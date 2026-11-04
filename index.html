@@ -1,0 +1,1865 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head><body>
+<title>SCAB 홈페이지 시안</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: ABB식 기업 사이트 구조 — 유틸리티 바 + 메가메뉴 고정 헤더, 네이비 히어로(도면 격자 + SCAB 큐브 워터마크), 흰 본문과 쿨그레이 패널 교차,
+   서브페이지는 좌측 LNB + 본문. 반응형은 컨테이너 쿼리. 톤앤매너는 data-tone으로 전환 (기본: Grid Navy · Teal) */
+:root{
+  --ac:#007A85; --ac-strong:#005E66; --ac-soft:#E2F2F3; --ac-hl:#3CC8D2; --ac-btn:#007A85; --ac-btn-h:#00636C; --ac-ink:#FFFFFF; --err:#C8102E;
+  --sw-on:#D7263D; --ink:#16202A; --title:#3B4754; --muted:#5F6B77; --faint:#94A0AB; --bg:#FFFFFF; --panel:#F2F5F7; --panel-2:#E4E9EE;
+  --line:#DCE2E8; --card:#FFFFFF; --well:#FFFFFF; --tile:#FFFFFF; --th:#13253A; --th-fg:#FFFFFF; --hero:#0D1B2A; --hero-2:#13253A; --hero-fg:#F2F6FA;
+  --hero-muted:#9FB0C2; --hero-line:#26394F; --hero-grid:rgba(160,200,230,.05); --ok:#1E9E57; --open:#16A34A; --warn:#D08A00;
+  --scrim:rgba(8,16,26,.55); --shadow:0 14px 36px rgba(13,27,42,.12); --logo-l:block; --logo-d:none;
+  --font:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1360px; --gut:32px; --hdr:72px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ac:#2BB8C4; --ac-strong:#5FD3DC; --ac-soft:#0E2C31; --ac-hl:#3CC8D2; --ac-btn:#2BB8C4; --ac-btn-h:#4FCAD4; --ac-ink:#04181B; --err:#FF5A6A;
+    --sw-on:#FF4D61; --ink:#E8EDF2; --title:#C3CCD5; --muted:#9AA6B2; --faint:#6C7884; --bg:#0E1318; --panel:#151C23; --panel-2:#080B0E;
+    --line:#26313C; --card:#141A20; --well:#EDEFF1; --tile:#EDEFF1; --th:#1C2A3A; --th-fg:#F2F6FA; --hero:#08121D; --hero-2:#0F1C2B;
+    --hero-fg:#F2F6FA; --hero-muted:#9FB0C2; --hero-line:#1F3044; --hero-grid:rgba(160,200,230,.045); --ok:#3CC57A; --open:#34C46A; --warn:#F0A928;
+    --scrim:rgba(0,0,0,.66); --shadow:0 14px 36px rgba(0,0,0,.55); --logo-l:none; --logo-d:block; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ac:#2BB8C4; --ac-strong:#5FD3DC; --ac-soft:#0E2C31; --ac-hl:#3CC8D2; --ac-btn:#2BB8C4; --ac-btn-h:#4FCAD4; --ac-ink:#04181B; --err:#FF5A6A;
+  --sw-on:#FF4D61; --ink:#E8EDF2; --title:#C3CCD5; --muted:#9AA6B2; --faint:#6C7884; --bg:#0E1318; --panel:#151C23; --panel-2:#080B0E;
+  --line:#26313C; --card:#141A20; --well:#EDEFF1; --tile:#EDEFF1; --th:#1C2A3A; --th-fg:#F2F6FA; --hero:#08121D; --hero-2:#0F1C2B; --hero-fg:#F2F6FA;
+  --hero-muted:#9FB0C2; --hero-line:#1F3044; --hero-grid:rgba(160,200,230,.045); --ok:#3CC57A; --open:#34C46A; --warn:#F0A928;
+  --scrim:rgba(0,0,0,.66); --shadow:0 14px 36px rgba(0,0,0,.55); --logo-l:none; --logo-d:block; color-scheme:dark;
+}
+:root[data-tone="blue"]{
+  --ac:#0057B8; --ac-strong:#00428C; --ac-soft:#E6EEF8; --ac-hl:#5AA9FF; --ac-btn:#0057B8; --ac-btn-h:#00489A; --ac-ink:#FFFFFF; --ink:#151E2C;
+  --title:#3A4658; --panel:#F2F4F8; --panel-2:#E3E8F0; --line:#DBE1EA; --th:#122244; --bg:#FFFFFF; --card:#FFFFFF; --hero:#0B1830; --hero-2:#122244;
+  --hero-muted:#A3B2CC; --hero-line:#24365A; --hero-grid:rgba(150,180,240,.05);
+}
+@media (prefers-color-scheme: dark){ :root[data-tone="blue"]:not([data-theme="light"]){
+    --ac:#5AA9FF; --ac-strong:#8CC4FF; --ac-soft:#10223D; --ac-hl:#5AA9FF; --ac-btn:#5AA9FF; --ac-btn-h:#7BBAFF; --ac-ink:#061326; --ink:#E6ECF4;
+    --title:#C5CDD8; --panel:#141922; --panel-2:#080B10; --line:#252E3C; --th:#1A2740; --bg:#0E121A; --card:#131823; --hero:#070F1E;
+    --hero-2:#0E1A30; --hero-muted:#A3B2CC; --hero-line:#1E2D47; --hero-grid:rgba(150,180,240,.045);
+} }
+:root[data-tone="blue"][data-theme="dark"]{
+  --ac:#5AA9FF; --ac-strong:#8CC4FF; --ac-soft:#10223D; --ac-hl:#5AA9FF; --ac-btn:#5AA9FF; --ac-btn-h:#7BBAFF; --ac-ink:#061326; --ink:#E6ECF4;
+  --title:#C5CDD8; --panel:#141922; --panel-2:#080B10; --line:#252E3C; --th:#1A2740; --bg:#0E121A; --card:#131823; --hero:#070F1E; --hero-2:#0E1A30;
+  --hero-muted:#A3B2CC; --hero-line:#1E2D47; --hero-grid:rgba(150,180,240,.045);
+}
+:root[data-tone="amber"]{
+  --ac:#8A5D00; --ac-strong:#6B4800; --ac-soft:#FBF1DC; --ac-hl:#F5B700; --ac-btn:#F2A900; --ac-btn-h:#DE9B00; --ac-ink:#1A1A1A; --ink:#1B1E22;
+  --title:#3F454C; --panel:#F3F4F5; --panel-2:#E6E8EA; --line:#DEE1E4; --th:#232A31; --bg:#FFFFFF; --card:#FFFFFF; --hero:#1B2026; --hero-2:#232A31;
+  --hero-muted:#A7B0BA; --hero-line:#343D47; --hero-grid:rgba(255,255,255,.035);
+}
+@media (prefers-color-scheme: dark){ :root[data-tone="amber"]:not([data-theme="light"]){
+    --ac:#F2B33D; --ac-strong:#F7C866; --ac-soft:#2E2410; --ac-hl:#F5B700; --ac-btn:#F2A900; --ac-btn-h:#F5B82E; --ac-ink:#17130A; --ink:#ECEDEF;
+    --title:#CBD0D5; --panel:#171A1E; --panel-2:#0A0B0C; --line:#2B3036; --th:#262C33; --bg:#101214; --card:#16191C; --hero:#0E1114;
+    --hero-2:#181D22; --hero-muted:#A7B0BA; --hero-line:#2C333A; --hero-grid:rgba(255,255,255,.03);
+} }
+:root[data-tone="amber"][data-theme="dark"]{
+  --ac:#F2B33D; --ac-strong:#F7C866; --ac-soft:#2E2410; --ac-hl:#F5B700; --ac-btn:#F2A900; --ac-btn-h:#F5B82E; --ac-ink:#17130A; --ink:#ECEDEF;
+  --title:#CBD0D5; --panel:#171A1E; --panel-2:#0A0B0C; --line:#2B3036; --th:#262C33; --bg:#101214; --card:#16191C; --hero:#0E1114; --hero-2:#181D22;
+  --hero-muted:#A7B0BA; --hero-line:#2C333A; --hero-grid:rgba(255,255,255,.03);
+}
+:root[data-tone="red"]{
+  --ac:#CD162C; --ac-strong:#A30F20; --ac-soft:#FBEAEC; --ac-hl:#FF5C6E; --ac-btn:#CD162C; --ac-btn-h:#A30F20; --ac-ink:#FFFFFF; --ink:#1B1B1E;
+  --title:#46464C; --muted:#67676E; --faint:#9C9CA3; --panel:#F4F4F5; --panel-2:#E8E8EB; --line:#E0E0E4; --th:#1B1B1E; --bg:#FFFFFF; --card:#FFFFFF;
+  --hero:#1A1A1C; --hero-2:#232326; --hero-fg:#F4F4F5; --hero-muted:#A9A9B0; --hero-line:#38383D; --hero-grid:transparent;
+}
+@media (prefers-color-scheme: dark){ :root[data-tone="red"]:not([data-theme="light"]){
+    --ac:#EE3B52; --ac-strong:#FF6577; --ac-soft:#3A1B20; --ac-hl:#FF5C6E; --ac-btn:#EE3B52; --ac-btn-h:#FF5568; --ac-ink:#FFFFFF; --ink:#ECECEE;
+    --title:#C8C8CE; --muted:#A3A3AB; --faint:#74747B; --panel:#18181B; --panel-2:#0A0A0B; --line:#2C2C31; --th:#2A2A2F; --bg:#111113;
+    --card:#17171A; --hero:#0B0B0C; --hero-2:#19191C; --hero-fg:#F4F4F5; --hero-muted:#A9A9B0; --hero-line:#323237; --hero-grid:transparent;
+} }
+:root[data-tone="red"][data-theme="dark"]{
+  --ac:#EE3B52; --ac-strong:#FF6577; --ac-soft:#3A1B20; --ac-hl:#FF5C6E; --ac-btn:#EE3B52; --ac-btn-h:#FF5568; --ac-ink:#FFFFFF; --ink:#ECECEE;
+  --title:#C8C8CE; --muted:#A3A3AB; --faint:#74747B; --panel:#18181B; --panel-2:#0A0A0B; --line:#2C2C31; --th:#2A2A2F; --bg:#111113; --card:#17171A;
+  --hero:#0B0B0C; --hero-2:#19191C; --hero-fg:#F4F4F5; --hero-muted:#A9A9B0; --hero-line:#323237; --hero-grid:transparent;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+img{display:block}
+h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+.mono{font-family:var(--mono)}
+.ic{display:inline-flex;flex:none}
+.ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm svg{width:16px;height:16px}
+.ic.lg svg{width:26px;height:26px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.email{overflow-wrap:anywhere;word-break:break-all}
+
+/* stage + preview */
+.stage{min-height:100%;transition:background .2s}
+.stage.preview{background:var(--panel-2);padding-block:28px 120px}
+.stage.preview .site{max-width:var(--pw);margin-inline:auto;border-radius:20px;box-shadow:var(--shadow);overflow:clip;outline:1px solid var(--line)}
+.site{container:site/inline-size;background:var(--bg);position:relative;min-height:100vh}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding-inline:22px;font-weight:600;font-size:15px;border-radius:2px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s;white-space:nowrap}
+.btn.pri{background:var(--ac-btn);color:var(--ac-ink)}
+.btn.pri:hover{background:var(--ac-btn-h)}
+.btn.line{border-color:var(--line);background:var(--card);color:var(--ink)}
+.btn.line:hover{border-color:var(--ink)}
+.btn.ghost{border-color:rgba(255,255,255,.4);color:#fff}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.btn.sm{height:36px;padding-inline:14px;font-size:14px}
+.link{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ac);font-size:15px}
+.link:hover{gap:10px}
+.link .ic svg{width:18px;height:18px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);font-weight:500}
+.on-dark.eyebrow{color:var(--ac-hl)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;padding-inline:10px;border-radius:13px;background:var(--panel);color:var(--muted);font-size:12.5px;font-weight:500;white-space:nowrap}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--bc,var(--ac))}
+.chip.red{background:var(--ac-soft);color:var(--ac)}
+.chip.sample{background:transparent;border:1px dashed var(--faint);color:var(--muted);height:22px;font-size:11.5px}
+.draft{display:inline-flex;align-items:center;height:22px;padding-inline:8px;border:1px dashed var(--err);color:var(--err);font-size:11.5px;border-radius:3px;font-weight:600;vertical-align:middle}
+
+/* utility bar */
+.util{background:var(--panel);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.util-in{display:flex;justify-content:space-between;align-items:center;min-height:36px;gap:16px}
+.util-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.util-links{display:flex;align-items:center;gap:18px}
+.util-links a:hover{color:var(--ink)}
+.util-tel{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);color:var(--ink)}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.lang button{padding:2px 9px;font-size:11.5px;font-family:var(--mono)}
+.lang button.on{background:var(--ink);color:var(--bg)}
+.theme-btn{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border:1px solid var(--line);border-radius:2px;font-size:12px}
+.theme-btn:hover{border-color:var(--ink);color:var(--ink)}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;height:var(--hdr);gap:28px}
+.logo{display:flex;align-items:center;flex:none}
+.logo img{height:40px;width:auto}
+.logo .l{display:var(--logo-l)} .logo .d{display:var(--logo-d)}
+.gnb{flex:1;display:flex;justify-content:center}
+.gnb>ul{display:flex}
+.gnb-a{position:relative;display:flex;align-items:center;height:var(--hdr);padding-inline:22px;font-weight:600;font-size:16.5px;color:var(--ink)}
+.gnb-a::after{content:"";position:absolute;left:22px;right:22px;bottom:-1px;height:3px;background:var(--ac);transform:scaleX(0);transition:transform .2s}
+.gnb li.open .gnb-a::after,.gnb li.cur .gnb-a::after{transform:scaleX(1)}
+.gnb li.cur .gnb-a{color:var(--ac)}
+.hdr-act{display:flex;align-items:center;gap:6px;margin-left:auto}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;color:var(--ink)}
+.icon-btn:hover{background:var(--panel)}
+.burger{display:none}
+.mega{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+.mega-in{display:grid;grid-template-columns:260px minmax(0,1fr) 300px;gap:40px;padding-block:32px 36px}
+.mega-intro h3{font-size:24px;color:var(--title);margin-block:8px 10px}
+.mega-intro p{color:var(--muted);font-size:14.5px;margin-bottom:16px}
+.mega-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;border-left:1px solid var(--line);padding-left:36px}
+.mega-col h4{font-size:12px;font-family:var(--mono);letter-spacing:.12em;color:var(--faint);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.mega-col a{display:flex;align-items:center;justify-content:space-between;padding-block:7px;font-size:15px;color:var(--ink);border-bottom:1px solid transparent}
+.mega-col a:hover{color:var(--ac)}
+.mega-col a .ic{opacity:0;transition:opacity .15s}
+.mega-col a:hover .ic{opacity:1}
+.mega-feat{display:grid;grid-template-rows:auto 1fr;background:var(--panel);border:1px solid var(--line)}
+.mega-feat .fimg{height:140px;background:var(--well);display:grid;place-items:center;padding:14px}
+.mega-feat .fimg img{max-height:112px;width:auto;max-width:100%;object-fit:contain}
+.mega-feat .fimg.txt{background:var(--hero);color:var(--hero-fg);font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:.02em}
+.mega-feat .fb{padding:14px 16px}
+.mega-feat .fb b{display:block;font-size:15px}
+.mega-feat .fb span{font-size:13.5px;color:var(--muted)}
+.mega-feat:hover b{color:var(--ac)}
+.drawer{border-top:1px solid var(--line);background:var(--bg);max-height:calc(100vh - var(--hdr) - env(safe-area-inset-top,0px));overflow:auto}
+.drawer details{border-bottom:1px solid var(--line)}
+.drawer summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-weight:600;font-size:17px;cursor:pointer}
+.drawer summary::-webkit-details-marker{display:none}
+.drawer summary .ic{transition:transform .2s}
+.drawer details[open] summary .ic{transform:rotate(90deg)}
+.drawer .dl{display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;padding-bottom:16px}
+.drawer .dl a{padding:8px 0;color:var(--muted);font-size:15px}
+.drawer .dl a.cur{color:var(--ac);font-weight:600}
+.drawer-foot{display:flex;gap:10px;padding-block:18px 24px;flex-wrap:wrap}
+
+/* hero */
+.hero{position:relative;background-color:var(--hero);color:var(--hero-fg);overflow:hidden}
+.hero,.phero,.sec.dark{background-image:linear-gradient(var(--hero-grid) 1px,transparent 1px),linear-gradient(90deg,var(--hero-grid) 1px,transparent 1px);background-size:56px 56px}
+.hero-cube{position:absolute;right:-90px;top:50%;transform:translateY(-50%);width:600px;max-width:none;opacity:.055;pointer-events:none}
+.slides{display:grid}
+.slide{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:56px;align-items:center;padding-block:76px 144px;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
+.slide.on{opacity:1;visibility:visible}
+.slide h1{font-size:46px;line-height:1.22;font-weight:700;margin-block:14px 18px}
+.slide-p{color:var(--hero-muted);font-size:17px;max-width:46ch}
+.slide-cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.bchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:26px}
+.bchips span{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:2px;color:#fff;background:var(--bc)}
+.slide-vis{position:relative;min-width:0}
+.collage{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:14px;height:440px}
+.collage .ph{position:relative;background:#fff;border-radius:3px;overflow:hidden;min-width:0;min-height:0;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.collage .ph img{position:absolute;inset:18px;width:calc(100% - 36px);height:calc(100% - 36px);object-fit:contain}
+.collage .ph.big{grid-row:span 2}
+.collage .ph figcaption{font-family:var(--mono);font-size:11px;color:#56565C;letter-spacing:.06em;margin-top:8px;text-align:center}
+.vis-card{background:var(--hero-2);border:1px solid var(--hero-line);border-radius:4px;padding:18px 20px 14px}
+.vis-card .vc-h{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--hero-muted);letter-spacing:.08em;margin-bottom:6px;gap:12px}
+.vis-cap{font-size:13.5px;color:var(--hero-muted);margin-top:6px;min-height:2.6em}
+.hero-ctrl{position:absolute;left:0;right:0;bottom:78px}
+.hero-ctrl .wrap{display:flex;align-items:center;gap:18px}
+.hc-count{font-family:var(--mono);font-size:13px;color:var(--hero-muted);white-space:nowrap}
+.hc-count b{color:#fff;font-weight:500}
+.hc-bars{display:flex;gap:6px}
+.hc-bars button{width:44px;height:14px;position:relative}
+.hc-bars button::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:rgba(255,255,255,.22)}
+.hc-bars button::after{content:"";position:absolute;left:0;top:6px;height:2px;width:0;background:var(--ac-hl)}
+.hc-bars button.on::after{width:100%;transition:width var(--dur,7s) linear}
+.hc-bars.paused button.on::after{transition:none;width:100%}
+.hc-btn{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);border-radius:50%;color:#fff}
+.hc-btn:hover{border-color:#fff}
+.hc-btn .ic svg{width:16px;height:16px}
+
+/* quick */
+.quick{position:relative;z-index:2;margin-top:-44px}
+.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.q{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center;padding:22px 24px;border-right:1px solid var(--line);transition:background .15s}
+.q:last-child{border-right:0}
+.q>.ic{grid-row:span 2;width:46px;height:46px;border-radius:50%;background:var(--ac-soft);color:var(--ac);align-items:center;justify-content:center}
+.q b{font-size:16.5px}
+.q span.d{font-size:13.5px;color:var(--muted);grid-column:2}
+.q .go{grid-row:1/span 2;grid-column:3;color:var(--faint)}
+.q:hover{background:var(--panel)}
+.q:hover .go{color:var(--ac)}
+
+/* sections */
+.sec{padding-block:96px}
+.sec.tight{padding-block:72px}
+.sec.alt{background:var(--panel)}
+.sec.dark{background-color:var(--hero-2);color:var(--hero-fg)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;margin-bottom:40px;flex-wrap:wrap}
+.sec-head .lead{margin-top:14px}
+.t2{position:relative;padding-top:20px;font-size:32px;line-height:1.3;font-weight:700;color:var(--title)}
+.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--ac)}
+.sec.dark .t2{color:#fff}
+.t3{font-size:21px;font-weight:700;color:var(--title);line-height:1.4}
+.lead{color:var(--muted);font-size:17px;max-width:64ch}
+.sec.dark .lead{color:var(--hero-muted)}
+
+/* brands */
+.brand-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.brand{display:grid;grid-template-rows:96px auto 1fr auto;background:var(--card);border:1px solid var(--line);transition:border-color .15s,transform .15s}
+.brand:hover{border-color:var(--ink)}
+.brand .bl{background:var(--tile);display:grid;place-items:center;padding:20px;border-bottom:3px solid var(--bc)}
+.brand .bl img{max-height:46px;max-width:78%;width:auto;object-fit:contain}
+.txtlogo{font-weight:700;font-size:22px;letter-spacing:.04em;color:#1565C0;display:flex;align-items:baseline;gap:8px}
+.txtlogo small{font-size:15px;letter-spacing:0;font-weight:600}
+.brand .bt{padding:18px 18px 4px;font-weight:700;font-size:16px}
+.brand .bd{padding:0 18px 14px;font-size:13.5px;color:var(--muted)}
+.brand .bf{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ac);display:flex;justify-content:space-between;align-items:center}
+
+/* solutions */
+.sol-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.sol{display:grid;grid-template-rows:auto 1fr;background:var(--card);border:1px solid var(--line);transition:border-color .15s}
+.sol:hover{border-color:var(--ink)}
+.sol .sv{background:var(--panel);padding:14px 14px 6px;border-bottom:1px solid var(--line);aspect-ratio:16/10;display:grid;place-items:center}
+.sol .sv svg{width:100%;height:100%}
+.sol .sb{padding:20px 20px 22px;display:grid;gap:8px;align-content:start}
+.sol .sb .eyebrow{font-size:11px}
+.sol .sb b{font-size:18px;line-height:1.4}
+.sol .sb p{font-size:14px;color:var(--muted)}
+.sol .sb .link{margin-top:6px}
+
+/* engineering band */
+.eng{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:56px;align-items:start}
+.svc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hero-line);border:1px solid var(--hero-line)}
+.svc{background:var(--hero-2);padding:18px 20px}
+.svc b{display:block;font-size:15.5px;margin-bottom:4px}
+.svc span{font-size:13.5px;color:var(--hero-muted)}
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:44px;counter-reset:st}
+.step{position:relative;background:var(--hero);border:1px solid var(--hero-line);padding:16px 16px 18px;counter-increment:st;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%)}
+.step::before{content:counter(st,decimal-leading-zero);display:block;font-family:var(--mono);font-size:12px;color:var(--ac-hl);margin-bottom:6px}
+.step b{font-size:14.5px;line-height:1.4;display:block}
+.step.hl{background:var(--ac-btn);border-color:var(--ac-btn);color:var(--ac-ink)}
+.step.hl::before{color:var(--ac-ink)}
+.steps.light .step{background:var(--card);border-color:var(--line);color:var(--ink)}
+.steps.light .step::before{color:var(--ac)}
+.steps.light .step.hl{background:var(--ac-btn);border-color:var(--ac-btn);color:var(--ac-ink)}
+.steps.light .step.hl::before{color:var(--ac-ink)}
+
+/* references */
+.ref-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ref-col{background:var(--card);border:1px solid var(--line)}
+.ref-col h3{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line);font-size:17px;color:var(--title)}
+.ref-col li{display:grid;gap:2px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.ref-col li:last-child{border-bottom:0}
+.ref-col li b{font-size:15px;font-weight:600}
+.ref-col li span{font-size:13px;color:var(--muted)}
+.marquee{margin-top:40px;overflow:hidden;border-block:1px solid var(--line);background:var(--tile);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mq-track{display:flex;gap:44px;width:max-content;padding-block:20px;animation:mq 60s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-track img{height:40px;width:auto;max-width:150px;object-fit:contain}
+@keyframes mq{to{transform:translateX(-50%)}}
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.logo-grid div{background:var(--tile);height:84px;display:grid;place-items:center;padding:14px}
+.logo-grid img{max-height:44px;max-width:100%;width:auto;object-fit:contain}
+
+/* news + cta */
+.news-wrap{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:24px}
+.news-list{border-top:2px solid var(--ink)}
+.news-list a{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;padding:17px 4px;border-bottom:1px solid var(--line)}
+.news-list a:hover b{color:var(--ac)}
+.news-list b{font-weight:500;font-size:15.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.news-list time{font-family:var(--mono);font-size:13px;color:var(--faint)}
+.cta-card{background:var(--hero);color:var(--hero-fg);padding:28px;display:grid;gap:14px;align-content:start;position:relative;overflow:hidden}
+.cta-card .big{font-family:var(--mono);font-size:28px;font-weight:600;letter-spacing:.01em}
+.cta-card p{color:var(--hero-muted);font-size:14px}
+.cta-card img{position:absolute;right:-40px;bottom:-50px;width:200px;opacity:.07}
+
+/* footer */
+.ftr{background:var(--hero);color:var(--hero-muted);font-size:13.5px}
+.ftr-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,2fr);gap:48px;padding-block:56px 36px;border-bottom:1px solid var(--hero-line)}
+.ftr-top img{height:36px;width:auto;margin-bottom:18px}
+.ftr-info{display:grid;gap:4px}
+.ftr-info span b{color:var(--hero-fg);font-weight:500;margin-right:6px}
+.ftr-map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.ftr-map h4{color:#fff;font-size:14px;margin-bottom:10px}
+.ftr-map a{display:block;padding-block:3px}
+.ftr-map a:hover{color:#fff}
+.ftr-bot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px 28px;flex-wrap:wrap}
+.ftr-bot nav{display:flex;gap:18px;flex-wrap:wrap}
+.ftr-bot nav button:hover{color:#fff}
+.ftr-bot nav button.b{color:#fff;font-weight:600}
+.fam{background:var(--hero-2);border:1px solid var(--hero-line);color:var(--hero-fg);height:34px;padding-inline:10px;font-size:13px}
+
+/* sub pages */
+.phero{position:relative;background-color:var(--hero);color:var(--hero-fg);overflow:hidden}
+.phero .wrap{padding-block:52px 46px;position:relative}
+.phero-cube{position:absolute;right:4%;top:-40px;width:300px;opacity:.06;pointer-events:none}
+.crumb{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--hero-muted);margin-bottom:18px;flex-wrap:wrap}
+.crumb a:hover{color:#fff}
+.phero h1{font-size:38px;font-weight:700;margin-top:8px}
+.phero p.pd{color:var(--hero-muted);margin-top:10px;max-width:64ch}
+.sub{display:grid;grid-template-columns:232px minmax(0,1fr);gap:56px;padding-block:56px 104px}
+.lnb{position:sticky;top:calc(var(--hdr) + 24px + env(safe-area-inset-top,0px));align-self:start}
+.lnb-t{font-size:20px;font-weight:700;padding-bottom:14px;border-bottom:2px solid var(--ink);color:var(--title)}
+.lnb h5{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;font-weight:500;margin:18px 0 4px}
+.lnb a{display:flex;justify-content:space-between;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line);font-size:15px;color:var(--muted)}
+.lnb a:hover{color:var(--ink)}
+.lnb a.cur{color:var(--ac);font-weight:600}
+.lnb a .ic{opacity:0}
+.lnb a.cur .ic{opacity:1}
+.sub-body{min-width:0;display:grid;gap:56px;align-content:start}
+.block{display:grid;gap:22px;align-content:start}
+.block-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px 24px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--faint)}
+.prose{font-size:16.5px;line-height:1.85;color:var(--ink);max-width:68ch;display:grid;gap:14px}
+.sign{font-weight:600;color:var(--title)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--th);color:var(--th-fg);font-weight:600;font-size:13.5px;white-space:nowrap}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+tbody tr:hover td{background:var(--panel)}
+.info th{width:170px;background:var(--panel);color:var(--title);font-weight:600;white-space:nowrap}
+.info td{color:var(--ink)}
+.tnum{font-variant-numeric:tabular-nums}
+td.hl{color:var(--ac);font-weight:600}
+
+/* cards general */
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px}
+.card h4{font-size:16.5px;margin-bottom:6px;color:var(--ink)}
+.card p{font-size:14px;color:var(--muted)}
+.card .ix{font-family:var(--mono);font-size:12px;color:var(--ac);margin-bottom:10px;display:block}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:var(--card)}
+.fact{padding:22px 22px 20px;border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:var(--mono);font-size:30px;font-weight:600;color:var(--ac);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.fact span{font-size:14px;color:var(--muted)}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.rs{padding:20px 30px 22px 22px;background:var(--panel);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%);display:grid;gap:6px;align-content:start}
+.rs .yr{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.rs b{font-size:17px;line-height:1.4}
+.rs p{font-size:13.5px;color:var(--muted)}
+.rs.now{background:var(--ac-btn);color:var(--ac-ink)}
+.rs.now .yr,.rs.now p{color:var(--ac-ink);opacity:.85}
+.rs.fut{background:var(--hero);color:var(--hero-fg)}
+.rs.fut .yr,.rs.fut p{color:var(--hero-muted)}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px 16px;position:relative;overflow:clip}
+.tl-i{position:relative;padding-top:26px}
+.tl-i::before{content:"";position:absolute;left:0;right:-16px;top:7px;height:2px;background:var(--line)}
+.tl-i::after{content:"";position:absolute;left:0;top:1px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--faint)}
+.tl-i.hl::after{border-color:var(--ac);background:var(--ac)}
+.tl-i .yr{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--title);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.tl-i.hl .yr{color:var(--ac)}
+.tl-i li{position:relative;padding-left:12px;font-size:14px;color:var(--muted);margin-bottom:6px;line-height:1.55}
+.tl-i li::before{content:"";position:absolute;left:0;top:.7em;width:4px;height:4px;background:var(--faint)}
+.tl-next{display:flex;gap:12px;align-items:center;background:var(--panel);padding:16px 20px;border-left:4px solid var(--ac);font-size:15px}
+.tl-next b{color:var(--ac);font-family:var(--mono)}
+
+/* org */
+.org-brands{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.ob{background:var(--card);border:1px solid var(--line);display:grid;grid-template-rows:72px auto}
+.ob .bl{background:var(--tile);display:grid;place-items:center;padding:14px;border-bottom:3px solid var(--bc)}
+.ob .bl img{max-height:36px;max-width:80%;width:auto}
+.ob .bl .txtlogo{font-size:18px}
+.ob p{padding:12px 14px;font-size:13px;color:var(--muted);text-align:center}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pil{padding:22px;border:1px solid var(--line);background:var(--card)}
+.pil.k{background:var(--hero);color:var(--hero-fg);border-color:var(--hero)}
+.pil h4{font-size:17px;margin-bottom:12px}
+.pil li{position:relative;padding-left:14px;font-size:14px;margin-bottom:7px;color:var(--muted)}
+.pil.k li{color:var(--hero-muted)}
+.pil li::before{content:"";position:absolute;left:0;top:.66em;width:5px;height:5px;background:var(--ac)}
+
+/* certs */
+.cert-row{display:grid;grid-template-columns:repeat(2,minmax(0,220px)) minmax(0,1fr);gap:16px;align-items:start}
+.cert{background:var(--card);border:1px solid var(--line);padding:12px;display:grid;gap:10px;text-align:center}
+.cert .ci{background:var(--well);aspect-ratio:3/4;max-width:100%;position:relative;overflow:hidden}
+.cert .ci img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.cert span{font-size:13.5px;font-weight:600}
+.cert:hover span{color:var(--ac)}
+.dist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dc{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center;border:1px solid var(--line);background:var(--card);padding:12px}
+.dc .bl{background:var(--tile);height:60px;display:grid;place-items:center;padding:8px}
+.dc .bl img{max-height:32px;width:auto;max-width:100%}
+.dc .bl .txtlogo{font-size:15px}
+.dc .bl.k{background:var(--hero);color:#fff;font-weight:700;font-size:17px;letter-spacing:.04em}
+.dc b{display:block;font-size:14.5px}
+.dc span{font-size:13px;color:var(--muted)}
+
+/* tabs, filters */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs button,.tabs a{padding:12px 18px;font-weight:600;font-size:15px;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs .on{color:var(--ac);border-bottom-color:var(--ac)}
+.tabs button:hover,.tabs a:hover{color:var(--ink)}
+.fbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{height:36px;padding-inline:14px;border:1px solid var(--line);border-radius:18px;font-size:14px;color:var(--muted);display:inline-flex;align-items:center;gap:6px;background:var(--card)}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--bc)}
+.pill:hover{border-color:var(--ink);color:var(--ink)}
+.pill.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.search{display:flex;align-items:center;gap:8px;height:42px;border:1px solid var(--line);background:var(--card);padding-inline:12px;min-width:0;flex:0 1 300px}
+.search input{border:0;outline:0;background:transparent;width:100%;min-width:0;height:100%;font-size:14.5px}
+.search:focus-within{border-color:var(--ink)}
+.count{font-size:14px;color:var(--muted)}
+.count b{color:var(--ac);font-family:var(--mono)}
+
+/* products */
+.bhead{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;border:1px solid var(--line);background:var(--card)}
+.bhead .bl{background:var(--tile);display:grid;place-items:center;padding:24px;border-right:4px solid var(--bc)}
+.bhead .bl img{max-height:58px;max-width:85%;width:auto}
+.bhead .bi{padding:22px 24px 22px 0;display:grid;gap:10px;align-content:start}
+.bhead .bi h3{font-size:22px;color:var(--title)}
+.bhead .bi>.chip{justify-self:start}
+.bhead .bi p{color:var(--muted);font-size:15px}
+.made{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--muted)}
+.made span b{font-family:var(--mono);color:var(--ink);font-weight:500;margin-left:4px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:18px}
+.pc{display:grid;grid-template-rows:auto 1fr auto;background:var(--card);border:1px solid var(--line);transition:border-color .15s;text-align:left}
+.pc:hover{border-color:var(--ink)}
+.pc{min-width:0}
+.pc .pw{background:var(--well);aspect-ratio:4/3;max-width:100%;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.pc .pw img{position:absolute;inset:18px;width:calc(100% - 36px);height:calc(100% - 36px);object-fit:contain}
+.pc .pw .plate{position:absolute;inset:0}
+.pc .pb{padding:16px 18px 6px;display:grid;gap:6px;align-content:start}
+.pc .pm{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.01em}
+.pc .pn{font-weight:700;font-size:16.5px;line-height:1.4}
+.pc ul li{position:relative;padding-left:12px;font-size:13.5px;color:var(--muted);line-height:1.55}
+.pc ul li::before{content:"";position:absolute;left:0;top:.66em;width:4px;height:4px;background:var(--ac)}
+.pc .pf{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 16px;gap:8px}
+.pc .pf .link{font-size:14px}
+.pc .bdg{position:absolute;left:10px;top:10px}
+.plate{width:100%;height:100%;display:grid;align-content:center;justify-items:center;gap:10px;background:linear-gradient(180deg,var(--bc) 0 6px,#F4F4F5 6px);color:#2A2A2E;text-align:center;padding:12px}
+.plate .pl-b{font-weight:700;font-size:15px;color:var(--bc);letter-spacing:.03em}
+.plate .pl-m{font-family:var(--mono);font-size:13px;color:#4A4A50}
+.plate svg{width:72%;height:auto}
+.empty{padding:48px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line)}
+
+/* solution detail */
+.sd-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:start}
+.diagram{background:var(--panel);border:1px solid var(--line);padding:20px}
+.diagram svg{width:100%;height:auto;display:block}
+.dg-ctrl{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.dg-ctrl button{height:34px;padding-inline:12px;border:1px solid var(--line);background:var(--card);font-size:13.5px;border-radius:2px}
+.dg-ctrl button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dg-cap{margin-top:12px;font-size:14.5px;color:var(--ink);min-height:2.8em}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.numlist{display:grid;gap:10px;counter-reset:nl}
+.numlist li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--line);counter-increment:nl}
+.numlist li::before{content:counter(nl);width:30px;height:30px;border-radius:50%;background:var(--ac-btn);color:var(--ac-ink);display:grid;place-items:center;font-family:var(--mono);font-size:13px;font-weight:600}
+.numlist b{display:block;font-size:15.5px}
+.numlist span{font-size:13.5px;color:var(--muted)}
+.thd{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.thd div{flex:1 1 140px;padding:12px 14px;background:var(--card);border:1px solid var(--line)}
+.thd span{display:block;font-size:12.5px;color:var(--muted)}
+.thd b{font-family:var(--mono);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.thd .after b{color:var(--ac)}
+
+/* svgs */
+.flisr{--live:var(--sw-on);--dead:var(--faint);--opn:var(--open);--nfg:#fff;--txt:var(--muted);--bgc:var(--panel);--fault:var(--warn)}
+.on-dark .flisr{--live:#FF4D61;--dead:#5E6672;--opn:#34C46A;--txt:var(--hero-muted);--bgc:var(--hero-2);--fault:#F0A928}
+.flisr .seg{fill:none;stroke-width:4;stroke-linecap:round;transition:stroke .35s}
+.flisr .seg.live{stroke:var(--live)}
+.flisr .seg.dead{stroke:var(--dead);stroke-dasharray:5 6;stroke-width:3}
+.flisr .nd circle,.flisr .nd rect{stroke-width:2.5;transition:fill .35s,stroke .35s}
+.flisr .nd.cl circle,.flisr .nd.cl rect{fill:var(--live);stroke:var(--live)}
+.flisr .nd.op circle,.flisr .nd.op rect{fill:var(--bgc);stroke:var(--opn)}
+.flisr .nd text{font-family:var(--mono);font-size:10px;font-weight:600;text-anchor:middle;dominant-baseline:central}
+.flisr .nd.cl text{fill:var(--nfg)}
+.flisr .nd.op text{fill:var(--opn)}
+.flisr .src rect{fill:var(--bgc);stroke:var(--txt);stroke-width:1.5}
+.flisr .lbl{font-family:var(--mono);font-size:10.5px;fill:var(--txt);text-anchor:middle}
+.flisr .fault{opacity:0;transition:opacity .3s}
+.flisr .fault.show{opacity:1}
+.flisr .fault path{fill:var(--fault)}
+.flisr .ring-lbl{font-family:var(--mono);font-size:10px;fill:var(--txt);text-anchor:middle}
+.wv{--a:var(--ink);--b:var(--faint);--c:var(--ac);--g:var(--line);--t:var(--muted);--sh:var(--ac-soft)}
+.on-dark .wv{--a:#F4F4F5;--b:#6A7280;--c:var(--ac-hl);--g:var(--hero-line);--t:var(--hero-muted);--sh:color-mix(in srgb,var(--ac-hl) 16%,transparent)}
+.wv .grid{stroke:var(--g);stroke-width:1}
+.wv .ax{font-family:var(--mono);font-size:10.5px;fill:var(--t)}
+.wv .tr{fill:none;stroke-width:2.2;stroke-linejoin:round}
+.wv .tr.a{stroke:var(--a)} .wv .tr.b{stroke:var(--b)} .wv .tr.c{stroke:var(--c)}
+.wv .shade{fill:var(--sh)}
+.wv .mk{stroke:var(--t);stroke-width:1;stroke-dasharray:3 3}
+.wv .ann{font-family:var(--font);font-size:11.5px;fill:var(--t)}
+.wv .ann.c{fill:var(--c);font-weight:600}
+.wv .tr{transition:opacity .35s,stroke-width .35s}
+.wv .dim{opacity:.22}
+.mcc{--box:var(--card);--ln:var(--faint);--t:var(--muted);--okc:var(--ok);--wrc:var(--warn);--k:var(--ink)}
+.mcc rect.m{fill:var(--box);stroke:var(--ln);stroke-width:1.2}
+.mcc rect.e{fill:var(--k)}
+.mcc text{font-family:var(--mono);font-size:10px;fill:var(--t);text-anchor:middle;dominant-baseline:central}
+.mcc text.ek{fill:var(--bg);font-size:10.5px;font-weight:600}
+.mcc path{stroke:var(--ln);stroke-width:1.2;fill:none}
+.mcc circle.ok{fill:var(--okc)} .mcc circle.wr{fill:var(--wrc)}
+
+/* resources */
+.rlist{border-top:2px solid var(--ink)}
+.ri{display:grid;grid-template-columns:110px minmax(0,1fr) 150px 120px auto;gap:16px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line)}
+.ri .rt b{font-weight:600;font-size:15.5px;display:block}
+.ri .rt span{font-size:13px;color:var(--muted)}
+.ri .rm{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.ri .ra{display:flex;gap:6px;justify-content:flex-end}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+.badge.lock{color:var(--warn)}
+
+/* contact */
+.ct-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:32px;align-items:start}
+.form{display:grid;gap:22px;background:var(--card);border:1px solid var(--line);padding:28px}
+.frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label,.fld .lb{font-size:14px;font-weight:600;color:var(--title)}
+.fld label i,.fld .lb i{color:var(--err);font-style:normal;margin-left:2px}
+.fld input,.fld select,.fld textarea{width:100%;height:46px;border:1px solid var(--line);background:var(--bg);padding:0 12px;font-size:15px;border-radius:2px}
+.fld textarea{height:160px;padding:12px;resize:vertical;line-height:1.6}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:0;border-color:var(--ink)}
+.fld.err input,.fld.err select,.fld.err textarea{border-color:var(--err)}
+.fld .em{font-size:12.5px;color:var(--err);min-height:0}
+.fld .hint{font-size:12.5px;color:var(--faint)}
+.radios{display:flex;flex-wrap:wrap;gap:6px}
+.radios label{position:relative}
+.radios input{position:absolute;opacity:0;width:1px;height:1px}
+.radios span{display:inline-flex;align-items:center;height:38px;padding-inline:14px;border:1px solid var(--line);font-size:14px;font-weight:500;cursor:pointer;border-radius:2px;background:var(--bg)}
+.radios input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.radios input:focus-visible+span{outline:2px solid var(--ac);outline-offset:2px}
+.file{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.file input{position:absolute;opacity:0;width:1px;height:1px}
+.file .fname{font-size:13.5px;color:var(--muted)}
+.consent{border:1px solid var(--line);background:var(--panel);padding:14px 16px;display:grid;gap:10px;font-size:13.5px}
+.consent .ctext{color:var(--muted);line-height:1.7}
+.consent label{display:flex;gap:8px;align-items:center;font-weight:600;cursor:pointer;font-size:14.5px}
+.consent input{width:18px;height:18px;accent-color:var(--ac)}
+.fact-side{display:grid;gap:16px;position:sticky;top:calc(var(--hdr) + 24px + env(safe-area-inset-top,0px))}
+.side-card{background:var(--card);border:1px solid var(--line);padding:22px;display:grid;gap:12px}
+.side-card.k{background:var(--hero);color:var(--hero-fg);border-color:var(--hero)}
+.side-card h4{font-size:16px}
+.kv{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:14.5px}
+.kv span{color:var(--muted);font-size:13px}
+.side-card.k .kv span{color:var(--hero-muted)}
+.kv b{font-family:var(--mono);font-weight:500}
+.cp{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;color:inherit;opacity:.7}
+.cp:hover{opacity:1;background:rgba(127,127,127,.15)}
+.cp .ic svg{width:15px;height:15px}
+.receipt{background:var(--card);border:1px solid var(--line);display:grid}
+.rc-h{padding:24px 28px;border-bottom:1px solid var(--line);display:grid;gap:6px}
+.rc-h .no{font-family:var(--mono);font-size:14px;color:var(--ac)}
+.rc-b{padding:22px 28px;display:grid;gap:18px}
+.mailprev{border:1px solid var(--line);background:var(--panel);font-size:14px}
+.mailprev .mh{display:grid;grid-template-columns:70px minmax(0,1fr);gap:4px 10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.mailprev .mh span{color:var(--muted)}
+.mailprev pre{margin:0;padding:14px 16px;font-family:var(--font);white-space:pre-wrap;color:var(--ink);font-size:14px;line-height:1.7}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.bu{border-top:3px solid var(--bc);background:var(--card);border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.bu h3{padding:18px 20px;font-size:17px;border-bottom:1px solid var(--line);color:var(--title);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.person{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:15px 20px;border-bottom:1px solid var(--line);align-items:center}
+.person:last-child{border-bottom:0}
+.person b{font-size:16px}
+.person .role{font-size:13px;color:var(--muted);grid-column:1}
+.person .pm{grid-column:2;grid-row:1/span 2;display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.map-ph{border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;text-align:center;padding:40px 20px;gap:12px;min-height:280px}
+.map-ph .ic{width:56px;height:56px;border-radius:50%;background:var(--ac-btn);color:var(--ac-ink);align-items:center;justify-content:center}
+
+/* board */
+.btbl td.c,.btbl th.c{text-align:center}
+.btbl td.t a{display:inline-flex;align-items:center;gap:8px;font-weight:500}
+.btbl td.t a:hover{color:var(--ac)}
+.btbl tr.pin td{background:var(--panel)}
+.btbl .nb{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:22px;padding-inline:6px;font-size:11.5px;font-weight:700;background:var(--ac-btn);color:var(--ac-ink);border-radius:2px}
+.btbl .cat{font-size:13px;color:var(--muted)}
+.ans{display:inline-flex;font-size:11.5px;font-weight:600;color:var(--ok);border:1px solid var(--ok);padding:0 6px;border-radius:2px}
+.ans.wait{color:var(--faint);border-color:var(--faint)}
+.pager{display:flex;justify-content:center;gap:4px;margin-top:6px}
+.pager button{width:36px;height:36px;border:1px solid var(--line);font-family:var(--mono);font-size:13px;background:var(--card)}
+.pager button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.post{border-top:2px solid var(--ink)}
+.post-h{padding:22px 4px;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.post-h h2{font-size:24px;color:var(--ink)}
+.post-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.post-b{padding:28px 4px 36px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.85;white-space:pre-line;max-width:72ch}
+.post-a{margin-top:18px;background:var(--panel);border-left:4px solid var(--ac);padding:18px 20px;white-space:pre-line;font-size:15.5px;line-height:1.8}
+.post-a b{display:block;color:var(--ac);margin-bottom:6px}
+.post-nav{display:grid;border-bottom:1px solid var(--line)}
+.post-nav a{display:grid;grid-template-columns:80px minmax(0,1fr);gap:12px;padding:14px 4px;border-top:1px solid var(--line);font-size:14.5px}
+.post-nav a span{color:var(--muted)}
+.post-nav a:hover b{color:var(--ac)}
+.post-act{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+
+/* modal, search, toast, dock */
+.modal{position:fixed;inset:0;z-index:100;background:var(--scrim);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.mbox{position:relative;background:var(--bg);width:100%;max-width:900px;max-height:calc(100vh - 32px);overflow:auto;border-radius:6px;box-shadow:var(--shadow)}
+.mclose{position:absolute;right:12px;top:12px;z-index:2;background:var(--bg)}
+.pm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.pm-img{background:var(--well);position:relative;min-height:340px;overflow:hidden}
+.pm-img img{position:absolute;inset:36px;width:calc(100% - 72px);height:calc(100% - 72px);object-fit:contain}
+.pm-img .plate{position:absolute;inset:0}
+.pm-b{padding:36px 32px 28px;display:grid;gap:14px;align-content:start}
+.pm-b h3{font-size:24px;line-height:1.35}
+.pm-b ul li{position:relative;padding-left:14px;margin-bottom:6px;color:var(--muted);font-size:15px}
+.pm-b ul li::before{content:"";position:absolute;left:0;top:.7em;width:5px;height:5px;background:var(--ac)}
+.pm-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.mpad{padding:36px 32px}
+.mpad h3{font-size:22px;margin-bottom:16px;color:var(--title)}
+.mpad .prose{font-size:14.5px}
+.smap{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px}
+.smap h4{font-size:15px;padding-bottom:8px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.smap a{display:block;padding:5px 0;font-size:14px;color:var(--muted)}
+.smap a:hover{color:var(--ac)}
+.srch{position:fixed;inset:0;z-index:95;background:var(--scrim);padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+.srch-box{max-width:760px;margin:6vh auto 0;background:var(--bg);border-radius:6px;box-shadow:var(--shadow);overflow:hidden}
+.srch-in{display:flex;align-items:center;gap:10px;padding:0 16px;height:64px;border-bottom:1px solid var(--line)}
+.srch-in input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:18px;height:100%}
+.srch-res{max-height:60vh;overflow:auto;padding:8px 0 12px}
+.srch-res h5{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint);padding:12px 18px 4px;font-weight:500;text-transform:uppercase}
+.srch-res a{display:flex;justify-content:space-between;gap:12px;padding:10px 18px;font-size:15px}
+.srch-res a span{color:var(--muted);font-size:13px;white-space:nowrap}
+.srch-res a:hover,.srch-res a:focus{background:var(--panel);outline:0}
+.srch-res mark{background:var(--ac-soft);color:var(--ac);padding:0 1px}
+.srch-tip{padding:16px 18px;color:var(--muted);font-size:14px}
+.srch-tip button{color:var(--ac);margin-right:10px;font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:120;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:4px;font-size:14px;box-shadow:var(--shadow);max-width:calc(100vw - 32px)}
+.dock{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:90;display:grid;justify-items:end;gap:10px}
+.dock-btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding-inline:16px;border-radius:22px;background:#1B1B1E;color:#fff;font-weight:600;font-size:14px;box-shadow:0 10px 28px rgba(0,0,0,.3);border:1px solid #38383D}
+.dock-btn i{width:8px;height:8px;border-radius:50%;background:var(--ac-hl)}
+.top-btn{width:44px;height:44px;border-radius:50%;background:var(--bg);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--shadow);font-family:var(--mono);font-size:11px;font-weight:600}
+.dock-panel{width:340px;max-width:calc(100vw - 32px);max-height:calc(100vh - 120px);overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+.dp-h{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.dp-h b{font-size:15px}
+.dp-h span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.dp-s{padding:14px 16px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.dp-s>label,.dp-s .lb{font-size:12.5px;font-weight:600;color:var(--muted)}
+.segc{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.segc button{height:34px;font-size:13px;border-right:1px solid var(--line)}
+.segc button:last-child{border-right:0}
+.segc button.on{background:var(--ink);color:var(--bg)}
+.sw{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.sw input{width:40px;height:22px;accent-color:var(--ac)}
+.notes{display:grid;gap:6px}
+.notes textarea{width:100%;height:70px;border:1px solid var(--line);background:var(--bg);padding:8px 10px;font-size:13.5px;resize:vertical;border-radius:3px}
+.notes .nl{display:grid;gap:4px;max-height:160px;overflow:auto}
+.notes .ni{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;font-size:13px;padding:6px 8px;background:var(--panel);border-radius:3px}
+.notes .ni span{color:var(--muted);font-family:var(--mono);font-size:11px;display:block}
+.notes .row{display:flex;gap:6px;justify-content:space-between}
+.dp-f{padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.6}
+.tones{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tone-b{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--line);border-radius:4px;font-size:12.5px;text-align:left;line-height:1.3;background:var(--bg)}
+.tone-b:hover{border-color:var(--faint)}
+.tone-b.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.tone-b em,.tc-b em{font-style:normal;color:var(--ac);font-weight:600;font-size:11.5px}
+.tsw{position:relative;flex:none;width:28px;height:28px;border-radius:4px}
+.tsw i{position:absolute;right:4px;bottom:4px;width:10px;height:10px;border-radius:50%}
+.mbox.wide{max-width:1320px}
+.tc-note{font-size:13.5px;color:var(--muted);margin:-6px 0 18px}
+.tcmp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tc{border:1px solid var(--line);display:grid;grid-template-rows:auto auto 1fr;background:var(--card);min-width:0}
+.tc.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.tc-hero{padding:18px 16px 20px;display:grid;gap:8px;justify-items:start;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px}
+.tc-hero img{height:24px;width:auto;margin-bottom:6px}
+.tc-hero .eb{font-family:var(--mono);font-size:10px;letter-spacing:.12em}
+.tc-hero b{color:#F4F6F8;font-size:17px;line-height:1.35}
+.tc-hero .tb{font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:2px;margin-top:4px}
+.tc-light{background:#FFFFFF;padding:14px 16px;display:grid;gap:6px;border-bottom:1px solid var(--line)}
+.tc-light .bar{width:26px;height:3px}
+.tc-light b{font-size:15px}
+.tc-light span{font-size:12.5px;font-weight:600}
+.tc-b{padding:14px 16px 16px;display:grid;gap:8px;align-content:start}
+.tc-b h4{font-size:16px}
+.tc-b p{font-size:13px;color:var(--muted);line-height:1.6}
+.tc-sw{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.tc-sw span{display:flex;align-items:center;gap:6px}
+.tc-sw i{width:14px;height:14px;border-radius:3px;outline:1px solid var(--line)}
+.tc-sw code{font-family:var(--mono);margin-left:auto;color:var(--ink)}
+@media (max-width:1000px){.tcmp{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.tcmp{grid-template-columns:1fr}}
+
+/* responsive (container) */
+@container site (max-width:1180px){
+  .gnb,.hdr-cta{display:none}
+  .burger{display:inline-flex}
+  .brand-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .eng{grid-template-columns:1fr;gap:32px}
+  .steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sub{grid-template-columns:1fr;gap:28px;padding-block:28px 80px}
+  .lnb{position:static;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  .lnb-t,.lnb h5{display:none}
+  .lnb a{flex:none;border:1px solid var(--line);border-radius:18px;padding:7px 14px;font-size:14px;background:var(--card)}
+  .lnb a.cur{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .lnb a .ic{display:none}
+  .org-brands{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tl{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ct-grid{grid-template-columns:1fr}
+  .fact-side{position:static}
+  .ftr-top{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container site (max-width:900px){
+  .slide{grid-template-columns:1fr;gap:32px;padding-block:52px 140px}
+  .collage{height:360px}
+  .slide h1{font-size:36px}
+  .slide-vis{max-width:560px}
+  .quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .q:nth-child(2){border-right:0}
+  .q:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .ref-cols{grid-template-columns:1fr}
+  .news-wrap{grid-template-columns:1fr}
+  .sd-grid{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact:nth-child(2){border-right:0}
+  .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .people{grid-template-columns:1fr}
+  .ri{grid-template-columns:minmax(0,1fr) auto;gap:6px 12px}
+  .ri .rc{grid-column:1/-1}
+  .ri .rm{grid-column:1}
+  .ri .rb{display:none}
+  .ri .ra{grid-column:2;grid-row:2/span 2}
+  .cert-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cert-row .dist{grid-column:1/-1}
+  .pm-grid{grid-template-columns:1fr}
+  .bhead{grid-template-columns:1fr}
+  .bhead .bl{border-right:0;border-bottom:4px solid var(--bc)}
+  .bhead .bi{padding:0 20px 20px}
+}
+@container site (max-width:760px){
+  .wrap{--gut:16px}
+  .util{display:none}
+  .sec{padding-block:64px}
+  .t2{font-size:26px}
+  .phero h1{font-size:30px}
+  .brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc-grid{grid-template-columns:1fr}
+  .road{grid-template-columns:1fr}
+  .rs{clip-path:none}
+  .tl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .org-brands{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  .dist{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .form{padding:20px}
+  .ftr-map{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .btbl .hide-m{display:none}
+  .hc-bars button{width:28px}
+  .mega{display:none}
+  .logo img{height:34px}
+  .hdr-in{gap:12px}
+}
+@container site (max-width:480px){
+  .slide h1{font-size:30px}
+  .slide-p{font-size:15.5px}
+  .quick-grid{grid-template-columns:1fr}
+  .q{border-right:0;border-bottom:1px solid var(--line)}
+  .q:last-child{border-bottom:0}
+  .brand-grid,.sol-grid{grid-template-columns:1fr}
+  .tl{grid-template-columns:1fr}
+  .org-brands{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .collage{height:300px}
+  .kv{grid-template-columns:52px minmax(0,1fr) auto}
+  .drawer .dl{grid-template-columns:1fr}
+}
+@media (max-width:520px){ .dock-btn .lbl{display:none} .dock-btn{padding-inline:14px} }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  .mq-track{flex-wrap:wrap;width:auto;justify-content:center}
+}
+</style>
+
+<div class="stage" id="stage">
+  <div class="site" id="site">
+    <div class="util" id="util"></div>
+    <header class="hdr" id="hdr"></header>
+    <main id="view"></main>
+    <footer class="ftr" id="ftr"></footer>
+  </div>
+</div>
+<div class="dock" id="dock"></div>
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
+<div class="srch" id="srch" hidden role="dialog" aria-modal="true" aria-label="사이트 검색"></div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem('scab_site_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+             set(k,v){try{localStorage.setItem('scab_site_'+k,JSON.stringify(v))}catch(e){}}};
+const A=n=>`assets/${n}.webp`;
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const VERSION='v0.2', VDATE='2026-11-04';
+const TONES={
+ teal:{ko:'네이비 · 틸',name:'Grid Navy · Teal',rec:true,hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
+  why:'전력 · 에너지 업계에서 많이 쓰는 딥 네이비를 바탕으로, Schneider 그린과 Sifang 블루 사이의 틸을 포인트로 씁니다. 취급 브랜드 어느 쪽 색에도 치우치지 않습니다.'},
+ blue:{ko:'파워 블루',name:'Power Blue',hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
+  why:'국내외 전력기기 · 전력회사에서 가장 흔한 신뢰형 블루입니다. 안정적이지만 Sifang · 상도전기의 블루와 가깝게 보일 수 있습니다.'},
+ amber:{ko:'그래파이트 · 볼트',name:'Graphite · Volt',hero:'#1B2026',btn:'#F2A900',ink:'#1A1A1A',ac:'#8A5D00',hl:'#F5B700',panel:'#F3F4F5',title:'#3F454C',
+  why:'그래파이트 바탕에 전기 위험 경고 표지의 노랑에서 온 앰버를 포인트로 씁니다. 산업 현장 · 엔지니어링 성격이 강하고 취급 브랜드 색과 겹치지 않습니다.'},
+ red:{ko:'SCAB 레드 (v0.1)',name:'SCAB Red',hero:'#1A1A1C',btn:'#CD162C',ink:'#FFFFFF',ac:'#CD162C',hl:'#FF5C6E',panel:'#F4F4F5',title:'#46464C',
+  why:'회사 로고색을 그대로 쓴 v0.1 시안입니다. 차콜과 레드 조합이라 ABB · Hitachi Energy 사이트와 인상이 비슷합니다.'}
+};
+let tone=store.get('tone','teal');if(!TONES[tone])tone='teal';
+document.documentElement.setAttribute('data-tone',tone);
+
+/* ---------- icons ---------- */
+const SV={
+ search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/>',
+ menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+ close:'<path d="M6 6l12 12M18 6L6 18"/>',
+ arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+ left:'<path d="M15 6l-6 6 6 6"/>',
+ chev:'<path d="M9 6l6 6-6 6"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ moon:'<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>',
+ phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/>',
+ mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+ doc:'<path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+ down:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+ lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+ ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/>',
+ pin:'<path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+ copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 011-1h10"/>',
+ box:'<path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7M12 11v10"/>',
+ pause:'<path d="M8 5v14M16 5v14"/>',
+ play:'<path d="M7 5l12 7-12 7z"/>',
+ edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+ note:'<path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M8 9h8M8 13h5"/>',
+ trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+ list:'<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',
+ check:'<path d="M5 12l5 5 9-10"/>'
+};
+const ic=(n,c='')=>`<span class="ic ${c}" aria-hidden="true"><svg viewBox="0 0 24 24">${SV[n]||''}</svg></span>`;
+
+/* ---------- company facts (from Company Profile 2027 Draft) ---------- */
+const CO={name:'(주)에스캡엔지니어링',en:'SCAB Engineering Co., Ltd.',ceo:'',tel:'02-322-8100',fax:'02-322-8200',mail:'axax1002@scab.co.kr',
+  bizno:'710-81-02685',type:'도매 및 소매업 / 전기부품',founded:'2004.04.10',inc:'2021.09.27',staff:'8명',
+  addr:'서울특별시 영등포구 선유로49길 23, 14층 1410호',addr2:'(양평동4가, 선유도역2차아이에스비즈타워)',
+  addrEn:'#1410, IS Biz Tower 2, 23 Seonyu-ro 49-gil, Yeongdeungpo-gu, Seoul, Korea'};
+
+const BRANDS={
+ abb:{name:'ABB',color:'#FF000F',logo:'brand_abb',role:'ABB Korea 대리점',scope:'LV · MV · PA 제품',
+   intro:'보호계전기(Relion), 고속절체(SUE), 동기투입장치(SYNCHROTACT), 스마트 변전소(SSC600), 고·저압 차단기, 공정자동화(PA) 계측기기',
+   made:[['보호계전기','FI'],['차단기','IT · CN'],['HSBT','DE'],['동기투입장치','CH']],site:'https://new.abb.com/kr'},
+ schneider:{name:'Schneider Electric',color:'#3DCD58',logo:'brand_se',role:'Schneider Electric Korea 대리점',scope:'DE · PP 제품 / EOCR',
+   intro:'EcoStruxure 기반 보호계전기(Easergy), 디지털 미터(PowerLogic), 저·고압 차단기, EOCR 모터 보호와 MCC 모니터링',
+   made:[['계전기 · 차단기','FR · CN'],['저압 제품','FR'],['디지털 미터','FR · CN'],['EOCR','KR']],site:'https://www.se.com/kr/ko/'},
+ hitachi:{name:'Hitachi Energy',color:'#E4002B',logo:'brand_hitachi',role:'Hitachi Energy Korea 대리점',scope:'변압기 · 초고압(HV) 제품',
+   intro:'발전소 · 변전소용 초고압 차단기, 단로기, 계기용 변성기, 피뢰기, 발전기 차단기, 변압기 · 리액터와 서비스',
+   made:[['계전기 · 차단기','SE'],['변압기','KR · VN 등'],['HV 제품','SE 등']],site:'https://www.hitachienergy.com'},
+ sifang:{name:'Sifang',ko:'北京四方',color:'#1565C0',logo:null,role:'Sifang 국내 독점 대리점',scope:'SVG/STATCOM · 전력품질',
+   intro:'Beijing Sifang Automation — 동적 무효전력 보상(SVG/STATCOM), AHF · 콘덴서 · 리액터 조합의 전력품질 패키지, 보호 · 변전 자동화',
+   made:[['SVG / STATCOM','CN'],['보호','CN']],site:null},
+ sangdo:{name:'상도전기',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'상도전기 공급사',scope:'저압 제품',
+   intro:'국내 · 베트남 생산 저압 제품. 국내 배전반 · 플랜트 프로젝트 공급',made:[['저압 제품','KR · VN']],site:null}
+};
+const BKEYS=Object.keys(BRANDS);
+const brandLogo=(k,cls='')=>{const b=BRANDS[k];return b.logo?`<img class="${cls}" src="${A(b.logo)}" alt="${esc(b.name)}" loading="lazy">`:`<span class="txtlogo">SIFANG <small>北京四方</small></span>`};
+
+const CATS={relay:'보호계전기',transfer:'절체 · 동기',breaker:'차단기 · 개폐기',meter:'계측 · 모니터링',hv:'초고압 · 변압기',pq:'전력품질',lv:'저압 제품',pa:'공정자동화(PA)',service:'서비스'};
+
+const P=(id,brand,cat,name,model,img,pts)=>({id,brand,cat,name,model,img,pts});
+const PRODUCTS=[
+ P('abb-relion','abb','relay','Relion 보호계전기','REX615 · REX640 · 아크 보호','abb_relion',['보호 · 제어 · 계측 통합','IEC 61850 통신','링 배전 자동화(FLISR) 적용']),
+ P('abb-sue','abb','transfer','고속절체장치 (HSBT)','SUE 3000 · SUE 4000','abb_sue4000',['약 30 ms 고속 절체','공정 중단 최소화','다양한 모선 구성 대응']),
+ P('abb-sync6','abb','transfer','동기투입장치','SYNCHROTACT 6','abb_sync6',['자동 동기 투입 · 동기 검출','발전기 · 계통 연계','원전 동기계전기 대체 동등성 검토']),
+ P('abb-ssc600','abb','relay','스마트 변전소 보호 · 제어','SSC600','abb_ssc600',['집중형 보호 · 제어','AI 기반 예측 정비','디지털 변전소 (IEC 61850)']),
+ P('abb-mvcb','abb','breaker','고압 차단기 · 개폐기','VCB · VCS · LBS','abb_mvcb',['IEC / ANSI 규격','CT · PT · 센서']),
+ P('abb-islimiter','abb','breaker','고장전류 한류기','Is-Limiter',null,['고장전류를 수 ms 내 차단','기존 차단기 · 모선 정격 유지 가능','국내 대형 플랜트 적용 실적']),
+ P('abb-lvcb','abb','lv','저압 차단기','ACB · MCCB · MCB','abb_lvcb',['보조 계전기','배전반 · 플랜트 적용']),
+ P('abb-afdd','abb','lv','아크 고장 차단기','AFDD','abb_afdd',['저압 아크 고장 검출 · 차단','전기 화재 예방']),
+ P('abb-tx','abb','pa','전송기','압력 · 온도 · 유량','abb_tx',['공정자동화(PA) 계측']),
+ P('abb-pos','abb','pa','밸브 포지셔너','Positioner','abb_pos',['플랜트 · 발전 적용']),
+ P('abb-ana','abb','pa','분석기','Analyzer','abb_ana',['공정 분석']),
+ P('se-easergy','schneider','relay','보호계전기','Easergy P3 · P5','se_easergy',['저 · 고압 보호, 아크 검출','IEC 61850 등 다양한 프로토콜','UL 인증 모델 (해외 프로젝트)']),
+ P('se-powerlogic','schneider','meter','디지털 미터','PowerLogic PM8000 · ION','se_powerlogic',['정밀 계측','고조파 · 전력품질 분석','UL 인증 모델 PM8240 · ION7400']),
+ P('se-mtz','schneider','lv','저압 기중차단기','MasterPact MTZ','se_x139',['전력품질 계측 내장','디지털 모듈 업그레이드']),
+ P('se-hvx','schneider','breaker','고압 진공차단기','EvoPact HVX','se_x141',['콤팩트 설계 · 저유지보수','IoT 센서 디지털 모니터링']),
+ P('se-eocr','schneider','lv','전자식 모터보호계전기','EOCR iSEM1 · iSEM2','eocr',['과부하 · 결상 · 지락 보호','통신형 모델','신규 · MRO · Retrofit 공급']),
+ P('se-edge','schneider','meter','MCC 모니터링 시스템','EOCR Edge','eocr_edge',['MCC 모터 데이터 수집','모니터링 · 예지 정비','Load List 기반 설계']),
+ P('he-cb','hitachi','hv','가스차단기','Live Tank 36–1200 kV · Dead Tank 72–800 kV','he_147',['발전 · 변전 적용']),
+ P('he-ds','hitachi','hv','단로기','Center / Double break · Pantograph','he_148',['Pantograph ≤ 550 kV']),
+ P('he-it','hitachi','hv','계기용 변성기','CT 36–800 kV · VT 72–800 kV','he_149',['복합형 ≤ 145 kV','광 센서']),
+ P('he-sa','hitachi','hv','피뢰기','PEXLIM · TEXLIM · EXLIM','he_150',['EXCOUNT 서지 카운터']),
+ P('he-gcb','hitachi','hv','발전기 차단기 (GCB)','HVR/S · HECPS · HECS · HEC','he_151',['최대 300 kA / 2000 MW']),
+ P('he-tr','hitachi','hv','변압기 · 리액터','GSU · 변전 · 전기로 · 특수','he_152',['몰드 변압기 (HEK)']),
+ P('he-bu','hitachi','hv','부싱 · 탭 절환기','OLTC · DETC','he_153',['계측 · 보호 장치']),
+ P('he-sv','hitachi','service','서비스','설치 · 시운전 · 교육','he_154',['예비품 · 유지보수 · Retrofit']),
+ P('sf-svg','sifang','pq','SVG / STATCOM','동적 무효전력 보상',null,['고압 · 특고압 (변전소)','신재생 · 해상풍력 연계','실시간(ms) 응답']),
+ P('sf-pq','sifang','pq','전력품질 패키지','AHF · 콘덴서 · 리액터',null,['부하 · 계통별 조합 제안','진단 → 선정 → 공급 → 사후관리']),
+ P('sf-sa','sifang','relay','보호 · 변전 자동화','Protection & SA',null,['보호 및 변전 자동화 포트폴리오']),
+ P('sd-lv','sangdo','lv','저압 제품','Sangdo LV',null,['국내 · 베트남 생산','국내 배전반 · 플랜트 프로젝트'])
+];
+
+/* ---------- resources ---------- */
+const RCAT={catalog:'카탈로그',tech:'기술자료',cert:'인증서',profile:'회사소개서'};
+const R=(id,cat,title,brand,meta,date,access,extra={})=>({id,cat,title,brand,meta,date,access,...extra});
+const RESOURCES=[
+ R('r-prof-en','profile','2027 회사소개서 (영문, Draft v0.1)',null,'PDF · 2.1 MB','2027-01','file'),
+ R('r-prof-kr','profile','2027 회사소개서 (국문)',null,'PDF','준비 중','soon'),
+ R('r-c-relion','catalog','Relion 615 · 640 시리즈 제품 안내','abb','제조사 자료','—','maker'),
+ R('r-c-sue','catalog','SUE 3000 / SUE 4000 고속절체 브로셔','abb','제조사 자료','—','maker'),
+ R('r-c-sync','catalog','SYNCHROTACT 6 동기투입장치','abb','제조사 자료','—','maker'),
+ R('r-c-ssc','catalog','SSC600 스마트 변전소','abb','제조사 자료','—','maker'),
+ R('r-c-isl','catalog','Is-Limiter 고장전류 한류기','abb','제조사 자료','—','maker'),
+ R('r-c-easergy','catalog','Easergy P3 · P5 보호계전기','schneider','제조사 자료','—','maker'),
+ R('r-c-pm','catalog','PowerLogic PM8000 · ION 시리즈','schneider','제조사 자료','—','maker'),
+ R('r-c-mtz','catalog','MasterPact MTZ · EvoPact HVX','schneider','제조사 자료','—','maker'),
+ R('r-c-eocr','catalog','EOCR iSEM · EOCR Edge','schneider','제조사 자료','—','maker'),
+ R('r-c-he','catalog','Hitachi Energy 초고압 제품군','hitachi','제조사 자료','—','maker'),
+ R('r-c-svg','catalog','Sifang SVG / STATCOM','sifang','제조사 자료','—','request'),
+ R('r-t-coord','tech','보호협조 · 정정 계산서 작성 예시 (단락전류 계산 기반)',null,'기술 노트','—','request'),
+ R('r-t-87b','tech','고임피던스 모선보호(87B) 안정화 저항 · VDR 선정',null,'기술 노트','—','request'),
+ R('r-t-alt','tech','고지대(해발 4,000 m) 보호계전기 적용 — 절연 보정 · 컨포멀 코팅 (IEC 60255-27)',null,'기술 노트','—','request'),
+ R('r-t-hsbt','tech','HSBT 절체 로직 설계 (REX640 HSABTC) · 인터록 시험 계획',null,'기술 노트','—','request'),
+ R('r-t-sync','tech','원전 동기계전기 대체 동등성 검토 (SYNCHROTACT 6)',null,'기술 노트','—','request'),
+ R('r-t-flisr','tech','데이터센터 FLISR 자가복구 배전 (REX615 링 · IEC 61850 GOOSE)',null,'기술 노트','—','request'),
+ R('r-t-pq','tech','전력품질 설비 선정 가이드 (콘덴서 · 리액터 / AHF / SVG)',null,'기술 노트','—','request'),
+ R('r-t-mcc','tech','Smart MCC — Load List 기반 EOCR 모델 · CT · 통신 선정',null,'기술 노트','—','request'),
+ R('r-cert-rnd','cert','연구개발전담부서 인정서',null,'이미지','2026-04-14','view',{img:'cert_rnd'}),
+ R('r-cert-abb','cert','ABB Korea 대리점 인증','abb','등록 예정','—','soon'),
+ R('r-cert-se','cert','Schneider Electric Korea 대리점 인증','schneider','등록 예정','—','soon'),
+ R('r-cert-he','cert','Hitachi Energy Korea 대리점 인증','hitachi','등록 예정','—','soon'),
+ R('r-cert-sf','cert','Sifang 국내 독점 대리점 인증','sifang','등록 예정','—','soon'),
+ R('r-cert-khnp','cert','한국수력원자력 유자격 공급자 (Q-Class)',null,'등록 예정','—','soon')
+];
+
+/* ---------- references ---------- */
+const REFS={};
+const CUST=[];
+
+/* ---------- board ---------- */
+const SAMPLE_POSTS=[
+ {id:1,cat:'notice',pin:true,title:'홈페이지 시안 v0.1 공개',date:'2026-11-03',sort:20261103,author:'관리자',views:24,sample:true,
+  body:'회사소개서(2027 Draft)를 바탕으로 만든 홈페이지 시안입니다.\n메뉴 구성, 문구, 이미지는 검토 후 순차적으로 수정합니다.\n\n· 회사소개 / 취급제품 / 자료실 / 고객문의 / 게시판\n· 오픈 도메인: www.scab.co.kr'},
+ {id:2,cat:'notice',pin:true,title:'개인정보처리방침 · 이메일무단수집거부 (초안)',date:'2026-11-03',sort:20261102,author:'관리자',views:9,sample:true,
+  body:'홈페이지 오픈 전 개인정보처리방침을 확정해 게시합니다.\n화면 하단의 "개인정보처리방침" 링크에서 초안을 확인할 수 있습니다.'},
+ {id:3,cat:'news',title:'연구개발전담부서 인정',date:'2026-04-14',sort:20260414,author:'관리자',views:57,sample:true,
+  body:'(주)에스캡엔지니어링 연구개발전담부서가 인정되었습니다. (신고일 2026.04.14)\n인정서는 자료실 > 인증서에서 확인할 수 있습니다.'},
+ {id:4,cat:'news',title:'Sifang(北京四方) 국내 독점 대리점 — SVG/STATCOM',date:'2026',sort:20260300,author:'관리자',views:41,sample:true,
+  body:'Beijing Sifang Automation의 국내 독점 대리점으로 SVG/STATCOM과 전력품질 솔루션을 공급합니다.\nAHF · 콘덴서 · 리액터를 포함한 조합 제안이 가능합니다.'},
+ {id:5,cat:'news',title:'Schneider Electric EOCR 대리점 (에티버스)',date:'2026',sort:20260200,author:'관리자',views:33,sample:true,
+  body:'Schneider Electric EOCR 대리점으로 iSEM1 / iSEM2, EOCR Edge를 신규 · MRO · Retrofit 프로젝트에 공급합니다.'},
+ {id:6,cat:'news',title:'Hitachi Energy Korea 대리점',date:'2024–25',sort:20250100,author:'관리자',views:62,sample:true,
+  body:'Hitachi Energy Korea 대리점으로 변압기와 초고압(HV) 제품을 공급합니다.'},
+ {id:7,cat:'news',title:'Schneider Electric Korea 대리점 (DE/PP)',date:'2024–25',sort:20240100,author:'관리자',views:58,sample:true,
+  body:'Schneider Electric Korea의 DE · PP 제품 대리점으로 보호계전기, 디지털 미터, 차단기를 공급합니다.'},
+ {id:9,cat:'qna',title:'해발 4,000 m 현장에 보호계전기를 적용할 수 있나요?',date:'2026-11-03',sort:20261101,author:'예시 고객',views:15,sample:true,
+  body:'고지대 플랜트에 고압반 보호계전기를 적용하려고 합니다. 고도 조건에서 확인해야 할 사항이 궁금합니다.',
+  answer:'카탈로그 고도 정격, 컨포멀 코팅 옵션, IEC 60255-27 절연 보정 항목을 제조사별로 검토합니다.\nABB · Schneider · Siemens · SEL · GE 제품을 같은 기준으로 비교하고, 고객 사양 적합성과 대안을 보고서로 제출합니다.'},
+ {id:10,cat:'qna',title:'EOCR 모델은 어떻게 선정하나요?',date:'2026-11-03',sort:20261100,author:'예시 고객',views:11,sample:true,
+  body:'MCC 신설 건으로 EOCR 견적을 받고 싶습니다. 어떤 자료를 드리면 되나요?',
+  answer:'모터 Load List(정격 출력 · 전압 · 전류)를 보내 주시면 모터별 모델 · CT · 통신 방식을 선정해 견적합니다.\n모니터링이 필요하면 EOCR Edge 구성도 함께 제안합니다.'}
+];
+const BCAT={notice:'공지사항',news:'회사 소식',qna:'기술 Q&A'};
+let userPosts=store.get('posts',[]);
+const allPosts=()=>[...userPosts,...SAMPLE_POSTS];
+
+/* ---------- menu ---------- */
+const MENU=[
+ {id:'company',label:'회사소개',en:'COMPANY',home:'company-overview',desc:'2004년 설립 이후의 연혁, 사업 조직, 인증',
+  cols:[{t:'회사소개',items:[['company-overview','회사 개요 · 인사말'],['company-vision','비전 · 핵심가치'],['company-history','연혁'],['company-organization','사업 조직']]},
+        {t:'신뢰',items:[['company-certs','인증 · 파트너'],['company-location','오시는 길']]}],
+  feat:{img:'cube_red',t:'SCAB 2030',d:'제품 판매 → 시스템 솔루션 → 제조 기반 종합 솔루션',href:'company-vision'}},
+ {id:'products',label:'취급제품',en:'PRODUCTS',home:'products',desc:'5개 브랜드의 보호 · 제어 · 전력품질 제품과 현장별 솔루션, 엔지니어링',
+  cols:[{t:'브랜드',items:[['products-abb','ABB'],['products-schneider','Schneider Electric'],['products-hitachi','Hitachi Energy'],['products-sifang','Sifang 北京四方'],['products-sangdo','상도전기']]},
+        {t:'솔루션',items:[['solutions-datacenter','데이터센터 FLISR'],['solutions-hsbt','고속절체 · 동기 (HSBT)'],['solutions-pq','전력품질 (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)']]},
+        {t:'엔지니어링',items:[['engineering','엔지니어링 서비스'],['products','전체 제품 찾기']]}],
+  feat:{img:'abb_relion',t:'Relion REX615 · REX640',d:'보호 · 제어 · 계측, IEC 61850',href:'products-abb'}},
+ {id:'resources',label:'자료실',en:'RESOURCES',home:'resources',desc:'카탈로그, 기술자료, 인증서, 회사소개서',
+  cols:[{t:'자료실',items:[['resources','전체 자료'],['resources-catalog','카탈로그'],['resources-tech','기술자료']]},{t:'회사 자료',items:[['resources-cert','인증서'],['resources-profile','회사소개서']]}],
+  feat:{img:'cert_rnd',t:'연구개발전담부서 인정서',d:'신고일 2026.04.14',href:'resources-cert'}},
+ {id:'contact',label:'고객문의',en:'CONTACT',home:'contact',desc:'견적 · 기술 · A/S 문의와 사업부별 담당자 안내',
+  cols:[{t:'고객문의',items:[['contact','견적 · 기술 문의'],['contact-people','사업부별 문의 창구'],['company-location','오시는 길']]}],
+  feat:{txt:'02-322-8100',t:'대표전화',d:'FAX 02-322-8200 · axax1002@scab.co.kr',href:'contact'}},
+ {id:'board',label:'게시판',en:'NEWS & BOARD',home:'board-notice',desc:'공지사항, 회사 소식, 기술 Q&A',
+  cols:[{t:'게시판',items:[['board-notice','공지사항'],['board-news','회사 소식'],['board-qna','기술 Q&A']]}],
+  feat:{txt:'Q&A',t:'기술 Q&A',d:'제품 선정 · 적용 질문을 남겨 주세요',href:'board-qna'}}
+];
+const TITLE={home:'홈'};
+MENU.forEach(m=>m.cols.forEach(c=>c.items.forEach(([id,l])=>{if(!TITLE[id])TITLE[id]=l})));
+TITLE['company-overview']='회사 개요';TITLE['board-write']='글쓰기';TITLE['resources']='자료실';
+const menuOf=id=>id.startsWith('company')?'company':(id.startsWith('product')||id.startsWith('solution')||id==='engineering')?'products':id.startsWith('resource')?'resources':id.startsWith('contact')?'contact':id.startsWith('board')?'board':null;
+
+/* ---------- svg diagrams ---------- */
+const FL_CAP=['정상 운전 — 상시 개방점(NOP)으로 두 피더를 나누어 운전','고장 발생 — 피더 차단기 트립, REX615가 고장 위치 검출 (GOOSE)','고장 구간 분리 — 고장 구간 양단 개방 후 피더 차단기 재투입','건전 구간 복구 — 상시 개방점 투입, 반대 피더에서 공급'];
+const FL_STEP=['정상','고장 발생','구간 분리','복구'];
+function flisrSVG(){
+ const cx=180,cy=170,r=104,pt=a=>[+(cx+r*Math.cos(a*Math.PI/180)).toFixed(1),+(cy+r*Math.sin(a*Math.PI/180)).toFixed(1)];
+ const N={A:pt(-120),B:pt(180),C:pt(120),F:pt(-60),E:pt(0),D:pt(60)}, S=[180,30], NOP=[180,N.C[1]];
+ const CB1=[132,46],CB2=[228,46];
+ const L=(a,b)=>`M${a[0]} ${a[1]}L${b[0]} ${b[1]}`;
+ const segs={s1:`M${S[0]-24} ${S[1]+8}L${CB1[0]} ${CB1[1]}`,sa:L(CB1,N.A),ab:L(N.A,N.B),bc:L(N.B,N.C),cn:L(N.C,NOP),nd:L(NOP,N.D),de:L(N.D,N.E),ef:L(N.E,N.F),fs:L(N.F,CB2),s2:`M${CB2[0]} ${CB2[1]}L${S[0]+24} ${S[1]+8}`};
+ const node=(k,p)=>`<g class="nd cl" data-n="${k}"><circle cx="${p[0]}" cy="${p[1]}" r="17"/><text x="${p[0]}" y="${p[1]}">615</text></g>`;
+ const sq=(k,p,t)=>`<g class="nd cl" data-n="${k}"><rect x="${p[0]-11}" y="${p[1]-11}" width="22" height="22" rx="2"/><text x="${p[0]}" y="${p[1]}" style="font-size:8px">${t}</text></g>`;
+ const mid=[(N.A[0]+N.B[0])/2,(N.A[1]+N.B[1])/2];
+ return `<svg class="flisr" viewBox="0 0 360 300" role="img" aria-label="REX615 링 배전 FLISR 동작 개념도">
+  <g class="src"><rect x="${S[0]-38}" y="${S[1]-16}" width="76" height="24" rx="3"/><text class="lbl" x="${S[0]}" y="${S[1]}">변전소 모선</text></g>
+  ${Object.entries(segs).map(([k,d])=>`<path class="seg live" data-s="${k}" d="${d}"/>`).join('')}
+  ${sq('cb1',CB1,'CB')}${sq('cb2',CB2,'CB')}
+  ${Object.entries(N).map(([k,p])=>node(k,p)).join('')}
+  <g class="nd op" data-n="nop"><rect x="${NOP[0]-12}" y="${NOP[1]-12}" width="24" height="24" rx="2"/><text x="${NOP[0]}" y="${NOP[1]}" style="font-size:8px">NOP</text></g>
+  <g class="fault"><path d="M${mid[0]-2} ${mid[1]-17}l-9 15h7l-4 13 11-17h-7l4-11z"/></g>
+  <text class="ring-lbl" x="${cx}" y="${cy-4}">REX615 Ring</text><text class="ring-lbl" x="${cx}" y="${cy+11}">IEC 61850 GOOSE</text>
+ </svg>`;
+}
+function setFlisr(svg,k){
+ if(!svg)return;
+ const live={0:'s1 sa ab bc cn nd de ef fs s2',1:'nd de ef fs s2',2:'s1 sa nd de ef fs s2',3:'s1 sa bc cn nd de ef fs s2'}[k].split(' ');
+ $$('.seg',svg).forEach(p=>{const on=live.includes(p.dataset.s);p.classList.toggle('live',on);p.classList.toggle('dead',!on)});
+ const open={0:['nop'],1:['nop','cb1'],2:['nop','A','B'],3:['A','B']}[k];
+ $$('.nd',svg).forEach(g=>{const o=open.includes(g.dataset.n);g.classList.toggle('op',o);g.classList.toggle('cl',!o)});
+ $('.fault',svg).classList.toggle('show',k>0);
+}
+function wavePath(fn,x0,x1,t0,t1,yc,amp,step){
+ let d='';const n=Math.round((t1-t0)/step);
+ for(let i=0;i<=n;i++){const t=t0+i*step,x=x0+(t-t0)/(t1-t0)*(x1-x0),y=yc-amp*fn(t);d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}
+ return d;
+}
+function hsbtSVG(){
+ const X0=46,X1=544,T1=100,yc=104,amp=64,x=t=>X0+t/T1*(X1-X0);
+ const w=2*Math.PI*60/1000;
+ const pre=t=>Math.sin(w*t), res=t=>0.82*Math.exp(-(t-20)/28)*Math.sin(2*Math.PI*57/1000*(t-20)+w*20), post=t=>Math.sin(w*t+0.45);
+ let grid='',ax='';
+ for(let t=0;t<=100;t+=20){grid+=`<line class="grid" x1="${x(t)}" y1="30" x2="${x(t)}" y2="178"/>`;ax+=`<text class="ax" x="${x(t)}" y="194" text-anchor="middle">${t}</text>`}
+ return `<svg class="wv" viewBox="0 0 560 214" role="img" aria-label="고속절체 시 모선 전압 개념도">
+  ${grid}<line class="grid" x1="${X0}" y1="${yc}" x2="${X1}" y2="${yc}"/>
+  <rect class="shade" x="${x(20)}" y="30" width="${x(50)-x(20)}" height="148"/>
+  <line class="mk" x1="${x(20)}" y1="22" x2="${x(20)}" y2="178"/><line class="mk" x1="${x(50)}" y1="22" x2="${x(50)}" y2="178"/>
+  <path class="tr a" d="${wavePath(pre,X0,x(20),0,20,yc,amp,.25)}"/>
+  <path class="tr b" d="${wavePath(res,x(20),x(50),20,50,yc,amp,.25)}"/>
+  <path class="tr c" d="${wavePath(post,x(50),X1,50,100,yc,amp,.25)}"/>
+  <text class="ann" x="${x(20)-4}" y="18" text-anchor="end">주전원 고장</text>
+  <text class="ann c" x="${(x(20)+x(50))/2}" y="44" text-anchor="middle">≈ 30 ms</text>
+  <text class="ann" x="${x(50)+4}" y="18">예비전원 투입</text>
+  <text class="ax" x="${X1}" y="208" text-anchor="end">시간 [ms] · 개념도</text>
+  <text class="ax" x="${X0}" y="208">모선 전압 (예시)</text>
+ </svg>`;
+}
+const PQ_H=[[5,.22],[7,.13],[11,.07],[13,.05]], PQ_A=[[5,.02],[7,.012],[11,.006],[13,.004]];
+const thd=h=>Math.sqrt(h.reduce((s,[,a])=>s+a*a,0))*100;
+function pqSVG(mode){
+ const X0=40,X1=544,yc=100,amp=52,T=4*Math.PI;
+ const f=h=>t=>Math.sin(t)+h.reduce((s,[n,a])=>s+a*Math.sin(n*t),0);
+ let grid='';for(let i=0;i<=4;i++){const xx=X0+i/4*(X1-X0);grid+=`<line class="grid" x1="${xx}" y1="26" x2="${xx}" y2="174"/>`}
+ return `<svg class="wv" viewBox="0 0 560 200" role="img" aria-label="고조파 보상 전후 전류 파형 예시">
+  ${grid}<line class="grid" x1="${X0}" y1="${yc}" x2="${X1}" y2="${yc}"/>
+  <path class="tr b pq-before ${mode==='after'?'dim':''}" d="${wavePath(f(PQ_H),X0,X1,0,T,yc,amp,.02)}"/>
+  <path class="tr c pq-after ${mode==='before'?'dim':''}" d="${wavePath(f(PQ_A),X0,X1,0,T,yc,amp,.02)}"/>
+  <text class="ann" x="${X0}" y="18">부하 전류 (5 · 7 · 11 · 13차 고조파, 예시)</text>
+  <text class="ax" x="${X1}" y="194" text-anchor="end">2 주기</text>
+ </svg>`;
+}
+function mccSVG(){
+ let s='';const xs=[34,98,162,226];
+ [0,1].forEach(r=>{const y0=r?84:20,bus=r?132:72;
+  s+=`<path d="M${xs[0]+25} ${bus}H290"/>`;
+  xs.forEach((x0,i)=>{const n=r*4+i+1,warn=n===6;
+   s+=`<path d="M${x0+25} ${y0+40}V${bus}"/><rect class="m" x="${x0}" y="${y0}" width="50" height="40" rx="3"/><text x="${x0+25}" y="${y0+14}">M${n}</text><circle class="${warn?'wr':'ok'}" cx="${x0+25}" cy="${y0+28}" r="4.5"/>`})});
+ return `<svg class="mcc" viewBox="0 0 400 162" role="img" aria-label="EOCR과 EOCR Edge 모니터링 구성 개념도">${s}
+  <rect class="e" x="290" y="40" width="96" height="100" rx="4"/><text class="ek" x="338" y="80">EOCR</text><text class="ek" x="338" y="96">Edge</text>
+  <text x="338" y="154">모니터링 · 예지정비</text></svg>`;
+}
+
+/* ---------- shell ---------- */
+function shell(){
+ $('#util').innerHTML=`<div class="wrap util-in"><span class="util-tag">Protection · Control · Power Quality</span>
+  <div class="util-links"><a href="#contact">고객문의</a><a href="#resources">자료실</a><a href="#company-location">오시는 길</a>
+  <span class="util-tel">${ic('phone','sm')}${CO.tel}</span>
+  <span class="lang"><button class="on" aria-pressed="true">KOR</button><button data-act="eng" aria-pressed="false">ENG</button></span>
+  <button class="theme-btn" data-act="theme" id="themeBtn"></button></div></div>`;
+ $('#hdr').innerHTML=`<div class="wrap hdr-in">
+   <a class="logo" href="#home" aria-label="(주)에스캡엔지니어링 홈"><img class="l" src="${A('logo')}" alt="(주)에스캡엔지니어링 SCAB Engineering"><img class="d" src="${A('logo_dark')}" alt=""></a>
+   <nav class="gnb" aria-label="주 메뉴"><ul>${MENU.map(m=>`<li data-menu="${m.id}"><a class="gnb-a" href="#${m.home}">${m.label}</a></li>`).join('')}</ul></nav>
+   <div class="hdr-act">
+     <button class="icon-btn" data-act="search" aria-label="사이트 검색">${ic('search')}</button>
+     <a class="btn pri sm hdr-cta" href="#contact">견적 문의</a>
+     <button class="icon-btn burger" data-act="burger" aria-label="메뉴 열기" aria-expanded="false">${ic('menu')}</button>
+   </div></div>
+   <div class="mega" id="mega" hidden></div>
+   <div class="drawer" id="drawer" hidden></div>`;
+ $('#ftr').innerHTML=`<div class="wrap">
+  <div class="ftr-top"><div><img src="${A('logo_dark')}" alt="(주)에스캡엔지니어링">
+   <div class="ftr-info"><span><b>${CO.name}</b>${CO.en}</span><span><b>사업자등록번호</b><span class="mono">${CO.bizno}</span></span>
+   <span><b>주소</b>${CO.addr} ${CO.addr2}</span><span><b>TEL</b><span class="mono">${CO.tel}</span> · <b>FAX</b><span class="mono">${CO.fax}</span> · <b>E-mail</b><span class="email">${CO.mail}</span></span></div></div>
+   <nav class="ftr-map" aria-label="사이트맵">${MENU.map(m=>`<div><h4>${m.label}</h4>${m.cols.flatMap(c=>c.items).slice(0,6).map(([id,l])=>`<a href="#${id}">${l}</a>`).join('')}</div>`).join('')}</nav></div>
+  <div class="ftr-bot"><nav><button class="b" data-act="privacy">개인정보처리방침</button><button data-act="noemail">이메일무단수집거부</button><button data-act="sitemap">사이트맵</button></nav>
+   <label class="sr" for="fam">패밀리 사이트</label>
+   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option></select>
+   <span class="mono">© SCAB Engineering Co., Ltd.</span></div></div>`;
+ drawer();themeLabel();
+}
+function drawer(){
+ const cur=location.hash.slice(1)||'home';
+ $('#drawer').innerHTML=`<div class="wrap">${MENU.map(m=>`<details${menuOf(cur)===m.id?' open':''}><summary>${m.label}${ic('chev')}</summary>
+  <div class="dl">${m.cols.flatMap(c=>c.items).map(([id,l])=>`<a href="#${id}" class="${id===cur?'cur':''}">${l}</a>`).join('')}</div></details>`).join('')}
+  <div class="drawer-foot"><a class="btn pri sm" href="#contact">견적 문의</a><button class="btn line sm" data-act="theme">${ic('moon','sm')} 배경 전환</button><span class="util-tel">${ic('phone','sm')}${CO.tel}</span></div></div>`;
+}
+function megaHTML(m){
+ const f=m.feat;
+ return `<div class="wrap mega-in"><div class="mega-intro"><p class="eyebrow">${m.en}</p><h3>${m.label}</h3><p>${m.desc}</p><a class="link" href="#${m.home}">${m.label} 바로가기 ${ic('arrow')}</a></div>
+  <div class="mega-cols">${m.cols.map(c=>`<div class="mega-col"><h4>${c.t}</h4>${c.items.map(([id,l])=>`<a href="#${id}">${l}${ic('chev','sm')}</a>`).join('')}</div>`).join('')}</div>
+  <a class="mega-feat" href="#${f.href}"><div class="fimg${f.txt?' txt':''}">${f.txt?esc(f.txt):`<img src="${A(f.img)}" alt="">`}</div><div class="fb"><b>${f.t}</b><span>${f.d}</span></div></a></div>`;
+}
+
+/* ---------- components ---------- */
+const secHead=(eb,t,lead,link)=>`<div class="sec-head"><div><p class="eyebrow">${eb}</p><h2 class="t2" style="margin-top:10px">${t}</h2>${lead?`<p class="lead">${lead}</p>`:''}</div>${link?`<a class="link" href="#${link[0]}">${link[1]} ${ic('arrow')}</a>`:''}</div>`;
+const blockHead=(t,right='')=>`<div class="block-h"><h2 class="t2">${t}</h2>${right}</div>`;
+const chipBrand=k=>{const b=BRANDS[k];return `<span class="chip" style="--bc:${b.color}"><span class="dot"></span>${esc(b.name)}</span>`};
+const waveIcon=`<svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 Q12 2 22 20 T42 20 T62 20 T82 20 T102 20 T122 20" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/><path d="M2 20 Q12 6 22 20 T42 20 T62 20 T82 20 T102 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+function pImg(p){
+ if(p.img)return `<img src="${A(p.img)}" alt="${esc(p.name)} ${esc(p.model)}" loading="lazy">`;
+ const b=BRANDS[p.brand];
+ return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
+}
+function pCard(p){
+ return `<article class="pc"><div class="pw">${pImg(p)}</div>
+  <div class="pb">${chipBrand(p.brand)}<span class="pn">${esc(p.name)}</span><span class="pm">${esc(p.model)}</span><ul>${p.pts.slice(0,2).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
+  <div class="pf"><button class="link" data-act="prod" data-id="${p.id}">자세히 ${ic('arrow')}</button><button class="btn line sm" data-act="quote" data-id="${p.id}">견적 문의</button></div></article>`;
+}
+
+/* ---------- home ---------- */
+const SLIDES=[
+ {eb:'PROTECTION · CONTROL · POWER QUALITY',h:'보호 · 제어 · 전력품질<br>제품에서 시스템 솔루션까지',
+  p:'ABB · Schneider Electric · Hitachi Energy · Sifang · 상도전기 제품을 공급하고, 보호협조 · 절체 로직 · 시운전 지원까지 함께 수행합니다.',
+  cta:[['products','취급제품 보기','pri'],['contact','견적 문의','ghost']],chips:true,
+  vis:()=>`<div class="collage"><figure class="ph big" style="margin:0"><img src="${A('abb_relion')}" alt="ABB Relion 보호계전기"></figure>
+   <figure class="ph s" style="margin:0"><img src="${A('se_easergy')}" alt="Schneider Easergy 보호계전기"></figure>
+   <figure class="ph s" style="margin:0"><img src="${A('he_152')}" alt="Hitachi Energy 변압기"></figure></div>`},
+ {eb:'DATA CENTER · FLISR',h:'데이터센터 배전의<br>자가복구 (FLISR)',
+  p:'ABB REX615 링 구성과 IEC 61850 GOOSE로 고장 구간을 찾아 분리하고, 건전 구간은 수 초 안에 복구합니다.',
+  cta:[['solutions-datacenter','솔루션 보기','pri'],['contact','상담 요청','ghost']],
+  vis:()=>`<div class="vis-card on-dark"><div class="vc-h"><span>FLISR SEQUENCE</span><span id="flHeroStep">01 / 04</span></div><div id="flHero">${flisrSVG()}</div><p class="vis-cap" id="flHeroCap">${FL_CAP[0]}</p></div>`},
+ {eb:'HIGH-SPEED TRANSFER',h:'공정을 멈추지 않는<br>고속절체 · 동기투입',
+  p:'SUE 3000/4000 고속절체(약 30 ms)와 SYNCHROTACT 6 동기투입장치. REX640 HSABTC 기반 절체 로직 설계와 인터록 시험을 지원합니다.',
+  cta:[['solutions-hsbt','솔루션 보기','pri'],['products-abb','ABB 제품','ghost']],
+  vis:()=>`<div class="vis-card on-dark"><div class="vc-h"><span>BUS VOLTAGE · FAST TRANSFER</span><span>SUE 3000/4000</span></div>${hsbtSVG()}</div>`},
+ {eb:'POWER QUALITY · SIFANG',h:'고조파 · 역률 · 무효전력<br>진단에서 사후관리까지',
+  p:'Sifang SVG/STATCOM, AHF, 콘덴서 · 리액터 가운데 부하와 계통에 맞는 설비를 선정합니다.',
+  cta:[['solutions-pq','솔루션 보기','pri'],['products-sifang','Sifang 제품','ghost']],
+  vis:()=>`<div class="vis-card on-dark"><div class="vc-h"><span>THDi ${thd(PQ_H).toFixed(1)}% → ${thd(PQ_A).toFixed(1)}%</span><span>예시 파형</span></div>${pqSVG('both')}</div>`}
+];
+function pageHome(){
+ const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
+ const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
+ return `
+ <section class="hero" aria-roledescription="carousel" aria-label="주요 안내">
+  <img class="hero-cube" src="${A('cube_white')}" alt="">
+  <div class="wrap"><div class="slides" id="slides">
+   ${SLIDES.map((s,i)=>`<article class="slide${i?'':' on'}" aria-roledescription="slide" aria-label="${i+1} / ${SLIDES.length}"${i?' aria-hidden="true"':''}>
+    <div class="slide-txt"><p class="eyebrow on-dark">${s.eb}</p><h1>${s.h}</h1><p class="slide-p">${s.p}</p>
+     <div class="slide-cta">${s.cta.map(([h,l,c])=>`<a class="btn ${c}" href="#${h}"${i?' tabindex="-1"':''}>${l}${c==='pri'?ic('arrow'):''}</a>`).join('')}</div>
+     ${s.chips?`<div class="bchips">${chips}</div>`:''}</div>
+    <div class="slide-vis">${s.vis()}</div></article>`).join('')}
+  </div></div>
+  <div class="hero-ctrl"><div class="wrap">
+   <span class="hc-count"><b id="hcNow">01</b> / ${String(SLIDES.length).padStart(2,'0')}</span>
+   <div class="hc-bars" id="hcBars">${SLIDES.map((s,i)=>`<button aria-label="${i+1}번 슬라이드" class="${i?'':'on'}" data-slide="${i}"></button>`).join('')}</div>
+   <button class="hc-btn" data-act="prev" aria-label="이전">${ic('left')}</button>
+   <button class="hc-btn" data-act="next" aria-label="다음">${ic('chev')}</button>
+   <button class="hc-btn" data-act="pause" id="hcPause" aria-label="자동 넘김 정지">${ic('pause')}</button>
+  </div></div>
+ </section>
+ <div class="wrap quick"><nav class="quick-grid" aria-label="바로가기">
+  ${[['products','제품 찾기','브랜드 · 제품군별 검색','box'],['resources','자료실','카탈로그 · 기술자료 · 인증서','doc'],['contact','견적 · 기술 문의','담당 사업부로 바로 연결','mail'],['company-location','오시는 길','당산역 · 선유도역 인근','pin']]
+   .map(([h,t,d,i])=>`<a class="q" href="#${h}">${ic(i)}<b>${t}</b><span class="d">${d}</span><span class="go">${ic('arrow')}</span></a>`).join('')}
+ </nav></div>
+
+ <section class="sec"><div class="wrap">
+  ${secHead('BRANDS','취급 브랜드','대리점 · 공급사로 등록된 5개 브랜드의 제품을 공급합니다.',['products','전체 제품 찾기'])}
+  <div class="brand-grid">${BKEYS.map(k=>{const b=BRANDS[k];return `<a class="brand" href="#products-${k}" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div><div class="bt">${esc(b.role)}</div><div class="bd">${esc(b.scope)}</div><div class="bf">제품 보기 ${ic('arrow','sm')}</div></a>`}).join('')}</div>
+ </div></section>
+
+ <section class="sec alt"><div class="wrap">
+  ${secHead('SOLUTIONS','현장 과제별 솔루션','단일 제품부터 엔지니어링을 포함한 패키지까지, 현장 조건에 맞춰 구성합니다.')}
+  <div class="sol-grid">
+   <a class="sol" href="#solutions-datacenter"><div class="sv" id="solFl">${flisrSVG()}</div><div class="sb"><span class="eyebrow">DATA CENTER</span><b>데이터센터 FLISR</b><p>REX615 링 · GOOSE 기반 고장 구간 분리와 자동 복구</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-hsbt"><div class="sv">${hsbtSVG()}</div><div class="sb"><span class="eyebrow">HSBT · SYNC</span><b>고속절체 · 동기투입</b><p>약 30 ms 고속절체와 발전기 · 계통 동기투입</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-pq"><div class="sv">${pqSVG('both')}</div><div class="sb"><span class="eyebrow">POWER QUALITY</span><b>전력품질 (SVG · AHF)</b><p>고조파 · 역률 · 무효전력 진단과 설비 선정</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-mcc"><div class="sv">${mccSVG()}</div><div class="sb"><span class="eyebrow">SMART MCC</span><b>Smart MCC (EOCR)</b><p>모터 보호부터 MCC 모니터링 · 예지정비까지</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+  </div>
+ </div></section>
+
+ <section class="sec dark"><div class="wrap">
+  <div class="eng"><div><p class="eyebrow on-dark">ENGINEERING</p><h2 class="t2" style="margin-top:10px">보호계전 · 전력계통 엔지니어링</h2>
+   <p class="lead" style="margin-top:14px">여러 제조사 제품을 같은 기준으로 비교해 선정하고, 정정 계산부터 시운전 · 사후관리까지 지원합니다.</p>
+   <a class="btn ghost" href="#engineering" style="margin-top:28px">엔지니어링 서비스 ${ic('arrow')}</a></div>
+   <div class="svc-grid">${ENG.slice(0,6).map(([t,d])=>`<div class="svc"><b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
+  <div class="steps">${STEPS.map((s,i)=>`<div class="step${i===2?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+ </div></section>
+
+
+ <section class="sec alt tight"><div class="wrap news-wrap">
+  <div>${secHead('NEWS','소식',null,['board-notice','게시판'])}
+   <div class="news-list">${latest.map(p=>`<a href="#board-post-${p.id}"><span class="chip${p.cat==='notice'?' red':''}">${BCAT[p.cat]}</span><b>${esc(p.title)}</b><time>${esc(p.date)}</time></a>`).join('')}</div></div>
+  <div class="cta-card"><img src="${A('cube_white')}" alt=""><p class="eyebrow on-dark">CONTACT</p><span class="big">${CO.tel}</span>
+   <p>FAX ${CO.fax}<br><span class="email">${CO.mail}</span></p>
+   <p>제품 견적, 기술 검토, A/S 문의는 온라인 문의로 남겨 주시면 담당 사업부에서 연락드립니다.</p>
+   <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn pri" href="#contact">온라인 문의 ${ic('arrow')}</a><a class="btn ghost" href="#contact-people">문의 창구 보기</a></div></div>
+ </div></section>`;
+}
+const ENG=[['보호협조 · 정정 계산','단락전류 계산 기반 정정 계산서, 보호협조 곡선'],['모선보호 (87B)','고임피던스 모선보호 안정화 저항 · VDR 선정'],['절체 로직 설계','HSBT 절체 로직, 인터록 시험 계획, 현장 복구 지원'],['원전 동등성 검토','Q · A/S등급, 단종품 대체 기술 비교'],['특수 환경 검토','해발 4,000 m 고도 보정, 컨포멀 코팅, IEC 60255-27'],['디지털 변전소','IEC 61850, SSC600 · REX640'],['해외 인증 대응','UL 인증 제품 선정 (PowerLogic PM8240 · ION7400, Easergy P3/P5)'],['기술 지원 · 교육','고장 분석, 입회 시험, 제품 · 보호 교육']];
+const STEPS=['요구사항 · 사양 검토','제품 선정 · 제조사 비교','설계 · 로직 · 정정','공급 · FAT 지원','시운전 · 현장 지원','사후관리 · 교육'];
+
+/* ---------- company pages ---------- */
+function pgCompanyOverview(){
+ return `<div class="block">${blockHead('인사말',`<span class="draft">문구 초안</span>`)}
+  <div class="prose"><p>(주)에스캡엔지니어링은 2004년 서울에서 ABB 저압 제품 대리점으로 시작해 보호계전기, 차단기, 공정자동화 기기를 공급해 왔습니다.</p>
+  <p>현재는 Schneider Electric, Hitachi Energy, Sifang, 상도전기 제품까지 취급하며, 보호협조 계산, 절체 로직 설계, 시운전 지원 같은 엔지니어링 업무를 함께 수행합니다.</p>
+  <p>고객의 입장에서 제품을 선정하고 기술 검토를 제공하는 것을 기본으로 삼고 있습니다. 고객과 함께 오래, 꾸준히 성장하겠습니다.</p>
+  </div></div>
+ <div class="block">${blockHead('회사 개요')}
+  <div class="facts"><div class="fact"><b>2004</b><span>창업 (04.10)</span></div><div class="fact"><b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact"><b>5</b><span>취급 브랜드</span></div><div class="fact"><b>KHNP</b><span>유자격 공급자</span></div></div>
+  <div class="tbl-wrap"><table class="info"><tbody>
+   <tr><th>회사명</th><td>${CO.name} · ${CO.en}</td></tr>
+   <tr><th>주소</th><td>${CO.addr}<br>${CO.addr2}</td></tr>
+   <tr><th>전화 / 팩스</th><td class="mono tnum">${CO.tel} / ${CO.fax}</td></tr><tr><th>이메일</th><td class="email">${CO.mail}</td></tr>
+   <tr><th>사업자등록번호</th><td class="mono tnum">${CO.bizno}</td></tr><tr><th>업태 / 종목</th><td>${CO.type}</td></tr>
+   <tr><th>설립</th><td>창업 ${CO.founded} · 법인 설립 ${CO.inc}</td></tr><tr><th>임직원</th><td>${CO.staff}</td></tr>
+  </tbody></table></div></div>`;
+}
+const VALUES=[['고객 성공','고객 관점의 제품 선정과 기술 검토'],['새로운 기회와 시장','데이터센터 · 신재생 · 해외'],['신뢰 기반 시너지','제조사 · EPC · 배전반 제작사와 협업'],['지속 성장','충성 고객 기반의 안정적 성장'],['사회 공헌','안전한 전력 시스템으로 산업 지원'],['신기술 리더십','디지털 변전소 · IEC 61850 · AI 유지보수'],['기술 · 영업 역량','보호계전 전문성 · 멀티 브랜드 역량'],['사람 중심 문화','교육 · 복지 · 성과 공유']];
+function pgCompanyVision(){
+ return `<div class="block">${blockHead('SCAB 2030')}<p class="lead">제품 판매에서 시스템 솔루션으로, 2030년에는 제조 기반 종합 솔루션 공급으로 확장합니다.</p>
+  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>브랜드 · 제품 다각화</b><p>SEK · HEK 대리점, Sifang 독점 대리점, EOCR 대리점</p></div>
+   <div class="rs now"><span class="yr">2027 / 28</span><b>시스템 솔루션 확장</b><p>제품 + 엔지니어링 + 시스템 (SCADA · PMS · HSBT · FLISR) 패키지</p></div>
+   <div class="rs fut"><span class="yr">2029 / 30</span><b>제조 기반 종합 솔루션</b><p>자체 배전반 · LV Box 제작, 종합 솔루션 공급</p></div></div>
+  <div class="facts"><div class="fact"><b>10+</b><span>구성원</span></div><div class="fact"><b>₩10B+</b><span>매출</span></div><div class="fact"><b>100+</b><span>고객사</span></div><div class="fact"><b>20+</b><span>브랜드 · 제품군</span></div></div>
+  <p class="note">2030년 목표 기준</p></div>
+ <div class="block">${blockHead('미션 · 핵심가치')}<p class="lead">Growing with our customers — Long and Steady. 고객과 함께 오래, 꾸준히 성장합니다.</p>
+  <div class="grid-4">${VALUES.map(([t,d])=>`<div class="card"><h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
+}
+const HIST=[['2004–05',['에스캡 설립 (서울)','ABB Korea LV 대리점']],['2007–08',['발전 · 공공 분야 ABB 제품 공급','ABB Korea MV 대리점']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['ABB Korea PA 대리점','Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용','한수원 ABB 유자격 공급사 등록']],['2020–21',['ABB Korea EL "Best Growth Distributor"','(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['Sifang 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
+function pgCompanyHistory(){
+ return `<div class="block">${blockHead('연혁','<span class="note">2004 – 2026</span>')}
+  <div class="tl">${HIST.map(([y,it],i)=>`<div class="tl-i${i===HIST.length-1?' hl':''}"><div class="yr">${y}</div><ul>${it.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
+  <div class="tl-next"><b>2027 →</b><span>제품 판매에서 시스템 솔루션으로 확장 · 2030년 제조 기반 종합 솔루션 공급</span></div></div>`;
+}
+function pgCompanyOrg(){
+ const prod={abb:'보호계전기 · 차단기 · HSBT · 동기투입 · LV · PA',schneider:'보호계전기 · 차단기 · 디지털 미터 · EOCR · SCADA',hitachi:'변압기 (몰드 · 유입) · HV 제품',sifang:'SVG / STATCOM · 전력품질 솔루션',sangdo:'저압 제품'};
+ return `<div class="block">${blockHead('제품 사업')}
+  <div class="org-brands">${BKEYS.map(k=>`<a class="ob" href="#products-${k}" style="--bc:${BRANDS[k].color}"><div class="bl">${brandLogo(k)}</div><p>${prod[k]}</p></a>`).join('')}</div></div>
+ <div class="block">${blockHead('엔지니어링 · 시스템 솔루션')}
+  <div class="pillars"><div class="pil"><h4>엔지니어링 사업</h4><ul><li>정정 계산 · 보호협조</li><li>HSBT · 동기 · 로직 설계, 시운전 지원</li><li>EOCR · 디지털 미터 적용 설계</li></ul></div>
+   <div class="pil k"><h4>시스템 솔루션 사업</h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR 자가복구 배전 · 디지털 변전소</li><li>SVG/STATCOM · AHF 전력품질 패키지</li></ul></div>
+   <div class="pil"><h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>원자력 · 발전 · 해외 EPC</li></ul></div></div></div>`;
+}
+function pgCompanyCerts(){
+ const dist=[['abb','ABB Korea 대리점','LV · MV · PA 제품'],['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','Sifang 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도전기 공급사','저압 제품'],['khnp','한국수력원자력 유자격 공급자','보호계전기 · 차단기 · 계측기 (Q-Class)']];
+ return `<div class="block">${blockHead('인증 · 등록')}
+  <div class="cert-row">
+   <button class="cert" data-act="img" data-img="cert_rnd" data-t="연구개발전담부서 인정서"><div class="ci"><img src="${A('cert_rnd')}" alt="연구개발전담부서 인정서" loading="lazy"></div><span>연구개발전담부서 인정서</span></button>
+   <div class="dist">${dist.map(([k,t,d])=>`<div class="dc"><div class="bl${k==='khnp'?' k':''}">${k==='khnp'?'KHNP':brandLogo(k)}</div><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
+  </div><p class="note">대리점 인증서 원본 이미지는 자료실 &gt; 인증서에 등록 예정입니다.</p></div>`;
+}
+function refTable(k){
+ const g=REFS[k],ov=k==='overseas';
+ return `<div class="tbl-wrap"><table><thead><tr><th>프로젝트</th><th>${ov?'경유 · 고객':'고객'}</th><th>주요 제품</th><th>${ov?'분야':'범위'}</th></tr></thead>
+  <tbody>${g.rows.map(r=>`<tr><td><b style="font-weight:600">${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>`;
+}
+let refTab='power';
+function pgCompanyRefs(){
+ return `<div class="block">${blockHead('주요 공급 실적')}
+  <div class="tabs" role="tablist">${Object.entries(REFS).map(([k,g])=>`<button role="tab" class="${k===refTab?'on':''}" data-act="reftab" data-k="${k}" aria-selected="${k===refTab}">${g.t}</button>`).join('')}</div>
+  <div id="refBody">${refTable(refTab)}</div>
+  <p class="note">해외: 한국 EPC를 통한 ABB IED · 계측기기 공급과 현장 지원</p></div>
+ <div class="block">${blockHead('주요 고객사')}<div class="logo-grid">${CUST.map(([f,n])=>`<div><img src="${A('c_'+f)}" alt="${esc(n)}" loading="lazy"></div>`).join('')}</div></div>`;
+}
+function pgLocation(){
+ const q=encodeURIComponent('선유도역2차아이에스비즈타워');
+ return `<div class="block">${blockHead('오시는 길')}
+  <div class="sd-grid"><div class="map-ph">${ic('pin','lg')}<b style="font-size:17px">선유도역 2차 아이에스비즈타워 14층 1410호</b>
+   <p class="note">시안에서는 지도를 표시하지 않습니다. 실제 사이트에서 지도 API를 연결합니다.</p>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="btn line sm" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">네이버 지도 ${ic('ext','sm')}</a><a class="btn line sm" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">카카오맵 ${ic('ext','sm')}</a></div></div>
+  <div class="tbl-wrap"><table class="info"><tbody>
+   <tr><th>주소</th><td>${CO.addr}<br>${CO.addr2}</td></tr><tr><th>영문 주소</th><td>${CO.addrEn}</td></tr>
+   <tr><th>지하철</th><td>2 · 9호선 당산역 인근<br>9호선 선유도역 도보 이동</td></tr>
+   <tr><th>전화</th><td class="mono">${CO.tel} ${copyBtn(CO.tel)}</td></tr><tr><th>팩스</th><td class="mono">${CO.fax}</td></tr>
+  </tbody></table></div></div></div>`;
+}
+const copyBtn=t=>`<button class="cp" data-act="copy" data-v="${esc(t)}" aria-label="${esc(t)} 복사">${ic('copy')}</button>`;
+
+/* ---------- products pages ---------- */
+let pf={brand:'all',cat:'all',q:''};
+function filteredProducts(){
+ const q=pf.q.trim().toLowerCase();
+ return PRODUCTS.filter(p=>(pf.brand==='all'||p.brand===pf.brand)&&(pf.cat==='all'||p.cat===pf.cat)&&(!q||(p.name+' '+p.model+' '+BRANDS[p.brand].name+' '+p.pts.join(' ')).toLowerCase().includes(q)));
+}
+function prodFilter(showBrand){
+ const cats=Object.keys(CATS).filter(c=>PRODUCTS.some(p=>(pf.brand==='all'||p.brand===pf.brand)&&p.cat===c));
+ return `<div class="fbar">${showBrand?`<div class="pills" role="group" aria-label="브랜드">${[['all','전체']].concat(BKEYS.map(k=>[k,BRANDS[k].name])).map(([k,l])=>`<button class="pill${pf.brand===k?' on':''}" data-act="pfb" data-k="${k}"${k!=='all'?` style="--bc:${BRANDS[k].color}"`:''}>${k!=='all'?'<span class="dot"></span>':''}${esc(l)}</button>`).join('')}</div>`:''}
+  <label class="search">${ic('search','sm')}<span class="sr">제품 검색</span><input id="pq" type="search" placeholder="제품명 · 모델 검색 (예: REX615)" value="${esc(pf.q)}"></label></div>
+  <div class="fbar"><div class="pills" role="group" aria-label="제품군">${[['all','전 제품군']].concat(cats.map(c=>[c,CATS[c]])).map(([k,l])=>`<button class="pill${pf.cat===k?' on':''}" data-act="pfc" data-k="${k}">${l}</button>`).join('')}</div><span class="count" id="pcount"></span></div>`;
+}
+function prodGridHTML(){
+ const list=filteredProducts();
+ return list.length?`<div class="pgrid">${list.map(pCard).join('')}</div>`:`<div class="empty">조건에 맞는 제품이 없습니다. 검색어를 지우거나 다른 제품군을 선택해 주세요.<br><br><a class="link" href="#contact">찾는 제품을 문의하기 ${ic('arrow')}</a></div>`;
+}
+function pgProducts(){
+ return `<div class="block">${blockHead('전체 제품 찾기')}${prodFilter(true)}<div id="pgrid">${prodGridHTML()}</div></div>`;
+}
+function pgBrand(k){
+ const b=BRANDS[k];
+ return `<div class="block"><div class="bhead" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div>
+  <div class="bi"><span class="chip red">${esc(b.role)}</span><h3>${esc(b.name)}${b.ko?` <span style="font-weight:500;color:var(--muted)">${b.ko}</span>`:''}${b.en?` <span style="font-weight:500;color:var(--muted);font-size:16px">${b.en}</span>`:''}</h3><p>${esc(b.intro)}</p>
+  <div class="made">${b.made.map(([t,c])=>`<span>${t}<b>${c}</b></span>`).join('')}<span style="color:var(--faint)">생산국은 제품에 따라 다를 수 있음</span></div>
+  ${b.site?`<div><a class="link" href="${b.site}" target="_blank" rel="noopener">제조사 사이트 ${ic('ext')}</a></div>`:''}</div></div></div>
+ <div class="block">${blockHead('제품')}${prodFilter(false)}<div id="pgrid">${prodGridHTML()}</div></div>`;
+}
+function pgSolDatacenter(){
+ return `<div class="block">${blockHead('데이터센터 전력 신뢰도')}<p class="lead">FLISR(Fault Location, Isolation & Service Restoration) 자가복구 배전과 전력 감시 · 품질 패키지</p>
+  <div class="sd-grid"><div class="diagram"><div id="flSol">${flisrSVG()}</div>
+   <div class="dg-ctrl" role="group" aria-label="FLISR 단계">${FL_STEP.map((s,i)=>`<button data-act="fl" data-k="${i}" class="${i?'':'on'}">${i+1}. ${s}</button>`).join('')}<button data-act="flplay" id="flPlay">${ic('play','sm')} 자동 재생</button></div>
+   <p class="dg-cap" id="flCap">${FL_CAP[0]}</p>
+   <div class="legend"><span><i style="background:var(--sw-on)"></i>투입 · 가압</span><span><i style="background:var(--open)"></i>개방</span><span><i style="border:2px dashed var(--faint);background:transparent"></i>정전 구간</span></div></div>
+  <ol class="numlist"><li><div><b>자가복구 배전 (FLISR)</b><span>ABB REX615 링 / 루프 구성, 고장 구간 분리 · 복구 로직</span></div></li>
+   <li><div><b>절체 · 보호</b><span>ATS, 보호계전기, 디지털 미터 (PowerLogic)</span></div></li>
+   <li><div><b>전력품질</b><span>AHF (능동형 고조파 필터) · 콘덴서 · 리액터</span></div></li>
+   <li><div><b>상태 감시 · DCIM</b><span>온도 · 습도 · 아크 · 부분방전 감시, EcoStruxure 연동</span></div></li></ol></div>
+  <p class="note">Schneider Electric 데이터센터 아키텍처(ATS · AHF · DCIM)와 ABB 보호 · FLISR를 고객 요구에 맞게 조합합니다.</p></div>
+ <div class="block">${blockHead('관련 제품')}<div class="pgrid">${['abb-relion','se-powerlogic','se-easergy','sf-pq'].map(id=>pCard(PRODUCTS.find(p=>p.id===id))).join('')}</div></div>`;
+}
+function pgSolHsbt(){
+ return `<div class="block">${blockHead('고속절체 · 동기투입')}<p class="lead">공정 중단 없이 전원을 유지하는 HSBT와 SYNCHROTACT 6</p>
+  <div class="steps light" style="margin-top:0">${['정상 운전 — 주전원 공급','고장 · 전압 강하 — 위상 · 주파수 · 잔류전압 감시','고속 절체 — 약 30 ms','연속 운전 — 공정 중단 최소화'].map((s,i)=>`<div class="step${i===2?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+  <div class="diagram">${hsbtSVG()}<p class="note" style="margin-top:8px">개념도입니다. 실제 절체 시간은 절체 방식과 설정에 따라 달라집니다.</p></div></div>
+ <div class="block"><div class="grid-2">
+  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 3000/4000)</h4><p>다양한 모선 구성에 대응하는 고속절체장치 · REX640 HSABTC 기반 절체 로직 설계 · 인터록 시험 계획과 현장 복구 지원</p></div></div>
+  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sync6')}" alt="SYNCHROTACT 6" style="width:100%"></div><div><h4>SYNCHROTACT 6</h4><p>발전기 · 계통 자동 동기투입 / 동기 검출 · 원전 노후 동기계전기 대체 동등성 검토 · 발전 및 산업용</p></div></div>
+ </div></div>`;
+}
+let pqMode='before';
+function pgSolPq(){
+ return `<div class="block">${blockHead('전력품질 — 고조파 · 역률 · 무효전력')}<p class="lead">Sifang SVG/STATCOM · AHF · 콘덴서 · 리액터</p>
+  <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${['진단 — 고조파 · 역률 · 전압 변동 측정','설비 선정 — AHF / 콘덴서 · 리액터 / SVG','공급 · 엔지니어링 — 사양 검토 · 설치 · 시운전 · 인허가','사후관리 — 성능 확인 · 유지보수'].map((s,i)=>`<div class="step${i===1?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+  <div class="diagram"><div id="pqWave">${pqSVG(pqMode)}</div>
+   <div class="dg-ctrl" role="group" aria-label="파형 보기"><button data-act="pq" data-k="before" class="${pqMode==='before'?'on':''}">보상 전</button><button data-act="pq" data-k="after" class="${pqMode==='after'?'on':''}">보상 후 (AHF)</button><button data-act="pq" data-k="both" class="${pqMode==='both'?'on':''}">겹쳐 보기</button></div>
+   <div class="thd"><div><span>전류 THD · 보상 전</span><b>${thd(PQ_H).toFixed(1)}%</b></div><div class="after"><span>전류 THD · 보상 후</span><b>${thd(PQ_A).toFixed(1)}%</b></div></div>
+   <p class="note" style="margin-top:8px">예시 파형입니다. 실제 개선량은 현장 측정 결과로 산정합니다.</p></div></div>
+ <div class="block">${blockHead('설비 비교')}
+  <div class="tbl-wrap"><table><thead><tr><th>항목</th><th>콘덴서 · 리액터</th><th>AHF (능동형 필터)</th><th>SVG / STATCOM</th></tr></thead><tbody>
+   <tr><th style="font-weight:600">주 목적</th><td>역률 보상 (고정)</td><td>고조파 전류 보상</td><td>동적 무효전력 · 전압 제어</td></tr>
+   <tr><th style="font-weight:600">응답</th><td>단계 제어</td><td>실시간 (ms)</td><td>실시간 (ms)</td></tr>
+   <tr><th style="font-weight:600">계통</th><td>저압 · 고압</td><td>주로 저압</td><td>고압 · 특고압 (변전소)</td></tr>
+   <tr><th style="font-weight:600">주요 용도</th><td>일반 산업 설비</td><td>인버터 · UPS 부하, 데이터센터</td><td>신재생 · 해상풍력 · 광산</td></tr>
+  </tbody></table></div><p class="note">해발 4,000 m 현장은 절연 및 냉각의 고도 보정을 별도로 검토합니다.</p></div>`;
+}
+function pgSolMcc(){
+ return `<div class="block">${blockHead('Smart MCC — EOCR · EOCR Edge')}<p class="lead">모터 보호에서 모니터링 시스템까지</p>
+  <div class="sd-grid"><div class="diagram">${mccSVG()}<div class="legend"><span><i style="background:var(--ok)"></i>정상</span><span><i style="background:var(--warn)"></i>주의 (예: 과부하 경향)</span></div></div>
+  <ol class="numlist"><li><div><b>EOCR (iSEM1 / iSEM2)</b><span>전자식 과부하 · 결상 · 지락 모터 보호, 통신형 모델</span></div></li>
+   <li><div><b>EOCR Edge</b><span>MCC 모터 데이터 수집 · 모니터링 · 예지 정비</span></div></li>
+   <li><div><b>Load List 기반 설계</b><span>모터 정격별 모델 · CT · 통신 선정, 견적 · 공급</span></div></li>
+   <li><div><b>공급 채널</b><span>Schneider EOCR 대리점 — 신규 · MRO · Retrofit</span></div></li></ol></div></div>
+ <div class="block">${blockHead('관련 제품')}<div class="pgrid">${['se-eocr','se-edge'].map(id=>pCard(PRODUCTS.find(p=>p.id===id))).join('')}</div></div>`;
+}
+function pgEngineering(){
+ const V=['ABB','Schneider','Siemens','SEL','GE'];
+ return `<div class="block">${blockHead('엔지니어링 서비스')}<p class="lead">보호계전 · 전력계통 담당자가 기술 검토를 수행합니다.</p>
+  <div class="grid-4">${ENG.map(([t,d])=>`<div class="card"><h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>
+ <div class="block">${blockHead('수행 절차')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step${i===1?' hl':''}"><b>${s}</b></div>`).join('')}</div></div>
+ <div class="block">${blockHead('제조사 비교 예 — 고지대(4,000 m) 보호계전기')}
+  <div class="tbl-wrap"><table><thead><tr><th>항목</th>${V.map(v=>`<th>${v}</th>`).join('')}</tr></thead><tbody>
+   <tr><th style="font-weight:600">카탈로그 고도 정격</th>${V.map(()=>'<td>확인</td>').join('')}</tr>
+   <tr><th style="font-weight:600">컨포멀 코팅 옵션</th>${V.map(()=>'<td>확인</td>').join('')}</tr>
+   <tr><th style="font-weight:600">IEC 60255-27 절연 보정</th>${V.map(()=>'<td>검토</td>').join('')}</tr>
+   <tr><th style="font-weight:600">결론</th><td colspan="5" class="hl">고객 사양 적합성 판단 · 대안 제시</td></tr>
+  </tbody></table></div><p class="note">검토 구조의 예시입니다. 실제 결과는 프로젝트별 보고서로 제출합니다.</p></div>
+ <div class="block">${blockHead('기술 자료',`<a class="link" href="#resources-tech">자료실에서 보기 ${ic('arrow')}</a>`)}
+  <div class="rlist">${RESOURCES.filter(r=>r.cat==='tech').slice(0,4).map(resRow).join('')}</div></div>`;
+}
+
+/* ---------- resources ---------- */
+let rq='';
+function resRow(r){
+ const act=r.access==='file'?`<button class="btn line sm" data-act="dl" data-id="${r.id}">${ic('down','sm')} 다운로드</button>`
+  :r.access==='view'?`<button class="btn line sm" data-act="img" data-img="${r.img}" data-t="${esc(r.title)}">보기</button>`
+  :r.access==='maker'?`<a class="btn line sm" href="${BRANDS[r.brand].site}" target="_blank" rel="noopener">제조사 ${ic('ext','sm')}</a><button class="btn line sm" data-act="req" data-id="${r.id}">요청</button>`
+  :r.access==='request'?`<button class="btn line sm" data-act="req" data-id="${r.id}">${ic('lock','sm')} 자료 요청</button>`
+  :`<span class="badge">준비 중</span>`;
+ return `<div class="ri"><span class="rc"><span class="chip${r.cat==='tech'?' red':''}">${RCAT[r.cat]}</span></span>
+  <div class="rt"><b>${esc(r.title)}</b><span>${r.brand?esc(BRANDS[r.brand].name):'에스캡엔지니어링'}</span></div>
+  <span class="rm">${esc(r.meta)}</span><span class="rm rb">${esc(r.date)}</span><div class="ra">${act}</div></div>`;
+}
+function pgResources(cat){
+ const list=RESOURCES.filter(r=>(cat==='all'||r.cat===cat)&&(!rq||r.title.toLowerCase().includes(rq.toLowerCase())));
+ return `<div class="block">${blockHead(cat==='all'?'전체 자료':RCAT[cat])}
+  <div class="fbar"><div class="tabs" style="border-bottom:0">${[['all','전체','resources']].concat(Object.entries(RCAT).map(([k,l])=>[k,l,'resources-'+k])).map(([k,l,h])=>`<a href="#${h}" class="${cat===k?'on':''}">${l} <span class="mono" style="font-size:12px;color:var(--faint)">${k==='all'?RESOURCES.length:RESOURCES.filter(r=>r.cat===k).length}</span></a>`).join('')}</div>
+  <label class="search">${ic('search','sm')}<span class="sr">자료 검색</span><input id="rq" type="search" placeholder="자료명 검색" value="${esc(rq)}"></label></div>
+  <div class="rlist" id="rlist">${list.length?list.map(resRow).join(''):'<div class="empty">검색 결과가 없습니다.</div>'}</div>
+  <p class="note">${ic('lock','sm')} 표시 자료는 요청서를 남기시면 담당자가 이메일로 보내 드립니다. 제조사 자료는 각 제조사 사이트에서 최신본을 받을 수 있습니다.</p></div>`;
+}
+
+/* ---------- contact ---------- */
+const DESK=['대표 창구','견적 · 기술 문의',CO.mail];
+const PEOPLE={
+ abb:{t:'ABB 사업부',bc:'#FF000F',list:[DESK]},
+ se:{t:'Schneider · Hitachi · Sifang 사업부',bc:'#3DCD58',list:[DESK]}
+};
+const ITYPE=['견적 요청','기술 문의','A/S · 고장','자료 요청','해외 프로젝트','기타'];
+let prefill=null, receipt=null;
+function route2(f){
+ if(f.type==='해외 프로젝트')return {to:DESK,bu:'해외 프로젝트'};
+ if(f.brand==='abb')return {to:DESK,bu:PEOPLE.abb.t};
+ if(['schneider','hitachi','sifang'].includes(f.brand))return {to:DESK,bu:PEOPLE.se.t};
+ return {to:DESK,bu:'대표 메일'};
+}
+function pgContact(){
+ if(receipt)return receiptHTML(receipt);
+ const pf2=prefill||{};prefill=null;
+ const inq=store.get('inq',[]);
+ return `<div class="ct-grid"><form class="form" id="cform" novalidate>
+   <div>${blockHead('견적 · 기술 문의')}<p class="note" style="margin-top:10px"><i style="color:var(--err);font-style:normal">*</i> 표시는 필수 항목입니다.</p></div>
+   <div class="fld"><span class="lb">문의 유형<i>*</i></span><div class="radios" role="radiogroup" aria-label="문의 유형">${ITYPE.map((t,i)=>`<label><input type="radio" name="type" value="${t}" ${(pf2.type?pf2.type===t:i===0)?'checked':''}><span>${t}</span></label>`).join('')}</div></div>
+   <div class="frow"><div class="fld"><label for="f-brand">관련 브랜드</label><select id="f-brand" name="brand"><option value="">선택 안 함</option>${BKEYS.map(k=>`<option value="${k}" ${pf2.brand===k?'selected':''}>${esc(BRANDS[k].name)}</option>`).join('')}</select></div>
+    <div class="fld"><label for="f-prod">제품 · 모델</label><input id="f-prod" name="prod" value="${esc(pf2.prod||'')}" placeholder="예: REX615, EOCR iSEM2"></div></div>
+   <div class="frow"><div class="fld"><label for="f-co">회사명<i>*</i></label><input id="f-co" name="co" autocomplete="organization" required><span class="em"></span></div>
+    <div class="fld"><label for="f-dept">부서 · 직책</label><input id="f-dept" name="dept"></div></div>
+   <div class="frow"><div class="fld"><label for="f-name">담당자명<i>*</i></label><input id="f-name" name="name" autocomplete="name" required><span class="em"></span></div>
+    <div class="fld"><label for="f-tel">연락처<i>*</i></label><input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="010-0000-0000" required><span class="em"></span></div></div>
+   <div class="fld"><label for="f-mail">이메일<i>*</i></label><input id="f-mail" name="mail" type="email" autocomplete="email" required><span class="em"></span></div>
+   <div class="fld"><label for="f-sub">제목<i>*</i></label><input id="f-sub" name="sub" value="${esc(pf2.sub||'')}" required><span class="em"></span></div>
+   <div class="fld"><label for="f-msg">내용<i>*</i></label><textarea id="f-msg" name="msg" maxlength="2000" required placeholder="수량, 사양, 납기, 현장 조건 등을 적어 주시면 검토가 빨라집니다.">${esc(pf2.msg||'')}</textarea><span class="hint"><span id="msgCount">0</span> / 2000</span><span class="em"></span></div>
+   <div class="fld"><span class="lb">첨부파일</span><div class="file"><label class="btn line sm" for="f-file">${ic('doc','sm')} 파일 선택<input id="f-file" type="file" name="file"></label><span class="fname" id="fname">사양서 · 단선도 · Load List (최대 10 MB)</span></div></div>
+   <div class="consent"><p class="ctext"><b>개인정보 수집 · 이용 안내</b><br>수집 항목: 회사명, 담당자명, 연락처, 이메일 · 이용 목적: 문의 응대 및 견적 제공 · 보유 기간: 문의 처리 완료 후 1년 <span class="draft" style="height:18px">초안</span></p>
+    <label><input type="checkbox" id="f-agree" name="agree"> 개인정보 수집 · 이용에 동의합니다 (필수)</label><span class="em" id="agreeErr" style="color:var(--err);font-size:12.5px"></span></div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" type="submit">문의 접수 ${ic('arrow')}</button><button class="btn line" type="button" data-act="sample">예시 내용 채우기</button><span class="note">시안에서는 메일이 발송되지 않습니다.</span></div>
+  </form>
+  <aside class="fact-side">
+   <div class="side-card k"><h4>대표 연락처</h4>
+    <div class="kv"><span>TEL</span><b>${CO.tel}</b>${copyBtn(CO.tel)}</div><div class="kv"><span>FAX</span><b>${CO.fax}</b>${copyBtn(CO.fax)}</div><div class="kv"><span>E-mail</span><b class="email" style="font-size:13.5px">${CO.mail}</b>${copyBtn(CO.mail)}</div></div>
+   <div class="side-card"><h4>사업부별 담당</h4><p class="note">ABB 제품은 ABB 사업부, Schneider · Hitachi · Sifang 제품은 해당 사업부에서 응대합니다.</p><a class="link" href="#contact-people">담당자 보기 ${ic('arrow')}</a></div>
+   ${admin?`<div class="side-card"><h4>접수 내역 (관리자 · 이 브라우저)</h4>${inq.length?inq.slice(0,6).map(x=>`<div style="font-size:13.5px;border-top:1px solid var(--line);padding-top:8px"><b class="mono" style="color:var(--ac)">${esc(x.no)}</b><br>${esc(x.type)} · ${esc(x.co)} · ${esc(x.sub)}</div>`).join(''):'<p class="note">아직 접수된 문의가 없습니다.</p>'}</div>`:''}
+  </aside></div>`;
+}
+function receiptHTML(r){
+ const rt=route2(r);
+ return `<div class="receipt"><div class="rc-h"><span class="no">${esc(r.no)}</span><h2 class="t2">문의가 접수되었습니다</h2><p class="lead">담당자가 확인 후 ${esc(r.mail)} 또는 ${esc(r.tel)}로 연락드립니다.</p></div>
+  <div class="rc-b"><div class="tbl-wrap"><table class="info"><tbody>
+   <tr><th>문의 유형</th><td>${esc(r.type)}</td></tr><tr><th>브랜드 · 제품</th><td>${r.brand?esc(BRANDS[r.brand].name):'—'} ${esc(r.prod||'')}</td></tr>
+   <tr><th>회사 · 담당자</th><td>${esc(r.co)} · ${esc(r.name)} ${esc(r.dept||'')}</td></tr><tr><th>제목</th><td>${esc(r.sub)}</td></tr>
+   ${r.file?`<tr><th>첨부</th><td>${esc(r.file)}</td></tr>`:''}</tbody></table></div>
+  <div><p class="eyebrow" style="margin-bottom:8px">시뮬레이션 · 담당자에게 전달될 메일</p>
+   <div class="mailprev"><div class="mh"><span>받는 사람</span><b>${esc(rt.to[0])} ${esc(rt.to[1].split(' · ')[0])} &lt;<span class="email">${esc(rt.to[2])}</span>&gt;</b>${rt.cc?`<span>참조</span><span>${esc(rt.cc[0])} &lt;<span class="email">${esc(rt.cc[2])}</span>&gt;</span>`:''}<span>배정</span><span>${esc(rt.bu)}</span><span>제목</span><b>[홈페이지 문의] ${esc(r.type)} – ${esc(r.co)}</b></div>
+   <pre>${esc(`접수번호: ${r.no}\n회사명: ${r.co}\n담당자: ${r.name} ${r.dept||''}\n연락처: ${r.tel}\n이메일: ${r.mail}\n브랜드/제품: ${r.brand?BRANDS[r.brand].name:'-'} ${r.prod||''}\n\n${r.msg}`)}</pre></div>
+   <p class="note" style="margin-top:8px">배정 규칙(시안): ABB → ABB 사업부 · Schneider/Hitachi/Sifang → 해당 사업부 · 해외 프로젝트 → 해외 담당 · 그 외 → 대표 메일</p></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" data-act="newinq">새 문의 작성</button><a class="btn line" href="#home">홈으로</a></div></div></div>`;
+}
+function pgPeople(){
+ return `<div class="block">${blockHead('사업부별 문의 창구')}
+  <div class="people">${Object.values(PEOPLE).map(g=>`<div class="bu" style="--bc:${g.bc}"><h3>${g.t}</h3>${g.list.map(([n,r,m])=>`<div class="person"><b>${n}</b><span class="role">${r}</span><span class="pm"><span class="email">${m}</span>${copyBtn(m)}</span></div>`).join('')}</div>`).join('')}</div>
+  <div class="tbl-wrap"><table class="info"><tbody><tr><th>대표전화</th><td class="mono">${CO.tel} ${copyBtn(CO.tel)}</td></tr><tr><th>팩스</th><td class="mono">${CO.fax}</td></tr><tr><th>주소</th><td>${CO.addr} ${CO.addr2}</td></tr></tbody></table></div></div>`;
+}
+
+/* ---------- board ---------- */
+let bq='',bpage=1;
+function pgBoard(cat){
+ const list=allPosts().filter(p=>p.cat===cat&&(!bq||p.title.includes(bq))).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||b.sort-a.sort);
+ const per=10,pages=Math.max(1,Math.ceil(list.length/per));bpage=Math.min(bpage,pages);
+ const rows=list.slice((bpage-1)*per,bpage*per);
+ const canWrite=cat==='qna'||admin;
+ let n=list.length-(bpage-1)*per;
+ return `<div class="block">${blockHead(BCAT[cat],canWrite?`<a class="btn pri sm" href="#board-write" data-act="wcat" data-k="${cat}">${ic('edit','sm')} 글쓰기</a>`:'')}
+  <div class="fbar"><div class="tabs" style="border-bottom:0">${Object.entries(BCAT).map(([k,l])=>`<a href="#board-${k}" class="${k===cat?'on':''}">${l}</a>`).join('')}</div>
+   <label class="search">${ic('search','sm')}<span class="sr">게시물 검색</span><input id="bq" type="search" placeholder="제목 검색" value="${esc(bq)}"></label></div>
+  <div class="tbl-wrap"><table class="btbl"><thead><tr><th class="c hide-m" style="width:72px">번호</th><th>제목</th><th class="c hide-m" style="width:110px">작성자</th><th class="c" style="width:112px">등록일</th><th class="c hide-m" style="width:70px">조회</th></tr></thead>
+  <tbody>${rows.length?rows.map(p=>`<tr class="${p.pin?'pin':''}"><td class="c hide-m mono">${p.pin?'<span class="nb">공지</span>':n--}</td>
+   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> ${p.cat==='qna'?(p.answer?'<span class="ans">답변완료</span>':'<span class="ans wait">답변대기</span>'):''} ${p.sample?'<span class="chip sample">예시</span>':''}${p.mine?'<span class="chip sample">시안 작성</span>':''}</td>
+   <td class="c hide-m">${esc(p.author)}</td><td class="c mono tnum" style="font-size:13px">${esc(p.date)}</td><td class="c hide-m mono" style="font-size:13px">${p.views||0}</td></tr>`).join(''):`<tr><td colspan="5" class="c" style="padding:40px;color:var(--muted)">게시물이 없습니다.</td></tr>`}</tbody></table></div>
+  ${pages>1?`<div class="pager">${Array.from({length:pages},(_,i)=>`<button class="${i+1===bpage?'on':''}" data-act="bpage" data-k="${i+1}">${i+1}</button>`).join('')}</div>`:''}
+  ${cat!=='qna'&&!admin?`<p class="note">공지사항 · 회사 소식은 관리자만 작성합니다. 시안 도구에서 '관리자 모드'를 켜면 작성 화면을 볼 수 있습니다.</p>`:''}</div>`;
+}
+function pgPost(id){
+ const all=allPosts(),p=all.find(x=>x.id===id);
+ if(!p)return `<div class="empty">게시물을 찾을 수 없습니다. <a class="link" href="#board-notice">목록으로</a></div>`;
+ const same=all.filter(x=>x.cat===p.cat).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||b.sort-a.sort),i=same.indexOf(p),prev=same[i+1],next=same[i-1];
+ return `<div class="block"><div class="post"><div class="post-h"><span>${p.pin?'<span class="chip red">공지</span>':`<span class="chip">${BCAT[p.cat]}</span>`} ${p.sample?'<span class="chip sample">예시</span>':''}</span><h2>${esc(p.title)}</h2>
+  <div class="post-meta"><span>작성자 ${esc(p.author)}</span><span class="mono">${esc(p.date)}</span><span>조회 ${p.views||0}</span></div></div>
+  <div class="post-b">${esc(p.body)}${p.answer?`<div class="post-a"><b>답변 · 에스캡엔지니어링</b>${esc(p.answer)}</div>`:''}</div>
+  <div class="post-nav">${next?`<a href="#board-post-${next.id}"><span>다음 글</span><b>${esc(next.title)}</b></a>`:''}${prev?`<a href="#board-post-${prev.id}"><span>이전 글</span><b>${esc(prev.title)}</b></a>`:''}</div></div>
+  <div class="post-act"><a class="btn line sm" href="#board-${p.cat}">${ic('list','sm')} 목록</a>${p.mine?`<button class="btn line sm" data-act="delpost" data-id="${p.id}">${ic('trash','sm')} 삭제</button>`:''}</div></div>`;
+}
+let wcat='qna';
+function pgWrite(){
+ const cats=admin?Object.entries(BCAT):[['qna',BCAT.qna]];
+ if(!admin)wcat='qna';
+ return `<div class="block">${blockHead('글쓰기')}<form class="form" id="wform" novalidate>
+  <div class="frow"><div class="fld"><label for="w-cat">분류</label><select id="w-cat" name="cat">${cats.map(([k,l])=>`<option value="${k}" ${k===wcat?'selected':''}>${l}</option>`).join('')}</select></div>
+   <div class="fld"><label for="w-au">작성자 (회사 · 이름)<i>*</i></label><input id="w-au" name="author" value="${admin?'관리자':''}" required><span class="em"></span></div></div>
+  <div class="fld"><label for="w-t">제목<i>*</i></label><input id="w-t" name="title" required><span class="em"></span></div>
+  <div class="fld"><label for="w-b">내용<i>*</i></label><textarea id="w-b" name="body" required></textarea><span class="em"></span></div>
+  ${admin?'<label class="sw" style="justify-content:flex-start;gap:8px"><input type="checkbox" name="pin"> 상단 고정 (공지)</label>':'<label class="sw" style="justify-content:flex-start;gap:8px"><input type="checkbox" name="secret"> 비밀글 (작성자와 관리자만 보기)</label>'}
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn pri" type="submit">등록</button><a class="btn line" href="#board-${wcat}">취소</a><span class="note">시안 작성 글은 이 브라우저에만 저장됩니다.</span></div></form></div>`;
+}
+
+/* ---------- router ---------- */
+let admin=store.get('admin',false);
+const PAGES={
+ 'company-overview':pgCompanyOverview,'company-vision':pgCompanyVision,'company-history':pgCompanyHistory,'company-organization':pgCompanyOrg,
+ 'company-certs':pgCompanyCerts,'company-location':pgLocation,
+ 'products':pgProducts,'products-abb':()=>pgBrand('abb'),'products-schneider':()=>pgBrand('schneider'),'products-hitachi':()=>pgBrand('hitachi'),'products-sifang':()=>pgBrand('sifang'),'products-sangdo':()=>pgBrand('sangdo'),
+ 'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'engineering':pgEngineering,
+ 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),'resources-profile':()=>pgResources('profile'),
+ 'contact':pgContact,'contact-people':pgPeople,
+ 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna'),'board-write':pgWrite
+};
+const PDESC={'company':'보호 · 제어 · 전력품질 제품과 엔지니어링을 공급하는 (주)에스캡엔지니어링','products':'ABB · Schneider Electric · Hitachi Energy · Sifang · 상도전기','resources':'카탈로그 · 기술자료 · 인증서 · 회사소개서','contact':'견적 · 기술 · A/S 문의','board':'공지사항 · 회사 소식 · 기술 Q&A'};
+let curId='home';
+function subLayout(id,body){
+ const mid=menuOf(id),m=MENU.find(x=>x.id===mid);
+ const title=id.startsWith('board-post')?BCAT[(allPosts().find(p=>'board-post-'+p.id===id)||{}).cat]||'게시판':TITLE[id]||m.label;
+ const lnbCur=id.startsWith('board-post')?'board-'+((allPosts().find(p=>'board-post-'+p.id===id)||{}).cat||'notice'):id;
+ return `<section class="phero"><img class="phero-cube" src="${A('cube_white')}" alt=""><div class="wrap">
+   <nav class="crumb" aria-label="현재 위치"><a href="#home">홈</a>${ic('chev','sm')}<a href="#${m.home}">${m.label}</a>${ic('chev','sm')}<span>${esc(title)}</span></nav>
+   <p class="eyebrow on-dark">${m.en}</p><h1>${esc(title)}</h1><p class="pd">${PDESC[mid]}</p></div></section>
+  <div class="wrap sub"><nav class="lnb" aria-label="${m.label} 메뉴"><p class="lnb-t">${m.label}</p>
+   ${m.cols.map(c=>`${m.cols.length>1?`<h5>${c.t}</h5>`:''}${c.items.map(([i,l])=>`<a href="#${i}" class="${i===lnbCur?'cur':''}">${l}${ic('chev','sm')}</a>`).join('')}`).join('')}</nav>
+   <div class="sub-body">${body}</div></div>`;
+}
+let timers=[];
+function clearTimers(){timers.forEach(t=>clearInterval(t));timers=[]}
+function render(scroll=true){
+ clearTimers();closeMega();
+ let id=decodeURIComponent(location.hash.slice(1))||'home';
+ const post=id.match(/^board-post-(\d+)$/);
+ if(!post&&id!=='home'&&!PAGES[id])id='home';
+ if(id.startsWith('products-'))pf={brand:id.slice(9),cat:'all',q:pf.q&&curId===id?pf.q:''};
+ else if(id==='products'&&curId!=='products')pf={brand:'all',cat:'all',q:''};
+ if(id!=='contact')receipt=null;
+ if(id.startsWith('board-')&&!post&&id!=='board-write'&&curId!==id){bq='';bpage=1}
+ curId=id;
+ const v=$('#view');
+ v.innerHTML=id==='home'?pageHome():subLayout(id,post?pgPost(+post[1]):PAGES[id]());
+ $$('.gnb li').forEach(li=>li.classList.toggle('cur',li.dataset.menu===menuOf(id)));
+ drawer();$('#drawer').hidden=true;const bg=$('[data-act="burger"]');bg.setAttribute('aria-expanded','false');bg.innerHTML=ic('menu');
+ document.title=(id==='home'?'':(TITLE[id]||'게시판')+' | ')+'SCAB 홈페이지 (테스트)';
+ afterRender(id);
+ if(scroll)window.scrollTo({top:0,behavior:'auto'});
+ updateDockPage();
+}
+function afterRender(id){
+ if(id==='home'){initCarousel();const s=$('#solFl svg');setFlisr(s,0)}
+ if(id==='solutions-datacenter'){setFlisr($('#flSol svg'),0)}
+ if(id==='products'||id.startsWith('products-'))updCount();
+ if(id==='contact'&&$('#cform'))initForm();
+ if(id==='board-write')initWrite();
+ if(id.startsWith('board-post-')){const p=SAMPLE_POSTS.find(x=>'board-post-'+x.id===id)||userPosts.find(x=>'board-post-'+x.id===id);if(p){p.views=(p.views||0)+1;if(p.mine)store.set('posts',userPosts)}}
+}
+
+/* ---------- carousel ---------- */
+let slideI=0,paused=false,flK=0;
+function initCarousel(){
+ slideI=0;hoverHero=false;const dur=7000;
+ const bars=$('#hcBars');bars.style.setProperty('--dur',dur+'ms');
+ paused=paused||RM;
+ showSlide(0);
+ const t=setInterval(()=>{if(!paused&&!document.hidden&&!hoverHero)showSlide((slideI+1)%SLIDES.length)},dur);timers.push(t);
+ const ft=setInterval(()=>{const s=$('#flHero svg');if(!s)return;flK=(flK+1)%4;setFlisr(s,flK);const c=$('#flHeroCap');if(c)c.textContent=FL_CAP[flK];const st=$('#flHeroStep');if(st)st.textContent=`0${flK+1} / 04`},2300);
+ if(!RM)timers.push(ft);
+ setFlisr($('#flHero svg'),0);
+ $('#hcPause').innerHTML=paused?ic('play'):ic('pause');
+ bars.classList.toggle('paused',paused);
+ const hero=$('.hero');hero.addEventListener('mouseenter',()=>{hoverHero=true});hero.addEventListener('mouseleave',()=>{hoverHero=false});
+}
+let hoverHero=false;
+function showSlide(i){
+ slideI=i;
+ $$('.slide').forEach((s,k)=>{const on=k===i;s.classList.toggle('on',on);s.setAttribute('aria-hidden',on?'false':'true');$$('a',s).forEach(a=>on?a.removeAttribute('tabindex'):a.setAttribute('tabindex','-1'))});
+ const bs=$$('#hcBars button');bs.forEach(b=>b.classList.remove('on'));void $('#hcBars').offsetWidth;bs[i]&&bs[i].classList.add('on');
+ const n=$('#hcNow');if(n)n.textContent=String(i+1).padStart(2,'0');
+}
+
+/* ---------- mega ---------- */
+let megaT=null,megaOpen=null;
+function openMega(id){
+ clearTimeout(megaT);
+ const m=MENU.find(x=>x.id===id),mega=$('#mega');
+ if(megaOpen!==id){mega.innerHTML=megaHTML(m);megaOpen=id}
+ mega.hidden=false;$$('.gnb li').forEach(li=>li.classList.toggle('open',li.dataset.menu===id));
+}
+function closeMega(){const mega=$('#mega');if(mega)mega.hidden=true;megaOpen=null;$$('.gnb li').forEach(li=>li.classList.remove('open'))}
+
+/* ---------- products interactions ---------- */
+function updCount(){const c=$('#pcount');if(c)c.innerHTML=`<b>${filteredProducts().length}</b>개 제품`}
+function refreshProducts(){
+ const v=$('#view'),inp=$('#pq'),had=document.activeElement===inp,pos=inp?inp.selectionStart:0;
+ const host=$$('.sub-body .block',v).find(b=>b.querySelector('#pgrid'));
+ if(!host)return;
+ const isAll=curId==='products';
+ host.innerHTML=isAll?`${blockHead('전체 제품 찾기')}${prodFilter(true)}<div id="pgrid">${prodGridHTML()}</div>`:`${blockHead('제품')}${prodFilter(false)}<div id="pgrid">${prodGridHTML()}</div>`;
+ updCount();
+ if(had){const n=$('#pq');n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}}
+}
+function prodModal(id){
+ const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const b=BRANDS[p.brand];
+ const res=RESOURCES.filter(r=>r.brand===p.brand&&r.cat==='catalog').slice(0,3);
+ openModal(`<div class="pm-grid"><div class="pm-img">${pImg(p)}</div><div class="pm-b">${chipBrand(p.brand)}<h3>${esc(p.name)}</h3><span class="mono" style="color:var(--muted)">${esc(p.model)}</span>
+  <ul>${p.pts.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+  <p class="note">분류: ${CATS[p.cat]} · ${esc(b.role)}</p>
+  ${res.length?`<div><p class="eyebrow" style="margin-bottom:6px">관련 자료</p>${res.map(r=>`<div style="font-size:14px;padding:4px 0">${ic('doc','sm')} ${esc(r.title)}</div>`).join('')}</div>`:''}
+  <div class="pm-act"><button class="btn pri" data-act="quote" data-id="${p.id}">견적 문의 ${ic('arrow')}</button><button class="btn line" data-act="reqp" data-id="${p.id}">자료 요청</button><a class="btn line" href="#products-${p.brand}" data-act="closemodal">${esc(b.name)} 제품 전체</a></div></div></div>`,p.name);
+}
+
+/* ---------- modal / toast ---------- */
+let lastFocus=null;
+function openModal(html,label,wide){
+ lastFocus=document.activeElement;$('#mbox').classList.toggle('wide',!!wide);
+ $('#mbox').innerHTML=`<button class="icon-btn mclose" data-act="closemodal" aria-label="닫기">${ic('close')}</button>${html}`;
+ $('#modal').setAttribute('aria-label',label||'안내');$('#modal').hidden=false;
+ setTimeout(()=>{const c=$('#mbox .mclose');c&&c.focus()},30);
+}
+function closeModal(){$('#modal').hidden=true;$('#mbox').innerHTML='';lastFocus&&lastFocus.focus&&lastFocus.focus()}
+let toastT=null;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},2600)}
+function copy(v){
+ const done=()=>toast(`복사했습니다: ${v}`);
+ try{navigator.clipboard.writeText(v).then(done).catch(()=>toast(`복사가 막혀 있습니다. 직접 선택해 주세요: ${v}`))}catch(e){toast(`직접 선택해 주세요: ${v}`)}
+}
+
+/* ---------- forms ---------- */
+function setErr(f,name,msg){const el=f.elements[name];const fld=el&&el.closest('.fld');if(!fld)return;fld.classList.toggle('err',!!msg);const em=$('.em',fld);if(em)em.textContent=msg||''}
+function initForm(){
+ const f=$('#cform'),msg=$('#f-msg');
+ const cnt=()=>$('#msgCount').textContent=msg.value.length;cnt();msg.addEventListener('input',cnt);
+ $('#f-file').addEventListener('change',e=>{const fl=e.target.files[0];$('#fname').textContent=fl?`${fl.name} (${(fl.size/1048576).toFixed(1)} MB)${fl.size>10485760?' — 10 MB를 넘습니다':''}`:'사양서 · 단선도 · Load List (최대 10 MB)'});
+ f.addEventListener('submit',e=>{
+  e.preventDefault();const d=Object.fromEntries(new FormData(f).entries());let bad=null;
+  const req={co:'회사명을 입력해 주세요.',name:'담당자명을 입력해 주세요.',tel:'연락처를 입력해 주세요.',mail:'이메일을 입력해 주세요.',sub:'제목을 입력해 주세요.',msg:'문의 내용을 입력해 주세요.'};
+  Object.entries(req).forEach(([k,m])=>{const v=(d[k]||'').trim();let er=v?'':m;
+   if(v&&k==='mail'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))er='이메일 형식을 확인해 주세요. 예: name@company.com';
+   if(v&&k==='tel'&&!/^[0-9+\-\s()]{8,}$/.test(v))er='숫자와 하이픈(-)으로 입력해 주세요.';
+   setErr(f,k,er);if(er&&!bad)bad=k});
+  const ag=$('#f-agree').checked;$('#agreeErr').textContent=ag?'':'개인정보 수집 · 이용에 동의해야 접수할 수 있습니다.';if(!ag&&!bad)bad='agree';
+  if(bad){const el=f.elements[bad];el&&el.focus();toast('필수 항목을 확인해 주세요.');return}
+  const fl=$('#f-file').files[0];const now=new Date();const ymd=`${String(now.getFullYear()).slice(2)}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`;
+  const inq=store.get('inq',[]);const no=`SCAB-${ymd}-${String(inq.length+1).padStart(3,'0')}`;
+  receipt={...d,no,file:fl?fl.name:''};inq.unshift({no,type:d.type,co:d.co,sub:d.sub});store.set('inq',inq);
+  render();
+ });
+}
+function initWrite(){
+ const f=$('#wform');
+ f.elements.cat.addEventListener('change',e=>{wcat=e.target.value});
+ f.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f).entries());let bad=null;
+  [['author','작성자를 입력해 주세요.'],['title','제목을 입력해 주세요.'],['body','내용을 입력해 주세요.']].forEach(([k,m])=>{const er=(d[k]||'').trim()?'':m;setErr(f,k,er);if(er&&!bad)bad=k});
+  if(bad){f.elements[bad].focus();return}
+  const now=new Date(),date=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  const id=Math.max(100,...allPosts().map(p=>p.id))+1;
+  userPosts.unshift({id,cat:d.cat,title:d.title.trim(),body:d.body.trim(),author:d.author.trim(),date,sort:+date.replace(/-/g,'')*100+99,views:0,mine:true,pin:!!d.pin,secret:!!d.secret});
+  store.set('posts',userPosts);toast('등록했습니다.');location.hash='#board-post-'+id;
+ });
+}
+
+/* ---------- search ---------- */
+function searchIndex(){
+ const idx=[];
+ Object.entries(TITLE).forEach(([id,l])=>{if(id!=='home'&&id!=='board-write')idx.push({g:'메뉴',t:l,h:'#'+id,s:MENU.find(m=>m.id===menuOf(id))?.label||''})});
+ PRODUCTS.forEach(p=>idx.push({g:'제품',t:`${p.name} · ${p.model}`,h:'#products-'+p.brand,s:BRANDS[p.brand].name,prod:p.id,k:p.pts.join(' ')}));
+ RESOURCES.forEach(r=>idx.push({g:'자료',t:r.title,h:'#resources-'+r.cat,s:RCAT[r.cat]}));
+ allPosts().forEach(p=>idx.push({g:'게시판',t:p.title,h:'#board-post-'+p.id,s:BCAT[p.cat]}));
+ return idx;
+}
+function openSearch(){
+ const s=$('#srch');s.hidden=false;
+ s.innerHTML=`<div class="srch-box"><div class="srch-in">${ic('search')}<label class="sr" for="sq">사이트 검색</label><input id="sq" type="search" placeholder="제품, 모델, 자료, 게시물 검색" autocomplete="off"><button class="icon-btn" data-act="closesearch" aria-label="검색 닫기">${ic('close')}</button></div><div class="srch-res" id="sres"></div></div>`;
+ const inp=$('#sq');inp.focus();const idx=searchIndex();
+ const draw=()=>{const q=inp.value.trim().toLowerCase();const out=$('#sres');
+  if(!q){out.innerHTML=`<div class="srch-tip">추천 검색어: ${['REX615','EOCR','HSBT','SVG','4,000 m','회사소개서'].map(w=>`<button data-act="sq" data-v="${w}">${w}</button>`).join('')}</div>`;return}
+  const hits=idx.filter(x=>(x.t+' '+x.s+' '+(x.k||'')).toLowerCase().includes(q)).slice(0,30);
+  if(!hits.length){out.innerHTML=`<div class="srch-tip">"${esc(inp.value)}"에 대한 결과가 없습니다. 고객문의에서 직접 문의해 주세요. <a class="link" href="#contact" data-act="closesearch">문의하기</a></div>`;return}
+  const groups={};hits.forEach(h=>(groups[h.g]=groups[h.g]||[]).push(h));
+  const mk=t=>{const i=t.toLowerCase().indexOf(q);return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length))};
+  out.innerHTML=Object.entries(groups).map(([g,l])=>`<h5>${g}</h5>${l.map(h=>`<a href="${h.h}" data-act="sgo"${h.prod?` data-prod="${h.prod}"`:''}><b style="font-weight:500">${mk(h.t)}</b><span>${esc(h.s)}</span></a>`).join('')}`).join('');
+ };
+ draw();inp.addEventListener('input',draw);
+}
+function closeSearch(){$('#srch').hidden=true;$('#srch').innerHTML=''}
+
+/* ---------- theme ---------- */
+function curTheme(){const a=document.documentElement.getAttribute('data-theme');if(a)return a;return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
+function setTheme(t){if(t==='system')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',t);store.set('theme',t);themeLabel();dockRender()}
+function themeLabel(){const b=$('#themeBtn');if(b)b.innerHTML=curTheme()==='dark'?`${ic('sun','sm')} 흰 배경`:`${ic('moon','sm')} 검정 배경`}
+
+/* ---------- sim dock ---------- */
+let dockOpen=false,width=store.get('width','pc'),notes=store.get('notes',[]);
+const WID={pc:null,tab:'834px',mob:'390px'};
+function applyWidth(){const st=$('#stage');st.classList.toggle('preview',!!WID[width]);if(WID[width])st.style.setProperty('--pw',WID[width]);else st.style.removeProperty('--pw')}
+function dockRender(){
+ const th=store.get('theme','system');
+ $('#dock').innerHTML=`${dockOpen?`<div class="dock-panel" role="dialog" aria-label="시안 도구">
+   <div class="dp-h"><b>시안 도구</b><span>${VERSION} · ${VDATE}</span></div>
+   <div class="dp-s"><span class="lb">화면 폭 미리보기</span><div class="segc">${[['pc','PC'],['tab','태블릿'],['mob','모바일']].map(([k,l])=>`<button class="${width===k?'on':''}" data-act="width" data-k="${k}">${l}</button>`).join('')}</div></div>
+   <div class="dp-s"><span class="lb">배경</span><div class="segc">${[['system','시스템'],['light','흰색'],['dark','검정']].map(([k,l])=>`<button class="${th===k?'on':''}" data-act="settheme" data-k="${k}">${l}</button>`).join('')}</div></div>
+   <div class="dp-s"><span class="lb">톤앤매너</span><div class="tones">${Object.entries(TONES).map(([k,t])=>`<button class="tone-b${tone===k?' on':''}" data-act="settone2" data-k="${k}" aria-pressed="${tone===k}"><span class="tsw" style="background:${t.hero}"><i style="background:${t.btn}"></i></span><span>${t.ko}${t.rec?' <em>추천</em>':''}</span></button>`).join('')}</div>
+    <button class="btn line sm" data-act="tonecmp">톤 4종 나란히 비교</button></div>
+   <div class="dp-s"><label class="sw" for="admSw">관리자 모드 (공지 작성 · 문의 접수 내역)<input type="checkbox" id="admSw" ${admin?'checked':''}></label>
+    <button class="btn line sm" data-act="sitemap">${ic('list','sm')} 사이트맵 보기</button></div>
+   <div class="dp-s notes"><span class="lb">수정 메모 — 현재 페이지: <b id="dpPage" style="color:var(--ink)"></b></span>
+    <label class="sr" for="noteIn">수정 메모</label><textarea id="noteIn" placeholder="예: 메인 첫 화면 문구를 더 짧게"></textarea>
+    <div class="row"><button class="btn pri sm" data-act="addnote">메모 추가</button><button class="btn line sm" data-act="copynotes" ${notes.length?'':'disabled'}>${ic('copy','sm')} 전체 복사 (${notes.length})</button></div>
+    <div class="nl">${notes.map((n,i)=>`<div class="ni"><div><span>${esc(n.page)}</span>${esc(n.text)}</div><button class="cp" data-act="delnote" data-k="${i}" aria-label="메모 삭제">${ic('close')}</button></div>`).join('')}</div></div>
+   <div class="dp-f">복사한 메모를 대화창에 붙여 넣으면 그 내용대로 다음 시안을 고칩니다.<br>배포 예정: www.scab.co.kr (가비아 DNS)</div></div>`:''}
+  <div style="display:flex;gap:8px"><button class="top-btn" data-act="top" aria-label="맨 위로">TOP</button>
+  <button class="dock-btn" data-act="dock" aria-expanded="${dockOpen}"><i></i><span class="lbl">시안 도구</span>${ic(dockOpen?'close':'note','sm')}</button></div>`;
+ updateDockPage();
+ const sw=$('#admSw');if(sw)sw.addEventListener('change',e=>{admin=e.target.checked;store.set('admin',admin);toast(admin?'관리자 모드를 켰습니다.':'관리자 모드를 껐습니다.');render(false)});
+}
+function updateDockPage(){const p=$('#dpPage');if(p)p.textContent=curId==='home'?'홈':(TITLE[curId]||curId)}
+
+function setTone(k){
+ if(!TONES[k])return;tone=k;document.documentElement.setAttribute('data-tone',k);store.set('tone',k);dockRender();
+ if(!$('#modal').hidden&&$('#tcmp'))toneModal(true);
+ toast(`'${TONES[k].ko}' 톤을 적용했습니다.`);
+}
+function toneModal(keep){
+ const html=`<div class="mpad"><h3>톤앤매너 비교</h3><p class="tc-note">로고의 빨강 큐브와 설비 상태 색(투입 · 가압 = 적색, 개방 = 녹색)은 모든 톤에서 그대로 둡니다. 바뀌는 것은 배경 · 포인트 · 패널 · 제목 색입니다.</p>
+  <div class="tcmp" id="tcmp">${Object.entries(TONES).map(([k,t])=>`<div class="tc${tone===k?' on':''}">
+   <div class="tc-hero" style="background-color:${t.hero}"><img src="${A('logo_dark')}" alt=""><span class="eb" style="color:${t.hl}">PROTECTION · CONTROL</span><b>보호 · 제어 · 전력품질<br>제품에서 시스템 솔루션까지</b><span class="tb" style="background:${t.btn};color:${t.ink}">견적 문의</span></div>
+   <div class="tc-light"><span class="bar" style="background:${t.ac}"></span><b style="color:${t.title}">취급 브랜드</b><span style="color:${t.ac}">제품 보기 →</span></div>
+   <div class="tc-b"><h4>${t.ko}${t.rec?' <em>추천</em>':''}</h4><span class="mono" style="font-size:12px;color:var(--faint)">${t.name}</span><p>${t.why}</p>
+    <div class="tc-sw">${[['배경',t.hero],['포인트',t.btn],['패널',t.panel],['제목',t.title]].map(([l,c])=>`<span><i style="background:${c}"></i>${l}<code>${c}</code></span>`).join('')}</div>
+    <button class="btn ${tone===k?'line':'pri'} sm" data-act="settone2" data-k="${k}" ${tone===k?'aria-pressed="true"':''}>${tone===k?'적용 중':'이 톤 적용'}</button></div></div>`).join('')}</div></div>`;
+ if(keep){$('#mbox').innerHTML=`<button class="icon-btn mclose" data-act="closemodal" aria-label="닫기">${ic('close')}</button>${html}`;return}
+ openModal(html,'톤앤매너 비교',true);
+}
+function sitemapModal(){
+ openModal(`<div class="mpad"><h3>사이트맵</h3><div class="smap">${MENU.map(m=>`<div><h4>${m.label}</h4>${m.cols.map(c=>c.items.map(([i,l])=>`<a href="#${i}" data-act="closemodal">${l}</a>`).join('')).join('')}</div>`).join('')}</div></div>`,'사이트맵');
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+ const a=e.target.closest('[data-act]');
+ const link=e.target.closest('a[href^="#"]');
+ if(link&&link.dataset.reftab){refTab=link.dataset.reftab}
+ if(!a){if(link&&!$('#modal').hidden)closeModal();if(link&&!$('#srch').hidden)closeSearch();return}
+ const act=a.dataset.act,k=a.dataset.k;
+ switch(act){
+  case 'theme':setTheme(curTheme()==='dark'?'light':'dark');break;
+  case 'settheme':setTheme(k);break;
+  case 'eng':toast('영문 사이트는 다음 시안에서 만듭니다.');break;
+  case 'search':openSearch();break;
+  case 'closesearch':closeSearch();break;
+  case 'sq':{const i=$('#sq');i.value=a.dataset.v;i.dispatchEvent(new Event('input'));i.focus();break}
+  case 'sgo':{const pid=a.dataset.prod;closeSearch();if(pid){setTimeout(()=>prodModal(pid),60)}break}
+  case 'burger':{const d=$('#drawer');d.hidden=!d.hidden;a.setAttribute('aria-expanded',String(!d.hidden));a.innerHTML=ic(d.hidden?'menu':'close');break}
+  case 'prev':showSlide((slideI-1+SLIDES.length)%SLIDES.length);break;
+  case 'next':showSlide((slideI+1)%SLIDES.length);break;
+  case 'pause':paused=!paused;a.innerHTML=paused?ic('play'):ic('pause');a.setAttribute('aria-label',paused?'자동 넘김 시작':'자동 넘김 정지');$('#hcBars').classList.toggle('paused',paused);if(!paused)showSlide(slideI);break;
+  case 'prod':prodModal(a.dataset.id);break;
+  case 'quote':case 'reqp':{const p=PRODUCTS.find(x=>x.id===a.dataset.id);prefill={type:act==='quote'?'견적 요청':'자료 요청',brand:p.brand,prod:p.model,sub:`${p.name} (${p.model}) ${act==='quote'?'견적 요청':'자료 요청'}`};receipt=null;closeModal();if(curId==='contact')render();else location.hash='#contact';break}
+  case 'req':{const r=RESOURCES.find(x=>x.id===a.dataset.id);prefill={type:'자료 요청',brand:r.brand||'',sub:`자료 요청: ${r.title}`,msg:`아래 자료를 요청합니다.\n- ${r.title}\n\n사용 목적: `};receipt=null;if(curId==='contact')render();else location.hash='#contact';break}
+  case 'dl':toast('시안에서는 다운로드가 동작하지 않습니다. 실제 사이트에서 PDF 파일을 연결합니다.');break;
+  case 'img':openModal(`<div class="mpad"><h3>${esc(a.dataset.t)}</h3><div style="background:var(--well);padding:16px;display:grid;place-items:center"><img src="${A(a.dataset.img)}" alt="${esc(a.dataset.t)}" style="max-height:70vh;width:auto;max-width:100%"></div></div>`,a.dataset.t);break;
+  case 'closemodal':closeModal();break;
+  case 'copy':copy(a.dataset.v);break;
+  case 'reftab':refTab=k;$$('.tabs [data-act="reftab"]').forEach(b=>{b.classList.toggle('on',b.dataset.k===k);b.setAttribute('aria-selected',b.dataset.k===k)});$('#refBody').innerHTML=refTable(k);break;
+  case 'pfb':pf.brand=k;pf.cat='all';refreshProducts();break;
+  case 'pfc':pf.cat=k;refreshProducts();break;
+  case 'fl':{flStop();const s=$('#flSol svg');setFlisr(s,+k);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#flCap').textContent=FL_CAP[+k];break}
+  case 'flplay':{if(flTimer){flStop();break}let i=0;const step=()=>{const s=$('#flSol svg');if(!s){flStop();return}setFlisr(s,i);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===i));$('#flCap').textContent=FL_CAP[i];i=(i+1)%4};step();flTimer=setInterval(step,2000);timers.push(flTimer);a.innerHTML=`${ic('pause','sm')} 정지`;break}
+  case 'pq':pqMode=k;$('#pqWave').innerHTML=pqSVG(k);$$('.dg-ctrl [data-act="pq"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));break;
+  case 'sample':{const f=$('#cform');const v={co:'(예시) 한빛플랜트',dept:'전기팀 과장',name:'홍길동',tel:'010-1234-5678',mail:'sample@example.com',sub:f.elements.sub.value||'MCC 신설 EOCR 견적 요청',msg:f.elements.msg.value||'MCC 신설 건 EOCR 견적을 요청합니다.\n- 모터 42대 (Load List 첨부 예정)\n- 통신: Modbus\n- 납기: 2027년 3월'};Object.entries(v).forEach(([n,x])=>{f.elements[n].value=x;setErr(f,n,'')});$('#f-agree').checked=true;$('#agreeErr').textContent='';$('#msgCount').textContent=f.elements.msg.value.length;toast('예시 내용을 채웠습니다. 문의 접수를 눌러 보세요.');break}
+  case 'newinq':receipt=null;render();break;
+  case 'wcat':wcat=k;break;
+  case 'bpage':bpage=+k;render(false);break;
+  case 'delpost':{userPosts=userPosts.filter(p=>p.id!==+a.dataset.id);store.set('posts',userPosts);toast('삭제했습니다.');location.hash='#board-qna';break}
+  case 'privacy':openModal(`<div class="mpad"><h3>개인정보처리방침 <span class="draft">초안</span></h3><div class="prose"><p>(주)에스캡엔지니어링은 고객 문의 응대를 위해 최소한의 개인정보를 수집합니다.</p><p><b>수집 항목</b> 회사명, 담당자명, 연락처, 이메일<br><b>이용 목적</b> 문의 응대, 견적 및 기술 자료 제공<br><b>보유 기간</b> 문의 처리 완료 후 1년, 관계 법령에 따른 보관 기간이 있으면 그 기간</p><p><b>개인정보 보호책임자</b> 담당자 지정 후 기재</p><p class="note">정식 오픈 전 확정본으로 교체합니다.</p></div></div>`,'개인정보처리방침');break;
+  case 'noemail':openModal(`<div class="mpad"><h3>이메일무단수집거부</h3><div class="prose"><p>본 웹사이트에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부합니다.</p><p>이를 위반하면 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 처벌받을 수 있습니다.</p></div></div>`,'이메일무단수집거부');break;
+  case 'sitemap':sitemapModal();break;
+  case 'settone2':setTone(k);break;
+  case 'tonecmp':toneModal();break;
+  case 'dock':dockOpen=!dockOpen;dockRender();break;
+  case 'width':width=k;store.set('width',k);applyWidth();dockRender();window.scrollTo({top:0});break;
+  case 'top':window.scrollTo({top:0,behavior:RM?'auto':'smooth'});break;
+  case 'addnote':{const t=$('#noteIn').value.trim();if(!t){$('#noteIn').focus();return}notes.unshift({page:curId==='home'?'홈':(TITLE[curId]||curId),text:t});store.set('notes',notes);dockRender();toast('메모를 추가했습니다.');break}
+  case 'delnote':notes.splice(+k,1);store.set('notes',notes);dockRender();break;
+  case 'copynotes':copy(`[홈페이지 시안 ${VERSION} 수정 메모]\n`+notes.slice().reverse().map((n,i)=>`${i+1}. (${n.page}) ${n.text}`).join('\n'));break;
+ }
+});
+let flTimer=null;
+function flStop(){if(flTimer){clearInterval(flTimer);flTimer=null}const b=$('#flPlay');if(b)b.innerHTML=`${ic('play','sm')} 자동 재생`}
+document.addEventListener('input',e=>{
+ if(e.target.id==='pq'){pf.q=e.target.value;const g=$('#pgrid');if(g){g.innerHTML=prodGridHTML();updCount()}}
+ if(e.target.id==='rq'){rq=e.target.value;const cat=curId==='resources'?'all':curId.replace('resources-','');const list=RESOURCES.filter(r=>(cat==='all'||r.cat===cat)&&(!rq||r.title.toLowerCase().includes(rq.toLowerCase())));$('#rlist').innerHTML=list.length?list.map(resRow).join(''):'<div class="empty">검색 결과가 없습니다.</div>'}
+ if(e.target.id==='bq'){bq=e.target.value;bpage=1;const pos=e.target.selectionStart;render(false);const n=$('#bq');n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}}
+});
+document.addEventListener('change',e=>{if(e.target.id==='fam'&&e.target.value){const a=document.createElement('a');a.href=e.target.value;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();e.target.value=''}});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){if(!$('#modal').hidden)closeModal();else if(!$('#srch').hidden)closeSearch();else closeMega()}
+ if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();openSearch()}
+});
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+$('#srch').addEventListener('click',e=>{if(e.target.id==='srch')closeSearch()});
+
+/* mega hover */
+function bindMega(){
+ const hdr=$('#hdr');
+ $$('.gnb li').forEach(li=>{li.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch')openMega(li.dataset.menu)});li.querySelector('a').addEventListener('focus',()=>openMega(li.dataset.menu))});
+ hdr.addEventListener('pointerleave',()=>{megaT=setTimeout(closeMega,160)});
+ hdr.addEventListener('pointerenter',()=>clearTimeout(megaT));
+ hdr.addEventListener('focusout',e=>{if(!hdr.contains(e.relatedTarget))closeMega()});
+}
+
+/* boot */
+const th0=store.get('theme','system');if(th0!=='system')document.documentElement.setAttribute('data-theme',th0);
+shell();bindMega();applyWidth();dockRender();
+window.addEventListener('hashchange',()=>render(true));
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',themeLabel);
+render(false);
+})();
+</script>
+
+</body></html>
