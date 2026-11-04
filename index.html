@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head><body>
 <title>SCAB 홈페이지 시안</title>
@@ -973,8 +974,7 @@ const RESOURCES=[
  R('r-cert-abb','cert','ABB Korea 대리점 인증','abb','등록 예정','—','soon'),
  R('r-cert-se','cert','Schneider Electric Korea 대리점 인증','schneider','등록 예정','—','soon'),
  R('r-cert-he','cert','Hitachi Energy Korea 대리점 인증','hitachi','등록 예정','—','soon'),
- R('r-cert-sf','cert','Sifang 국내 독점 대리점 인증','sifang','등록 예정','—','soon'),
- R('r-cert-khnp','cert','한국수력원자력 유자격 공급자 (Q-Class)',null,'등록 예정','—','soon')
+ R('r-cert-sf','cert','Sifang 국내 독점 대리점 인증','sifang','등록 예정','—','soon')
 ];
 
 /* ---------- references ---------- */
@@ -1002,7 +1002,16 @@ const SAMPLE_POSTS=[
   answer:'카탈로그 고도 정격, 컨포멀 코팅 옵션, IEC 60255-27 절연 보정 항목을 제조사별로 검토합니다.\nABB · Schneider · Siemens · SEL · GE 제품을 같은 기준으로 비교하고, 고객 사양 적합성과 대안을 보고서로 제출합니다.'},
  {id:10,cat:'qna',title:'EOCR 모델은 어떻게 선정하나요?',date:'2026-11-03',sort:20261100,author:'예시 고객',views:11,sample:true,
   body:'MCC 신설 건으로 EOCR 견적을 받고 싶습니다. 어떤 자료를 드리면 되나요?',
-  answer:'모터 Load List(정격 출력 · 전압 · 전류)를 보내 주시면 모터별 모델 · CT · 통신 방식을 선정해 견적합니다.\n모니터링이 필요하면 EOCR Edge 구성도 함께 제안합니다.'}
+  answer:'모터 Load List(정격 출력 · 전압 · 전류)를 보내 주시면 모터별 모델 · CT · 통신 방식을 선정해 견적합니다.\n모니터링이 필요하면 EOCR Edge 구성도 함께 제안합니다.'},
+ {id:11,cat:'qna',title:'보호협조 시간 간격(CTI)은 얼마로 잡나요?',date:'2026-11-04',sort:20261099,author:'예시 고객',views:8,sample:true,
+  body:'상 · 하위 과전류 계전기 사이의 협조 시간 간격을 어떻게 정하는지 궁금합니다.',
+  answer:'일반적으로 0.2–0.4 s 범위에서 정합니다 (IEEE Std 242 참고).\n차단기 차단 시간, 계전기 동작 오차, 여유 시간을 합산해 계통별로 결정하고, 디지털 계전기끼리는 0.2–0.3 s 수준으로 줄이기도 합니다.\n정정 계산서에는 고장 지점별 동작 시간과 협조 곡선(TCC)을 함께 제출합니다.'},
+ {id:12,cat:'qna',title:'GOOSE 통신으로 배선 인터록을 대체할 수 있나요?',date:'2026-11-04',sort:20261098,author:'예시 고객',views:6,sample:true,
+  body:'변전소 개보수 때 계전기 간 인터록 배선을 IEC 61850 GOOSE로 바꾸려고 합니다. 확인할 사항이 있을까요?',
+  answer:'가능합니다. IEC 61850-5는 트립급 신호(Type 1A)의 전송 시간을 수 ms 수준으로 규정하고 있어 인터록 · 차단 신호에도 적용됩니다.\n다만 통신망 이중화(PRP / HSR, IEC 62439-3), VLAN · 우선순위 설정, 통신 단절 시 동작 방식, GOOSE 시험 계획을 함께 검토해야 합니다.'},
+ {id:13,cat:'qna',title:'고임피던스 모선보호(87B)용 CT는 어떤 조건이 필요한가요?',date:'2026-11-04',sort:20261097,author:'예시 고객',views:5,sample:true,
+  body:'87B 고임피던스 방식을 검토 중입니다. CT 사양은 어떻게 맞춰야 하나요?',
+  answer:'모든 CT의 변류비가 같아야 하고, 저누설 리액턴스 CT(IEC 61869-2 Class PX)를 사용합니다.\n안정화 전압 Vs ≥ If × (Rct + 2RL)로 정하고, CT 무릎점 전압은 보통 Vs의 2배 이상을 확보합니다.\n내부 고장 시 과전압을 제한하는 VDR(금속산화물 비선형 저항) 선정도 함께 검토합니다.'},
 ];
 const BCAT={notice:'공지사항',news:'회사 소식',qna:'기술 Q&A'};
 let userPosts=store.get('posts',[]);
@@ -1233,6 +1242,16 @@ function pageHome(){
   </div>
  </div></section>
 
+ <section class="sec"><div class="wrap">
+  ${secHead('APPLICATIONS','적용 분야','계통 구성과 운전 조건이 다른 분야별로 제품과 보호 방식을 맞춰 제안합니다.')}
+  <div class="grid-3">${APPL.map(([t,d,l])=>`<div class="card"><h4>${t}</h4><p>${d}</p><p style="margin-top:10px;font-size:13px;color:var(--ink)">${l}</p></div>`).join('')}</div>
+ </div></section>
+
+ <section class="sec alt"><div class="wrap">
+  ${secHead('CHECKLIST','견적 요청 시 준비 자료','아래 자료를 함께 보내 주시면 검토와 회신이 빨라집니다.',['contact','견적 문의'])}
+  <div class="grid-4">${PREP.map(([t,items])=>`<div class="card"><h4>${t}</h4><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted);line-height:1.8">${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
+ </div></section>
+
  <section class="sec dark"><div class="wrap">
   <div class="eng"><div><p class="eyebrow on-dark">ENGINEERING</p><h2 class="t2" style="margin-top:10px">보호계전 · 전력계통 엔지니어링</h2>
    <p class="lead" style="margin-top:14px">여러 제조사 제품을 같은 기준으로 비교해 선정하고, 정정 계산부터 시운전 · 사후관리까지 지원합니다.</p>
@@ -1251,7 +1270,21 @@ function pageHome(){
    <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn pri" href="#contact">온라인 문의 ${ic('arrow')}</a><a class="btn ghost" href="#contact-people">문의 창구 보기</a></div></div>
  </div></section>`;
 }
-const ENG=[['보호협조 · 정정 계산','단락전류 계산 기반 정정 계산서, 보호협조 곡선'],['모선보호 (87B)','고임피던스 모선보호 안정화 저항 · VDR 선정'],['절체 로직 설계','HSBT 절체 로직, 인터록 시험 계획, 현장 복구 지원'],['원전 동등성 검토','Q · A/S등급, 단종품 대체 기술 비교'],['특수 환경 검토','해발 4,000 m 고도 보정, 컨포멀 코팅, IEC 60255-27'],['디지털 변전소','IEC 61850, SSC600 · REX640'],['해외 인증 대응','UL 인증 제품 선정 (PowerLogic PM8240 · ION7400, Easergy P3/P5)'],['기술 지원 · 교육','고장 분석, 입회 시험, 제품 · 보호 교육']];
+const APPL=[
+ ['발전 · 신재생','발전기 보호, 동기투입, 계통 연계','발전기 차단기 · 동기투입장치 · 보호계전기'],
+ ['석유화학 · 정유','공정 정지를 줄이는 전원 절체와 부하차단','고속절체(HSBT) · 지능형 부하차단 · 고장전류 한류기'],
+ ['반도체 · 전자','모터 부하가 많은 MCC 보호와 감시','EOCR · EOCR Edge · 디지털 미터'],
+ ['철강 · 소재','전기로 · 대용량 부하의 전력품질','SVG/STATCOM · AHF · 변압기'],
+ ['데이터센터','무정전 운영을 위한 배전 자동복구','FLISR · 아크 보호 · Power SCADA'],
+ ['배전 · 변전 · 해외 EPC','디지털 변전소와 해외 규격 대응','IEC 61850 · UL 인증 제품 · 보호계전기']
+];
+const PREP=[
+ ['보호계전기',['단선결선도','CT · VT 변류비','필요한 보호 요소 (ANSI 번호)','통신 방식 (IEC 61850 등)']],
+ ['모터 보호 (EOCR)',['모터 Load List','정격 출력 · 전압 · 전류','기동 방식','통신 · 모니터링 필요 여부']],
+ ['차단기 · 개폐기',['정격 전압 · 전류','차단 용량','설치 방식 (고정 · 인출)','제어 전원']],
+ ['전력품질',['고조파 측정 데이터','부하 종류 · 용량','목표 역률 · THD','수전 계통 조건']]
+];
+const ENG=[['보호협조 · 정정 계산','단락전류 계산 기반 정정 계산서, 보호협조 곡선'],['모선보호 (87B)','고임피던스 모선보호 안정화 저항 · VDR 선정'],['절체 로직 설계','HSBT 절체 로직, 인터록 시험 계획, 현장 복구 지원'],['단종품 대체 검토','단종 계전기 기능 비교 · 정정값 변환'],['특수 환경 검토','해발 4,000 m 고도 보정, 컨포멀 코팅, IEC 60255-27'],['디지털 변전소','IEC 61850, SSC600 · REX640'],['해외 인증 대응','UL 인증 제품 선정 (PowerLogic PM8240 · ION7400, Easergy P3/P5)'],['기술 지원 · 교육','고장 분석, 입회 시험, 제품 · 보호 교육']];
 const STEPS=['요구사항 · 사양 검토','제품 선정 · 제조사 비교','설계 · 로직 · 정정','공급 · FAT 지원','시운전 · 현장 지원','사후관리 · 교육'];
 
 /* ---------- company pages ---------- */
@@ -1262,7 +1295,7 @@ function pgCompanyOverview(){
   <p>고객의 입장에서 제품을 선정하고 기술 검토를 제공하는 것을 기본으로 삼고 있습니다. 고객과 함께 오래, 꾸준히 성장하겠습니다.</p>
   </div></div>
  <div class="block">${blockHead('회사 개요')}
-  <div class="facts"><div class="fact"><b>2004</b><span>창업 (04.10)</span></div><div class="fact"><b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact"><b>5</b><span>취급 브랜드</span></div><div class="fact"><b>KHNP</b><span>유자격 공급자</span></div></div>
+  <div class="facts"><div class="fact"><b>2004</b><span>창업 (04.10)</span></div><div class="fact"><b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact"><b>5</b><span>취급 브랜드</span></div><div class="fact"><b>R&amp;D</b><span>연구개발전담부서 (2026)</span></div></div>
   <div class="tbl-wrap"><table class="info"><tbody>
    <tr><th>회사명</th><td>${CO.name} · ${CO.en}</td></tr>
    <tr><th>주소</th><td>${CO.addr}<br>${CO.addr2}</td></tr>
@@ -1282,7 +1315,7 @@ function pgCompanyVision(){
  <div class="block">${blockHead('미션 · 핵심가치')}<p class="lead">Growing with our customers — Long and Steady. 고객과 함께 오래, 꾸준히 성장합니다.</p>
   <div class="grid-4">${VALUES.map(([t,d])=>`<div class="card"><h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
-const HIST=[['2004–05',['에스캡 설립 (서울)','ABB Korea LV 대리점']],['2007–08',['발전 · 공공 분야 ABB 제품 공급','ABB Korea MV 대리점']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['ABB Korea PA 대리점','Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용','한수원 ABB 유자격 공급사 등록']],['2020–21',['ABB Korea EL "Best Growth Distributor"','(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['Sifang 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
+const HIST=[['2004–05',['에스캡 설립 (서울)','ABB Korea LV 대리점']],['2007–08',['발전 · 공공 분야 ABB 제품 공급','ABB Korea MV 대리점']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['ABB Korea PA 대리점','Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['ABB Korea EL "Best Growth Distributor"','(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['Sifang 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
 function pgCompanyHistory(){
  return `<div class="block">${blockHead('연혁','<span class="note">2004 – 2026</span>')}
   <div class="tl">${HIST.map(([y,it],i)=>`<div class="tl-i${i===HIST.length-1?' hl':''}"><div class="yr">${y}</div><ul>${it.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
@@ -1298,7 +1331,7 @@ function pgCompanyOrg(){
    <div class="pil"><h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>원자력 · 발전 · 해외 EPC</li></ul></div></div></div>`;
 }
 function pgCompanyCerts(){
- const dist=[['abb','ABB Korea 대리점','LV · MV · PA 제품'],['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','Sifang 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도전기 공급사','저압 제품'],['khnp','한국수력원자력 유자격 공급자','보호계전기 · 차단기 · 계측기 (Q-Class)']];
+ const dist=[['abb','ABB Korea 대리점','LV · MV · PA 제품'],['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','Sifang 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도전기 공급사','저압 제품']];
  return `<div class="block">${blockHead('인증 · 등록')}
   <div class="cert-row">
    <button class="cert" data-act="img" data-img="cert_rnd" data-t="연구개발전담부서 인정서"><div class="ci"><img src="${A('cert_rnd')}" alt="연구개발전담부서 인정서" loading="lazy"></div><span>연구개발전담부서 인정서</span></button>
