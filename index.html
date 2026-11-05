@@ -213,8 +213,8 @@ ul{margin:0;padding:0;list-style:none}
 .hero-ctrl .wrap{display:flex;align-items:center;gap:18px}
 .hc-count{font-family:var(--mono);font-size:13px;color:var(--hero-muted);white-space:nowrap}
 .hc-count b{color:#fff;font-weight:500}
-.hc-bars{display:flex;gap:6px}
-.hc-bars button{width:44px;height:14px;position:relative}
+.hc-bars{display:flex;gap:6px;flex:0 1 auto;min-width:0}
+.hc-bars button{width:44px;height:14px;position:relative;flex:0 1 44px;min-width:10px}
 .hc-bars button::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:rgba(255,255,255,.22)}
 .hc-bars button::after{content:"";position:absolute;left:0;top:6px;height:2px;width:0;background:var(--ac-hl)}
 .hc-bars button.on::after{width:100%;transition:width var(--dur,7s) linear}
@@ -886,7 +886,7 @@ td.hl{color:var(--ac);font-weight:600}
   .form{padding:20px}
   .ftr-map{grid-template-columns:repeat(2,minmax(0,1fr))}
   .btbl .hide-m{display:none}
-  .hc-bars button{width:28px}
+  .hc-bars button{width:28px;flex-basis:28px}
   .mega{display:none}
   .logo img{height:34px}
   .hdr-in{gap:12px}
@@ -1731,24 +1731,27 @@ function pCard(p){
 
 /* ---------- home ---------- */
 const PQCAP=['VFD · 인버터 부하의 고조파 전류가 수전 계통으로 흘러 나감','SVG / STATCOM · AHF가 고조파와 무효전력을 보상해 전류가 사인파에 가까워짐'];
-const SLIDES=[
- {eb:'SAFE · CONNECTED · ADVANCED · BEYOND',h:'안전한 전력에서<br>시스템 솔루션까지',
+/* Hero slides: 'main' is pinned as slide 1 and always shown. Other slides rotate after it;
+   set on:false to take one down (kept here for reuse), add new ones after main. Up to about 10. */
+const SLIDES_ALL=[
+ {id:'main',pin:true,eb:'SAFE · CONNECTED · ADVANCED · BEYOND',h:'안전한 전력에서<br>시스템 솔루션까지',
   p:'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기 제품을 공급하고, 보호협조 · 절체 로직 · 시운전 지원까지 함께 수행합니다.',
   cta:[['products','취급제품 보기','pri'],['contact','견적 문의','ghost']],chips:true,
   vis:()=>`<div class="iso-vis">${ISO.sceneGrid()}</div><p class="iso-cap"><b>GRID → LOAD</b><span>수전 변전소 · 주배전반에서 공장 · 데이터센터 · 신재생 설비까지</span></p>`},
- {eb:'DATA CENTER · FLISR',h:'데이터센터 배전의<br>자가복구 (FLISR)',
+ {id:'flisr',on:true,since:'2026-11',eb:'DATA CENTER · FLISR',h:'데이터센터 배전의<br>자가복구 (FLISR)',
   p:'ABB REX615 링 구성과 IEC 61850 GOOSE로 고장 구간을 찾아 분리하고, 건전 구간은 수 초 안에 복구합니다.',
   cta:[['solutions-datacenter','솔루션 보기','pri'],['contact','상담 요청','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroFL">${ISO.sceneFLISR()}</div><p class="iso-cap"><b id="flHeroStep">01 / 04</b><span id="flHeroCap">${ISO.FL.cap[0]}</span></p>`},
- {eb:'HIGH-SPEED TRANSFER',h:'공정을 멈추지 않는<br>고속절체 · 동기투입',
+ {id:'hsbt',on:true,since:'2026-11',eb:'HIGH-SPEED TRANSFER',h:'공정을 멈추지 않는<br>고속절체 · 동기투입',
   p:'SUE 3000/4000 고속절체(약 30 ms)와 SYNCHROTACT 6 동기투입장치. REX640 HSABTC 기반 절체 로직 설계와 인터록 시험을 지원합니다.',
   cta:[['solutions-hsbt','솔루션 보기','pri'],['products-abb','ABB 제품','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroHS">${ISO.sceneHSBT()}</div><p class="iso-cap"><b id="hsHeroStep">01 / 04</b><span id="hsHeroCap">${ISO.HS.cap[0]}</span></p>`},
- {eb:'POWER QUALITY · SIFANG',h:'고조파 · 역률 · 무효전력<br>진단에서 사후관리까지',
+ {id:'pq',on:true,since:'2026-11',eb:'POWER QUALITY · SIFANG',h:'고조파 · 역률 · 무효전력<br>진단에서 사후관리까지',
   p:'SIFANG SVG/STATCOM, AHF, 콘덴서 · 리액터 가운데 부하와 계통에 맞는 설비를 선정합니다.',
   cta:[['solutions-pq','솔루션 보기','pri'],['products-sifang','SIFANG 제품','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">보상 전</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`}
 ];
+const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
  const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);

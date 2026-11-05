@@ -213,8 +213,8 @@ ul{margin:0;padding:0;list-style:none}
 .hero-ctrl .wrap{display:flex;align-items:center;gap:18px}
 .hc-count{font-family:var(--mono);font-size:13px;color:var(--hero-muted);white-space:nowrap}
 .hc-count b{color:#fff;font-weight:500}
-.hc-bars{display:flex;gap:6px}
-.hc-bars button{width:44px;height:14px;position:relative}
+.hc-bars{display:flex;gap:6px;flex:0 1 auto;min-width:0}
+.hc-bars button{width:44px;height:14px;position:relative;flex:0 1 44px;min-width:10px}
 .hc-bars button::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:rgba(255,255,255,.22)}
 .hc-bars button::after{content:"";position:absolute;left:0;top:6px;height:2px;width:0;background:var(--ac-hl)}
 .hc-bars button.on::after{width:100%;transition:width var(--dur,7s) linear}
@@ -892,7 +892,7 @@ td.hl{color:var(--ac);font-weight:600}
   .form{padding:20px}
   .ftr-map{grid-template-columns:repeat(2,minmax(0,1fr))}
   .btbl .hide-m{display:none}
-  .hc-bars button{width:28px}
+  .hc-bars button{width:28px;flex-basis:28px}
   .mega{display:none}
   .logo img{height:34px}
   .hdr-in{gap:12px}
@@ -1737,24 +1737,27 @@ function pCard(p){
 
 /* ---------- home ---------- */
 const PQCAP=['Harmonic currents from VFD · inverter loads flow into the supply system','SVG / STATCOM · AHF compensate harmonics and reactive power, bringing the current close to a sine wave'];
-const SLIDES=[
- {eb:'SAFE · CONNECTED · ADVANCED · BEYOND',h:'From safe power<br>to system solutions',
+/* Hero slides: 'main' is pinned as slide 1 and always shown. Other slides rotate after it;
+   set on:false to take one down (kept here for reuse), add new ones after main. Up to about 10. */
+const SLIDES_ALL=[
+ {id:'main',pin:true,eb:'SAFE · CONNECTED · ADVANCED · BEYOND',h:'From safe power<br>to system solutions',
   p:'We supply ABB · Schneider Electric · Hitachi Energy · SIFANG · Sangdo Electric products, together with protection coordination, transfer logic and commissioning support.',
   cta:[['products','View products','pri'],['contact','Request a quote','ghost']],chips:true,
   vis:()=>`<div class="iso-vis">${ISO.sceneGrid()}</div><p class="iso-cap"><b>GRID → LOAD</b><span>From main substations and switchgear to factories, data centers and renewables</span></p>`},
- {eb:'DATA CENTER · FLISR',h:'Self-healing data center<br>distribution (FLISR)',
+ {id:'flisr',on:true,since:'2026-11',eb:'DATA CENTER · FLISR',h:'Self-healing data center<br>distribution (FLISR)',
   p:'An ABB REX615 ring with IEC 61850 GOOSE locates and isolates the faulted section and restores healthy sections within seconds.',
   cta:[['solutions-datacenter','View solution','pri'],['contact','Request consultation','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroFL">${ISO.sceneFLISR()}</div><p class="iso-cap"><b id="flHeroStep">01 / 04</b><span id="flHeroCap">${ISO.FL.cap[0]}</span></p>`},
- {eb:'HIGH-SPEED TRANSFER',h:'Non-stop processes<br>Fast transfer · synchronizing',
+ {id:'hsbt',on:true,since:'2026-11',eb:'HIGH-SPEED TRANSFER',h:'Non-stop processes<br>Fast transfer · synchronizing',
   p:'SUE 3000/4000 high-speed transfer (approx. 30 ms) and the SYNCHROTACT 6 synchronizer. We support transfer logic design based on REX640 HSABTC and interlock testing.',
   cta:[['solutions-hsbt','View solution','pri'],['products-abb','ABB products','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroHS">${ISO.sceneHSBT()}</div><p class="iso-cap"><b id="hsHeroStep">01 / 04</b><span id="hsHeroCap">${ISO.HS.cap[0]}</span></p>`},
- {eb:'POWER QUALITY · SIFANG',h:'Harmonics · power factor · reactive power<br>From diagnosis to after-sales',
+ {id:'pq',on:true,since:'2026-11',eb:'POWER QUALITY · SIFANG',h:'Harmonics · power factor · reactive power<br>From diagnosis to after-sales',
   p:'We select the right equipment for the load and system among SIFANG SVG/STATCOM, AHF and capacitors · reactors.',
   cta:[['solutions-pq','View solution','pri'],['products-sifang','SIFANG products','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">Before compensation</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`}
 ];
+const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
  const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
