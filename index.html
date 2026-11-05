@@ -1321,7 +1321,7 @@ const store={get(k,d){try{const v=localStorage.getItem('scab_site_'+k);return v=
              set(k,v){try{localStorage.setItem('scab_site_'+k,JSON.stringify(v))}catch(e){}}};
 const A=n=>`assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const VERSION='v0.4', VDATE='2026-11-05';
+const VERSION='v0.4.1', VDATE='2026-11-05';
 const TONES={
  teal:{ko:'네이비 · 틸',name:'Grid Navy · Teal',rec:true,hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
   why:'전력 · 에너지 업계에서 많이 쓰는 딥 네이비를 바탕으로, Schneider 그린과 SIFANG 블루 사이의 틸을 포인트로 씁니다. 취급 브랜드 어느 쪽 색에도 치우치지 않습니다.'},
@@ -1426,11 +1426,9 @@ const PRODUCTS=[
 ];
 
 /* ---------- resources ---------- */
-const RCAT={catalog:'카탈로그',tech:'기술자료',cert:'인증서',profile:'회사소개서'};
+const RCAT={catalog:'카탈로그',tech:'기술자료',cert:'인증서'};
 const R=(id,cat,title,brand,meta,date,access,extra={})=>({id,cat,title,brand,meta,date,access,...extra});
 const RESOURCES=[
- R('r-prof-en','profile','2027 회사소개서 (영문, Draft v0.1)',null,'PDF · 2.1 MB','2027-01','file'),
- R('r-prof-kr','profile','2027 회사소개서 (국문)',null,'PDF','준비 중','soon'),
  R('r-c-relion','catalog','Relion 615 · 640 시리즈 제품 안내','abb','제조사 자료','—','maker'),
  R('r-c-sue','catalog','SUE 3000 / SUE 4000 고속절체 브로셔','abb','제조사 자료','—','maker'),
  R('r-c-sync','catalog','SYNCHROTACT 6 동기투입장치','abb','제조사 자료','—','maker'),
@@ -1463,7 +1461,7 @@ const CUST=[];
 /* ---------- board ---------- */
 const SAMPLE_POSTS=[
  {id:1,cat:'notice',pin:true,title:'홈페이지 시안 v0.1 공개',date:'2026-11-03',sort:20261103,author:'관리자',views:24,sample:true,
-  body:'회사소개서(2027 Draft)를 바탕으로 만든 홈페이지 시안입니다.\n메뉴 구성, 문구, 이미지는 검토 후 순차적으로 수정합니다.\n\n· 회사소개 / 취급제품 / 자료실 / 고객문의 / 게시판\n· 오픈 도메인: www.scab.co.kr'},
+  body:'(주)에스캡엔지니어링 홈페이지 시안입니다.\n메뉴 구성, 문구, 이미지는 검토 후 순차적으로 수정합니다.\n\n· 회사소개 / 취급제품 / 자료실 / 고객문의 / 게시판\n· 오픈 도메인: www.scab.co.kr'},
  {id:2,cat:'notice',pin:true,title:'개인정보처리방침 · 이메일무단수집거부 (초안)',date:'2026-11-03',sort:20261102,author:'관리자',views:9,sample:true,
   body:'홈페이지 오픈 전 개인정보처리방침을 확정해 게시합니다.\n화면 하단의 "개인정보처리방침" 링크에서 초안을 확인할 수 있습니다.'},
  {id:3,cat:'news',title:'연구개발전담부서 인정',date:'2026-04-14',sort:20260414,author:'관리자',views:57,sample:true,
@@ -1507,8 +1505,8 @@ const MENU=[
         {t:'솔루션',items:[['solutions-datacenter','데이터센터 FLISR'],['solutions-hsbt','고속절체 · 동기 (HSBT)'],['solutions-pq','전력품질 (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)']]},
         {t:'엔지니어링',items:[['engineering','엔지니어링 서비스'],['products','전체 제품 찾기']]}],
   feat:{img:'abb_relion',t:'Relion REX615 · REX640',d:'보호 · 제어 · 계측, IEC 61850',href:'products-abb'}},
- {id:'resources',label:'자료실',en:'RESOURCES',home:'resources',desc:'카탈로그, 기술자료, 인증서, 회사소개서',
-  cols:[{t:'자료실',items:[['resources','전체 자료'],['resources-catalog','카탈로그'],['resources-tech','기술자료']]},{t:'회사 자료',items:[['resources-cert','인증서'],['resources-profile','회사소개서']]}],
+ {id:'resources',label:'자료실',en:'RESOURCES',home:'resources',desc:'카탈로그, 기술자료, 인증서',
+  cols:[{t:'자료실',items:[['resources','전체 자료'],['resources-catalog','카탈로그'],['resources-tech','기술자료'],['resources-cert','인증서']]}],
   feat:{img:'cert_rnd',t:'연구개발전담부서 인정서',d:'신고일 2026.04.14',href:'resources-cert'}},
  {id:'contact',label:'고객문의',en:'CONTACT',home:'contact',desc:'견적 · 기술 · A/S 문의와 사업부별 담당자 안내',
   cols:[{t:'고객문의',items:[['contact','견적 · 기술 문의'],['contact-people','사업부별 문의 창구'],['company-location','오시는 길']]}],
@@ -2068,11 +2066,11 @@ const PAGES={
  'company-certs':pgCompanyCerts,'company-location':pgLocation,
  'products':pgProducts,'products-abb':()=>pgBrand('abb'),'products-schneider':()=>pgBrand('schneider'),'products-hitachi':()=>pgBrand('hitachi'),'products-sifang':()=>pgBrand('sifang'),'products-sangdo':()=>pgBrand('sangdo'),
  'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'engineering':pgEngineering,
- 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),'resources-profile':()=>pgResources('profile'),
+ 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),
  'contact':pgContact,'contact-people':pgPeople,
  'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna'),'board-write':pgWrite
 };
-const PDESC={'company':'보호 · 제어 · 전력품질 제품과 엔지니어링을 공급하는 (주)에스캡엔지니어링','products':'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기','resources':'카탈로그 · 기술자료 · 인증서 · 회사소개서','contact':'견적 · 기술 · A/S 문의','board':'공지사항 · 회사 소식 · 기술 Q&A'};
+const PDESC={'company':'보호 · 제어 · 전력품질 제품과 엔지니어링을 공급하는 (주)에스캡엔지니어링','products':'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기','resources':'카탈로그 · 기술자료 · 인증서','contact':'견적 · 기술 · A/S 문의','board':'공지사항 · 회사 소식 · 기술 Q&A'};
 let curId='home';
 function subLayout(id,body){
  const mid=menuOf(id),m=MENU.find(x=>x.id===mid);
@@ -2241,7 +2239,7 @@ function openSearch(){
  s.innerHTML=`<div class="srch-box"><div class="srch-in">${ic('search')}<label class="sr" for="sq">사이트 검색</label><input id="sq" type="search" placeholder="제품, 모델, 자료, 게시물 검색" autocomplete="off"><button class="icon-btn" data-act="closesearch" aria-label="검색 닫기">${ic('close')}</button></div><div class="srch-res" id="sres"></div></div>`;
  const inp=$('#sq');inp.focus();const idx=searchIndex();
  const draw=()=>{const q=inp.value.trim().toLowerCase();const out=$('#sres');
-  if(!q){out.innerHTML=`<div class="srch-tip">추천 검색어: ${['REX615','EOCR','HSBT','SVG','4,000 m','회사소개서'].map(w=>`<button data-act="sq" data-v="${w}">${w}</button>`).join('')}</div>`;return}
+  if(!q){out.innerHTML=`<div class="srch-tip">추천 검색어: ${['REX615','EOCR','HSBT','SVG','FLISR','4,000 m'].map(w=>`<button data-act="sq" data-v="${w}">${w}</button>`).join('')}</div>`;return}
   const hits=idx.filter(x=>(x.t+' '+x.s+' '+(x.k||'')).toLowerCase().includes(q)).slice(0,30);
   if(!hits.length){out.innerHTML=`<div class="srch-tip">"${esc(inp.value)}"에 대한 결과가 없습니다. 고객문의에서 직접 문의해 주세요. <a class="link" href="#contact" data-act="closesearch">문의하기</a></div>`;return}
   const groups={};hits.forEach(h=>(groups[h.g]=groups[h.g]||[]).push(h));
