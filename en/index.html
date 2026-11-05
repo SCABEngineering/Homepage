@@ -2415,6 +2415,7 @@ document.addEventListener('click',e=>{
  const a=e.target.closest('[data-act]');
  const link=e.target.closest('a[href^="#"]');
  if(link&&link.dataset.reftab){refTab=link.dataset.reftab}
+ if(link){const h=link.getAttribute('href'),cur=location.hash||'#home';if(h===cur||(h==='#home'&&cur==='#')){e.preventDefault();closeMega();const d=$('#drawer');if(d&&!d.hidden){d.hidden=true;const bg=$('[data-act="burger"]');if(bg){bg.setAttribute('aria-expanded','false');bg.innerHTML=ic('menu')}}window.scrollTo({top:0,behavior:RM?'auto':'smooth'})}}
  if(!a){if(link&&!$('#modal').hidden)closeModal();if(link&&!$('#srch').hidden)closeSearch();return}
  const act=a.dataset.act,k=a.dataset.k;
  switch(act){
