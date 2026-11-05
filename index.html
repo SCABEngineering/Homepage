@@ -744,7 +744,9 @@ td.hl{color:var(--ac);font-weight:600}
 .iso .blink{animation:isoblink 1s steps(2) infinite}
 .iso .rotor{animation:isospin 7s linear infinite}
 .iso-vis{position:relative;min-width:0}
-.iso-cap{display:flex;gap:12px;align-items:baseline;margin-top:4px;font-size:13.5px;color:var(--hero-muted);min-height:1.6em}
+.slide .iso-vis{aspect-ratio:16/9;display:grid;place-items:center}
+.slide .iso-vis svg{width:100%;height:100%;display:block}
+.iso-cap{display:flex;gap:12px;align-items:baseline;margin-top:4px;font-size:13.5px;color:var(--hero-muted);min-height:3.2em}
 .iso-cap b{font-family:var(--mono);color:var(--ac-hl);font-weight:500;white-space:nowrap}
 .sol .sp{padding:26px 22px 4px}
 .svc .pg{margin-bottom:10px}
@@ -1732,7 +1734,7 @@ function pCard(p){
 /* ---------- home ---------- */
 const PQCAP=['VFD · 인버터 부하의 고조파 전류가 수전 계통으로 흘러 나감','SVG / STATCOM · AHF가 고조파와 무효전력을 보상해 전류가 사인파에 가까워짐'];
 /* Hero slides: 'main' is pinned as slide 1 and always shown. Other slides rotate after it;
-   set on:false to take one down (kept here for reuse), add new ones after main. Up to about 10. */
+   set on:false to take one down (kept here for reuse), add new ones after main. Max 5 (main + 4). */
 const SLIDES_ALL=[
  {id:'main',pin:true,eb:'SAFE · CONNECTED · ADVANCED · BEYOND',h:'안전한 전력에서<br>시스템 솔루션까지',
   p:'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기 제품을 공급하고, 보호협조 · 절체 로직 · 시운전 지원까지 함께 수행합니다.',
@@ -1751,7 +1753,7 @@ const SLIDES_ALL=[
   cta:[['solutions-pq','솔루션 보기','pri'],['products-sifang','SIFANG 제품','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">보상 전</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`}
 ];
-const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false);
+const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,5);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
  const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
@@ -2214,7 +2216,12 @@ function afterRender(id){
 
 /* ---------- carousel ---------- */
 let slideI=0,paused=false,flK=0;
+function eqSlides(){const sl=$$('.slide');if(!sl.length)return;['.eyebrow','h1','.slide-p','.slide-cta'].forEach(q=>{const els=sl.map(x=>x.querySelector('.slide-txt '+q)).filter(Boolean);els.forEach(e=>e.style.minHeight='');const m=Math.max(...els.map(e=>e.getBoundingClientRect().height));els.forEach(e=>e.style.minHeight=m+'px')});
+ const tx=sl.map(x=>x.querySelector('.slide-txt')).filter(Boolean);tx.forEach(e=>e.style.minHeight='');const mt=Math.max(...tx.map(e=>e.getBoundingClientRect().height));tx.forEach(e=>e.style.minHeight=mt+'px')}
+let eqT;window.addEventListener('resize',()=>{clearTimeout(eqT);eqT=setTimeout(eqSlides,150)});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>eqSlides());
 function initCarousel(){
+ eqSlides();
  slideI=0;hoverHero=false;const dur=7000;
  const bars=$('#hcBars');bars.style.setProperty('--dur',dur+'ms');
  paused=paused||RM;
