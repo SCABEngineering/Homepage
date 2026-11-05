@@ -806,6 +806,31 @@ td.hl{color:var(--ac);font-weight:600}
 .scab-quote{border-left:3px solid var(--ac);padding:4px 0 4px 18px;display:grid;gap:4px}
 .scab-quote b{font-size:22px;color:var(--title);letter-spacing:-.01em}
 .scab-quote span{color:var(--muted);font-size:15.5px}
+/* SCAB band: energized busbar */
+.bnd-bg{position:relative;overflow:hidden;color:var(--hero-fg);isolation:isolate;
+ background:linear-gradient(var(--hero-grid) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,var(--hero-grid) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(120deg,var(--hero) 0%,var(--hero-2) 70%,#123049 100%)}
+.bnd-cube{position:absolute;right:-40px;top:-60px;width:300px;height:340px;object-fit:contain;opacity:.05;pointer-events:none;z-index:-1}
+.bA{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:34px 34px 30px}
+.bA::before{content:"";position:absolute;left:34px;right:0;top:72px;height:3px;border-radius:2px;background:linear-gradient(90deg,#3CC8D2 0%,#6FE7EE 60%,rgba(111,231,238,0) 100%);box-shadow:0 0 12px rgba(60,200,210,.55)}
+.bA .cur{position:absolute;left:34px;right:0;top:72px;height:3px;overflow:hidden;pointer-events:none}
+.bA .cur::before{content:"";position:absolute;left:-100px;right:0;top:0;bottom:0;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(255,255,255,.95) 46px 54px,transparent 54px 100px);animation:bcur 2.2s linear infinite}
+@keyframes bcur{to{transform:translateX(100px)}}
+.bA .i{position:relative;z-index:1;display:grid;justify-items:start;gap:2px;padding-right:12px}
+.bA .gl{position:absolute;left:-6px;top:-16px;font-size:150px;line-height:1;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(160,210,235,.17);pointer-events:none;z-index:-1;font-family:var(--font)}
+.bA .nd{position:relative;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1C3954,var(--hero) 75%);border:1.5px solid rgba(60,200,210,.75);box-shadow:0 0 0 6px rgba(60,200,210,.08),0 10px 24px rgba(0,0,0,.35)}
+.bA .nd .pg svg{width:40px;height:40px}
+.bA .i:last-child .nd{border-color:#7FF3FA;box-shadow:0 0 0 6px rgba(127,243,250,.14),0 0 28px rgba(60,200,210,.55)}
+.bA .i:last-child .nd::after{content:"";position:absolute;inset:-1.5px;border-radius:50%;border:1.5px solid rgba(127,243,250,.6);animation:bpulse 2.4s ease-out infinite}
+@keyframes bpulse{from{transform:scale(1);opacity:.9}to{transform:scale(1.6);opacity:0}}
+.bA .no{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:rgba(160,210,235,.55);margin-top:10px}
+.bA .w{margin-top:8px;font-size:23px;font-weight:700;color:#FFFFFF;letter-spacing:-.01em}
+.bA .w em{font-style:normal;color:var(--ac-hl)}
+.bA .k{font-size:14.5px;color:var(--hero-muted)}
+@media (prefers-reduced-motion:reduce){.bA .cur::before,.bA .i:last-child .nd::after{animation:none}}
+@container site (max-width:760px){
+ .bA{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:30px;padding:26px 20px}
+ .bA::before,.bA .cur{display:none}
+ .bA .gl{font-size:110px}.bA .nd{width:64px;height:64px}.bA .nd .pg svg{width:32px;height:32px}.bA .w{font-size:19px}}
 .dp-h{gap:10px}.dp-h span{margin-left:auto}
 .iso .pgs{fill:none;stroke:#E6EEF5;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .iso .pgs .a{stroke:#5CF0FA}.iso .pgs .f{fill:#E6EEF5;stroke:none}.iso .pgs .fa{fill:#5CF0FA;stroke:none}
@@ -1401,7 +1426,7 @@ const store={get(k,d){try{const v=localStorage.getItem('scab_site_'+k);return v=
              set(k,v){try{localStorage.setItem('scab_site_'+k,JSON.stringify(v))}catch(e){}}};
 const A=n=>`../assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const VERSION='v0.5', VDATE='2026-11-05';
+const VERSION='v0.5.1', VDATE='2026-11-05';
 const TONES={
  teal:{ko:'Navy · Teal',name:'Grid Navy · Teal',rec:true,hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
   why:'A deep navy common in the power and energy industry, with a teal accent between Schneider green and SIFANG blue. It does not lean toward any one brand color.'},
@@ -1856,7 +1881,7 @@ const SCABV=[
  {l:'A',w:'Advanced',ko:'Leading technology',pg:'chip',d:'Advanced technologies such as digital substations, power quality compensation and predictive maintenance, applied to suit site conditions.',kw:['Digital substation','SVG/STATCOM','Predictive maintenance'],href:'solutions-pq',lk:'Power quality solutions'},
  {l:'B',w:'Beyond',ko:'Toward total solutions',pg:'beyond',d:'Moving beyond product supply to system solutions, and to manufacturing-based total solutions by 2030.',kw:['System solutions','In-house manufacturing','SCAB 2030'],href:'company-vision',lk:'Vision · Core values'}
 ];
-const scabBand=()=>`<div class="scab-band">${SCABV.map(v=>`<div class="sb-i"><span class="sb-l">${v.l}</span><span class="sb-w"><em>${v.l}</em>${v.w.slice(1)}</span><span class="sb-k">${v.ko}</span></div>`).join('')}</div>`;
+const scabBand=()=>`<div class="bnd-bg bA"><img class="bnd-cube" src="${A('cube_white')}" alt=""><span class="cur"></span>${SCABV.map((v,i)=>`<div class="i"><span class="gl" aria-hidden="true">${v.l}</span><span class="nd">${pg(v.pg,'on-dark')}</span><span class="no">0${i+1}</span><span class="w"><em>${v.l}</em>${v.w.slice(1)}</span><span class="k">${v.ko}</span></div>`).join('')}</div>`;
 function pgCompanyName(){
  return `<div class="block">${blockHead('Meaning of SCAB','<span class="note">Safe · Connected · Advanced · Beyond</span>')}
   <p class="lead">SCAB stands for Safe · Connected · Advanced · Beyond. Starting from safe power, the name expresses the aim of going beyond product supply through connected systems and advanced technology.</p>
