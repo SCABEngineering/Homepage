@@ -193,7 +193,7 @@ ul{margin:0;padding:0;list-style:none}
 .hero,.phero,.sec.dark{background-image:linear-gradient(var(--hero-grid) 1px,transparent 1px),linear-gradient(90deg,var(--hero-grid) 1px,transparent 1px);background-size:56px 56px}
 .hero-cube{position:absolute;right:-90px;top:50%;transform:translateY(-50%);width:600px;max-width:none;opacity:.055;pointer-events:none}
 .slides{display:grid}
-.slide{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:56px;align-items:center;padding-block:76px 144px;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
+.slide{grid-area:1/1;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:48px;align-items:center;padding-block:76px 144px;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
 .slide.on{opacity:1;visibility:visible}
 .slide h1{font-size:46px;line-height:1.22;font-weight:700;margin-block:14px 18px}
 .slide-p{color:var(--hero-muted);font-size:17px;max-width:46ch}
@@ -725,6 +725,52 @@ td.hl{color:var(--ac);font-weight:600}
 @media (max-width:1000px){.tcmp{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.tcmp{grid-template-columns:1fr}}
 
+/* pictograms + isometric scenes */
+.pg{display:inline-flex;flex:none;color:var(--ink)}
+.pg svg{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pg .a{stroke:var(--ac)} .pg .f{fill:currentColor;stroke:none} .pg .fa{fill:var(--ac);stroke:none}
+.pg.sm svg{width:30px;height:30px} .pg.md svg{width:40px;height:40px} .pg.lg svg{width:60px;height:60px}
+.pg.on-dark{color:#E6EEF5} .pg.on-dark .a{stroke:var(--ac-hl)} .pg.on-dark .fa{fill:var(--ac-hl)}
+.iso{width:100%;height:auto;display:block}
+.iso .pgi{fill:none;stroke:#13253A;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.iso .pgi .a{stroke:#007A85}.iso .pgi .f{fill:#13253A;stroke:none}.iso .pgi .fa{fill:#007A85;stroke:none}
+@keyframes isoflow{to{stroke-dashoffset:-32}}
+@keyframes isopulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@keyframes isoblink{50%{opacity:.25}}
+@keyframes isospin{to{transform:rotate(360deg)}}
+.iso .flow{animation:isoflow 1.1s linear infinite}
+.iso .goose-on{animation:isoflow 1.4s linear infinite}
+.iso .pulse{transform-box:fill-box;transform-origin:center;animation:isopulse 1.4s ease-out infinite}
+.iso .blink{animation:isoblink 1s steps(2) infinite}
+.iso .rotor{animation:isospin 7s linear infinite}
+.iso-vis{position:relative;min-width:0}
+.iso-cap{display:flex;gap:12px;align-items:baseline;margin-top:4px;font-size:13.5px;color:var(--hero-muted);min-height:1.6em}
+.iso-cap b{font-family:var(--mono);color:var(--ac-hl);font-weight:500;white-space:nowrap}
+.sol .sp{padding:26px 22px 4px}
+.svc .pg{margin-bottom:10px}
+.q>.pg{grid-row:span 2}
+.q>.pg svg{width:40px;height:40px}
+.card>.pg{margin-bottom:14px}
+.pil>.pg{margin-bottom:12px}
+.fact>.pg{display:flex;margin-bottom:10px}
+.fact>.pg svg{width:34px;height:34px}
+.step>.pg{display:flex;margin:2px 0 8px}
+.step.hl>.pg{color:var(--ac-ink)} .step.hl>.pg .a{stroke:var(--ac-ink)} .step.hl>.pg .fa{fill:var(--ac-ink)}
+.side-card>.pg{margin-bottom:2px}
+.cat-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.cat-t{display:grid;justify-items:center;align-content:start;gap:6px;padding:14px 8px 12px;border:1px solid var(--line);background:var(--card);font-size:13.5px;font-weight:600;color:var(--ink);text-align:center;line-height:1.35}
+.cat-t:hover{border-color:var(--ink)}
+.cat-t.on{border-color:var(--ac);box-shadow:inset 0 0 0 1px var(--ac);color:var(--ac)}
+.cat-t .n{font-family:var(--mono);font-size:11.5px;color:var(--faint);font-weight:500}
+.pc .pw .iso.mini{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
+.pm-img .iso.mini{position:absolute;inset:24px;width:calc(100% - 48px);height:calc(100% - 48px)}
+.mega-feat .fimg.pgf{background:var(--panel)}
+.mega-feat .fimg.pgf .pg svg{width:64px;height:64px}
+.sd-col{display:grid;gap:20px}
+.sd-col .numlist{grid-template-columns:repeat(4,minmax(0,1fr))}
+.diagram.isod{padding:12px 16px 18px;background:linear-gradient(180deg,var(--panel),var(--bg))}
+@media (prefers-reduced-motion: reduce){.iso .flow,.iso .goose-on,.iso .pulse,.iso .blink,.iso .rotor{animation:none}}
+
 /* responsive (container) */
 @container site (max-width:1180px){
   .gnb,.hdr-cta{display:none}
@@ -747,6 +793,7 @@ td.hl{color:var(--ac);font-weight:600}
   .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @container site (max-width:900px){
+  .sd-col .numlist{grid-template-columns:repeat(2,minmax(0,1fr))}
   .slide{grid-template-columns:1fr;gap:32px;padding-block:52px 140px}
   .collage{height:360px}
   .slide h1{font-size:36px}
@@ -800,6 +847,7 @@ td.hl{color:var(--ac);font-weight:600}
   .hdr-in{gap:12px}
 }
 @container site (max-width:480px){
+  .sd-col .numlist{grid-template-columns:1fr}
   .slide h1{font-size:30px}
   .slide-p{font-size:15.5px}
   .quick-grid{grid-template-columns:1fr}
@@ -820,6 +868,28 @@ td.hl{color:var(--ac);font-weight:600}
 }
 </style>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+ <linearGradient id="iso-plat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBFCFD"/><stop offset="1" stop-color="#E5ECF1"/></linearGradient>
+ <linearGradient id="iso-cabL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9EEF2"/><stop offset="1" stop-color="#D2DAE1"/></linearGradient>
+ <linearGradient id="iso-cabR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9D2DA"/><stop offset="1" stop-color="#B2BDC7"/></linearGradient>
+ <linearGradient id="iso-bldL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F4F7"/><stop offset="1" stop-color="#DAE2E9"/></linearGradient>
+ <linearGradient id="iso-bldR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CED7DF"/><stop offset="1" stop-color="#B8C3CD"/></linearGradient>
+ <linearGradient id="iso-facL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBEF"/><stop offset="1" stop-color="#CFD8DF"/></linearGradient>
+ <linearGradient id="iso-facR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4CED7"/><stop offset="1" stop-color="#AEBAC5"/></linearGradient>
+ <linearGradient id="iso-trL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#97A2AC"/><stop offset="1" stop-color="#7D8893"/></linearGradient>
+ <linearGradient id="iso-trR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A8590"/><stop offset="1" stop-color="#626D78"/></linearGradient>
+ <linearGradient id="iso-contL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCE6EE"/><stop offset="1" stop-color="#C3D1DC"/></linearGradient>
+ <linearGradient id="iso-contR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9C8D4"/><stop offset="1" stop-color="#A2B3C1"/></linearGradient>
+ <linearGradient id="iso-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2C4660"/><stop offset=".55" stop-color="#1A2F44"/><stop offset="1" stop-color="#36536E"/></linearGradient>
+ <linearGradient id="iso-solar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A4D74"/><stop offset="1" stop-color="#173252"/></linearGradient>
+ <linearGradient id="iso-tower" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F4F7F9"/><stop offset="1" stop-color="#C9D2DA"/></linearGradient>
+ <radialGradient id="iso-tree" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#9CCBB0"/><stop offset="1" stop-color="#4F8C6D"/></radialGradient>
+ <radialGradient id="iso-spark" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF4C2"/><stop offset=".45" stop-color="#FFB02E"/><stop offset="1" stop-color="#FF7A00" stop-opacity="0"/></radialGradient>
+ <filter id="iso-blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+ <filter id="iso-blur8" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+ <filter id="iso-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+ <filter id="iso-drop" x="-20%" y="-40%" width="140%" height="180%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.6" flood-color="#13253A" flood-opacity=".18"/></filter>
+</defs></svg>
 <div class="stage" id="stage">
   <div class="site" id="site">
     <div class="util" id="util"></div>
@@ -834,6 +904,415 @@ td.hl{color:var(--ac);font-weight:600}
 <div class="toast" id="toast" hidden role="status"></div>
 
 <script>
+/* ===== SCAB pictograms (48 grid, line style) + isometric scene kit ===== */
+(()=>{
+'use strict';
+const PG={
+ relay:'<rect x="12" y="6" width="24" height="36" rx="2"/><rect class="a" x="16" y="10" width="16" height="10" rx="1"/><circle class="fa" cx="17" cy="26" r="1.6"/><circle class="f" cx="22" cy="26" r="1.6"/><path d="M16 32h16M16 37h10"/>',
+ breaker:'<path d="M24 4v10M24 34v10"/><rect x="15" y="14" width="18" height="20" rx="2"/><path class="a" d="M19 18l10 12M29 18L19 30"/>',
+ transformer:'<circle cx="24" cy="17" r="9"/><circle class="a" cx="24" cy="31" r="9"/><path d="M24 2v6M24 40v6"/>',
+ tower:'<path d="M24 4L14 44M24 4l10 40M12 12h24M19 20h10M17 30h14M17 30l14 14M31 30L17 44"/><path class="a" d="M7 12h5M36 12h5M7 12v4M41 12v4"/>',
+ datacenter:'<rect x="12" y="6" width="24" height="36" rx="2"/><path d="M12 15h24M12 24h24M12 33h24M22 10.5h9M22 19.5h9M22 28.5h9"/><circle class="fa" cx="17" cy="10.5" r="1.5"/><circle class="fa" cx="17" cy="19.5" r="1.5"/><circle class="fa" cx="17" cy="28.5" r="1.5"/>',
+ wave:'<path d="M4 18c3-9 7-9 10 0s7 9 10 0 7-9 10 0 7 9 10 0"/><path class="a" d="M6 40h36M11 36v4M18 31v9M25 34v6M32 32v8M39 37v3"/>',
+ motor:'<circle cx="21" cy="24" r="14"/><path d="M14 30V18l7 7 7-7v12"/><path class="a" d="M35 24h9"/>',
+ transfer:'<circle cx="12" cy="9" r="5"/><circle cx="36" cy="9" r="5"/><path d="M12 14v8M36 14v8M12 22v8M12 30v6M36 30v6M8 36h32M24 36v8"/><path class="a" d="M36 22l-6 7"/>',
+ sync:'<path d="M4 17c3-8 6-8 9 0s6 8 9 0 6-8 9 0 6 8 9 0"/><path class="a" d="M4 31c3-8 6-8 9 0s6 8 9 0 6-8 9 0 6 8 9 0"/>',
+ meter:'<path d="M6 32a18 18 0 0 1 36 0"/><path d="M6 32h36M12 21l2.5 2.5M24 15v3.5M36 21l-2.5 2.5"/><path class="a" d="M24 32l9-11"/><circle class="f" cx="24" cy="32" r="2"/>',
+ gear:'<circle cx="24" cy="24" r="12"/><circle class="a" cx="24" cy="24" r="5"/><path d="M24 5v7M24 36v7M5 24h7M36 24h7M10.6 10.6l5 5M32.4 32.4l5 5M10.6 37.4l5-5M32.4 15.6l5-5"/>',
+ network:'<circle cx="24" cy="8" r="4"/><circle cx="8" cy="36" r="4"/><circle cx="40" cy="36" r="4"/><circle class="a" cx="24" cy="25" r="4"/><path d="M24 12v9M11.5 33.5l9-6M36.5 33.5l-9-6"/><path class="a" d="M12 38h24" stroke-dasharray="3 3"/>',
+ shield:'<path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z"/><path class="a" d="M26 13l-7 12h6l-3 10 9-14h-6l3-8z"/>',
+ heal:'<path d="M39 21A15 15 0 1 1 30.5 10.4"/><path class="a" d="M29.5 4.5l2.5 6.6-6.8 2"/><circle cx="24" cy="9" r="0"/><circle class="fa" cx="24" cy="24" r="3"/><circle class="f" cx="11" cy="31.5" r="2.4"/><circle class="f" cx="37" cy="31.5" r="2.4"/>',
+ doc:'<path d="M12 4h16l8 8v32H12z"/><path d="M28 4v8h8"/><path class="a" d="M18 22h12M18 28h12M18 34h8"/>',
+ book:'<path d="M5 10c6-2 13-2 19 2v30c-6-4-13-4-19-2z"/><path d="M43 10c-6-2-13-2-19 2v30c6-4 13-4 19-2z"/><path class="a" d="M29 19h8M29 25h8"/>',
+ cert:'<rect x="5" y="8" width="38" height="26" rx="2"/><path d="M11 16h16M11 22h12"/><circle class="a" cx="34" cy="25" r="5"/><path class="a" d="M31 29.5l-2 10.5 5-3 5 3-2-10.5"/>',
+ present:'<rect x="5" y="6" width="38" height="24" rx="1"/><path d="M24 30v6M16 44l8-8 8 8"/><path class="a" d="M11 24l7-7 5 4 9-9"/>',
+ phone:'<path d="M14 6h7l3 9-4 3a20 20 0 0 0 10 10l3-4 9 3v7a4 4 0 0 1-4 4C21 38 10 27 10 10a4 4 0 0 1 4-4z"/><path class="a" d="M30 6a12 12 0 0 1 12 12"/>',
+ mail:'<rect x="5" y="10" width="38" height="28" rx="2"/><path class="a" d="M5 13l19 14 19-14"/>',
+ pin:'<path d="M24 44S10 30 10 19a14 14 0 0 1 28 0c0 11-14 25-14 25z"/><circle class="a" cx="24" cy="19" r="5"/>',
+ box:'<path d="M24 4l18 9v22l-18 9-18-9V13z"/><path d="M6 13l18 9 18-9M24 22v22"/><path class="a" d="M15 8.5l18 9v6"/>',
+ chat:'<path d="M5 7h27v19H17l-8 7v-7H5z"/><path class="a" d="M36 15h7v18h-4v6l-7-6H21v-3"/>',
+ megaphone:'<path d="M7 20v8h7l15 8V12l-15 8z"/><path class="a" d="M35 18a8 8 0 0 1 0 12M14 28l3 12h5l-2-12"/>',
+ news:'<rect x="5" y="8" width="31" height="32" rx="2"/><path d="M36 16h7v20a4 4 0 0 1-4 4H9"/><rect class="a" x="10" y="14" width="10" height="8"/><path d="M24 15h7M24 21h7M10 28h21M10 34h21"/>',
+ people:'<circle cx="18" cy="16" r="6"/><path d="M6 40c0-7 5-12 12-12s12 5 12 12"/><circle class="a" cx="33" cy="18" r="5"/><path class="a" d="M33 28c6 0 10 4 10 10"/>',
+ globe:'<circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c7 6 7 30 0 36M24 6c-7 6-7 30 0 36"/><path class="a" d="M10 14h28M10 34h28"/>',
+ factory:'<path d="M4 42V22l10 6v-6l10 6v-6l10 6V8h8v34z"/><path d="M2 42h44"/><path class="a" d="M10 35h4M20 35h4M30 35h4"/>',
+ refinery:'<path d="M8 44V18h8v26M20 44V10h8v34M32 44V24h8v20M3 44h42"/><path class="a" d="M12 18v-6M24 10V4M36 24v-5"/>',
+ chip:'<rect x="12" y="12" width="24" height="24" rx="2"/><rect class="a" x="18" y="18" width="12" height="12"/><path d="M18 5v7M24 5v7M30 5v7M18 36v7M24 36v7M30 36v7M5 18h7M5 24h7M5 30h7M36 18h7M36 24h7M36 30h7"/>',
+ steel:'<path d="M10 14h28l-4 27H14z"/><path d="M5 14h38"/><path class="a" d="M18 21c2 3-2 5 0 8M24 19c2 3-2 5 0 8M30 21c2 3-2 5 0 8"/>',
+ wind:'<path d="M24 21l-2 23h4zM19 44h10"/><circle cx="24" cy="18" r="2.6"/><path class="a" d="M24 15.4V3M26.3 19.3l10.8 6.2M21.7 19.3l-10.8 6.2"/>',
+ building:'<path d="M8 42V10l16-6v38M24 16l16 6v20M4 42h40"/><path class="a" d="M13 16h6M13 23h6M13 30h6M29 27h6M29 34h6"/>',
+ target:'<circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="10"/><circle class="fa" cx="24" cy="24" r="3"/><path class="a" d="M24 24L38 10M33 6v5h5"/>',
+ link:'<rect x="4" y="18" width="23" height="12" rx="6"/><rect class="a" x="21" y="18" width="23" height="12" rx="6"/>',
+ growth:'<path d="M6 42h36M6 42V6"/><path class="a" d="M10 34l9-9 7 6 12-14M32 17h6v6"/>',
+ leaf:'<path d="M8 40C8 18 22 8 42 8c0 20-10 34-32 32z"/><path class="a" d="M8 40l20-20M20 28h7M24 24v-7"/>',
+ bulb:'<path d="M18 34c0-4-6-8-6-15a12 12 0 0 1 24 0c0 7-6 11-6 15z"/><path d="M18 39h12M20 44h8"/><path class="a" d="M24 34V24l-3-3M24 24l3-3"/>',
+ tcc:'<path d="M6 6v36h36"/><path d="M12 9c2 14 9 23 27 27"/><path class="a" d="M10 18c3 10 11 16 29 20"/><path d="M6 24h3M24 42v-3" />',
+ busbar:'<path d="M5 14h38" stroke-width="3"/><path d="M14 14v14M24 14v14M34 14v14"/><circle class="a" cx="14" cy="33" r="4.5"/><circle class="a" cx="24" cy="33" r="4.5"/><circle class="a" cx="34" cy="33" r="4.5"/>',
+ logic:'<rect x="5" y="5" width="15" height="11" rx="2"/><rect x="28" y="5" width="15" height="11" rx="2"/><path d="M12.5 16v7h23v-7M24 23v6"/><path class="a" d="M24 29l8 7-8 7-8-7z"/>',
+ scales:'<path d="M24 6v36M14 42h20M8 12h32"/><path class="a" d="M8 12l-5 12h10zM40 12l-5 12h10z"/>',
+ mountain:'<path d="M2 42l14-22 8 12 6-8 16 18z"/><path class="a" d="M36 16V4M32 8l4-4 4 4"/>',
+ badge:'<circle cx="24" cy="19" r="14"/><path class="a" d="M18 19l4 4 8-8"/><path d="M16 31l-4 13 12-5 12 5-4-13"/>',
+ headset:'<path d="M8 28v-4a16 16 0 0 1 32 0v4"/><rect x="5" y="26" width="8" height="12" rx="2"/><rect x="35" y="26" width="8" height="12" rx="2"/><path class="a" d="M39 38c0 4-4 6-10 6h-4"/>',
+ clipboard:'<rect x="10" y="8" width="28" height="36" rx="2"/><rect x="18" y="4" width="12" height="8" rx="2"/><path class="a" d="M16 22l3 3 6-6M16 33l3 3 6-6"/><path d="M29 23h4M29 34h4"/>',
+ ruler:'<path d="M6 42L42 6"/><path d="M6 42h14M6 42V28"/><path class="a" d="M14 34l-3-3M20 28l-3-3M26 22l-3-3M32 16l-3-3"/>',
+ truck:'<path d="M3 11h25v23H3zM28 19h9l8 9v6H28z"/><circle cx="11" cy="37" r="4"/><circle class="a" cx="36" cy="37" r="4"/>',
+ power:'<path class="a" d="M24 4v18"/><path d="M14 10a16 16 0 1 0 20 0"/>',
+ wrench:'<path d="M31 5a10 10 0 0 0-9.4 13.6L6 34.2 13.8 42l15.6-15.6A10 10 0 0 0 43 17l-6.4 6.4-6.4-1.6-1.6-6.4z"/><circle class="fa" cx="11" cy="37" r="1.8"/>',
+ calendar:'<rect x="6" y="10" width="36" height="32" rx="2"/><path d="M6 18h36M16 6v8M32 6v8"/><rect class="a" x="13" y="24" width="8" height="7"/>',
+ search:'<circle cx="20" cy="20" r="13"/><path class="a" d="M30 30l12 12"/>',
+ plug:'<path d="M17 4v10M31 4v10M12 14h24v8a12 12 0 0 1-24 0z"/><path class="a" d="M24 34v10"/>',
+ gauge:'<circle cx="24" cy="18" r="12"/><path class="a" d="M24 18l6-6"/><path d="M20 30v6h8v-6M14 41h20"/>',
+ compass:'<circle cx="24" cy="24" r="18"/><path class="a" d="M31 17l-4 10-10 4 4-10z"/>',
+ screen:'<rect x="4" y="8" width="40" height="26" rx="2"/><path d="M18 42h12M24 34v8"/><path class="a" d="M10 26l7-8 6 5 8-9 7 6"/>',
+ fax:'<rect x="8" y="16" width="32" height="22" rx="2"/><path d="M14 16V6h16l4 4v6M14 30h20"/><path class="a" d="M16 24h4M24 24h4"/>'
+};
+window.PG=PG;
+window.pg=(n,cls='')=>`<span class="pg ${cls}" aria-hidden="true"><svg viewBox="0 0 48 48">${PG[n]||''}</svg></span>`;
+
+/* ---------- iso kit ---------- */
+const f1=n=>(+n).toFixed(1);
+const MAT={
+ cab:{t:'#F5F7F9',l:'url(#iso-cabL)',r:'url(#iso-cabR)'},
+ cabDark:{t:'#4B5A68',l:'#3B4855',r:'#2F3A45'},
+ plinth:{t:'#D9E0E6',l:'#C3CCD4',r:'#AEB9C3'},
+ roof:{t:'#E9EDF1',l:'#C8D0D8',r:'#B3BDC7'},
+ bld:{t:'#EEF2F6',l:'url(#iso-bldL)',r:'url(#iso-bldR)'},
+ fac:{t:'#E4E9EE',l:'url(#iso-facL)',r:'url(#iso-facR)'},
+ tr:{t:'#A9B3BC',l:'url(#iso-trL)',r:'url(#iso-trR)'},
+ fin:{t:'#9AA5AF',l:'#86919B',r:'#6F7A85'},
+ chil:{t:'#DCE3E9',l:'#C2CCD5',r:'#A9B5C0'},
+ trough:{t:'#C9D2DA',l:'#B4BEC8',r:'#9EAAB5'},
+ cont:{t:'#E8EEF3',l:'url(#iso-contL)',r:'url(#iso-contR)'},
+ motor:{t:'#5E7F99',l:'#4D6D86',r:'#3F5C72'},
+ skid:{t:'#B9C3CC',l:'#A3AEB8',r:'#8E9AA5'},
+ desk:{t:'#E6EBEF',l:'#CBD3DA',r:'#B4BEC7'},
+ stack:{t:'#C7CFD6',l:'#B0BAC3',r:'#98A3AE'}
+};
+function kit(K,OX,OY){
+ const ip=(x,y,z=0)=>[OX+(x-y)*0.8660254*K,OY+(x+y)*0.5*K-z*K];
+ const P=a=>a.map(p=>f1(p[0])+','+f1(p[1])).join(' ');
+ const D=a=>'M'+a.map(p=>f1(p[0])+' '+f1(p[1])).join('L');
+ const poly=(pts,fill,ex='')=>`<polygon points="${P(pts)}" fill="${fill}" ${ex}/>`;
+ const ST='stroke="rgba(40,60,80,.18)" stroke-width=".6" stroke-linejoin="round"';
+ const box=(x,y,z,w,d,h,m,st=ST)=>{const Q=(a,b,c)=>ip(x+a*w,y+b*d,z+c*h);
+  return poly([Q(0,1,0),Q(1,1,0),Q(1,1,1),Q(0,1,1)],m.l,st)+poly([Q(1,0,0),Q(1,1,0),Q(1,1,1),Q(1,0,1)],m.r,st)+poly([Q(0,0,1),Q(1,0,1),Q(1,1,1),Q(0,1,1)],m.t,st)};
+ const qY=(xa,xb,za,zb,y)=>[ip(xa,y,za),ip(xb,y,za),ip(xb,y,zb),ip(xa,y,zb)];
+ const qX=(ya,yb,za,zb,x)=>[ip(x,ya,za),ip(x,yb,za),ip(x,yb,zb),ip(x,ya,zb)];
+ const hull=ps=>{ps=ps.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);const lo=[],up=[];
+  for(const p of ps){while(lo.length>=2&&cr(lo[lo.length-2],lo[lo.length-1],p)<=0)lo.pop();lo.push(p)}
+  for(const p of ps.slice().reverse()){while(up.length>=2&&cr(up[up.length-2],up[up.length-1],p)<=0)up.pop();up.push(p)}
+  return lo.slice(0,-1).concat(up.slice(0,-1))};
+ const shadow=(x,y,w,d,h,o=.2)=>{const lx=.62*h,ly=.18*h,c=[[x,y],[x+w,y],[x+w,y+d],[x,y+d]];
+  return `<polygon points="${P(hull(c.map(q=>ip(q[0],q[1])).concat(c.map(q=>ip(q[0]+lx,q[1]+ly)))))}" fill="rgba(18,38,58,${o})" filter="url(#iso-blur)"/>`};
+ const seg=(pts,z=.02)=>pts.map(q=>ip(q[0],q[1],q[2]??z));
+ const trench=pts=>{const p=seg(pts);return `<path d="${D(p)}" fill="none" stroke="#D3DCE4" stroke-width="${f1(K*.9)}" stroke-linecap="round" stroke-linejoin="round"/><path d="${D(p)}" fill="none" stroke="#8C99A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>`};
+ const flow=(pts,dir=1,col='#00B7C3',z=.04)=>{const p=seg(dir>0?pts:pts.slice().reverse(),z);const d=D(p);
+  return `<path d="${d}" fill="none" stroke="${col}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".28" filter="url(#iso-glow)"/><path d="${d}" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#F2FEFF" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round" class="flow"/>`};
+ const lamp=(id,x,y,z,r=3.4)=>{const L=ip(x,y,z);return `<g class="lamp" data-n="${id}"><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="${r*2.5}" class="lg" fill="#E5484D" opacity=".35" filter="url(#iso-glow)"/><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="${r}" class="lc" fill="#E5484D"/></g>`};
+ const chip=(text,x,y,z,o={})=>{const p=ip(x,y,z);const w=o.w||(text.length*6.6+(o.dot?24:16));const dot=o.dot?`<circle cx="${f1(-w/2+10)}" cy="0" r="3.6" class="cd" fill="#E5484D"/>`:'';
+  return `<g class="chip${o.cls?' '+o.cls:''}"${o.n?` data-n="${o.n}"`:''} transform="translate(${f1(p[0])},${f1(p[1])})"><rect x="${f1(-w/2)}" y="-10" width="${f1(w)}" height="20" rx="10" fill="${o.bg||'#FFFFFF'}" stroke="rgba(19,37,58,.16)" filter="url(#iso-drop)"/>${dot}<text x="${o.dot?f1(-w/2+17):0}" y="3.8" ${o.dot?'':'text-anchor="middle"'} font-size="10.5" font-weight="600" fill="${o.fg||'#13253A'}" font-family="IBM Plex Mono,ui-monospace,monospace">${text}</text></g>`};
+ const badge=(name,x,y,z,r=17)=>{const p=ip(x,y,z);const s=r*1.25;
+  return `<g class="badge" transform="translate(${f1(p[0])},${f1(p[1])})"><path d="M0 ${r+9}V${r}" stroke="#13253A" stroke-width="1" opacity=".35"/><circle r="${r}" fill="#FFFFFF" filter="url(#iso-drop)"/><svg x="${f1(-s/2)}" y="${f1(-s/2)}" width="${f1(s)}" height="${f1(s)}" viewBox="0 0 48 48" class="pgi">${PG[name]}</svg></g>`};
+ const platform=(X1,Y1,TH=1.4,grid=4)=>{let s=poly([ip(0,Y1,0),ip(X1,Y1,0),ip(X1,Y1,-TH),ip(0,Y1,-TH)],'#C7D1DA')+poly([ip(X1,0,0),ip(X1,Y1,0),ip(X1,Y1,-TH),ip(X1,0,-TH)],'#B1BEC9')+poly([ip(0,0),ip(X1,0),ip(X1,Y1),ip(0,Y1)],'url(#iso-plat)');
+  for(let i=grid;i<X1;i+=grid)s+=`<path d="${D([ip(i,0),ip(i,Y1)])}" stroke="#C9D4DD" stroke-width=".5" opacity=".6"/>`;
+  for(let j=grid;j<Y1;j+=grid)s+=`<path d="${D([ip(0,j),ip(X1,j)])}" stroke="#C9D4DD" stroke-width=".5" opacity=".6"/>`;
+  return `<ellipse cx="${f1(ip(X1/2,Y1/2)[0])}" cy="${f1(ip(X1/2,Y1/2)[1]+K*2)}" rx="${f1((X1+Y1)*.5*K)}" ry="${f1((X1+Y1)*.2*K)}" fill="rgba(10,25,40,.18)" filter="url(#iso-blur8)"/>`+s};
+ const patch=(x0,y0,x1,y1,fill)=>poly([ip(x0,y0,.01),ip(x1,y0,.01),ip(x1,y1,.01),ip(x0,y1,.01)],fill);
+ const tree=(x,y,s=1)=>{const b=ip(x,y,0),c=ip(x,y,2.4*s);return `<ellipse cx="${f1(b[0]+8*s)}" cy="${f1(b[1]+2)}" rx="${f1(14*s)}" ry="${f1(6*s)}" fill="rgba(18,38,58,.16)" filter="url(#iso-blur)"/><path d="M${f1(b[0])} ${f1(b[1])}V${f1(c[1]+4)}" stroke="#7A6A58" stroke-width="2.4"/><circle cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(13*s)}" fill="url(#iso-tree)"/><circle cx="${f1(c[0]+5*s)}" cy="${f1(c[1]-6*s)}" r="${f1(8*s)}" fill="url(#iso-tree)" opacity=".9"/>`};
+ const kiosk=(id,x,y,o={})=>{const w=o.w||3.2,d=o.d||2.6,h=o.h||3.3,x0=x-w/2,y0=y-d/2,z1=.35,zt=z1+h,yF=y0+d,xF=x0+w;
+  let s=shadow(x0,y0,w,d,zt)+box(x0-.18,y0-.18,0,w+.36,d+.36,z1,MAT.plinth)+box(x0,y0,z1,w,d,h,MAT.cab);
+  s+=`<path d="${D([ip(x0+w/2,yF,z1+.2),ip(x0+w/2,yF,zt-.15)])}" stroke="rgba(60,80,100,.35)" stroke-width=".8"/>`;
+  s+=poly(qY(x0+.3,x0+1.35,zt-1.25,zt-.5,yF),'#1C2C3B')+`<g class="kscr" data-n="${id}">${poly(qY(x0+.42,x0+1.23,zt-1.13,zt-.62,yF),'#2DD4DF','opacity=".85"')}</g>`;
+  for(let i=0;i<3;i++)s+=`<path d="${D([ip(x0+1.9,yF,z1+.5+i*.28),ip(x0+2.85,yF,z1+.5+i*.28)])}" stroke="rgba(60,80,100,.35)" stroke-width=".8"/>`;
+  for(let i=0;i<4;i++)s+=`<path d="${D([ip(xF,y0+.4,z1+.6+i*.3),ip(xF,y0+2.1,z1+.6+i*.3)])}" stroke="rgba(40,60,80,.28)" stroke-width=".8"/>`;
+  s+=box(x0-.14,y0-.14,zt,w+.28,d+.28,.2,MAT.roof);
+  if(o.lamp!==false)s+=lamp(id,xF-.45,yF-.35,zt+.2);
+  return s};
+ const transformer=(x,y,id)=>{let t=shadow(x+.2,y+.2,5.2,3.8,5.8)+box(x,y,0,5.6,4.2,.4,MAT.plinth)+box(x+.5,y+.5,.4,4.4,3.0,3.4,MAT.tr);
+  for(let i=0;i<6;i++)t+=box(x+.8+i*.68,y+3.5,.8,.24,.55,2.6,MAT.fin);
+  for(let i=0;i<4;i++)t+=box(x+4.9,y+.8+i*.66,.8,.55,.24,2.6,MAT.fin);
+  t+=box(x+.9,y+.65,3.8,3.6,.9,.85,{t:'#B8C1C9',l:'#9AA5AF',r:'#87929C'});
+  [[1.5,2.4],[2.7,2.4],[3.9,2.4]].forEach(([bx,by])=>{for(let k=0;k<7;k++){const c=ip(x+bx,y+by,3.8+k*.25);t+=`<ellipse cx="${f1(c[0])}" cy="${f1(c[1])}" rx="${f1(K*.36)}" ry="${f1(K*.18)}" fill="${k%2?'#D9DFE5':'#C3CBD3'}" stroke="#98A3AD" stroke-width=".4"/>`}const c=ip(x+bx,y+by,5.6);t+=`<circle cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(K*.18)}" fill="#5B6670"/>`});
+  return t};
+ const swgr=(x,y,n,o={})=>{const cw=o.cw||2.33,d=o.d||3.6,h=o.h||5;let t=shadow(x,y,n*cw,d,h+.4)+box(x-.2,y-.2,0,n*cw+.4,d+.4,.3,MAT.plinth);
+  for(let i=0;i<n;i++){const x0=x+i*cw,yF=y+d,hl=o.hl&&o.hl.includes(i);t+=box(x0,y,.3,cw,d,h,MAT.cab);
+   t+=`<path d="${D([ip(x0+.12,yF,.5),ip(x0+.12,yF,h+.1),ip(x0+cw-.13,yF,h+.1),ip(x0+cw-.13,yF,.5),ip(x0+.12,yF,.5)])}" fill="none" stroke="rgba(60,80,100,.3)" stroke-width=".7"/>`;
+   t+=poly(qY(x0+.4,x0+1.25,h-.9,h-.25,yF),'#1C2C3B')+poly(qY(x0+.5,x0+1.15,h-.8,h-.35,yF),hl?'#5CF0FA':'#2DD4DF',`opacity="${hl?1:.8}"`);
+   if(hl)t+=poly(qY(x0+.12,x0+cw-.13,h-.02,h+.1,yF),'#00B7C3');
+   t+=poly(qY(x0+.4,x0+1.9,h-2.4,h-1.4,yF),'rgba(255,255,255,.35)');
+   if(o.lamps&&o.lamps[i])t+=lamp(o.lamps[i],x0+1.65,yF,h-.6,3);}
+  if(o.trough!==false)t+=box(x,y+.3,h+.3,n*cw,1.4,.5,MAT.trough);
+  return t};
+ const datacenter=(X0,Y0,X2,Y2,H,o={})=>{const Z=.3,ZT=Z+H;let t=shadow(X0,Y0,X2-X0,Y2-Y0,ZT)+box(X0-.4,Y0-.4,0,X2-X0+.8,Y2-Y0+.8,Z,MAT.plinth)+box(X0,Y0,Z,X2-X0,Y2-Y0,H,MAT.bld);
+  t+=poly([ip(X0+.45,Y0+.45,ZT),ip(X2-.45,Y0+.45,ZT),ip(X2-.45,Y2-.45,ZT),ip(X0+.45,Y2-.45,ZT)],'#E2E8EE');
+  const gb=Math.min(1.5,H*.3),gt=Math.min(H-.9,gb+2);
+  t+=poly(qY(X0,X2,Z,Z+.6,Y2),'#C2CCD5')+poly(qY(X0+.6,X2-.6,gb,gt,Y2),'url(#iso-glass)');
+  if(o.ups)t+=`<g class="ups">${poly(qY(X0+.6,X2-.6,gb,gt,Y2),'#FFB02E','opacity="0"')}</g>`;
+  for(let xx=X0+1.4;xx<X2-.5;xx+=1.35)t+=`<path d="${D([ip(xx,Y2,Z+.6),ip(xx,Y2,ZT-.1)])}" stroke="rgba(110,128,146,.26)" stroke-width=".8"/>`;
+  t+=poly(qX(Y0,Y2,Z,Z+.6,X2),'#ADB9C4')+poly(qX(Y0+.8,Y2-.8,gb,gt,X2),'url(#iso-glass)');
+  for(let yy=Y0+1.2;yy<Y2-.5;yy+=1.35)t+=`<path d="${D([ip(X2,yy,Z+.6),ip(X2,yy,ZT-.1)])}" stroke="rgba(80,98,116,.24)" stroke-width=".8"/>`;
+  if(o.label){const a=ip(X0+1.2,Y2,ZT-.35);t+=`<text transform="matrix(.8660254,.5,0,1,${f1(a[0])},${f1(a[1])})" font-size="${f1(K*1.1)}" font-weight="700" letter-spacing="3" fill="#2B3B4B">${o.label}</text>`}
+  if(o.label2){const b=ip(X2,Y2-1.2,ZT-.35);t+=`<text transform="matrix(.8660254,-.5,0,1,${f1(b[0])},${f1(b[1])})" font-size="${f1(K*1.1)}" font-weight="700" letter-spacing="3" fill="#25333F">${o.label2}</text>`}
+  const ch=[];for(let cx=X0+1.6;cx<X2-2.6;cx+=3.2){ch.push([cx,Y0+1.6]);ch.push([cx,Y2-3.6])}
+  ch.sort((p,q)=>(p[0]+p[1])-(q[0]+q[1])).forEach(([cx,cy])=>{t+=box(cx,cy,ZT,2.4,1.8,.75,MAT.chil);const c1=ip(cx+.7,cy+.9,ZT+.75),c2=ip(cx+1.7,cy+.9,ZT+.75);t+=`<ellipse cx="${f1(c1[0])}" cy="${f1(c1[1])}" rx="${f1(K*.46)}" ry="${f1(K*.24)}" fill="#7F8C98"/><ellipse cx="${f1(c2[0])}" cy="${f1(c2[1])}" rx="${f1(K*.46)}" ry="${f1(K*.24)}" fill="#7F8C98"/>`});
+  return t};
+ const factory=(X0,Y0,W,Dp,H,o={})=>{const X2=X0+W,Y2=Y0+Dp,Z=.3,ZT=Z+H;let t=shadow(X0,Y0,W,Dp,ZT+1.6)+box(X0-.4,Y0-.4,0,W+.8,Dp+.8,Z,MAT.plinth)+box(X0,Y0,Z,W,Dp,H,MAT.fac);
+  // windows on +y face
+  for(let xx=X0+1;xx<X2-1.6;xx+=2.2)t+=poly(qY(xx,xx+1.3,1.4,2.6,Y2),'url(#iso-glass)');
+  t+=poly(qX(Y0+1,Y0+3.4,Z,2.6,X2),'#5F6E7C')+poly(qX(Y0+1.15,Y0+3.25,Z,2.45,X2),'#7C8B98');
+  for(let yy=Y0+4.6;yy<Y2-1.4;yy+=2.2)t+=poly(qX(yy,yy+1.3,1.4,2.6,X2),'url(#iso-glass)');
+  // sawtooth roof
+  const n=Math.floor(Dp/3.2),step=Dp/n;
+  for(let i=0;i<n;i++){const ya=Y0+i*step,yb=ya+step;
+   t+=poly([ip(X0,ya,ZT),ip(X2,ya,ZT),ip(X2,yb,ZT+1.5),ip(X0,yb,ZT+1.5)],'#DDE3E9','stroke="rgba(40,60,80,.18)" stroke-width=".6"');
+   t+=poly([ip(X0,yb,ZT),ip(X2,yb,ZT),ip(X2,yb,ZT+1.5),ip(X0,yb,ZT+1.5)],'url(#iso-glass)','stroke="rgba(40,60,80,.18)" stroke-width=".6"');
+   t+=poly([ip(X2,ya,ZT),ip(X2,yb,ZT),ip(X2,yb,ZT+1.5)],'#B6C1CB','stroke="rgba(40,60,80,.18)" stroke-width=".6"');}
+  if(o.stack){const [sx,sy]=o.stack;t+=box(sx,sy,ZT,1.2,1.2,5.5,MAT.stack);t+=box(sx-.1,sy-.1,ZT+5.2,1.4,1.4,.3,{t:'#9AA5AF',l:'#86919B',r:'#6F7A85'})}
+  return t};
+ const wind=(x,y,h=12,phase=0)=>{const b=ip(x,y,0),hb=ip(x,y,h);let t=`<ellipse cx="${f1(b[0]+10)}" cy="${f1(b[1]+3)}" rx="${f1(K*1.2)}" ry="${f1(K*.4)}" fill="rgba(18,38,58,.16)" filter="url(#iso-blur)"/>`;
+  t+=`<polygon points="${f1(b[0]-K*.32)},${f1(b[1])} ${f1(b[0]+K*.32)},${f1(b[1])} ${f1(hb[0]+K*.14)},${f1(hb[1])} ${f1(hb[0]-K*.14)},${f1(hb[1])}" fill="url(#iso-tower)"/>`;
+  t+=box(x-.35,y-.9,h-.25,.7,1.6,.6,{t:'#F3F6F8',l:'#DCE3E9',r:'#C7D0D8'});
+  const c=ip(x,y+.9,h+.05),L=K*5.2;
+  t+=`<g class="rotor" style="transform-origin:${f1(c[0])}px ${f1(c[1])}px;animation-delay:${phase}s">${[0,120,240].map(a=>`<path d="M${f1(c[0])} ${f1(c[1])}l${f1(-K*.22)} ${f1(-L*.25)}L${f1(c[0])} ${f1(c[1]-L)}l${f1(K*.32)} ${f1(L*.74)}z" fill="#F7F9FB" stroke="#B9C3CC" stroke-width=".6" transform="rotate(${a} ${f1(c[0])} ${f1(c[1])})"/>`).join('')}</g><circle cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(K*.22)}" fill="#C7D0D8"/>`;
+  return t};
+ const solar=(x,y,L,rows,gap=2.6)=>{let t='';for(let r=0;r<rows;r++){const yy=y+r*gap;
+   t+=`<path d="${D([ip(x,yy+1.5,0),ip(x,yy+1.5,.5)])}M${D([ip(x+L,yy+1.5,0),ip(x+L,yy+1.5,.5)]).slice(1)}" stroke="#8E9AA5" stroke-width="1.2"/>`;
+   t+=poly([ip(x,yy,1.4),ip(x+L,yy,1.4),ip(x+L,yy+1.6,.5),ip(x,yy+1.6,.5)],'url(#iso-solar)','stroke="#9FB3C6" stroke-width=".6"');
+   for(let i=1;i<L/1.2;i++)t+=`<path d="${D([ip(x+i*1.2,yy,1.4),ip(x+i*1.2,yy+1.6,.5)])}" stroke="rgba(190,215,235,.5)" stroke-width=".6"/>`;
+   t+=`<path d="${D([ip(x,yy+.8,.95),ip(x+L,yy+.8,.95)])}" stroke="rgba(190,215,235,.45)" stroke-width=".6"/>`;}
+  return t};
+ const container=(x,y,w,d,h,label)=>{let t=shadow(x,y,w,d,h)+box(x-.2,y-.2,0,w+.4,d+.4,.3,MAT.plinth)+box(x,y,.3,w,d,h,MAT.cont);
+  for(let xx=x+.5;xx<x+w-.2;xx+=.55)t+=`<path d="${D([ip(xx,y+d,.45),ip(xx,y+d,.3+h-.15)])}" stroke="rgba(40,70,100,.18)" stroke-width="1"/>`;
+  for(let yy=y+.5;yy<y+d-.2;yy+=.55)t+=`<path d="${D([ip(x+w,yy,.45),ip(x+w,yy,.3+h-.15)])}" stroke="rgba(30,55,80,.2)" stroke-width="1"/>`;
+  t+=poly(qX(y+.6,y+2.2,.45,.3+h-.4,x+w),'#C9D3DC','stroke="rgba(30,55,80,.35)" stroke-width=".8"');
+  t+=poly(qY(x+.5,x+w-.5,.3+h-1.25,.3+h-.45,y+d),'#13253A');
+  if(label){const a=ip(x+.9,y+d,.3+h-.6);t+=`<text transform="matrix(.8660254,.5,0,1,${f1(a[0])},${f1(a[1])})" font-size="${f1(K*.95)}" font-weight="700" letter-spacing="1.5" fill="#E9FDFF" font-family="IBM Plex Mono,ui-monospace,monospace">${label}</text>`}
+  return t};
+ const motorUnit=(x,y,id)=>{let t=shadow(x,y,4.2,2,1.8,.16)+box(x,y,0,4.4,2.2,.35,MAT.skid);
+  t+=box(x+.3,y+.3,.35,2.4,1.6,1.4,MAT.motor);
+  for(let i=1;i<6;i++)t+=`<path d="${D([ip(x+.3+i*.4,y+1.9,.45),ip(x+.3+i*.4,y+1.9,1.65)])}" stroke="rgba(255,255,255,.28)" stroke-width=".8"/>`;
+  t+=box(x+2.7,y+.75,.85,.5,.7,.5,{t:'#A3AEB8',l:'#8E9AA5',r:'#7A8691'});
+  t+=box(x+3.2,y+.45,.35,1,1.3,1.3,{t:'#7FA8C4',l:'#6C95B1',r:'#5A829E'});
+  if(id){const L=ip(x+1.5,y+1.1,1.95);t+=`<g class="mled" data-n="${id}"><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="7" class="lg" fill="#2BD4A0" opacity=".35" filter="url(#iso-glow)"/><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="3" class="lc" fill="#2BD4A0"/></g>`}
+  return t};
+ const mcc=(x,y,n)=>{const cw=2.2,d=2.2,h=6;let t=shadow(x,y,n*cw,d,h)+box(x-.2,y-.2,0,n*cw+.4,d+.4,.3,MAT.plinth);
+  for(let i=0;i<n;i++){const x0=x+i*cw,yF=y+d;t+=box(x0,y,.3,cw,d,h,MAT.cab);
+   for(let r=0;r<6;r++){const za=.6+r*.88;t+=`<path d="${D([ip(x0+.15,yF,za),ip(x0+cw-.15,yF,za),ip(x0+cw-.15,yF,za+.78),ip(x0+.15,yF,za+.78),ip(x0+.15,yF,za)])}" fill="none" stroke="rgba(60,80,100,.32)" stroke-width=".6"/>`;
+    t+=poly(qY(x0+.3,x0+.85,za+.2,za+.58,yF),(r+i)%5===3?'#F0A928':'#2DD4DF','opacity=".85"');
+    t+=`<circle cx="${f1(ip(x0+1.6,yF,za+.4)[0])}" cy="${f1(ip(x0+1.6,yF,za+.4)[1])}" r="1.3" fill="#7A8794"/>`;}}
+  t+=box(x,y+.2,h+.3,n*cw,1.2,.4,MAT.trough);return t};
+ const monitor=(x,y)=>{let t=shadow(x,y,4,2.4,2.6,.14)+box(x,y,0,4,2.4,1.9,MAT.desk);
+  t+=box(x+1.8,y+.9,1.9,.4,.3,.6,{t:'#5B6670',l:'#4B5560',r:'#3D4650'});
+  const yF=y+1.2;t+=poly(qY(x+.4,x+3.6,2.4,4.6,yF),'#13253A','stroke="#5B6670" stroke-width="1"');
+  t+=poly(qY(x+.55,x+3.45,2.55,4.45,yF),'#0F2E3A');
+  const pts=[[.7,2.9],[1.1,3.4],[1.5,3.1],[1.9,3.8],[2.3,3.5],[2.7,4.1],[3.2,3.7]].map(([u,v])=>ip(x+u,yF,v));t+=`<path d="${D(pts)}" fill="none" stroke="#3CC8D2" stroke-width="1.6"/>`;
+  const p2=[[.7,3.2],[1.4,3.3],[2,3.0],[2.6,3.2],[3.2,3.0]].map(([u,v])=>ip(x+u,yF,v));t+=`<path d="${D(p2)}" fill="none" stroke="#F0A928" stroke-width="1.2" opacity=".8"/>`;
+  return t};
+ const callout=(n,a,lx,ly,text,anchor='start')=>{const w=text.length*11.2+34;const x0=anchor==='end'?lx-w:lx;
+  const ex=a[0]>x0+w?x0+w-6:a[0]<x0?x0+6:a[0], ey=a[0]>=x0&&a[0]<=x0+w?(a[1]<ly?ly-12:ly+12):ly;
+  return `<g class="callout"><path d="M${f1(a[0])} ${f1(a[1])}L${f1(ex)} ${f1(ey)}" stroke="#13253A" stroke-width=".9" opacity=".55"/><circle cx="${f1(a[0])}" cy="${f1(a[1])}" r="2.4" fill="#13253A"/>
+   <rect x="${f1(x0)}" y="${f1(ly-12)}" width="${f1(w)}" height="24" rx="12" fill="#FFFFFF" filter="url(#iso-drop)"/><circle cx="${f1(x0+12)}" cy="${f1(ly)}" r="8" fill="#007A85"/><text x="${f1(x0+12)}" y="${f1(ly+3.6)}" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" font-family="IBM Plex Mono,ui-monospace,monospace">${n}</text><text x="${f1(x0+26)}" y="${f1(ly+4.4)}" font-size="12" font-weight="600" fill="#1C2A38">${text}</text></g>`};
+ const spark=(x,y,z=.3,label='FAULT',dx=20,dy=-12)=>{const p=ip(x,y,z);return `<g class="fault" opacity="0"><circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="14" fill="none" stroke="#FF9A1F" stroke-width="2" class="pulse"/><circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="22" fill="url(#iso-spark)"/><path d="M${f1(p[0]-1)} ${f1(p[1]-15)}l-7 13h6l-3 11 10-15h-6l4-9z" fill="#FFFFFF" stroke="#E07800" stroke-width="1"/><g transform="translate(${f1(p[0]+dx)},${f1(p[1]+dy)})"><rect width="${label.length*7.4+20}" height="22" rx="11" fill="#E07800"/><text x="${(label.length*7.4+20)/2}" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="IBM Plex Mono,ui-monospace,monospace">${label}</text></g></g>`};
+ return {K,ip,P,D,poly,box,qY,qX,shadow,trench,flow,lamp,chip,badge,platform,patch,tree,kiosk,transformer,swgr,datacenter,factory,wind,solar,container,motorUnit,mcc,monitor,callout,spark};
+}
+const wrap=(inner,label,vb='0 0 960 640')=>`<svg viewBox="${vb}" class="iso" role="img" aria-label="${label}" font-family="IBM Plex Sans KR,Apple SD Gothic Neo,sans-serif">${inner}</svg>`;
+const byDepth=objs=>objs.sort((a,b)=>a.d-b.d).map(o=>o.s).join('');
+
+/* ---------- scene: grid to load ---------- */
+function sceneGrid(){
+ const k=kit(10,412,92);let s=k.platform(56,44);
+ s+=k.patch(1,1,13,8.2,'#E3E9EE');
+ const F={f1:[[15.2,5.8],[15.2,16],[11,16],[11,22]],f2:[[20,5.8],[20,17],[30,17],[30,20]],f3:[[44.5,9],[25,9],[25,5.8]],f4:[[41,37.5],[41,9]]};
+ Object.values(F).forEach(p=>s+=k.trench(p));
+ s+=`<g class="gflow">${k.flow(F.f1)}${k.flow(F.f2)}${k.flow(F.f3,1,'#2BD4A0')}${k.flow(F.f4,1,'#2BD4A0')}</g>`;
+ const o=[];
+ o.push({d:6,s:k.transformer(1.4,1.4)});o.push({d:11,s:k.transformer(7.2,1.4)});
+ o.push({d:18,s:k.swgr(14,2.2,6,{lamps:['','','','','','']})});
+ o.push({d:44,s:k.factory(4,22,14,16,4.2,{stack:[15,23]})});
+ o.push({d:54,s:k.datacenter(24,20,40,32,3.8)});
+ o.push({d:54,s:k.wind(46,6,12,0)});o.push({d:62,s:k.wind(52,12,12,-1.3)});
+ o.push({d:78,s:k.solar(43,34,10,3)});
+ o.push({d:28,s:k.kiosk('K1',11,18.5,{lamp:false})});o.push({d:42,s:k.kiosk('K2',25,17,{lamp:false})});o.push({d:66,s:k.kiosk('K3',41,24,{lamp:false})});
+ [[54,40,1],[2.6,40,.9],[2.8,15,.8],[20.5,40.5,.8],[30.5,39.6,.7]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ s+=k.badge('relay',21,4,8.8)+k.badge('wave',11,30,9)+k.badge('heal',32,26,7.4)+k.badge('sync',49,9,15.6);
+ return wrap(s,'변전소에서 공장 · 데이터센터 · 신재생까지 이어지는 전력 계통 일러스트');
+}
+
+/* ---------- scene: FLISR ---------- */
+const FL={nodes:{A:[11,16],B:[11,29],C:[22,39],NOP:[36,39],D:[50,30],E:[50,16],F:[34,6.5]},
+ seg:{L0:[[11,4.8],[11,16]],L1:[[11,16],[11,29]],L2:[[11,29],[11,39],[22,39]],L3:[[22,39],[36,39]],R0:[[21.8,4.8],[21.8,6.5],[34,6.5]],R1:[[34,6.5],[50,6.5],[50,16]],R2:[[50,16],[50,30]],R3:[[50,30],[50,39],[36,39]]},
+ flow:{L0:[1,0,1,1],L1:[1,0,0,0],L2:[1,0,0,-1],L3:[1,0,0,-1],R0:[1,1,1,1],R1:[1,1,1,1],R2:[1,1,1,1],R3:[1,1,1,1]},
+ open:[['NOP'],['NOP','CB1'],['NOP','A','B'],['A','B']],
+ live:[['CB1','CB2','A','B','C','D','E','F','NOP'],['CB2','D','E','F','NOP'],['CB1','CB2','A','D','E','F','NOP'],['CB1','CB2','A','B','C','D','E','F','NOP']],
+ cap:['정상 운전 — 두 피더가 상시 개방점(NOP)을 경계로 나누어 공급','고장 발생 — A–B 구간 케이블 고장, CB1 트립 · 데이터홀 1~3 UPS 운전','고장 구간 분리 — REX615가 GOOSE로 A · B 개방, CB1 재투입','건전 구간 복구 — NOP 투입, 반대 피더에서 B · C 공급'],
+ steps:['정상 운전','고장 발생','구간 분리','복구']};
+function sceneFLISR(o={}){
+ const k=kit(10,424,86);let s=k.platform(58,45);
+ Object.values(FL.seg).forEach(p=>s+=k.trench(p));
+ s+=`<g class="sflow"></g>`;
+ const objs=[];
+ objs.push({d:7,s:k.transformer(1.2,.8)});
+ objs.push({d:18,s:k.swgr(9,1,6,{lamps:['CB1','','','','','CB2']})});
+ objs.push({d:54,s:k.datacenter(20,13,43,31,4.4,{ups:true,label:'DATA HALL 1–3',label2:'DATA HALL 4–6'})});
+ Object.entries(FL.nodes).forEach(([id,[x,y]])=>objs.push({d:x+y,s:k.kiosk(id,x,y)}));
+ [[54,3,1],[56.2,8.5,.85],[54.5,42.5,1],[3,40.5,1],[6.2,43.6,.8],[2.5,14,.85],[57,24,.75]].forEach(([x,y,sc])=>objs.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(objs);
+ s+=k.spark(11,22.5);
+ const cp={CB:[16,2.8,7.6],A:[11,16,5.6],B:[11,29,5.6],C:[22,39,5.6],NOP:[36,39,5.6],D:[50,30,5.6],E:[50,16,5.6],F:[34,6.5,5.6]};
+ const ord=['CB','A','B','C','NOP','D','E','F','CB'];let gp='';
+ for(let i=0;i<ord.length-1;i++){const a=k.ip(...cp[ord[i]]),b=k.ip(...cp[ord[i+1]]);gp+=(i?'':`M${f1(a[0])} ${f1(a[1])}`)+`Q${f1((a[0]+b[0])/2)} ${f1((a[1]+b[1])/2-18)} ${f1(b[0])} ${f1(b[1])}`}
+ s+=`<path class="goose" d="${gp}" fill="none" stroke="#00A3AD" stroke-width="1.4" stroke-dasharray="3 5" opacity=".75"/>`;
+ Object.entries(FL.nodes).forEach(([id,[x,y]])=>s+=k.chip(id,x,y,5.6,{dot:true,n:id}));
+ s+=k.chip('CB1',13.2,2.8,7.6,{dot:true,n:'CB1'})+k.chip('CB2',19,2.8,7.6,{dot:true,n:'CB2'});
+ if(o.callouts){const c1=k.ip(4,2.6,5.8),c2=k.ip(12,4.6,3),c3=k.ip(9.6,29,2.4),c4=k.ip(36.6,40.2,1.6);
+  s+=k.callout('1',c1,c1[0]-150,c1[1]-28,'수전 변전소')+k.callout('2',c2,566,150,'MV 주배전반 · CB1 / CB2')+k.callout('3',c3,24,410,'REX615 링 메인 유닛 A–F')+k.callout('4',c4,c4[0]+56,c4[1]+28,'상시 개방점 NOP')}
+ s+=`<g class="stat"></g>`;
+ if(o.legend)s+=legend(700,516);
+ const svg=wrap(s,'데이터센터 MV 링 FLISR 아이소메트릭 일러스트');
+ return svg;
+}
+function legend(x,y){return `<g transform="translate(${x},${y})"><rect width="236" height="84" rx="8" fill="#FFFFFF" opacity=".94" filter="url(#iso-drop)"/>
+  <path d="M14 22H44" stroke="#00B7C3" stroke-width="3" stroke-linecap="round"/><text x="52" y="26" font-size="11.5" fill="#1C2A38">가압 · 전력 흐름</text>
+  <path d="M14 42H44" stroke="#8C99A6" stroke-width="2"/><text x="52" y="46" font-size="11.5" fill="#1C2A38">정전 구간</text>
+  <path d="M14 62H44" stroke="#00A3AD" stroke-width="1.4" stroke-dasharray="3 5"/><text x="52" y="66" font-size="11.5" fill="#1C2A38">IEC 61850 GOOSE</text>
+  <circle cx="160" cy="22" r="4" fill="#E5484D"/><text x="170" y="26" font-size="11.5" fill="#1C2A38">투입</text>
+  <circle cx="160" cy="42" r="4" fill="#22B35E"/><text x="170" y="46" font-size="11.5" fill="#1C2A38">개방</text></g>`}
+function setFLISR(root,kk){
+ if(!root)return;const k=kit(10,424,86);let f='';
+ Object.entries(FL.seg).forEach(([id,p])=>{const dir=FL.flow[id][kk];if(dir)f+=k.flow(p,dir)});
+ root.querySelector('.sflow').innerHTML=f;
+ lampsState(root,FL.open[kk]);
+ root.querySelectorAll('.kscr').forEach(g=>g.style.opacity=FL.live[kk].includes(g.dataset.n)?1:.12);
+ const ft=root.querySelector('.fault');if(ft)ft.setAttribute('opacity',kk>0?1:0);
+ const gs=root.querySelector('.goose');if(gs){gs.classList.toggle('goose-on',kk===1||kk===2);gs.setAttribute('stroke-width',(kk===1||kk===2)?2:1.4)}
+ const up=root.querySelector('.ups polygon');if(up)up.setAttribute('opacity',(kk===1||kk===2)?.38:0);
+ const sp=k.ip(31.5,22,7.4);const txt=['전 데이터홀 정상 공급','데이터홀 1–3 · UPS 운전','데이터홀 2–3 · UPS 운전','건전 구간 복구 · UPS 복귀'][kk];
+ const col=(kk===1||kk===2)?'#E07800':'#007A85';const w=txt.length*11.2+30;
+ root.querySelector('.stat').innerHTML=`<g transform="translate(${f1(sp[0]-w/2)},${f1(sp[1]-12)})"><rect width="${f1(w)}" height="24" rx="12" fill="${col}" filter="url(#iso-drop)"/><circle cx="13" cy="12" r="4" fill="#fff" ${(kk===1||kk===2)?'class="blink"':''}/><text x="23" y="16.5" font-size="12" font-weight="600" fill="#fff">${txt}</text></g>`;
+}
+function lampsState(root,open){
+ root.querySelectorAll('.lamp').forEach(g=>{if(!g.dataset.n)return;const c=open.includes(g.dataset.n)?'#22B35E':'#E5484D';g.querySelector('.lc').setAttribute('fill',c);g.querySelector('.lg').setAttribute('fill',c)});
+ root.querySelectorAll('.chip[data-n] .cd').forEach(c=>c.setAttribute('fill',open.includes(c.closest('.chip').dataset.n)?'#22B35E':'#E5484D'));
+}
+
+/* ---------- scene: HSBT ---------- */
+const HS={seg:{A:[[7.3,12.2],[11.8,12.2]],B:[[24.5,6.4],[24.5,8.2],[29,8.2],[29,9.8]],L:[[16,13.8],[16,19],[34,19]],m1:[[14.6,19],[14.6,23.4]],m2:[[20.6,19],[20.6,23.4]],m3:[[26.6,19],[26.6,23.4]],m4:[[32.6,19],[32.6,23.4]],P:[[34,19],[38,19],[38,22]]},
+ open:[['INC-B'],['INC-B'],['INC-A'],['INC-A']],
+ cap:['정상 운전 — 주전원(TR-A)으로 공급, 예비전원(TR-B) 대기','주전원 이상 — 전압 강하 검출, SUE가 위상 · 주파수 · 잔류전압 감시','고속 절체 — INC-A 개방, INC-B 투입 (약 30 ms)','연속 운전 — 예비전원으로 공정 유지'],
+ steps:['정상 운전','주전원 이상','고속 절체','연속 운전']};
+function sceneHSBT(){
+ const k=kit(10.4,404,98);let s=k.platform(52,40);
+ s+=k.patch(1,8,9,16.5,'#E3E9EE')+k.patch(21,1,29,7.4,'#E3E9EE');
+ Object.values(HS.seg).forEach(p=>s+=k.trench(p));
+ s+=`<g class="hflow"></g>`;
+ const o=[];
+ o.push({d:20,s:k.transformer(1.6,9.6)});o.push({d:25,s:k.transformer(22,1.8)});
+ o.push({d:26,s:k.swgr(12,10,8,{cw:2.2,hl:[3],lamps:['INC-A','','','','','','','INC-B']})});
+ [14.6,20.6,26.6,32.6].forEach((x,i)=>o.push({d:x+25,s:k.motorUnit(x-1.4,23.6,'m'+i)}));
+ o.push({d:60,s:k.factory(36,22,12,14,5.2,{stack:[45.5,23]})});
+ [[50,4,.9],[3,36,1],[48.5,38.5,.8],[8,38.6,.8],[2.5,21,.75]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ s+=k.spark(9.6,12.2,.3,'VOLTAGE DIP',-122,10);
+ s+=k.chip('TR-A',4.2,11.8,7.6)+k.chip('TR-B',24.6,4,7.6)+k.chip('INC-A',13.1,11.8,8.2,{dot:true,n:'INC-A'})+k.chip('INC-B',28.6,11.8,8.2,{dot:true,n:'INC-B'});
+ s+=`<g class="sue">${k.chip('SUE 3000',19.7,11.8,9.6,{bg:'#007A85',fg:'#FFFFFF',w:84})}</g><g class="t30" opacity="0">${k.chip('≈ 30 ms',19.7,11.8,12,{bg:'#13253A',fg:'#5CF0FA',w:72})}</g>`;
+ s+=k.badge('factory',42,29,11.8,15);
+ return wrap(s,'고속절체(HSBT) 아이소메트릭 일러스트');
+}
+function setHSBT(root,kk){
+ if(!root)return;const k=kit(10.4,404,98);let f='';
+ if(kk===0)f+=k.flow(HS.seg.A)+k.flow(HS.seg.L)+['m1','m2','m3','m4','P'].map(m=>k.flow(HS.seg[m])).join('');
+ if(kk===0||kk===1)f+=`<path d="${k.D(HS.seg.B.map(q=>k.ip(q[0],q[1],.04)).reverse())}" fill="none" stroke="#00B7C3" stroke-width="2.4" stroke-dasharray="5 5" opacity=".8"/>`;
+ if(kk===1)f+=`<path d="${k.D(HS.seg.L.map(q=>k.ip(q[0],q[1],.04)))}" fill="none" stroke="#F0A928" stroke-width="3" opacity=".9" stroke-dasharray="6 4"/>`;
+ if(kk>=2)f+=k.flow(HS.seg.B)+k.flow(HS.seg.L)+['m1','m2','m3','m4','P'].map(m=>k.flow(HS.seg[m])).join('');
+ root.querySelector('.hflow').innerHTML=f;
+ lampsState(root,HS.open[kk]);
+ const ft=root.querySelector('.fault');if(ft)ft.setAttribute('opacity',kk>=1?1:0);
+ root.querySelector('.t30').setAttribute('opacity',kk===2?1:0);
+ root.querySelectorAll('.mled').forEach(g=>{const c=kk===1?'#F0A928':'#2BD4A0';g.querySelector('.lc').setAttribute('fill',c);g.querySelector('.lg').setAttribute('fill',c)});
+}
+
+/* ---------- scene: Power quality ---------- */
+const PQH=[[5,.22],[7,.13],[11,.07],[13,.05]],PQA=[[5,.02],[7,.012],[11,.006],[13,.004]];
+const thd=h=>Math.sqrt(h.reduce((s,[,a])=>s+a*a,0))*100;
+function wavePath(h,x0,x1,yc,amp){let d='';for(let i=0;i<=200;i++){const t=i/200*4*Math.PI;const v=Math.sin(t)+h.reduce((s,[n,a])=>s+a*Math.sin(n*t),0);d+=(i?'L':'M')+f1(x0+i/200*(x1-x0))+' '+f1(yc-amp*v)}return d}
+function scenePQ(){
+ const k=kit(10.6,410,96);let s=k.platform(52,40);
+ s+=k.patch(1,1,9,7.4,'#E3E9EE');
+ const SG={feed:[[14,5.8],[14,13],[22,13],[22,16]],pq:[[11.5,5.8],[11.5,16.5],[9,16.5],[9,18.4]],ahf:[[9,23],[9,26.8]],vfd:[[30,11.6],[30,16]]};
+ Object.values(SG).forEach(p=>s+=k.trench(p));
+ s+=`<g class="pflow"></g>`;
+ const o=[];
+ o.push({d:5,s:k.transformer(1.6,1.6)});
+ o.push({d:14,s:k.swgr(10,1.8,4,{cw:2.2})});
+ o.push({d:24,s:k.swgr(24,9,4,{cw:2.2,d:2.4,h:4.4,trough:false})});
+ o.push({d:44,s:k.factory(20,16,20,16,4.4,{stack:[37,17]})});
+ o.push({d:30,s:k.container(3,18.4,11,4.6,4.2,'SVG / STATCOM')});
+ o.push({d:38,s:k.swgr(5.5,27,2,{cw:2.1,d:2,h:4,trough:false})});
+ [[48.5,4,.9],[46,38.2,1],[2.6,38,.9],[16.5,38.5,.75]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ s+=k.chip('VFD 부하',28.4,10.2,7)+k.chip('SVG / STATCOM',8.5,20.7,7,{w:110})+k.chip('AHF',7.6,28,6.6);
+ s+=`<g class="pqlamps">${k.lamp('svg',13.4,22.6,4.7)}${k.lamp('ahf',9.4,29,4.5)}</g>`;
+ // scope card
+ s+=`<g class="scope" transform="translate(600,58)"><rect width="320" height="150" rx="10" fill="#FFFFFF" filter="url(#iso-drop)"/>
+  <text x="16" y="24" font-size="11" font-weight="700" fill="#13253A" font-family="IBM Plex Mono,ui-monospace,monospace">LOAD CURRENT</text><text class="thdv" x="304" y="24" text-anchor="end" font-size="11" font-weight="700" fill="#E07800" font-family="IBM Plex Mono,ui-monospace,monospace"></text>
+  <path d="M16 90H304" stroke="#E4E9EE"/><path class="wv-b" d="${wavePath(PQH,16,304,90,38)}" fill="none" stroke="#E07800" stroke-width="2.2"/><path class="wv-a" d="${wavePath(PQA,16,304,90,38)}" fill="none" stroke="#00A3AD" stroke-width="2.4" opacity="0"/>
+  <text x="16" y="140" font-size="10" fill="#6B7A88">5 · 7 · 11 · 13차 고조파 · 예시 파형</text></g>`;
+ s+=`<path d="M700 208L${f1(k.ip(22,14.5,6)[0])} ${f1(k.ip(22,14.5,6)[1])}" stroke="#13253A" stroke-width=".9" opacity=".4" stroke-dasharray="3 3"/>`;
+ s+=k.badge('wave',30,24,9.6,15);
+ return wrap(s,'전력품질 보상(SVG · AHF) 아이소메트릭 일러스트');
+}
+function setPQ(root,kk){
+ if(!root)return;const k=kit(10.6,410,96);const SG={feed:[[14,5.8],[14,13],[22,13],[22,16]],pq:[[11.5,5.8],[11.5,16.5],[9,16.5],[9,18.4]],ahf:[[9,23],[9,26.8]],vfd:[[30,11.6],[30,16]]};
+ let f=k.flow(SG.feed)+k.flow(SG.vfd);
+ if(kk===0)f+=`<path d="${k.D(SG.feed.map(q=>k.ip(q[0],q[1],.06)))}" fill="none" stroke="#FF9A1F" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round" class="flow"/>`;
+ else f+=k.flow(SG.pq.slice().reverse(),1,'#2BD4A0')+k.flow(SG.ahf.slice().reverse(),1,'#2BD4A0');
+ root.querySelector('.pflow').innerHTML=f;
+ root.querySelectorAll('.pqlamps .lamp').forEach(g=>{const c=kk?'#2BD4A0':'#9AA5AF';g.querySelector('.lc').setAttribute('fill',c);g.querySelector('.lg').setAttribute('fill',c);g.querySelector('.lg').setAttribute('opacity',kk?.35:0)});
+ root.querySelector('.wv-b').setAttribute('opacity',kk?0.18:1);root.querySelector('.wv-a').setAttribute('opacity',kk?1:0);
+ const tv=root.querySelector('.thdv');tv.textContent=`THDi ${(kk?thd(PQA):thd(PQH)).toFixed(1)}%`;tv.setAttribute('fill',kk?'#00838F':'#E07800');
+}
+
+/* ---------- scene: Smart MCC ---------- */
+function sceneMCC(){
+ const k=kit(12,400,104);let s=k.platform(44,34);
+ const SG=[[[7,6.6],[7,15],[8.4,15],[8.4,19.8]],[[11,6.6],[11,15],[14.6,15],[14.6,19.8]],[[15,6.6],[15,15],[20.8,15],[20.8,19.8]],[[19,6.6],[19,14],[27,14],[27,19.8]],[[21,6.6],[21,13],[33.2,13],[33.2,19.8]]];
+ SG.forEach(p=>s+=k.trench(p));
+ s+=`<g>${SG.map(p=>k.flow(p)).join('')}</g>`;
+ const o=[];
+ o.push({d:12,s:k.mcc(4,4,8)});
+ [8.4,14.6,20.8,27,33.2].forEach((x,i)=>o.push({d:x+22,s:k.motorUnit(x-1.4,20,'mm'+i)}));
+ o.push({d:28,s:k.kiosk('EDGE',25.4,5,{w:2.2,d:1.6,h:2.6,lamp:false})});
+ o.push({d:42,s:k.monitor(32,6)});
+ [[41,30,.9],[2.6,31,.9],[42,3,.8]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ const a=k.ip(22,5.8,6.4),b=k.ip(25.4,5,3.4),c=k.ip(34,7.2,4.4);
+ s+=`<path d="M${f1(a[0])} ${f1(a[1])}Q${f1((a[0]+b[0])/2)} ${f1(a[1]-30)} ${f1(b[0])} ${f1(b[1])}Q${f1((b[0]+c[0])/2)} ${f1(b[1]-40)} ${f1(c[0])} ${f1(c[1])}" fill="none" stroke="#00A3AD" stroke-width="1.6" stroke-dasharray="3 5" class="goose-on"/>`;
+ s+=k.chip('MCC · EOCR',10,5,8.6,{w:96})+k.chip('EOCR Edge',25.4,5,5,{w:84,bg:'#007A85',fg:'#FFFFFF'})+k.chip('모니터링 · 예지정비',34,7.2,6.4,{w:130});
+ s+=`<g transform="translate(${f1(k.ip(27,21,4.2)[0]-56)},${f1(k.ip(27,21,4.2)[1]-12)})"><rect width="112" height="22" rx="11" fill="#E07800" filter="url(#iso-drop)"/><circle cx="12" cy="11" r="4" fill="#fff" class="blink"/><text x="22" y="15" font-size="11" font-weight="600" fill="#fff">M4 과부하 경향</text></g>`;
+ s+=k.badge('motor',14.6,21,5.6,15);
+ return wrap(s,'Smart MCC · EOCR Edge 아이소메트릭 일러스트');
+}
+function setMCC(root){if(!root)return;root.querySelectorAll('.mled').forEach(g=>{const warn=g.dataset.n==='mm3';const c=warn?'#F0A928':'#2BD4A0';g.querySelector('.lc').setAttribute('fill',c);g.querySelector('.lg').setAttribute('fill',c)})}
+
+/* ---------- mini product illustrations ---------- */
+function miniProduct(kind){
+ const k=kit(9,120,58);let s=`<ellipse cx="120" cy="134" rx="96" ry="20" fill="rgba(18,38,58,.10)" filter="url(#iso-blur8)"/>`;
+ if(kind==='container')s+=k.container(0,0,11,4.6,4.4,'SVG');
+ else if(kind==='pqcab'){s+=k.swgr(1.5,1,3,{cw:2.4,d:2.4,h:6,trough:false})}
+ else if(kind==='relaypanel'){s+=k.swgr(2,1,2,{cw:2.8,d:2.4,h:7,hl:[0,1],trough:false})}
+ else if(kind==='islimiter'){s+=k.box(2.5,1,0,5,3,.3,MAT.plinth)+k.box(2.7,1.2,.3,4.6,2.6,6.4,MAT.cab);const yF=3.8;
+  for(let i=0;i<3;i++){const xa=3.3+i*1.35;s+=k.poly(k.qY(xa,xa+.9,1.4,5.6,yF),'#1C2C3B')+k.poly(k.qY(xa+.25,xa+.65,1.8,5.2,yF),'#E07800','opacity=".85"')}}
+ else if(kind==='lvbox'){s+=k.box(2,1,0,6.4,2.6,.3,MAT.plinth)+k.box(2.2,1.2,.3,6,2.2,6,MAT.cab);const yF=3.4;
+  for(let r=0;r<4;r++)for(let c=0;c<4;c++){const xa=2.7+c*1.4,za=1+r*1.2;s+=k.poly(k.qY(xa,xa+1,za,za+.9,yF),'#3B4855')+k.poly(k.qY(xa+.35,xa+.65,za+.25,za+.65,yF),r===1&&c===2?'#E5484D':'#C9D2DA')}}
+ return `<svg viewBox="0 0 240 180" class="iso mini" role="img" aria-label="제품 일러스트">${s}</svg>`;
+}
+
+window.ISO={fit:(svg,pad=10)=>{if(!svg)return;try{const b=svg.getBBox();if(b.width>0)svg.setAttribute('viewBox',`${(b.x-pad).toFixed(1)} ${(b.y-pad).toFixed(1)} ${(b.width+2*pad).toFixed(1)} ${(b.height+2*pad).toFixed(1)}`)}catch(e){}},sceneGrid,sceneFLISR,setFLISR,sceneHSBT,setHSBT,scenePQ,setPQ,sceneMCC,setMCC,miniProduct,FL,HS,thd,PQH,PQA};
+})();
+
+</script>
+<script>
 (()=>{
 'use strict';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -842,12 +1321,12 @@ const store={get(k,d){try{const v=localStorage.getItem('scab_site_'+k);return v=
              set(k,v){try{localStorage.setItem('scab_site_'+k,JSON.stringify(v))}catch(e){}}};
 const A=n=>`assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const VERSION='v0.2', VDATE='2026-11-04';
+const VERSION='v0.4', VDATE='2026-11-05';
 const TONES={
  teal:{ko:'네이비 · 틸',name:'Grid Navy · Teal',rec:true,hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
-  why:'전력 · 에너지 업계에서 많이 쓰는 딥 네이비를 바탕으로, Schneider 그린과 Sifang 블루 사이의 틸을 포인트로 씁니다. 취급 브랜드 어느 쪽 색에도 치우치지 않습니다.'},
+  why:'전력 · 에너지 업계에서 많이 쓰는 딥 네이비를 바탕으로, Schneider 그린과 SIFANG 블루 사이의 틸을 포인트로 씁니다. 취급 브랜드 어느 쪽 색에도 치우치지 않습니다.'},
  blue:{ko:'파워 블루',name:'Power Blue',hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
-  why:'국내외 전력기기 · 전력회사에서 가장 흔한 신뢰형 블루입니다. 안정적이지만 Sifang · 상도전기의 블루와 가깝게 보일 수 있습니다.'},
+  why:'국내외 전력기기 · 전력회사에서 가장 흔한 신뢰형 블루입니다. 안정적이지만 SIFANG · 상도전기의 블루와 가깝게 보일 수 있습니다.'},
  amber:{ko:'그래파이트 · 볼트',name:'Graphite · Volt',hero:'#1B2026',btn:'#F2A900',ink:'#1A1A1A',ac:'#8A5D00',hl:'#F5B700',panel:'#F3F4F5',title:'#3F454C',
   why:'그래파이트 바탕에 전기 위험 경고 표지의 노랑에서 온 앰버를 포인트로 씁니다. 산업 현장 · 엔지니어링 성격이 강하고 취급 브랜드 색과 겹치지 않습니다.'},
  red:{ko:'SCAB 레드 (v0.1)',name:'SCAB Red',hero:'#1A1A1C',btn:'#CD162C',ink:'#FFFFFF',ac:'#CD162C',hl:'#FF5C6E',panel:'#F4F4F5',title:'#46464C',
@@ -892,7 +1371,7 @@ const CO={name:'(주)에스캡엔지니어링',en:'SCAB Engineering Co., Ltd.',c
   addrEn:'#1410, IS Biz Tower 2, 23 Seonyu-ro 49-gil, Yeongdeungpo-gu, Seoul, Korea'};
 
 const BRANDS={
- abb:{name:'ABB',color:'#FF000F',logo:'brand_abb',role:'ABB Korea 대리점',scope:'LV · MV · PA 제품',
+ abb:{name:'ABB',color:'#FF000F',logo:'brand_abb',role:'ABB 제품 공급',scope:'LV · MV · PA 제품',
    intro:'보호계전기(Relion), 고속절체(SUE), 동기투입장치(SYNCHROTACT), 스마트 변전소(SSC600), 고·저압 차단기, 공정자동화(PA) 계측기기',
    made:[['보호계전기','FI'],['차단기','IT · CN'],['HSBT','DE'],['동기투입장치','CH']],site:'https://new.abb.com/kr'},
  schneider:{name:'Schneider Electric',color:'#3DCD58',logo:'brand_se',role:'Schneider Electric Korea 대리점',scope:'DE · PP 제품 / EOCR',
@@ -901,8 +1380,8 @@ const BRANDS={
  hitachi:{name:'Hitachi Energy',color:'#E4002B',logo:'brand_hitachi',role:'Hitachi Energy Korea 대리점',scope:'변압기 · 초고압(HV) 제품',
    intro:'발전소 · 변전소용 초고압 차단기, 단로기, 계기용 변성기, 피뢰기, 발전기 차단기, 변압기 · 리액터와 서비스',
    made:[['계전기 · 차단기','SE'],['변압기','KR · VN 등'],['HV 제품','SE 등']],site:'https://www.hitachienergy.com'},
- sifang:{name:'Sifang',ko:'北京四方',color:'#1565C0',logo:null,role:'Sifang 국내 독점 대리점',scope:'SVG/STATCOM · 전력품질',
-   intro:'Beijing Sifang Automation — 동적 무효전력 보상(SVG/STATCOM), AHF · 콘덴서 · 리액터 조합의 전력품질 패키지, 보호 · 변전 자동화',
+ sifang:{name:'SIFANG',ko:'北京四方',color:'#1565C0',logo:null,role:'SIFANG 국내 독점 대리점',scope:'SVG/STATCOM · 전력품질',
+   intro:'Beijing SIFANG Automation — 동적 무효전력 보상(SVG/STATCOM), AHF · 콘덴서 · 리액터 조합의 전력품질 패키지, 보호 · 변전 자동화',
    made:[['SVG / STATCOM','CN'],['보호','CN']],site:null},
  sangdo:{name:'상도전기',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'상도전기 공급사',scope:'저압 제품',
    intro:'국내 · 베트남 생산 저압 제품. 국내 배전반 · 플랜트 프로젝트 공급',made:[['저압 제품','KR · VN']],site:null}
@@ -910,6 +1389,7 @@ const BRANDS={
 const BKEYS=Object.keys(BRANDS);
 const brandLogo=(k,cls='')=>{const b=BRANDS[k];return b.logo?`<img class="${cls}" src="${A(b.logo)}" alt="${esc(b.name)}" loading="lazy">`:`<span class="txtlogo">SIFANG <small>北京四方</small></span>`};
 
+const CATPG={all:'box',relay:'relay',transfer:'transfer',breaker:'breaker',meter:'meter',hv:'tower',pq:'wave',lv:'plug',pa:'gauge',service:'wrench'};
 const CATS={relay:'보호계전기',transfer:'절체 · 동기',breaker:'차단기 · 개폐기',meter:'계측 · 모니터링',hv:'초고압 · 변압기',pq:'전력품질',lv:'저압 제품',pa:'공정자동화(PA)',service:'서비스'};
 
 const P=(id,brand,cat,name,model,img,pts)=>({id,brand,cat,name,model,img,pts});
@@ -961,7 +1441,7 @@ const RESOURCES=[
  R('r-c-mtz','catalog','MasterPact MTZ · EvoPact HVX','schneider','제조사 자료','—','maker'),
  R('r-c-eocr','catalog','EOCR iSEM · EOCR Edge','schneider','제조사 자료','—','maker'),
  R('r-c-he','catalog','Hitachi Energy 초고압 제품군','hitachi','제조사 자료','—','maker'),
- R('r-c-svg','catalog','Sifang SVG / STATCOM','sifang','제조사 자료','—','request'),
+ R('r-c-svg','catalog','SIFANG SVG / STATCOM','sifang','제조사 자료','—','request'),
  R('r-t-coord','tech','보호협조 · 정정 계산서 작성 예시 (단락전류 계산 기반)',null,'기술 노트','—','request'),
  R('r-t-87b','tech','고임피던스 모선보호(87B) 안정화 저항 · VDR 선정',null,'기술 노트','—','request'),
  R('r-t-alt','tech','고지대(해발 4,000 m) 보호계전기 적용 — 절연 보정 · 컨포멀 코팅 (IEC 60255-27)',null,'기술 노트','—','request'),
@@ -971,10 +1451,9 @@ const RESOURCES=[
  R('r-t-pq','tech','전력품질 설비 선정 가이드 (콘덴서 · 리액터 / AHF / SVG)',null,'기술 노트','—','request'),
  R('r-t-mcc','tech','Smart MCC — Load List 기반 EOCR 모델 · CT · 통신 선정',null,'기술 노트','—','request'),
  R('r-cert-rnd','cert','연구개발전담부서 인정서',null,'이미지','2026-04-14','view',{img:'cert_rnd'}),
- R('r-cert-abb','cert','ABB Korea 대리점 인증','abb','등록 예정','—','soon'),
  R('r-cert-se','cert','Schneider Electric Korea 대리점 인증','schneider','등록 예정','—','soon'),
  R('r-cert-he','cert','Hitachi Energy Korea 대리점 인증','hitachi','등록 예정','—','soon'),
- R('r-cert-sf','cert','Sifang 국내 독점 대리점 인증','sifang','등록 예정','—','soon')
+ R('r-cert-sf','cert','SIFANG 국내 독점 대리점 인증','sifang','등록 예정','—','soon')
 ];
 
 /* ---------- references ---------- */
@@ -989,8 +1468,8 @@ const SAMPLE_POSTS=[
   body:'홈페이지 오픈 전 개인정보처리방침을 확정해 게시합니다.\n화면 하단의 "개인정보처리방침" 링크에서 초안을 확인할 수 있습니다.'},
  {id:3,cat:'news',title:'연구개발전담부서 인정',date:'2026-04-14',sort:20260414,author:'관리자',views:57,sample:true,
   body:'(주)에스캡엔지니어링 연구개발전담부서가 인정되었습니다. (신고일 2026.04.14)\n인정서는 자료실 > 인증서에서 확인할 수 있습니다.'},
- {id:4,cat:'news',title:'Sifang(北京四方) 국내 독점 대리점 — SVG/STATCOM',date:'2026',sort:20260300,author:'관리자',views:41,sample:true,
-  body:'Beijing Sifang Automation의 국내 독점 대리점으로 SVG/STATCOM과 전력품질 솔루션을 공급합니다.\nAHF · 콘덴서 · 리액터를 포함한 조합 제안이 가능합니다.'},
+ {id:4,cat:'news',title:'SIFANG(北京四方) 국내 독점 대리점 — SVG/STATCOM',date:'2026',sort:20260300,author:'관리자',views:41,sample:true,
+  body:'Beijing SIFANG Automation의 국내 독점 대리점으로 SVG/STATCOM과 전력품질 솔루션을 공급합니다.\nAHF · 콘덴서 · 리액터를 포함한 조합 제안이 가능합니다.'},
  {id:5,cat:'news',title:'Schneider Electric EOCR 대리점 (에티버스)',date:'2026',sort:20260200,author:'관리자',views:33,sample:true,
   body:'Schneider Electric EOCR 대리점으로 iSEM1 / iSEM2, EOCR Edge를 신규 · MRO · Retrofit 프로젝트에 공급합니다.'},
  {id:6,cat:'news',title:'Hitachi Energy Korea 대리점',date:'2024–25',sort:20250100,author:'관리자',views:62,sample:true,
@@ -1024,7 +1503,7 @@ const MENU=[
         {t:'신뢰',items:[['company-certs','인증 · 파트너'],['company-location','오시는 길']]}],
   feat:{img:'cube_red',t:'SCAB 2030',d:'제품 판매 → 시스템 솔루션 → 제조 기반 종합 솔루션',href:'company-vision'}},
  {id:'products',label:'취급제품',en:'PRODUCTS',home:'products',desc:'5개 브랜드의 보호 · 제어 · 전력품질 제품과 현장별 솔루션, 엔지니어링',
-  cols:[{t:'브랜드',items:[['products-abb','ABB'],['products-schneider','Schneider Electric'],['products-hitachi','Hitachi Energy'],['products-sifang','Sifang 北京四方'],['products-sangdo','상도전기']]},
+  cols:[{t:'브랜드',items:[['products-abb','ABB'],['products-schneider','Schneider Electric'],['products-hitachi','Hitachi Energy'],['products-sifang','SIFANG 北京四方'],['products-sangdo','상도전기']]},
         {t:'솔루션',items:[['solutions-datacenter','데이터센터 FLISR'],['solutions-hsbt','고속절체 · 동기 (HSBT)'],['solutions-pq','전력품질 (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)']]},
         {t:'엔지니어링',items:[['engineering','엔지니어링 서비스'],['products','전체 제품 찾기']]}],
   feat:{img:'abb_relion',t:'Relion REX615 · REX640',d:'보호 · 제어 · 계측, IEC 61850',href:'products-abb'}},
@@ -1033,10 +1512,10 @@ const MENU=[
   feat:{img:'cert_rnd',t:'연구개발전담부서 인정서',d:'신고일 2026.04.14',href:'resources-cert'}},
  {id:'contact',label:'고객문의',en:'CONTACT',home:'contact',desc:'견적 · 기술 · A/S 문의와 사업부별 담당자 안내',
   cols:[{t:'고객문의',items:[['contact','견적 · 기술 문의'],['contact-people','사업부별 문의 창구'],['company-location','오시는 길']]}],
-  feat:{txt:'02-322-8100',t:'대표전화',d:'FAX 02-322-8200 · axax1002@scab.co.kr',href:'contact'}},
+  feat:{pg:'headset',t:'대표전화 02-322-8100',d:'FAX 02-322-8200 · axax1002@scab.co.kr',href:'contact'}},
  {id:'board',label:'게시판',en:'NEWS & BOARD',home:'board-notice',desc:'공지사항, 회사 소식, 기술 Q&A',
   cols:[{t:'게시판',items:[['board-notice','공지사항'],['board-news','회사 소식'],['board-qna','기술 Q&A']]}],
-  feat:{txt:'Q&A',t:'기술 Q&A',d:'제품 선정 · 적용 질문을 남겨 주세요',href:'board-qna'}}
+  feat:{pg:'chat',t:'기술 Q&A',d:'제품 선정 · 적용 질문을 남겨 주세요',href:'board-qna'}}
 ];
 const TITLE={home:'홈'};
 MENU.forEach(m=>m.cols.forEach(c=>c.items.forEach(([id,l])=>{if(!TITLE[id])TITLE[id]=l})));
@@ -1161,7 +1640,7 @@ function megaHTML(m){
  const f=m.feat;
  return `<div class="wrap mega-in"><div class="mega-intro"><p class="eyebrow">${m.en}</p><h3>${m.label}</h3><p>${m.desc}</p><a class="link" href="#${m.home}">${m.label} 바로가기 ${ic('arrow')}</a></div>
   <div class="mega-cols">${m.cols.map(c=>`<div class="mega-col"><h4>${c.t}</h4>${c.items.map(([id,l])=>`<a href="#${id}">${l}${ic('chev','sm')}</a>`).join('')}</div>`).join('')}</div>
-  <a class="mega-feat" href="#${f.href}"><div class="fimg${f.txt?' txt':''}">${f.txt?esc(f.txt):`<img src="${A(f.img)}" alt="">`}</div><div class="fb"><b>${f.t}</b><span>${f.d}</span></div></a></div>`;
+  <a class="mega-feat" href="#${f.href}">${f.pg?`<div class="fimg pgf">${pg(f.pg,'lg')}</div>`:`<div class="fimg${f.txt?' txt':''}">${f.txt?esc(f.txt):`<img src="${A(f.img)}" alt="">`}</div>`}<div class="fb"><b>${f.t}</b><span>${f.d}</span></div></a></div>`;
 }
 
 /* ---------- components ---------- */
@@ -1171,6 +1650,7 @@ const chipBrand=k=>{const b=BRANDS[k];return `<span class="chip" style="--bc:${b
 const waveIcon=`<svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 Q12 2 22 20 T42 20 T62 20 T82 20 T102 20 T122 20" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/><path d="M2 20 Q12 6 22 20 T42 20 T62 20 T82 20 T102 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
 function pImg(p){
  if(p.img)return `<img src="${A(p.img)}" alt="${esc(p.name)} ${esc(p.model)}" loading="lazy">`;
+ const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','abb-islimiter':'islimiter','sd-lv':'lvbox'}[p.id];if(mk)return ISO.miniProduct(mk);
  const b=BRANDS[p.brand];
  return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
 }
@@ -1181,25 +1661,24 @@ function pCard(p){
 }
 
 /* ---------- home ---------- */
+const PQCAP=['VFD · 인버터 부하의 고조파 전류가 수전 계통으로 흘러 나감','SVG / STATCOM · AHF가 고조파와 무효전력을 보상해 전류가 사인파에 가까워짐'];
 const SLIDES=[
  {eb:'PROTECTION · CONTROL · POWER QUALITY',h:'보호 · 제어 · 전력품질<br>제품에서 시스템 솔루션까지',
-  p:'ABB · Schneider Electric · Hitachi Energy · Sifang · 상도전기 제품을 공급하고, 보호협조 · 절체 로직 · 시운전 지원까지 함께 수행합니다.',
+  p:'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기 제품을 공급하고, 보호협조 · 절체 로직 · 시운전 지원까지 함께 수행합니다.',
   cta:[['products','취급제품 보기','pri'],['contact','견적 문의','ghost']],chips:true,
-  vis:()=>`<div class="collage"><figure class="ph big" style="margin:0"><img src="${A('abb_relion')}" alt="ABB Relion 보호계전기"></figure>
-   <figure class="ph s" style="margin:0"><img src="${A('se_easergy')}" alt="Schneider Easergy 보호계전기"></figure>
-   <figure class="ph s" style="margin:0"><img src="${A('he_152')}" alt="Hitachi Energy 변압기"></figure></div>`},
+  vis:()=>`<div class="iso-vis">${ISO.sceneGrid()}</div><p class="iso-cap"><b>GRID → LOAD</b><span>수전 변전소 · 주배전반에서 공장 · 데이터센터 · 신재생 설비까지</span></p>`},
  {eb:'DATA CENTER · FLISR',h:'데이터센터 배전의<br>자가복구 (FLISR)',
   p:'ABB REX615 링 구성과 IEC 61850 GOOSE로 고장 구간을 찾아 분리하고, 건전 구간은 수 초 안에 복구합니다.',
   cta:[['solutions-datacenter','솔루션 보기','pri'],['contact','상담 요청','ghost']],
-  vis:()=>`<div class="vis-card on-dark"><div class="vc-h"><span>FLISR SEQUENCE</span><span id="flHeroStep">01 / 04</span></div><div id="flHero">${flisrSVG()}</div><p class="vis-cap" id="flHeroCap">${FL_CAP[0]}</p></div>`},
+  vis:()=>`<div class="iso-vis" id="isoHeroFL">${ISO.sceneFLISR()}</div><p class="iso-cap"><b id="flHeroStep">01 / 04</b><span id="flHeroCap">${ISO.FL.cap[0]}</span></p>`},
  {eb:'HIGH-SPEED TRANSFER',h:'공정을 멈추지 않는<br>고속절체 · 동기투입',
   p:'SUE 3000/4000 고속절체(약 30 ms)와 SYNCHROTACT 6 동기투입장치. REX640 HSABTC 기반 절체 로직 설계와 인터록 시험을 지원합니다.',
   cta:[['solutions-hsbt','솔루션 보기','pri'],['products-abb','ABB 제품','ghost']],
-  vis:()=>`<div class="vis-card on-dark"><div class="vc-h"><span>BUS VOLTAGE · FAST TRANSFER</span><span>SUE 3000/4000</span></div>${hsbtSVG()}</div>`},
+  vis:()=>`<div class="iso-vis" id="isoHeroHS">${ISO.sceneHSBT()}</div><p class="iso-cap"><b id="hsHeroStep">01 / 04</b><span id="hsHeroCap">${ISO.HS.cap[0]}</span></p>`},
  {eb:'POWER QUALITY · SIFANG',h:'고조파 · 역률 · 무효전력<br>진단에서 사후관리까지',
-  p:'Sifang SVG/STATCOM, AHF, 콘덴서 · 리액터 가운데 부하와 계통에 맞는 설비를 선정합니다.',
-  cta:[['solutions-pq','솔루션 보기','pri'],['products-sifang','Sifang 제품','ghost']],
-  vis:()=>`<div class="vis-card on-dark"><div class="vc-h"><span>THDi ${thd(PQ_H).toFixed(1)}% → ${thd(PQ_A).toFixed(1)}%</span><span>예시 파형</span></div>${pqSVG('both')}</div>`}
+  p:'SIFANG SVG/STATCOM, AHF, 콘덴서 · 리액터 가운데 부하와 계통에 맞는 설비를 선정합니다.',
+  cta:[['solutions-pq','솔루션 보기','pri'],['products-sifang','SIFANG 제품','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">보상 전</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`}
 ];
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
@@ -1216,7 +1695,7 @@ function pageHome(){
   </div></div>
   <div class="hero-ctrl"><div class="wrap">
    <span class="hc-count"><b id="hcNow">01</b> / ${String(SLIDES.length).padStart(2,'0')}</span>
-   <div class="hc-bars" id="hcBars">${SLIDES.map((s,i)=>`<button aria-label="${i+1}번 슬라이드" class="${i?'':'on'}" data-slide="${i}"></button>`).join('')}</div>
+   <div class="hc-bars" id="hcBars">${SLIDES.map((s,i)=>`<button aria-label="${i+1}번 슬라이드" class="${i?'':'on'}" data-act="slide" data-slide="${i}"></button>`).join('')}</div>
    <button class="hc-btn" data-act="prev" aria-label="이전">${ic('left')}</button>
    <button class="hc-btn" data-act="next" aria-label="다음">${ic('chev')}</button>
    <button class="hc-btn" data-act="pause" id="hcPause" aria-label="자동 넘김 정지">${ic('pause')}</button>
@@ -1224,40 +1703,40 @@ function pageHome(){
  </section>
  <div class="wrap quick"><nav class="quick-grid" aria-label="바로가기">
   ${[['products','제품 찾기','브랜드 · 제품군별 검색','box'],['resources','자료실','카탈로그 · 기술자료 · 인증서','doc'],['contact','견적 · 기술 문의','담당 사업부로 바로 연결','mail'],['company-location','오시는 길','당산역 · 선유도역 인근','pin']]
-   .map(([h,t,d,i])=>`<a class="q" href="#${h}">${ic(i)}<b>${t}</b><span class="d">${d}</span><span class="go">${ic('arrow')}</span></a>`).join('')}
+   .map(([h,t,d,i])=>`<a class="q" href="#${h}">${pg(i)}<b>${t}</b><span class="d">${d}</span><span class="go">${ic('arrow')}</span></a>`).join('')}
  </nav></div>
 
  <section class="sec"><div class="wrap">
-  ${secHead('BRANDS','취급 브랜드','대리점 · 공급사로 등록된 5개 브랜드의 제품을 공급합니다.',['products','전체 제품 찾기'])}
+  ${secHead('BRANDS','취급 브랜드','ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기, 5개 브랜드의 제품을 공급합니다.',['products','전체 제품 찾기'])}
   <div class="brand-grid">${BKEYS.map(k=>{const b=BRANDS[k];return `<a class="brand" href="#products-${k}" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div><div class="bt">${esc(b.role)}</div><div class="bd">${esc(b.scope)}</div><div class="bf">제품 보기 ${ic('arrow','sm')}</div></a>`}).join('')}</div>
  </div></section>
 
  <section class="sec alt"><div class="wrap">
   ${secHead('SOLUTIONS','현장 과제별 솔루션','단일 제품부터 엔지니어링을 포함한 패키지까지, 현장 조건에 맞춰 구성합니다.')}
   <div class="sol-grid">
-   <a class="sol" href="#solutions-datacenter"><div class="sv" id="solFl">${flisrSVG()}</div><div class="sb"><span class="eyebrow">DATA CENTER</span><b>데이터센터 FLISR</b><p>REX615 링 · GOOSE 기반 고장 구간 분리와 자동 복구</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
-   <a class="sol" href="#solutions-hsbt"><div class="sv">${hsbtSVG()}</div><div class="sb"><span class="eyebrow">HSBT · SYNC</span><b>고속절체 · 동기투입</b><p>약 30 ms 고속절체와 발전기 · 계통 동기투입</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
-   <a class="sol" href="#solutions-pq"><div class="sv">${pqSVG('both')}</div><div class="sb"><span class="eyebrow">POWER QUALITY</span><b>전력품질 (SVG · AHF)</b><p>고조파 · 역률 · 무효전력 진단과 설비 선정</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
-   <a class="sol" href="#solutions-mcc"><div class="sv">${mccSVG()}</div><div class="sb"><span class="eyebrow">SMART MCC</span><b>Smart MCC (EOCR)</b><p>모터 보호부터 MCC 모니터링 · 예지정비까지</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-datacenter"><div class="sp">${pg('heal','lg')}</div><div class="sb"><span class="eyebrow">DATA CENTER</span><b>데이터센터 FLISR</b><p>REX615 링 · GOOSE 기반 고장 구간 분리와 자동 복구</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-hsbt"><div class="sp">${pg('transfer','lg')}</div><div class="sb"><span class="eyebrow">HSBT · SYNC</span><b>고속절체 · 동기투입</b><p>약 30 ms 고속절체와 발전기 · 계통 동기투입</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-pq"><div class="sp">${pg('wave','lg')}</div><div class="sb"><span class="eyebrow">POWER QUALITY</span><b>전력품질 (SVG · AHF)</b><p>고조파 · 역률 · 무효전력 진단과 설비 선정</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-mcc"><div class="sp">${pg('motor','lg')}</div><div class="sb"><span class="eyebrow">SMART MCC</span><b>Smart MCC (EOCR)</b><p>모터 보호부터 MCC 모니터링 · 예지정비까지</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
   </div>
  </div></section>
 
  <section class="sec"><div class="wrap">
   ${secHead('APPLICATIONS','적용 분야','계통 구성과 운전 조건이 다른 분야별로 제품과 보호 방식을 맞춰 제안합니다.')}
-  <div class="grid-3">${APPL.map(([t,d,l])=>`<div class="card"><h4>${t}</h4><p>${d}</p><p style="margin-top:10px;font-size:13px;color:var(--ink)">${l}</p></div>`).join('')}</div>
+  <div class="grid-3">${APPL.map(([t,d,l],i)=>`<div class="card">${pg(['wind','refinery','chip','steel','datacenter','tower'][i]||'box')}<h4>${t}</h4><p>${d}</p><p style="margin-top:10px;font-size:13px;color:var(--ink)">${l}</p></div>`).join('')}</div>
  </div></section>
 
  <section class="sec alt"><div class="wrap">
   ${secHead('CHECKLIST','견적 요청 시 준비 자료','아래 자료를 함께 보내 주시면 검토와 회신이 빨라집니다.',['contact','견적 문의'])}
-  <div class="grid-4">${PREP.map(([t,items])=>`<div class="card"><h4>${t}</h4><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted);line-height:1.8">${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
+  <div class="grid-4">${PREP.map(([t,items],i)=>`<div class="card">${pg(['relay','motor','breaker','wave'][i]||'doc')}<h4>${t}</h4><ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted);line-height:1.8">${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
  </div></section>
 
  <section class="sec dark"><div class="wrap">
   <div class="eng"><div><p class="eyebrow on-dark">ENGINEERING</p><h2 class="t2" style="margin-top:10px">보호계전 · 전력계통 엔지니어링</h2>
    <p class="lead" style="margin-top:14px">여러 제조사 제품을 같은 기준으로 비교해 선정하고, 정정 계산부터 시운전 · 사후관리까지 지원합니다.</p>
    <a class="btn ghost" href="#engineering" style="margin-top:28px">엔지니어링 서비스 ${ic('arrow')}</a></div>
-   <div class="svc-grid">${ENG.slice(0,6).map(([t,d])=>`<div class="svc"><b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
-  <div class="steps">${STEPS.map((s,i)=>`<div class="step${i===2?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+   <div class="svc-grid">${ENG.slice(0,6).map(([t,d],i)=>`<div class="svc">${pg(ENGPG[i],'md on-dark')}<b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
+  <div class="steps">${STEPS.map((s,i)=>`<div class="step${i===2?' hl':''}">${pg(STEPPG[i],'sm on-dark')}<b>${s}</b></div>`).join('')}</div>
  </div></section>
 
 
@@ -1285,17 +1764,19 @@ const PREP=[
  ['전력품질',['고조파 측정 데이터','부하 종류 · 용량','목표 역률 · THD','수전 계통 조건']]
 ];
 const ENG=[['보호협조 · 정정 계산','단락전류 계산 기반 정정 계산서, 보호협조 곡선'],['모선보호 (87B)','고임피던스 모선보호 안정화 저항 · VDR 선정'],['절체 로직 설계','HSBT 절체 로직, 인터록 시험 계획, 현장 복구 지원'],['단종품 대체 검토','단종 계전기 기능 비교 · 정정값 변환'],['특수 환경 검토','해발 4,000 m 고도 보정, 컨포멀 코팅, IEC 60255-27'],['디지털 변전소','IEC 61850, SSC600 · REX640'],['해외 인증 대응','UL 인증 제품 선정 (PowerLogic PM8240 · ION7400, Easergy P3/P5)'],['기술 지원 · 교육','고장 분석, 입회 시험, 제품 · 보호 교육']];
+const ENGPG=['tcc','busbar','logic','scales','mountain','network','badge','headset'];
+const STEPPG=['clipboard','scales','ruler','truck','power','wrench'];
 const STEPS=['요구사항 · 사양 검토','제품 선정 · 제조사 비교','설계 · 로직 · 정정','공급 · FAT 지원','시운전 · 현장 지원','사후관리 · 교육'];
 
 /* ---------- company pages ---------- */
 function pgCompanyOverview(){
  return `<div class="block">${blockHead('인사말',`<span class="draft">문구 초안</span>`)}
   <div class="prose"><p>(주)에스캡엔지니어링은 2004년 서울에서 ABB 저압 제품 대리점으로 시작해 보호계전기, 차단기, 공정자동화 기기를 공급해 왔습니다.</p>
-  <p>현재는 Schneider Electric, Hitachi Energy, Sifang, 상도전기 제품까지 취급하며, 보호협조 계산, 절체 로직 설계, 시운전 지원 같은 엔지니어링 업무를 함께 수행합니다.</p>
+  <p>현재는 Schneider Electric, Hitachi Energy, SIFANG, 상도전기 제품까지 취급하며, 보호협조 계산, 절체 로직 설계, 시운전 지원 같은 엔지니어링 업무를 함께 수행합니다.</p>
   <p>고객의 입장에서 제품을 선정하고 기술 검토를 제공하는 것을 기본으로 삼고 있습니다. 고객과 함께 오래, 꾸준히 성장하겠습니다.</p>
   </div></div>
  <div class="block">${blockHead('회사 개요')}
-  <div class="facts"><div class="fact"><b>2004</b><span>창업 (04.10)</span></div><div class="fact"><b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact"><b>5</b><span>취급 브랜드</span></div><div class="fact"><b>R&amp;D</b><span>연구개발전담부서 (2026)</span></div></div>
+  <div class="facts"><div class="fact">${pg('calendar')}<b>2004</b><span>창업 (04.10)</span></div><div class="fact">${pg('building')}<b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact">${pg('box')}<b>5</b><span>취급 브랜드</span></div><div class="fact">${pg('bulb')}<b>R&amp;D</b><span>연구개발전담부서 (2026)</span></div></div>
   <div class="tbl-wrap"><table class="info"><tbody>
    <tr><th>회사명</th><td>${CO.name} · ${CO.en}</td></tr>
    <tr><th>주소</th><td>${CO.addr}<br>${CO.addr2}</td></tr>
@@ -1307,15 +1788,15 @@ function pgCompanyOverview(){
 const VALUES=[['고객 성공','고객 관점의 제품 선정과 기술 검토'],['새로운 기회와 시장','데이터센터 · 신재생 · 해외'],['신뢰 기반 시너지','제조사 · EPC · 배전반 제작사와 협업'],['지속 성장','충성 고객 기반의 안정적 성장'],['사회 공헌','안전한 전력 시스템으로 산업 지원'],['신기술 리더십','디지털 변전소 · IEC 61850 · AI 유지보수'],['기술 · 영업 역량','보호계전 전문성 · 멀티 브랜드 역량'],['사람 중심 문화','교육 · 복지 · 성과 공유']];
 function pgCompanyVision(){
  return `<div class="block">${blockHead('SCAB 2030')}<p class="lead">제품 판매에서 시스템 솔루션으로, 2030년에는 제조 기반 종합 솔루션 공급으로 확장합니다.</p>
-  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>브랜드 · 제품 다각화</b><p>SEK · HEK 대리점, Sifang 독점 대리점, EOCR 대리점</p></div>
+  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>브랜드 · 제품 다각화</b><p>SEK · HEK 대리점, SIFANG 독점 대리점, EOCR 대리점</p></div>
    <div class="rs now"><span class="yr">2027 / 28</span><b>시스템 솔루션 확장</b><p>제품 + 엔지니어링 + 시스템 (SCADA · PMS · HSBT · FLISR) 패키지</p></div>
    <div class="rs fut"><span class="yr">2029 / 30</span><b>제조 기반 종합 솔루션</b><p>자체 배전반 · LV Box 제작, 종합 솔루션 공급</p></div></div>
-  <div class="facts"><div class="fact"><b>10+</b><span>구성원</span></div><div class="fact"><b>₩10B+</b><span>매출</span></div><div class="fact"><b>100+</b><span>고객사</span></div><div class="fact"><b>20+</b><span>브랜드 · 제품군</span></div></div>
+  <div class="facts"><div class="fact">${pg('people')}<b>10+</b><span>구성원</span></div><div class="fact">${pg('growth')}<b>₩10B+</b><span>매출</span></div><div class="fact">${pg('link')}<b>100+</b><span>고객사</span></div><div class="fact">${pg('box')}<b>20+</b><span>브랜드 · 제품군</span></div></div>
   <p class="note">2030년 목표 기준</p></div>
  <div class="block">${blockHead('미션 · 핵심가치')}<p class="lead">Growing with our customers — Long and Steady. 고객과 함께 오래, 꾸준히 성장합니다.</p>
-  <div class="grid-4">${VALUES.map(([t,d])=>`<div class="card"><h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
+  <div class="grid-4">${VALUES.map(([t,d],i)=>`<div class="card">${pg(['target','compass','link','growth','leaf','bulb','gear','people'][i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
-const HIST=[['2004–05',['에스캡 설립 (서울)','ABB Korea LV 대리점']],['2007–08',['발전 · 공공 분야 ABB 제품 공급','ABB Korea MV 대리점']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['ABB Korea PA 대리점','Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['ABB Korea EL "Best Growth Distributor"','(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['Sifang 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
+const HIST=[['2004–05',['에스캡 설립 (서울)','ABB Korea LV 대리점']],['2007–08',['발전 · 공공 분야 ABB 제품 공급','ABB Korea MV 대리점']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['ABB Korea PA 대리점','Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['ABB Korea EL "Best Growth Distributor"','(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['SIFANG 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
 function pgCompanyHistory(){
  return `<div class="block">${blockHead('연혁','<span class="note">2004 – 2026</span>')}
   <div class="tl">${HIST.map(([y,it],i)=>`<div class="tl-i${i===HIST.length-1?' hl':''}"><div class="yr">${y}</div><ul>${it.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
@@ -1326,12 +1807,12 @@ function pgCompanyOrg(){
  return `<div class="block">${blockHead('제품 사업')}
   <div class="org-brands">${BKEYS.map(k=>`<a class="ob" href="#products-${k}" style="--bc:${BRANDS[k].color}"><div class="bl">${brandLogo(k)}</div><p>${prod[k]}</p></a>`).join('')}</div></div>
  <div class="block">${blockHead('엔지니어링 · 시스템 솔루션')}
-  <div class="pillars"><div class="pil"><h4>엔지니어링 사업</h4><ul><li>정정 계산 · 보호협조</li><li>HSBT · 동기 · 로직 설계, 시운전 지원</li><li>EOCR · 디지털 미터 적용 설계</li></ul></div>
-   <div class="pil k"><h4>시스템 솔루션 사업</h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR 자가복구 배전 · 디지털 변전소</li><li>SVG/STATCOM · AHF 전력품질 패키지</li></ul></div>
-   <div class="pil"><h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>원자력 · 발전 · 해외 EPC</li></ul></div></div></div>`;
+  <div class="pillars"><div class="pil">${pg('gear')}<h4>엔지니어링 사업</h4><ul><li>정정 계산 · 보호협조</li><li>HSBT · 동기 · 로직 설계, 시운전 지원</li><li>EOCR · 디지털 미터 적용 설계</li></ul></div>
+   <div class="pil k">${pg('screen','on-dark')}<h4>시스템 솔루션 사업</h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR 자가복구 배전 · 디지털 변전소</li><li>SVG/STATCOM · AHF 전력품질 패키지</li></ul></div>
+   <div class="pil">${pg('building')}<h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>원자력 · 발전 · 해외 EPC</li></ul></div></div></div>`;
 }
 function pgCompanyCerts(){
- const dist=[['abb','ABB Korea 대리점','LV · MV · PA 제품'],['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','Sifang 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도전기 공급사','저압 제품']];
+ const dist=[['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','SIFANG 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도전기 공급사','저압 제품']];
  return `<div class="block">${blockHead('인증 · 등록')}
   <div class="cert-row">
    <button class="cert" data-act="img" data-img="cert_rnd" data-t="연구개발전담부서 인정서"><div class="ci"><img src="${A('cert_rnd')}" alt="연구개발전담부서 인정서" loading="lazy"></div><span>연구개발전담부서 인정서</span></button>
@@ -1375,7 +1856,7 @@ function prodFilter(showBrand){
  const cats=Object.keys(CATS).filter(c=>PRODUCTS.some(p=>(pf.brand==='all'||p.brand===pf.brand)&&p.cat===c));
  return `<div class="fbar">${showBrand?`<div class="pills" role="group" aria-label="브랜드">${[['all','전체']].concat(BKEYS.map(k=>[k,BRANDS[k].name])).map(([k,l])=>`<button class="pill${pf.brand===k?' on':''}" data-act="pfb" data-k="${k}"${k!=='all'?` style="--bc:${BRANDS[k].color}"`:''}>${k!=='all'?'<span class="dot"></span>':''}${esc(l)}</button>`).join('')}</div>`:''}
   <label class="search">${ic('search','sm')}<span class="sr">제품 검색</span><input id="pq" type="search" placeholder="제품명 · 모델 검색 (예: REX615)" value="${esc(pf.q)}"></label></div>
-  <div class="fbar"><div class="pills" role="group" aria-label="제품군">${[['all','전 제품군']].concat(cats.map(c=>[c,CATS[c]])).map(([k,l])=>`<button class="pill${pf.cat===k?' on':''}" data-act="pfc" data-k="${k}">${l}</button>`).join('')}</div><span class="count" id="pcount"></span></div>`;
+  <div class="cat-tiles" role="group" aria-label="제품군">${[['all','전 제품군']].concat(cats.map(c=>[c,CATS[c]])).map(([k,l])=>`<button class="cat-t${pf.cat===k?' on':''}" data-act="pfc" data-k="${k}" aria-pressed="${pf.cat===k}">${pg(CATPG[k]||'box','md')}<span>${l}</span></button>`).join('')}</div><div class="fbar"><span class="count" id="pcount"></span></div>`;
 }
 function prodGridHTML(){
  const list=filteredProducts();
@@ -1394,10 +1875,10 @@ function pgBrand(k){
 }
 function pgSolDatacenter(){
  return `<div class="block">${blockHead('데이터센터 전력 신뢰도')}<p class="lead">FLISR(Fault Location, Isolation & Service Restoration) 자가복구 배전과 전력 감시 · 품질 패키지</p>
-  <div class="sd-grid"><div class="diagram"><div id="flSol">${flisrSVG()}</div>
+  <div class="sd-col"><div class="diagram isod"><div id="flSol">${ISO.sceneFLISR({callouts:true,legend:true})}</div>
    <div class="dg-ctrl" role="group" aria-label="FLISR 단계">${FL_STEP.map((s,i)=>`<button data-act="fl" data-k="${i}" class="${i?'':'on'}">${i+1}. ${s}</button>`).join('')}<button data-act="flplay" id="flPlay">${ic('play','sm')} 자동 재생</button></div>
-   <p class="dg-cap" id="flCap">${FL_CAP[0]}</p>
-   <div class="legend"><span><i style="background:var(--sw-on)"></i>투입 · 가압</span><span><i style="background:var(--open)"></i>개방</span><span><i style="border:2px dashed var(--faint);background:transparent"></i>정전 구간</span></div></div>
+   <p class="dg-cap" id="flCap">${ISO.FL.cap[0]}</p>
+   </div>
   <ol class="numlist"><li><div><b>자가복구 배전 (FLISR)</b><span>ABB REX615 링 / 루프 구성, 고장 구간 분리 · 복구 로직</span></div></li>
    <li><div><b>절체 · 보호</b><span>ATS, 보호계전기, 디지털 미터 (PowerLogic)</span></div></li>
    <li><div><b>전력품질</b><span>AHF (능동형 고조파 필터) · 콘덴서 · 리액터</span></div></li>
@@ -1407,7 +1888,7 @@ function pgSolDatacenter(){
 }
 function pgSolHsbt(){
  return `<div class="block">${blockHead('고속절체 · 동기투입')}<p class="lead">공정 중단 없이 전원을 유지하는 HSBT와 SYNCHROTACT 6</p>
-  <div class="steps light" style="margin-top:0">${['정상 운전 — 주전원 공급','고장 · 전압 강하 — 위상 · 주파수 · 잔류전압 감시','고속 절체 — 약 30 ms','연속 운전 — 공정 중단 최소화'].map((s,i)=>`<div class="step${i===2?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+  <div class="diagram isod"><div id="hsSol">${ISO.sceneHSBT()}</div><div class="dg-ctrl" role="group" aria-label="HSBT 단계">${ISO.HS.steps.map((s,i)=>`<button data-act="hs" data-k="${i}" class="${i?'':'on'}">${i+1}. ${s}</button>`).join('')}</div><p class="dg-cap" id="hsCap">${ISO.HS.cap[0]}</p></div>
   <div class="diagram">${hsbtSVG()}<p class="note" style="margin-top:8px">개념도입니다. 실제 절체 시간은 절체 방식과 설정에 따라 달라집니다.</p></div></div>
  <div class="block"><div class="grid-2">
   <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 3000/4000)</h4><p>다양한 모선 구성에 대응하는 고속절체장치 · REX640 HSABTC 기반 절체 로직 설계 · 인터록 시험 계획과 현장 복구 지원</p></div></div>
@@ -1416,8 +1897,9 @@ function pgSolHsbt(){
 }
 let pqMode='before';
 function pgSolPq(){
- return `<div class="block">${blockHead('전력품질 — 고조파 · 역률 · 무효전력')}<p class="lead">Sifang SVG/STATCOM · AHF · 콘덴서 · 리액터</p>
+ return `<div class="block">${blockHead('전력품질 — 고조파 · 역률 · 무효전력')}<p class="lead">SIFANG SVG/STATCOM · AHF · 콘덴서 · 리액터</p>
   <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${['진단 — 고조파 · 역률 · 전압 변동 측정','설비 선정 — AHF / 콘덴서 · 리액터 / SVG','공급 · 엔지니어링 — 사양 검토 · 설치 · 시운전 · 인허가','사후관리 — 성능 확인 · 유지보수'].map((s,i)=>`<div class="step${i===1?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+  <div class="diagram isod"><div id="pqSol">${ISO.scenePQ()}</div><div class="dg-ctrl" role="group" aria-label="보상 전후">${['보상 전','보상 후'].map((s,i)=>`<button data-act="pqs" data-k="${i}" class="${i?'':'on'}">${s}</button>`).join('')}</div><p class="dg-cap" id="pqCap">${PQCAP[0]}</p></div>
   <div class="diagram"><div id="pqWave">${pqSVG(pqMode)}</div>
    <div class="dg-ctrl" role="group" aria-label="파형 보기"><button data-act="pq" data-k="before" class="${pqMode==='before'?'on':''}">보상 전</button><button data-act="pq" data-k="after" class="${pqMode==='after'?'on':''}">보상 후 (AHF)</button><button data-act="pq" data-k="both" class="${pqMode==='both'?'on':''}">겹쳐 보기</button></div>
    <div class="thd"><div><span>전류 THD · 보상 전</span><b>${thd(PQ_H).toFixed(1)}%</b></div><div class="after"><span>전류 THD · 보상 후</span><b>${thd(PQ_A).toFixed(1)}%</b></div></div>
@@ -1432,7 +1914,7 @@ function pgSolPq(){
 }
 function pgSolMcc(){
  return `<div class="block">${blockHead('Smart MCC — EOCR · EOCR Edge')}<p class="lead">모터 보호에서 모니터링 시스템까지</p>
-  <div class="sd-grid"><div class="diagram">${mccSVG()}<div class="legend"><span><i style="background:var(--ok)"></i>정상</span><span><i style="background:var(--warn)"></i>주의 (예: 과부하 경향)</span></div></div>
+  <div class="sd-col"><div class="diagram isod"><div id="mccSol">${ISO.sceneMCC()}</div><div class="legend"><span><i style="background:var(--ok)"></i>정상</span><span><i style="background:var(--warn)"></i>주의 (예: 과부하 경향)</span></div></div>
   <ol class="numlist"><li><div><b>EOCR (iSEM1 / iSEM2)</b><span>전자식 과부하 · 결상 · 지락 모터 보호, 통신형 모델</span></div></li>
    <li><div><b>EOCR Edge</b><span>MCC 모터 데이터 수집 · 모니터링 · 예지 정비</span></div></li>
    <li><div><b>Load List 기반 설계</b><span>모터 정격별 모델 · CT · 통신 선정, 견적 · 공급</span></div></li>
@@ -1442,8 +1924,8 @@ function pgSolMcc(){
 function pgEngineering(){
  const V=['ABB','Schneider','Siemens','SEL','GE'];
  return `<div class="block">${blockHead('엔지니어링 서비스')}<p class="lead">보호계전 · 전력계통 담당자가 기술 검토를 수행합니다.</p>
-  <div class="grid-4">${ENG.map(([t,d])=>`<div class="card"><h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>
- <div class="block">${blockHead('수행 절차')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step${i===1?' hl':''}"><b>${s}</b></div>`).join('')}</div></div>
+  <div class="grid-4">${ENG.map(([t,d],i)=>`<div class="card">${pg(ENGPG[i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>
+ <div class="block">${blockHead('수행 절차')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step${i===1?' hl':''}">${pg(STEPPG[i],'sm')}<b>${s}</b></div>`).join('')}</div></div>
  <div class="block">${blockHead('제조사 비교 예 — 고지대(4,000 m) 보호계전기')}
   <div class="tbl-wrap"><table><thead><tr><th>항목</th>${V.map(v=>`<th>${v}</th>`).join('')}</tr></thead><tbody>
    <tr><th style="font-weight:600">카탈로그 고도 정격</th>${V.map(()=>'<td>확인</td>').join('')}</tr>
@@ -1470,7 +1952,8 @@ function resRow(r){
 function pgResources(cat){
  const list=RESOURCES.filter(r=>(cat==='all'||r.cat===cat)&&(!rq||r.title.toLowerCase().includes(rq.toLowerCase())));
  return `<div class="block">${blockHead(cat==='all'?'전체 자료':RCAT[cat])}
-  <div class="fbar"><div class="tabs" style="border-bottom:0">${[['all','전체','resources']].concat(Object.entries(RCAT).map(([k,l])=>[k,l,'resources-'+k])).map(([k,l,h])=>`<a href="#${h}" class="${cat===k?'on':''}">${l} <span class="mono" style="font-size:12px;color:var(--faint)">${k==='all'?RESOURCES.length:RESOURCES.filter(r=>r.cat===k).length}</span></a>`).join('')}</div>
+  <div class="cat-tiles">${[['all','전체','resources']].concat(Object.entries(RCAT).map(([k,l])=>[k,l,'resources-'+k])).map(([k,l,h])=>`<a href="#${h}" class="cat-t${cat===k?' on':''}">${pg({all:'box',catalog:'book',tech:'doc',cert:'cert',profile:'present'}[k],'md')}<span>${l}</span><span class="n">${k==='all'?RESOURCES.length:RESOURCES.filter(r=>r.cat===k).length}</span></a>`).join('')}</div>
+  <div class="fbar"><span></span>
   <label class="search">${ic('search','sm')}<span class="sr">자료 검색</span><input id="rq" type="search" placeholder="자료명 검색" value="${esc(rq)}"></label></div>
   <div class="rlist" id="rlist">${list.length?list.map(resRow).join(''):'<div class="empty">검색 결과가 없습니다.</div>'}</div>
   <p class="note">${ic('lock','sm')} 표시 자료는 요청서를 남기시면 담당자가 이메일로 보내 드립니다. 제조사 자료는 각 제조사 사이트에서 최신본을 받을 수 있습니다.</p></div>`;
@@ -1480,7 +1963,7 @@ function pgResources(cat){
 const DESK=['대표 창구','견적 · 기술 문의',CO.mail];
 const PEOPLE={
  abb:{t:'ABB 사업부',bc:'#FF000F',list:[DESK]},
- se:{t:'Schneider · Hitachi · Sifang 사업부',bc:'#3DCD58',list:[DESK]}
+ se:{t:'Schneider · Hitachi · SIFANG 사업부',bc:'#3DCD58',list:[DESK]}
 };
 const ITYPE=['견적 요청','기술 문의','A/S · 고장','자료 요청','해외 프로젝트','기타'];
 let prefill=null, receipt=null;
@@ -1512,9 +1995,9 @@ function pgContact(){
    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" type="submit">문의 접수 ${ic('arrow')}</button><button class="btn line" type="button" data-act="sample">예시 내용 채우기</button><span class="note">시안에서는 메일이 발송되지 않습니다.</span></div>
   </form>
   <aside class="fact-side">
-   <div class="side-card k"><h4>대표 연락처</h4>
+   <div class="side-card k">${pg('headset','md on-dark')}<h4>대표 연락처</h4>
     <div class="kv"><span>TEL</span><b>${CO.tel}</b>${copyBtn(CO.tel)}</div><div class="kv"><span>FAX</span><b>${CO.fax}</b>${copyBtn(CO.fax)}</div><div class="kv"><span>E-mail</span><b class="email" style="font-size:13.5px">${CO.mail}</b>${copyBtn(CO.mail)}</div></div>
-   <div class="side-card"><h4>사업부별 담당</h4><p class="note">ABB 제품은 ABB 사업부, Schneider · Hitachi · Sifang 제품은 해당 사업부에서 응대합니다.</p><a class="link" href="#contact-people">담당자 보기 ${ic('arrow')}</a></div>
+   <div class="side-card">${pg('people','md')}<h4>사업부별 담당</h4><p class="note">ABB 제품은 ABB 사업부, Schneider · Hitachi · SIFANG 제품은 해당 사업부에서 응대합니다.</p><a class="link" href="#contact-people">담당자 보기 ${ic('arrow')}</a></div>
    ${admin?`<div class="side-card"><h4>접수 내역 (관리자 · 이 브라우저)</h4>${inq.length?inq.slice(0,6).map(x=>`<div style="font-size:13.5px;border-top:1px solid var(--line);padding-top:8px"><b class="mono" style="color:var(--ac)">${esc(x.no)}</b><br>${esc(x.type)} · ${esc(x.co)} · ${esc(x.sub)}</div>`).join(''):'<p class="note">아직 접수된 문의가 없습니다.</p>'}</div>`:''}
   </aside></div>`;
 }
@@ -1528,7 +2011,7 @@ function receiptHTML(r){
   <div><p class="eyebrow" style="margin-bottom:8px">시뮬레이션 · 담당자에게 전달될 메일</p>
    <div class="mailprev"><div class="mh"><span>받는 사람</span><b>${esc(rt.to[0])} ${esc(rt.to[1].split(' · ')[0])} &lt;<span class="email">${esc(rt.to[2])}</span>&gt;</b>${rt.cc?`<span>참조</span><span>${esc(rt.cc[0])} &lt;<span class="email">${esc(rt.cc[2])}</span>&gt;</span>`:''}<span>배정</span><span>${esc(rt.bu)}</span><span>제목</span><b>[홈페이지 문의] ${esc(r.type)} – ${esc(r.co)}</b></div>
    <pre>${esc(`접수번호: ${r.no}\n회사명: ${r.co}\n담당자: ${r.name} ${r.dept||''}\n연락처: ${r.tel}\n이메일: ${r.mail}\n브랜드/제품: ${r.brand?BRANDS[r.brand].name:'-'} ${r.prod||''}\n\n${r.msg}`)}</pre></div>
-   <p class="note" style="margin-top:8px">배정 규칙(시안): ABB → ABB 사업부 · Schneider/Hitachi/Sifang → 해당 사업부 · 해외 프로젝트 → 해외 담당 · 그 외 → 대표 메일</p></div>
+   <p class="note" style="margin-top:8px">배정 규칙(시안): ABB → ABB 사업부 · Schneider/Hitachi/SIFANG → 해당 사업부 · 해외 프로젝트 → 해외 담당 · 그 외 → 대표 메일</p></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" data-act="newinq">새 문의 작성</button><a class="btn line" href="#home">홈으로</a></div></div></div>`;
 }
 function pgPeople(){
@@ -1589,7 +2072,7 @@ const PAGES={
  'contact':pgContact,'contact-people':pgPeople,
  'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna'),'board-write':pgWrite
 };
-const PDESC={'company':'보호 · 제어 · 전력품질 제품과 엔지니어링을 공급하는 (주)에스캡엔지니어링','products':'ABB · Schneider Electric · Hitachi Energy · Sifang · 상도전기','resources':'카탈로그 · 기술자료 · 인증서 · 회사소개서','contact':'견적 · 기술 · A/S 문의','board':'공지사항 · 회사 소식 · 기술 Q&A'};
+const PDESC={'company':'보호 · 제어 · 전력품질 제품과 엔지니어링을 공급하는 (주)에스캡엔지니어링','products':'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기','resources':'카탈로그 · 기술자료 · 인증서 · 회사소개서','contact':'견적 · 기술 · A/S 문의','board':'공지사항 · 회사 소식 · 기술 Q&A'};
 let curId='home';
 function subLayout(id,body){
  const mid=menuOf(id),m=MENU.find(x=>x.id===mid);
@@ -1624,8 +2107,12 @@ function render(scroll=true){
  updateDockPage();
 }
 function afterRender(id){
- if(id==='home'){initCarousel();const s=$('#solFl svg');setFlisr(s,0)}
- if(id==='solutions-datacenter'){setFlisr($('#flSol svg'),0)}
+ $$('#view svg.iso:not(.mini)').forEach(sv=>ISO.fit(sv));
+ if(id==='home'){initCarousel()}
+ if(id==='solutions-datacenter'){ISO.setFLISR($('#flSol svg'),0)}
+ if(id==='solutions-hsbt'){ISO.setHSBT($('#hsSol svg'),0)}
+ if(id==='solutions-pq'){ISO.setPQ($('#pqSol svg'),0)}
+ if(id==='solutions-mcc'){ISO.setMCC($('#mccSol svg'))}
  if(id==='products'||id.startsWith('products-'))updCount();
  if(id==='contact'&&$('#cform'))initForm();
  if(id==='board-write')initWrite();
@@ -1640,9 +2127,13 @@ function initCarousel(){
  paused=paused||RM;
  showSlide(0);
  const t=setInterval(()=>{if(!paused&&!document.hidden&&!hoverHero)showSlide((slideI+1)%SLIDES.length)},dur);timers.push(t);
- const ft=setInterval(()=>{const s=$('#flHero svg');if(!s)return;flK=(flK+1)%4;setFlisr(s,flK);const c=$('#flHeroCap');if(c)c.textContent=FL_CAP[flK];const st=$('#flHeroStep');if(st)st.textContent=`0${flK+1} / 04`},2300);
- if(!RM)timers.push(ft);
- setFlisr($('#flHero svg'),0);
+ const hk={fl:0,hs:0,pq:0};
+ const heroSet=()=>{ISO.setFLISR($('#isoHeroFL svg'),hk.fl);ISO.setHSBT($('#isoHeroHS svg'),hk.hs);ISO.setPQ($('#isoHeroPQ svg'),hk.pq);
+  const t=(id,v)=>{const e=$(id);if(e)e.textContent=v};
+  t('#flHeroStep',`0${hk.fl+1} / 04`);t('#flHeroCap',ISO.FL.cap[hk.fl]);t('#hsHeroStep',`0${hk.hs+1} / 04`);t('#hsHeroCap',ISO.HS.cap[hk.hs]);t('#pqHeroStep',hk.pq?'보상 후':'보상 전');t('#pqHeroCap',PQCAP[hk.pq])};
+ heroSet();
+ const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;heroSet()},2400);
+ if(!RM)timers.push(ft);else clearInterval(ft);
  $('#hcPause').innerHTML=paused?ic('play'):ic('pause');
  bars.classList.toggle('paused',paused);
  const hero=$('.hero');hero.addEventListener('mouseenter',()=>{hoverHero=true});hero.addEventListener('mouseleave',()=>{hoverHero=false});
@@ -1828,6 +2319,7 @@ document.addEventListener('click',e=>{
   case 'sq':{const i=$('#sq');i.value=a.dataset.v;i.dispatchEvent(new Event('input'));i.focus();break}
   case 'sgo':{const pid=a.dataset.prod;closeSearch();if(pid){setTimeout(()=>prodModal(pid),60)}break}
   case 'burger':{const d=$('#drawer');d.hidden=!d.hidden;a.setAttribute('aria-expanded',String(!d.hidden));a.innerHTML=ic(d.hidden?'menu':'close');break}
+  case 'slide':showSlide(+a.dataset.slide);break;
   case 'prev':showSlide((slideI-1+SLIDES.length)%SLIDES.length);break;
   case 'next':showSlide((slideI+1)%SLIDES.length);break;
   case 'pause':paused=!paused;a.innerHTML=paused?ic('play'):ic('pause');a.setAttribute('aria-label',paused?'자동 넘김 시작':'자동 넘김 정지');$('#hcBars').classList.toggle('paused',paused);if(!paused)showSlide(slideI);break;
@@ -1841,8 +2333,10 @@ document.addEventListener('click',e=>{
   case 'reftab':refTab=k;$$('.tabs [data-act="reftab"]').forEach(b=>{b.classList.toggle('on',b.dataset.k===k);b.setAttribute('aria-selected',b.dataset.k===k)});$('#refBody').innerHTML=refTable(k);break;
   case 'pfb':pf.brand=k;pf.cat='all';refreshProducts();break;
   case 'pfc':pf.cat=k;refreshProducts();break;
-  case 'fl':{flStop();const s=$('#flSol svg');setFlisr(s,+k);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#flCap').textContent=FL_CAP[+k];break}
-  case 'flplay':{if(flTimer){flStop();break}let i=0;const step=()=>{const s=$('#flSol svg');if(!s){flStop();return}setFlisr(s,i);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===i));$('#flCap').textContent=FL_CAP[i];i=(i+1)%4};step();flTimer=setInterval(step,2000);timers.push(flTimer);a.innerHTML=`${ic('pause','sm')} 정지`;break}
+  case 'fl':{flStop();const s=$('#flSol svg');ISO.setFLISR(s,+k);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#flCap').textContent=ISO.FL.cap[+k];break}
+  case 'hs':{const s=$('#hsSol svg');ISO.setHSBT(s,+k);$$('.dg-ctrl [data-act="hs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#hsCap').textContent=ISO.HS.cap[+k];break}
+  case 'pqs':{const s=$('#pqSol svg');ISO.setPQ(s,+k);$$('.dg-ctrl [data-act="pqs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#pqCap').textContent=PQCAP[+k];break}
+  case 'flplay':{if(flTimer){flStop();break}let i=0;const step=()=>{const s=$('#flSol svg');if(!s){flStop();return}ISO.setFLISR(s,i);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===i));$('#flCap').textContent=ISO.FL.cap[i];i=(i+1)%4};step();flTimer=setInterval(step,2000);timers.push(flTimer);a.innerHTML=`${ic('pause','sm')} 정지`;break}
   case 'pq':pqMode=k;$('#pqWave').innerHTML=pqSVG(k);$$('.dg-ctrl [data-act="pq"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));break;
   case 'sample':{const f=$('#cform');const v={co:'(예시) 한빛플랜트',dept:'전기팀 과장',name:'홍길동',tel:'010-1234-5678',mail:'sample@example.com',sub:f.elements.sub.value||'MCC 신설 EOCR 견적 요청',msg:f.elements.msg.value||'MCC 신설 건 EOCR 견적을 요청합니다.\n- 모터 42대 (Load List 첨부 예정)\n- 통신: Modbus\n- 납기: 2027년 3월'};Object.entries(v).forEach(([n,x])=>{f.elements[n].value=x;setErr(f,n,'')});$('#f-agree').checked=true;$('#agreeErr').textContent='';$('#msgCount').textContent=f.elements.msg.value.length;toast('예시 내용을 채웠습니다. 문의 접수를 눌러 보세요.');break}
   case 'newinq':receipt=null;render();break;
