@@ -999,7 +999,7 @@ const PG={
  datacenter:'<rect x="12" y="6" width="24" height="36" rx="2"/><path d="M12 15h24M12 24h24M12 33h24M22 10.5h9M22 19.5h9M22 28.5h9"/><circle class="fa" cx="17" cy="10.5" r="1.5"/><circle class="fa" cx="17" cy="19.5" r="1.5"/><circle class="fa" cx="17" cy="28.5" r="1.5"/>',
  wave:'<path d="M4 18c3-9 7-9 10 0s7 9 10 0 7-9 10 0 7 9 10 0"/><path class="a" d="M6 40h36M11 36v4M18 31v9M25 34v6M32 32v8M39 37v3"/>',
  motor:'<circle cx="21" cy="24" r="14"/><path d="M14 30V18l7 7 7-7v12"/><path class="a" d="M35 24h9"/>',
- transfer:'<circle cx="12" cy="9" r="5"/><circle cx="36" cy="9" r="5"/><path d="M12 14v8M36 14v8M12 22v8M12 30v6M36 30v6M8 36h32M24 36v8"/><path class="a" d="M36 22l-6 7"/>',
+ transfer:'<circle cx="12" cy="9" r="5"/><circle cx="36" cy="9" r="5"/><path d="M12 14v22M36 14v7M36 30v6M8 36h32M24 36v8"/><path class="a" d="M36 30l-7-8"/>',
  sync:'<path d="M4 17c3-8 6-8 9 0s6 8 9 0 6-8 9 0 6 8 9 0"/><path class="a" d="M4 31c3-8 6-8 9 0s6 8 9 0 6-8 9 0 6 8 9 0"/>',
  meter:'<path d="M6 32a18 18 0 0 1 36 0"/><path d="M6 32h36M12 21l2.5 2.5M24 15v3.5M36 21l-2.5 2.5"/><path class="a" d="M24 32l9-11"/><circle class="f" cx="24" cy="32" r="2"/>',
  gear:'<circle cx="24" cy="24" r="12"/><circle class="a" cx="24" cy="24" r="5"/><path d="M24 5v7M24 36v7M5 24h7M36 24h7M10.6 10.6l5 5M32.4 32.4l5 5M10.6 37.4l5-5M32.4 15.6l5-5"/>',
@@ -1610,7 +1610,7 @@ const MENU=[
   cols:[{t:'About Us',items:[['company-overview','Overview · Greeting'],['company-name','Meaning of SCAB'],['company-vision','Vision · Core values'],['company-history','History'],['company-organization','Business organization']]},
         {t:'Trust',items:[['company-certs','Certifications · Partners'],['company-location','Location']]}],
   feat:{img:'cube_red',t:'SCAB 2030',d:'Product sales → system solutions → manufacturing-based total solutions',href:'company-vision'}},
- {id:'products',label:'Products',en:'PORTFOLIO',home:'products',desc:'Protection · control · power quality products from 5 brands, site-specific solutions and engineering',
+ {id:'products',label:'Products',en:'PORTFOLIO',home:'products',desc:'Brand products, site-specific solutions and engineering',
   cols:[{t:'Brands',items:[['products-abb','ABB'],['products-schneider','Schneider Electric'],['products-hitachi','Hitachi Energy'],['products-sifang','SIFANG 北京四方'],['products-sangdo','Sangdo Electric']]},
         {t:'Solutions',items:[['solutions-datacenter','Data center FLISR'],['solutions-hsbt','Fast transfer · synchronizing (HSBT)'],['solutions-pq','Power quality (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)']]},
         {t:'Engineering',items:[['engineering','Engineering services'],['products','Find all products']]}],
@@ -1734,7 +1734,7 @@ function shell(){
    <nav class="ftr-map" aria-label="Sitemap">${MENU.map(m=>`<div><h4>${m.label}</h4>${m.cols.flatMap(c=>c.items).slice(0,6).map(([id,l])=>`<a href="#${id}">${l}</a>`).join('')}</div>`).join('')}</nav></div>
   <div class="ftr-bot"><nav><button class="b" data-act="privacy">Privacy policy</button><button data-act="noemail">No unauthorized e-mail collection</button><button data-act="sitemap">Sitemap</button></nav>
    <label class="sr" for="fam">Family sites</label>
-   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option></select>
+   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option><option value="https://www.sf-auto.com">SIFANG</option><option value="http://www.sang-do.com/">Sangdo Electric</option></select>
    <span class="mono">© SCAB Engineering Co., Ltd.</span></div></div>`;
  drawer();themeLabel();
 }
@@ -1818,7 +1818,7 @@ function pageHome(){
  </nav></div>
 
  <section class="sec"><div class="wrap">
-  ${secHead('BRANDS','Our brands','We supply products from 5 brands: ABB · Schneider Electric · Hitachi Energy · SIFANG · Sangdo Electric.',['products','Find all products'])}
+  ${secHead('BRANDS','Our brands','We supply ABB · Schneider Electric · Hitachi Energy · SIFANG · Sangdo Electric products, and can also select other products to suit customer needs.',['products','Find all products'])}
   <div class="brand-grid">${BKEYS.map(k=>{const b=BRANDS[k];return `<a class="brand" href="#products-${k}" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div><div class="bt">${esc(b.role)}</div><div class="bd">${esc(b.scope)}</div><div class="bf">View products ${ic('arrow','sm')}</div></a>`}).join('')}</div>
  </div></section>
 
@@ -1847,7 +1847,7 @@ function pageHome(){
    <p class="lead" style="margin-top:14px">Products from multiple manufacturers are compared and selected on the same criteria, with support from relay setting calculations to commissioning and after-sales.</p>
    <a class="btn ghost" href="#engineering" style="margin-top:28px">Engineering services ${ic('arrow')}</a></div>
    <div class="svc-grid">${ENG.slice(0,6).map(([t,d],i)=>`<div class="svc">${pg(ENGPG[i],'md on-dark')}<b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
-  <div class="steps">${STEPS.map((s,i)=>`<div class="step${i===2?' hl':''}">${pg(STEPPG[i],'sm on-dark')}<b>${s}</b></div>`).join('')}</div>
+  <div class="steps">${STEPS.map((s,i)=>`<div class="step">${pg(STEPPG[i],'sm on-dark')}<b>${s}</b></div>`).join('')}</div>
  </div></section>
 
 
@@ -2030,7 +2030,7 @@ function pgSolHsbt(){
 let pqMode='before';
 function pgSolPq(){
  return `<div class="block">${blockHead('Power quality — harmonics · power factor · reactive power')}<p class="lead">SIFANG SVG/STATCOM · AHF · capacitors · reactors</p>
-  <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${['Diagnosis — harmonics · power factor · voltage fluctuation measurement','Equipment selection — AHF / capacitors · reactors / SVG','Supply · engineering — specification review · installation · commissioning · permits','After-sales — performance verification · maintenance'].map((s,i)=>`<div class="step${i===1?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+  <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${['Diagnosis — harmonics · power factor · voltage fluctuation measurement','Equipment selection — AHF / capacitors · reactors / SVG','Supply · engineering — specification review · installation · commissioning · permits','After-sales — performance verification · maintenance'].map((s,i)=>`<div class="step"><b>${s}</b></div>`).join('')}</div>
   <div class="diagram isod"><div id="pqSol">${ISO.scenePQ()}</div><div class="dg-ctrl" role="group" aria-label="Before / after">${['Before compensation','After compensation'].map((s,i)=>`<button data-act="pqs" data-k="${i}" class="${i?'':'on'}">${s}</button>`).join('')}</div><p class="dg-cap" id="pqCap">${PQCAP[0]}</p></div>
   <div class="diagram"><div id="pqWave">${pqSVG(pqMode)}</div>
    <div class="dg-ctrl" role="group" aria-label="View waveform"><button data-act="pq" data-k="before" class="${pqMode==='before'?'on':''}">Before compensation</button><button data-act="pq" data-k="after" class="${pqMode==='after'?'on':''}">After compensation (AHF)</button><button data-act="pq" data-k="both" class="${pqMode==='both'?'on':''}">Overlay</button></div>
@@ -2057,7 +2057,7 @@ function pgEngineering(){
  const V=['ABB','Schneider','Siemens','SEL','GE'];
  return `<div class="block">${blockHead('Engineering services')}<p class="lead">Protection and power system engineers carry out the technical review.</p>
   <div class="grid-4">${ENG.map(([t,d],i)=>`<div class="card">${pg(ENGPG[i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>
- <div class="block">${blockHead('Process')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step${i===1?' hl':''}">${pg(STEPPG[i],'sm')}<b>${s}</b></div>`).join('')}</div></div>
+ <div class="block">${blockHead('Process')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step">${pg(STEPPG[i],'sm')}<b>${s}</b></div>`).join('')}</div></div>
  <div class="block">${blockHead('Manufacturer comparison example — high-altitude (4,000 m) protection relays')}
   <div class="tbl-wrap"><table><thead><tr><th>Item</th>${V.map(v=>`<th>${v}</th>`).join('')}</tr></thead><tbody>
    <tr><th style="font-weight:600">Catalog altitude rating</th>${V.map(()=>'<td>Checked</td>').join('')}</tr>
@@ -2259,7 +2259,7 @@ let eqT;window.addEventListener('resize',()=>{clearTimeout(eqT);eqT=setTimeout(e
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>eqSlides());
 function initCarousel(){
  eqSlides();
- slideI=0;hoverHero=false;const dur=7000;
+ slideI=0;hoverHero=false;const dur=4000;
  const bars=$('#hcBars');bars.style.setProperty('--dur',dur+'ms');
  paused=paused||RM;
  showSlide(0);

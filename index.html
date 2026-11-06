@@ -993,7 +993,7 @@ const PG={
  datacenter:'<rect x="12" y="6" width="24" height="36" rx="2"/><path d="M12 15h24M12 24h24M12 33h24M22 10.5h9M22 19.5h9M22 28.5h9"/><circle class="fa" cx="17" cy="10.5" r="1.5"/><circle class="fa" cx="17" cy="19.5" r="1.5"/><circle class="fa" cx="17" cy="28.5" r="1.5"/>',
  wave:'<path d="M4 18c3-9 7-9 10 0s7 9 10 0 7-9 10 0 7 9 10 0"/><path class="a" d="M6 40h36M11 36v4M18 31v9M25 34v6M32 32v8M39 37v3"/>',
  motor:'<circle cx="21" cy="24" r="14"/><path d="M14 30V18l7 7 7-7v12"/><path class="a" d="M35 24h9"/>',
- transfer:'<circle cx="12" cy="9" r="5"/><circle cx="36" cy="9" r="5"/><path d="M12 14v8M36 14v8M12 22v8M12 30v6M36 30v6M8 36h32M24 36v8"/><path class="a" d="M36 22l-6 7"/>',
+ transfer:'<circle cx="12" cy="9" r="5"/><circle cx="36" cy="9" r="5"/><path d="M12 14v22M36 14v7M36 30v6M8 36h32M24 36v8"/><path class="a" d="M36 30l-7-8"/>',
  sync:'<path d="M4 17c3-8 6-8 9 0s6 8 9 0 6-8 9 0 6 8 9 0"/><path class="a" d="M4 31c3-8 6-8 9 0s6 8 9 0 6-8 9 0 6 8 9 0"/>',
  meter:'<path d="M6 32a18 18 0 0 1 36 0"/><path d="M6 32h36M12 21l2.5 2.5M24 15v3.5M36 21l-2.5 2.5"/><path class="a" d="M24 32l9-11"/><circle class="f" cx="24" cy="32" r="2"/>',
  gear:'<circle cx="24" cy="24" r="12"/><circle class="a" cx="24" cy="24" r="5"/><path d="M24 5v7M24 36v7M5 24h7M36 24h7M10.6 10.6l5 5M32.4 32.4l5 5M10.6 37.4l5-5M32.4 15.6l5-5"/>',
@@ -1604,7 +1604,7 @@ const MENU=[
   cols:[{t:'회사소개',items:[['company-overview','회사 개요 · 인사말'],['company-name','SCAB의 의미'],['company-vision','비전 · 핵심가치'],['company-history','연혁'],['company-organization','사업 조직']]},
         {t:'신뢰',items:[['company-certs','인증 · 파트너'],['company-location','오시는 길']]}],
   feat:{img:'cube_red',t:'SCAB 2030',d:'제품 판매 → 시스템 솔루션 → 제조 기반 종합 솔루션',href:'company-vision'}},
- {id:'products',label:'취급제품',en:'PRODUCTS',home:'products',desc:'5개 브랜드의 보호 · 제어 · 전력품질 제품과 현장별 솔루션, 엔지니어링',
+ {id:'products',label:'취급제품',en:'PRODUCTS',home:'products',desc:'취급 브랜드 제품, 현장별 솔루션과 엔지니어링',
   cols:[{t:'브랜드',items:[['products-abb','ABB'],['products-schneider','Schneider Electric'],['products-hitachi','Hitachi Energy'],['products-sifang','SIFANG 北京四方'],['products-sangdo','상도전기']]},
         {t:'솔루션',items:[['solutions-datacenter','데이터센터 FLISR'],['solutions-hsbt','고속절체 · 동기 (HSBT)'],['solutions-pq','전력품질 (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)']]},
         {t:'엔지니어링',items:[['engineering','엔지니어링 서비스'],['products','전체 제품 찾기']]}],
@@ -1728,7 +1728,7 @@ function shell(){
    <nav class="ftr-map" aria-label="사이트맵">${MENU.map(m=>`<div><h4>${m.label}</h4>${m.cols.flatMap(c=>c.items).slice(0,6).map(([id,l])=>`<a href="#${id}">${l}</a>`).join('')}</div>`).join('')}</nav></div>
   <div class="ftr-bot"><nav><button class="b" data-act="privacy">개인정보처리방침</button><button data-act="noemail">이메일무단수집거부</button><button data-act="sitemap">사이트맵</button></nav>
    <label class="sr" for="fam">패밀리 사이트</label>
-   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option></select>
+   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option><option value="https://www.sf-auto.com">SIFANG</option><option value="http://www.sang-do.com/">상도전기</option></select>
    <span class="mono">© SCAB Engineering Co., Ltd.</span></div></div>`;
  drawer();themeLabel();
 }
@@ -1812,7 +1812,7 @@ function pageHome(){
  </nav></div>
 
  <section class="sec"><div class="wrap">
-  ${secHead('BRANDS','취급 브랜드','ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기, 5개 브랜드의 제품을 공급합니다.',['products','전체 제품 찾기'])}
+  ${secHead('BRANDS','취급 브랜드','ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도전기 제품을 공급하며, 이 외에도 고객을 위한 제품 선정이 가능합니다.',['products','전체 제품 찾기'])}
   <div class="brand-grid">${BKEYS.map(k=>{const b=BRANDS[k];return `<a class="brand" href="#products-${k}" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div><div class="bt">${esc(b.role)}</div><div class="bd">${esc(b.scope)}</div><div class="bf">제품 보기 ${ic('arrow','sm')}</div></a>`}).join('')}</div>
  </div></section>
 
@@ -1841,7 +1841,7 @@ function pageHome(){
    <p class="lead" style="margin-top:14px">여러 제조사 제품을 같은 기준으로 비교해 선정하고, 정정 계산부터 시운전 · 사후관리까지 지원합니다.</p>
    <a class="btn ghost" href="#engineering" style="margin-top:28px">엔지니어링 서비스 ${ic('arrow')}</a></div>
    <div class="svc-grid">${ENG.slice(0,6).map(([t,d],i)=>`<div class="svc">${pg(ENGPG[i],'md on-dark')}<b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
-  <div class="steps">${STEPS.map((s,i)=>`<div class="step${i===2?' hl':''}">${pg(STEPPG[i],'sm on-dark')}<b>${s}</b></div>`).join('')}</div>
+  <div class="steps">${STEPS.map((s,i)=>`<div class="step">${pg(STEPPG[i],'sm on-dark')}<b>${s}</b></div>`).join('')}</div>
  </div></section>
 
 
@@ -2024,7 +2024,7 @@ function pgSolHsbt(){
 let pqMode='before';
 function pgSolPq(){
  return `<div class="block">${blockHead('전력품질 — 고조파 · 역률 · 무효전력')}<p class="lead">SIFANG SVG/STATCOM · AHF · 콘덴서 · 리액터</p>
-  <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${['진단 — 고조파 · 역률 · 전압 변동 측정','설비 선정 — AHF / 콘덴서 · 리액터 / SVG','공급 · 엔지니어링 — 사양 검토 · 설치 · 시운전 · 인허가','사후관리 — 성능 확인 · 유지보수'].map((s,i)=>`<div class="step${i===1?' hl':''}"><b>${s}</b></div>`).join('')}</div>
+  <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${['진단 — 고조파 · 역률 · 전압 변동 측정','설비 선정 — AHF / 콘덴서 · 리액터 / SVG','공급 · 엔지니어링 — 사양 검토 · 설치 · 시운전 · 인허가','사후관리 — 성능 확인 · 유지보수'].map((s,i)=>`<div class="step"><b>${s}</b></div>`).join('')}</div>
   <div class="diagram isod"><div id="pqSol">${ISO.scenePQ()}</div><div class="dg-ctrl" role="group" aria-label="보상 전후">${['보상 전','보상 후'].map((s,i)=>`<button data-act="pqs" data-k="${i}" class="${i?'':'on'}">${s}</button>`).join('')}</div><p class="dg-cap" id="pqCap">${PQCAP[0]}</p></div>
   <div class="diagram"><div id="pqWave">${pqSVG(pqMode)}</div>
    <div class="dg-ctrl" role="group" aria-label="파형 보기"><button data-act="pq" data-k="before" class="${pqMode==='before'?'on':''}">보상 전</button><button data-act="pq" data-k="after" class="${pqMode==='after'?'on':''}">보상 후 (AHF)</button><button data-act="pq" data-k="both" class="${pqMode==='both'?'on':''}">겹쳐 보기</button></div>
@@ -2051,7 +2051,7 @@ function pgEngineering(){
  const V=['ABB','Schneider','Siemens','SEL','GE'];
  return `<div class="block">${blockHead('엔지니어링 서비스')}<p class="lead">보호계전 · 전력계통 담당자가 기술 검토를 수행합니다.</p>
   <div class="grid-4">${ENG.map(([t,d],i)=>`<div class="card">${pg(ENGPG[i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>
- <div class="block">${blockHead('수행 절차')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step${i===1?' hl':''}">${pg(STEPPG[i],'sm')}<b>${s}</b></div>`).join('')}</div></div>
+ <div class="block">${blockHead('수행 절차')}<div class="steps light" style="margin-top:0">${STEPS.map((s,i)=>`<div class="step">${pg(STEPPG[i],'sm')}<b>${s}</b></div>`).join('')}</div></div>
  <div class="block">${blockHead('제조사 비교 예 — 고지대(4,000 m) 보호계전기')}
   <div class="tbl-wrap"><table><thead><tr><th>항목</th>${V.map(v=>`<th>${v}</th>`).join('')}</tr></thead><tbody>
    <tr><th style="font-weight:600">카탈로그 고도 정격</th>${V.map(()=>'<td>확인</td>').join('')}</tr>
@@ -2253,7 +2253,7 @@ let eqT;window.addEventListener('resize',()=>{clearTimeout(eqT);eqT=setTimeout(e
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>eqSlides());
 function initCarousel(){
  eqSlides();
- slideI=0;hoverHero=false;const dur=7000;
+ slideI=0;hoverHero=false;const dur=4000;
  const bars=$('#hcBars');bars.style.setProperty('--dur',dur+'ms');
  paused=paused||RM;
  showSlide(0);
