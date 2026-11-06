@@ -836,6 +836,21 @@ td.hl{color:var(--ac);font-weight:600}
  .bA{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:30px;padding:26px 20px}
  .bA::before,.bA .cur{display:none}
  .bA .gl{font-size:110px}.bA .nd{width:64px;height:64px}.bA .nd .pg svg{width:32px;height:32px}.bA .w{font-size:19px}}
+.greet p{text-wrap:pretty}
+@container site (max-width:900px){br.br-pc{display:none}}
+.scab-iso + .dg-cap{font-size:16.5px;line-height:1.6}
+.rkw{margin-top:4px}.rkw span{background:var(--card);display:inline-flex;align-items:center;gap:6px}
+.rkw i{width:7px;height:7px;border-radius:50%;background:var(--bc);flex:none}
+.facts.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.area-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.ar{position:relative;border:1px solid var(--line);background:var(--card);padding:18px 18px 16px;display:grid;gap:6px;align-content:start}
+.ar .pg svg{width:34px;height:34px}
+.ar b{font-size:16px;color:var(--ink);margin-top:4px}
+.ar span{font-size:13.5px;color:var(--muted)}
+.ar.x{border-color:var(--ac);background:var(--ac-soft)}
+.ar .tg{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:11px;color:var(--ac);border:1px solid var(--ac);padding:0 8px;border-radius:10px;line-height:1.7}
+.pil .tg{display:inline-block;vertical-align:middle;margin-left:6px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--ac-hl);border:1px solid var(--ac-hl);padding:0 8px;border-radius:10px;line-height:1.7}
+@container site (max-width:900px){.area-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dp-h{gap:10px}.dp-h span{margin-left:auto}
 .iso .pgs{fill:none;stroke:#E6EEF5;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .iso .pgs .a{stroke:#5CF0FA}.iso .pgs .f{fill:#E6EEF5;stroke:none}.iso .pgs .fa{fill:#5CF0FA;stroke:none}
@@ -1095,7 +1110,7 @@ function kit(K,OX,OY){
   return `<path d="${d}" fill="none" stroke="${col}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".28" filter="url(#iso-glow)"/><path d="${d}" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#F2FEFF" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round" class="flow"/>`};
  const lamp=(id,x,y,z,r=3.4)=>{const L=ip(x,y,z);return `<g class="lamp" data-n="${id}"><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="${r*2.5}" class="lg" fill="#E5484D" opacity=".35" filter="url(#iso-glow)"/><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="${r}" class="lc" fill="#E5484D"/></g>`};
  const chip=(text,x,y,z,o={})=>{const p=ip(x,y,z);const w=o.w||(text.length*6.6+(o.dot?24:16));const dot=o.dot?`<circle cx="${f1(-w/2+10)}" cy="0" r="3.6" class="cd" fill="#E5484D"/>`:'';
-  return `<g class="chip${o.cls?' '+o.cls:''}"${o.n?` data-n="${o.n}"`:''} transform="translate(${f1(p[0])},${f1(p[1])})"><rect x="${f1(-w/2)}" y="-10" width="${f1(w)}" height="20" rx="10" fill="${o.bg||'#FFFFFF'}" stroke="rgba(19,37,58,.16)" filter="url(#iso-drop)"/>${dot}<text x="${o.dot?f1(-w/2+17):0}" y="3.8" ${o.dot?'':'text-anchor="middle"'} font-size="10.5" font-weight="600" fill="${o.fg||'#13253A'}" font-family="IBM Plex Mono,ui-monospace,monospace">${text}</text></g>`};
+  return `<g class="chip${o.cls?' '+o.cls:''}"${o.n?` data-n="${o.n}"`:''} transform="translate(${f1(p[0])},${f1(p[1])})${o.s?` scale(${o.s})`:''}"><rect x="${f1(-w/2)}" y="-10" width="${f1(w)}" height="20" rx="10" fill="${o.bg||'#FFFFFF'}" stroke="rgba(19,37,58,.16)" filter="url(#iso-drop)"/>${dot}<text x="${o.dot?f1(-w/2+17):0}" y="3.8" ${o.dot?'':'text-anchor="middle"'} font-size="10.5" font-weight="600" fill="${o.fg||'#13253A'}" font-family="IBM Plex Mono,ui-monospace,monospace">${text}</text></g>`};
  const badge=(name,x,y,z,r=17)=>{const p=ip(x,y,z);const s=r*1.25;
   return `<g class="badge" transform="translate(${f1(p[0])},${f1(p[1])})"><path d="M0 ${r+9}V${r}" stroke="#13253A" stroke-width="1" opacity=".35"/><circle r="${r}" fill="#FFFFFF" filter="url(#iso-drop)"/><svg x="${f1(-s/2)}" y="${f1(-s/2)}" width="${f1(s)}" height="${f1(s)}" viewBox="0 0 48 48" class="pgi">${PG[name]}</svg></g>`};
  const platform=(X1,Y1,TH=1.4,grid=4)=>{let s=poly([ip(0,Y1,0),ip(X1,Y1,0),ip(X1,Y1,-TH),ip(0,Y1,-TH)],'#C7D1DA')+poly([ip(X1,0,0),ip(X1,Y1,0),ip(X1,Y1,-TH),ip(X1,0,-TH)],'#B1BEC9')+poly([ip(0,0),ip(X1,0),ip(X1,Y1),ip(0,Y1)],'url(#iso-plat)');
@@ -1412,8 +1427,8 @@ function sceneSCAB(words){
    const a0=k.ip(x+W/2,Y0+Dp/2,zt+gh+.6),a1=k.ip(x+W/2,Y0+Dp/2,zt+gh+4.2);
    s+=`<path d="M${f1(a0[0])} ${f1(a0[1])}V${f1(a1[1])}M${f1(a1[0]-7)} ${f1(a1[1]+8)}L${f1(a1[0])} ${f1(a1[1])}L${f1(a1[0]+7)} ${f1(a1[1]+8)}" fill="none" stroke="#007A85" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`}
  });
- words.forEach((w,i)=>s+=k.chip(w,XS[i]+W/2,yb+3,.2,{w:w.length*7.4+22}));
- s+=k.chip('ENGINEERING',4.2,yb,.3,{bg:'#13253A',fg:'#5CF0FA',w:104});
+ words.forEach((w,i)=>s+=k.chip(w,XS[i]+W/2,yb+3.4,.2,{w:w.length*7.4+22,s:1.45}));
+ s+=k.chip('ENGINEERING',4.2,yb,.3,{bg:'#13253A',fg:'#5CF0FA',w:104,s:1.45});
  return wrap(s,'Safe · Connected · Advanced · Beyond — SCAB');
 }
 
@@ -1902,29 +1917,33 @@ function pgCompanyName(){
 }
 function pgCompanyOverview(){
  return `<div class="block">${blockHead('Greeting',`<span class="draft">Draft text</span>`)}
-  <div class="prose"><p>Founded in Seoul in 2004, SCAB Engineering has supplied protection relays, circuit breakers and process automation equipment.</p>
-  <p>Today it handles ABB, Schneider Electric, Hitachi Energy, SIFANG and Sangdo Electric products, and provides engineering such as protection coordination calculations, transfer logic design and commissioning support.</p>
-  <p>The basic principle is to select products from the customer’s point of view and to provide technical review. Growing with our customers — long and steady.</p>
+  <div class="prose greet"><p>Since 2004, SCAB Engineering has supplied protection relays, circuit breakers and process automation equipment.</p>
+  <p>Today it handles ABB, Schneider Electric, Hitachi Energy, SIFANG and Sangdo Electric products,<br class="br-pc"> and provides engineering such as protection coordination calculations, transfer logic design and commissioning support.</p>
+  <p>The basic principle is to select products from the customer’s point of view and to provide technical review.<br class="br-pc"> Growing with our customers — long and steady.</p>
   </div></div>
  <div class="block">${blockHead('Meaning of SCAB',`<a class="link" href="#company-name">Learn more ${ic('arrow')}</a>`)}${scabBand()}</div>
  <div class="block">${blockHead('Company overview')}
-  <div class="facts"><div class="fact">${pg('calendar')}<b>2004</b><span>Founded (04.10)</span></div><div class="fact">${pg('building')}<b>2021</b><span>Incorporated (09.27)</span></div><div class="fact">${pg('box')}<b>5</b><span>Our brands</span></div><div class="fact">${pg('bulb')}<b>R&amp;D</b><span>R&D department (2026)</span></div></div>
+  <div class="facts"><div class="fact">${pg('calendar')}<b>2004</b><span>Founded (04.10)</span></div><div class="fact">${pg('building')}<b>2021</b><span>Incorporated (09.27)</span></div><div class="fact">${pg('box')}<b>5+</b><span>Our brands</span></div><div class="fact">${pg('bulb')}<b>R&amp;D</b><span>R&D department (2026)</span></div></div>
   <div class="tbl-wrap"><table class="info"><tbody>
    <tr><th>Company</th><td>${CO.en}</td></tr>
    <tr><th>Address</th><td>${CO.addr}<br>${CO.addr2}</td></tr>
    <tr><th>Tel / Fax</th><td class="mono tnum">${CO.tel} / ${CO.fax}</td></tr><tr><th>E-mail</th><td class="email">${CO.mail}</td></tr>
    <tr><th>Business reg. no.</th><td class="mono tnum">${CO.bizno}</td></tr><tr><th>Business type</th><td>${CO.type}</td></tr>
-   <tr><th>Established</th><td>Founded ${CO.founded} · Incorporated ${CO.inc}</td></tr><tr><th>Employees</th><td>${CO.staff}</td></tr>
+   <tr><th>Established</th><td>Founded ${CO.founded} · Incorporated ${CO.inc}</td></tr>
   </tbody></table></div></div>`;
 }
 const VALUES=[['Customer success','Product selection and technical review from the customer’s point of view'],['New opportunities and markets','Data centers · renewables · overseas'],['Trust-based synergy','Collaboration with manufacturers · EPCs · panel builders'],['Sustainable growth','Stable growth based on loyal customers'],['Social contribution','Supporting industry with safe power systems'],['New technology leadership','Digital substation · IEC 61850 · AI maintenance'],['Technical · sales capability','Protection expertise · multi-brand capability'],['People-first culture','Training · welfare · shared results']];
+const AREAS=[['relay','Protection relays','Protection · control · arc protection'],['breaker','Breakers · switchgear','LV · MV · HV'],['transfer','Transfer · synchronizing','HSBT · synchronizers'],['meter','Metering · monitoring','Digital meters · EOCR'],['tower','HV · transformers','Transformers · HV products'],
+ ['wave','Power quality','SVG · AHF · capacitors · reactors'],['plug','LV products','Breakers · auxiliary relays'],['gauge','Process automation (PA)','Transmitters · positioners · analyzers'],['screen','System solutions','SCADA · PMS · FLISR · Smart MCC',1],['building','In-house manufacturing','Switchboards · LV boxes',1]];
 function pgCompanyVision(){
  return `<div class="block">${blockHead('SCAB 2030')}<p class="lead">Expanding from product sales to system solutions, and to manufacturing-based total solutions by 2030.</p>
-  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>Brand · product diversification</b><p>SEK · HEK distributor, SIFANG exclusive distributor, EOCR distributor</p></div>
+  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>Brand · product diversification</b><div class="kw rkw">${[['schneider','Schneider Electric Korea distributor'],['hitachi','Hitachi Energy Korea distributor'],['sifang','SIFANG exclusive distributor in Korea'],['schneider','Schneider EOCR distributor']].map(([k,t])=>`<span><i style="--bc:${BRANDS[k].color}"></i>${t}</span>`).join('')}</div></div>
    <div class="rs now"><span class="yr">2027 / 28</span><b>System solution expansion</b><p>Product + engineering + system (SCADA · PMS · HSBT · FLISR) packages</p></div>
    <div class="rs fut"><span class="yr">2029 / 30</span><b>Manufacturing-based total solutions</b><p>In-house switchboard · LV box manufacturing, total solution supply</p></div></div>
-  <div class="facts"><div class="fact">${pg('people')}<b>10+</b><span>Members</span></div><div class="fact">${pg('growth')}<b>₩10B+</b><span>Revenue</span></div><div class="fact">${pg('link')}<b>100+</b><span>Customers</span></div><div class="fact">${pg('box')}<b>20+</b><span>Brands · product lines</span></div></div>
+  <div class="facts two"><div class="fact">${pg('link')}<b>100+</b><span>Customers</span></div><div class="fact">${pg('box')}<b>20+</b><span>Brands · product lines</span></div></div>
   <p class="note">2030 targets</p></div>
+ <div class="block">${blockHead('Products and solutions by 2030')}<p class="lead">System solutions and in-house manufactured products are added to the current product range.</p>
+  <div class="area-grid">${AREAS.map(([p,t,d,x])=>`<div class="ar${x?' x':''}">${x?'<span class="tg">Expanding</span>':''}${pg(p)}<b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
  <div class="block">${blockHead('Mission · Core values')}<p class="lead">Growing with our customers — Long and Steady.</p>
   <div class="grid-4">${VALUES.map(([t,d],i)=>`<div class="card">${pg(['target','compass','link','growth','leaf','bulb','gear','people'][i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
@@ -1940,7 +1959,7 @@ function pgCompanyOrg(){
   <div class="org-brands">${BKEYS.map(k=>`<a class="ob" href="#products-${k}" style="--bc:${BRANDS[k].color}"><div class="bl">${brandLogo(k)}</div><p>${prod[k]}</p></a>`).join('')}</div></div>
  <div class="block">${blockHead('Engineering · system solutions')}
   <div class="pillars"><div class="pil">${pg('gear')}<h4>Engineering business</h4><ul><li>Relay settings · protection coordination</li><li>HSBT · synchronizing · logic design, commissioning support</li><li>EOCR · digital meter application design</li></ul></div>
-   <div class="pil k">${pg('screen','on-dark')}<h4>System solution business</h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR self-healing distribution · digital substations</li><li>SVG/STATCOM · AHF power quality packages</li></ul></div>
+   <div class="pil k">${pg('screen','on-dark')}<h4>System solution business <span class="tg">2027 – 28 focus</span></h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR self-healing distribution · digital substations</li><li>SVG/STATCOM · AHF power quality packages</li></ul></div>
    <div class="pil">${pg('building')}<h4>Large design · consulting market</h4><ul><li>Data centers</li><li>Renewables · offshore wind</li><li>Nuclear · power generation · overseas EPC</li></ul></div></div></div>`;
 }
 function pgCompanyCerts(){

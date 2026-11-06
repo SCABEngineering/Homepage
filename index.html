@@ -836,6 +836,21 @@ td.hl{color:var(--ac);font-weight:600}
  .bA{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:30px;padding:26px 20px}
  .bA::before,.bA .cur{display:none}
  .bA .gl{font-size:110px}.bA .nd{width:64px;height:64px}.bA .nd .pg svg{width:32px;height:32px}.bA .w{font-size:19px}}
+.greet p{text-wrap:pretty}
+@container site (max-width:900px){br.br-pc{display:none}}
+.scab-iso + .dg-cap{font-size:16.5px;line-height:1.6}
+.rkw{margin-top:4px}.rkw span{background:var(--card);display:inline-flex;align-items:center;gap:6px}
+.rkw i{width:7px;height:7px;border-radius:50%;background:var(--bc);flex:none}
+.facts.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.area-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.ar{position:relative;border:1px solid var(--line);background:var(--card);padding:18px 18px 16px;display:grid;gap:6px;align-content:start}
+.ar .pg svg{width:34px;height:34px}
+.ar b{font-size:16px;color:var(--ink);margin-top:4px}
+.ar span{font-size:13.5px;color:var(--muted)}
+.ar.x{border-color:var(--ac);background:var(--ac-soft)}
+.ar .tg{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:11px;color:var(--ac);border:1px solid var(--ac);padding:0 8px;border-radius:10px;line-height:1.7}
+.pil .tg{display:inline-block;vertical-align:middle;margin-left:6px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--ac-hl);border:1px solid var(--ac-hl);padding:0 8px;border-radius:10px;line-height:1.7}
+@container site (max-width:900px){.area-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dp-h{gap:10px}.dp-h span{margin-left:auto}
 .iso .pgs{fill:none;stroke:#E6EEF5;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .iso .pgs .a{stroke:#5CF0FA}.iso .pgs .f{fill:#E6EEF5;stroke:none}.iso .pgs .fa{fill:#5CF0FA;stroke:none}
@@ -1089,7 +1104,7 @@ function kit(K,OX,OY){
   return `<path d="${d}" fill="none" stroke="${col}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".28" filter="url(#iso-glow)"/><path d="${d}" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="#F2FEFF" stroke-width="2" stroke-dasharray="2 14" stroke-linecap="round" class="flow"/>`};
  const lamp=(id,x,y,z,r=3.4)=>{const L=ip(x,y,z);return `<g class="lamp" data-n="${id}"><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="${r*2.5}" class="lg" fill="#E5484D" opacity=".35" filter="url(#iso-glow)"/><circle cx="${f1(L[0])}" cy="${f1(L[1])}" r="${r}" class="lc" fill="#E5484D"/></g>`};
  const chip=(text,x,y,z,o={})=>{const p=ip(x,y,z);const w=o.w||(text.length*6.6+(o.dot?24:16));const dot=o.dot?`<circle cx="${f1(-w/2+10)}" cy="0" r="3.6" class="cd" fill="#E5484D"/>`:'';
-  return `<g class="chip${o.cls?' '+o.cls:''}"${o.n?` data-n="${o.n}"`:''} transform="translate(${f1(p[0])},${f1(p[1])})"><rect x="${f1(-w/2)}" y="-10" width="${f1(w)}" height="20" rx="10" fill="${o.bg||'#FFFFFF'}" stroke="rgba(19,37,58,.16)" filter="url(#iso-drop)"/>${dot}<text x="${o.dot?f1(-w/2+17):0}" y="3.8" ${o.dot?'':'text-anchor="middle"'} font-size="10.5" font-weight="600" fill="${o.fg||'#13253A'}" font-family="IBM Plex Mono,ui-monospace,monospace">${text}</text></g>`};
+  return `<g class="chip${o.cls?' '+o.cls:''}"${o.n?` data-n="${o.n}"`:''} transform="translate(${f1(p[0])},${f1(p[1])})${o.s?` scale(${o.s})`:''}"><rect x="${f1(-w/2)}" y="-10" width="${f1(w)}" height="20" rx="10" fill="${o.bg||'#FFFFFF'}" stroke="rgba(19,37,58,.16)" filter="url(#iso-drop)"/>${dot}<text x="${o.dot?f1(-w/2+17):0}" y="3.8" ${o.dot?'':'text-anchor="middle"'} font-size="10.5" font-weight="600" fill="${o.fg||'#13253A'}" font-family="IBM Plex Mono,ui-monospace,monospace">${text}</text></g>`};
  const badge=(name,x,y,z,r=17)=>{const p=ip(x,y,z);const s=r*1.25;
   return `<g class="badge" transform="translate(${f1(p[0])},${f1(p[1])})"><path d="M0 ${r+9}V${r}" stroke="#13253A" stroke-width="1" opacity=".35"/><circle r="${r}" fill="#FFFFFF" filter="url(#iso-drop)"/><svg x="${f1(-s/2)}" y="${f1(-s/2)}" width="${f1(s)}" height="${f1(s)}" viewBox="0 0 48 48" class="pgi">${PG[name]}</svg></g>`};
  const platform=(X1,Y1,TH=1.4,grid=4)=>{let s=poly([ip(0,Y1,0),ip(X1,Y1,0),ip(X1,Y1,-TH),ip(0,Y1,-TH)],'#C7D1DA')+poly([ip(X1,0,0),ip(X1,Y1,0),ip(X1,Y1,-TH),ip(X1,0,-TH)],'#B1BEC9')+poly([ip(0,0),ip(X1,0),ip(X1,Y1),ip(0,Y1)],'url(#iso-plat)');
@@ -1406,8 +1421,8 @@ function sceneSCAB(words){
    const a0=k.ip(x+W/2,Y0+Dp/2,zt+gh+.6),a1=k.ip(x+W/2,Y0+Dp/2,zt+gh+4.2);
    s+=`<path d="M${f1(a0[0])} ${f1(a0[1])}V${f1(a1[1])}M${f1(a1[0]-7)} ${f1(a1[1]+8)}L${f1(a1[0])} ${f1(a1[1])}L${f1(a1[0]+7)} ${f1(a1[1]+8)}" fill="none" stroke="#007A85" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`}
  });
- words.forEach((w,i)=>s+=k.chip(w,XS[i]+W/2,yb+3,.2,{w:w.length*7.4+22}));
- s+=k.chip('ENGINEERING',4.2,yb,.3,{bg:'#13253A',fg:'#5CF0FA',w:104});
+ words.forEach((w,i)=>s+=k.chip(w,XS[i]+W/2,yb+3.4,.2,{w:w.length*7.4+22,s:1.45}));
+ s+=k.chip('ENGINEERING',4.2,yb,.3,{bg:'#13253A',fg:'#5CF0FA',w:104,s:1.45});
  return wrap(s,'Safe · Connected · Advanced · Beyond — SCAB');
 }
 
@@ -1883,7 +1898,7 @@ const SCABV=[
 const scabBand=()=>`<div class="bnd-bg bA"><img class="bnd-cube" src="${A('cube_white')}" alt=""><span class="cur"></span>${SCABV.map((v,i)=>`<div class="i"><span class="gl" aria-hidden="true">${v.l}</span><span class="nd">${pg(v.pg,'on-dark')}</span><span class="no">0${i+1}</span><span class="w"><em>${v.l}</em>${v.w.slice(1)}</span><span class="k">${v.ko}</span></div>`).join('')}</div>`;
 function pgCompanyName(){
  return `<div class="block">${blockHead('SCAB의 의미','<span class="note">Safe · Connected · Advanced · Beyond</span>')}
-  <p class="lead">SCAB은 Safe · Connected · Advanced · Beyond의 머리글자입니다. 안전한 전력에서 출발해 연결된 시스템과 앞선 기술로, 제품 공급 그 이상을 지향한다는 뜻을 담았습니다.</p>
+  <p class="lead">SCAB은 Safe · Connected · Advanced · Beyond를 뜻합니다. 안전한 전력에서 출발해 연결된 시스템과 앞선 기술로, 제품 공급 그 이상을 지향한다는 뜻을 담았습니다.</p>
   ${scabBand()}
   <div class="diagram isod scab-iso">${ISO.sceneSCAB(SCABV.map(v=>v.w))}</div>
   <p class="dg-cap">엔지니어링이 모선처럼 네 가치를 하나로 잇습니다. B 위의 점선 큐브는 앞으로 넓혀 갈 영역을 뜻합니다.</p></div>
@@ -1896,29 +1911,33 @@ function pgCompanyName(){
 }
 function pgCompanyOverview(){
  return `<div class="block">${blockHead('인사말',`<span class="draft">문구 초안</span>`)}
-  <div class="prose"><p>(주)에스캡엔지니어링은 2004년 서울에서 시작해 보호계전기, 차단기, 공정자동화 기기를 공급해 왔습니다.</p>
-  <p>현재는 ABB, Schneider Electric, Hitachi Energy, SIFANG, 상도전기 제품을 취급하며, 보호협조 계산, 절체 로직 설계, 시운전 지원 같은 엔지니어링 업무를 함께 수행합니다.</p>
-  <p>고객의 입장에서 제품을 선정하고 기술 검토를 제공하는 것을 기본으로 삼고 있습니다. 고객과 함께 오래, 꾸준히 성장하겠습니다.</p>
+  <div class="prose greet"><p>(주)에스캡엔지니어링은 2004년부터 보호계전기, 차단기, 공정자동화 기기를 공급해 왔습니다.</p>
+  <p>현재는 ABB, Schneider Electric, Hitachi Energy, SIFANG, 상도전기 제품을 취급하며,<br class="br-pc"> 보호협조 계산, 절체 로직 설계, 시운전 지원 같은 엔지니어링 업무를 함께 수행합니다.</p>
+  <p>고객의 입장에서 제품을 선정하고 기술 검토를 제공하는 것을 기본으로 삼고 있습니다.<br class="br-pc"> 고객과 함께 오래, 꾸준히 성장하겠습니다.</p>
   </div></div>
  <div class="block">${blockHead('SCAB의 의미',`<a class="link" href="#company-name">자세히 보기 ${ic('arrow')}</a>`)}${scabBand()}</div>
  <div class="block">${blockHead('회사 개요')}
-  <div class="facts"><div class="fact">${pg('calendar')}<b>2004</b><span>창업 (04.10)</span></div><div class="fact">${pg('building')}<b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact">${pg('box')}<b>5</b><span>취급 브랜드</span></div><div class="fact">${pg('bulb')}<b>R&amp;D</b><span>연구개발전담부서 (2026)</span></div></div>
+  <div class="facts"><div class="fact">${pg('calendar')}<b>2004</b><span>창업 (04.10)</span></div><div class="fact">${pg('building')}<b>2021</b><span>법인 설립 (09.27)</span></div><div class="fact">${pg('box')}<b>5+</b><span>취급 브랜드</span></div><div class="fact">${pg('bulb')}<b>R&amp;D</b><span>연구개발전담부서 (2026)</span></div></div>
   <div class="tbl-wrap"><table class="info"><tbody>
    <tr><th>회사명</th><td>${CO.name} · ${CO.en}</td></tr>
    <tr><th>주소</th><td>${CO.addr}<br>${CO.addr2}</td></tr>
    <tr><th>전화 / 팩스</th><td class="mono tnum">${CO.tel} / ${CO.fax}</td></tr><tr><th>이메일</th><td class="email">${CO.mail}</td></tr>
    <tr><th>사업자등록번호</th><td class="mono tnum">${CO.bizno}</td></tr><tr><th>업태 / 종목</th><td>${CO.type}</td></tr>
-   <tr><th>설립</th><td>창업 ${CO.founded} · 법인 설립 ${CO.inc}</td></tr><tr><th>임직원</th><td>${CO.staff}</td></tr>
+   <tr><th>설립</th><td>창업 ${CO.founded} · 법인 설립 ${CO.inc}</td></tr>
   </tbody></table></div></div>`;
 }
 const VALUES=[['고객 성공','고객 관점의 제품 선정과 기술 검토'],['새로운 기회와 시장','데이터센터 · 신재생 · 해외'],['신뢰 기반 시너지','제조사 · EPC · 배전반 제작사와 협업'],['지속 성장','충성 고객 기반의 안정적 성장'],['사회 공헌','안전한 전력 시스템으로 산업 지원'],['신기술 리더십','디지털 변전소 · IEC 61850 · AI 유지보수'],['기술 · 영업 역량','보호계전 전문성 · 멀티 브랜드 역량'],['사람 중심 문화','교육 · 복지 · 성과 공유']];
+const AREAS=[['relay','보호계전기','보호 · 제어 · 아크 보호'],['breaker','차단기 · 개폐기','저압 · 고압 · 초고압'],['transfer','절체 · 동기','HSBT · 동기투입장치'],['meter','계측 · 모니터링','디지털 미터 · EOCR'],['tower','초고압 · 변압기','변압기 · HV 제품'],
+ ['wave','전력품질','SVG · AHF · 콘덴서 · 리액터'],['plug','저압 제품','차단기 · 보조 계전기'],['gauge','공정자동화(PA)','전송기 · 포지셔너 · 분석기'],['screen','시스템 솔루션','SCADA · PMS · FLISR · Smart MCC',1],['building','자체 제작','배전반 · LV Box',1]];
 function pgCompanyVision(){
  return `<div class="block">${blockHead('SCAB 2030')}<p class="lead">제품 판매에서 시스템 솔루션으로, 2030년에는 제조 기반 종합 솔루션 공급으로 확장합니다.</p>
-  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>브랜드 · 제품 다각화</b><p>SEK · HEK 대리점, SIFANG 독점 대리점, EOCR 대리점</p></div>
+  <div class="road"><div class="rs"><span class="yr">2025 / 26</span><b>브랜드 · 제품 다각화</b><div class="kw rkw">${[['schneider','Schneider Electric Korea 대리점'],['hitachi','Hitachi Energy Korea 대리점'],['sifang','SIFANG 국내 독점 대리점'],['schneider','Schneider EOCR 대리점']].map(([k,t])=>`<span><i style="--bc:${BRANDS[k].color}"></i>${t}</span>`).join('')}</div></div>
    <div class="rs now"><span class="yr">2027 / 28</span><b>시스템 솔루션 확장</b><p>제품 + 엔지니어링 + 시스템 (SCADA · PMS · HSBT · FLISR) 패키지</p></div>
    <div class="rs fut"><span class="yr">2029 / 30</span><b>제조 기반 종합 솔루션</b><p>자체 배전반 · LV Box 제작, 종합 솔루션 공급</p></div></div>
-  <div class="facts"><div class="fact">${pg('people')}<b>10+</b><span>구성원</span></div><div class="fact">${pg('growth')}<b>₩10B+</b><span>매출</span></div><div class="fact">${pg('link')}<b>100+</b><span>고객사</span></div><div class="fact">${pg('box')}<b>20+</b><span>브랜드 · 제품군</span></div></div>
+  <div class="facts two"><div class="fact">${pg('link')}<b>100+</b><span>고객사</span></div><div class="fact">${pg('box')}<b>20+</b><span>브랜드 · 제품군</span></div></div>
   <p class="note">2030년 목표 기준</p></div>
+ <div class="block">${blockHead('2030 취급 제품 · 솔루션')}<p class="lead">지금의 제품군에 시스템 솔루션과 자체 제작 제품을 더해 갑니다.</p>
+  <div class="area-grid">${AREAS.map(([p,t,d,x])=>`<div class="ar${x?' x':''}">${x?'<span class="tg">확장</span>':''}${pg(p)}<b>${t}</b><span>${d}</span></div>`).join('')}</div></div>
  <div class="block">${blockHead('미션 · 핵심가치')}<p class="lead">Growing with our customers — Long and Steady. 고객과 함께 오래, 꾸준히 성장합니다.</p>
   <div class="grid-4">${VALUES.map(([t,d],i)=>`<div class="card">${pg(['target','compass','link','growth','leaf','bulb','gear','people'][i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
@@ -1934,7 +1953,7 @@ function pgCompanyOrg(){
   <div class="org-brands">${BKEYS.map(k=>`<a class="ob" href="#products-${k}" style="--bc:${BRANDS[k].color}"><div class="bl">${brandLogo(k)}</div><p>${prod[k]}</p></a>`).join('')}</div></div>
  <div class="block">${blockHead('엔지니어링 · 시스템 솔루션')}
   <div class="pillars"><div class="pil">${pg('gear')}<h4>엔지니어링 사업</h4><ul><li>정정 계산 · 보호협조</li><li>HSBT · 동기 · 로직 설계, 시운전 지원</li><li>EOCR · 디지털 미터 적용 설계</li></ul></div>
-   <div class="pil k">${pg('screen','on-dark')}<h4>시스템 솔루션 사업</h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR 자가복구 배전 · 디지털 변전소</li><li>SVG/STATCOM · AHF 전력품질 패키지</li></ul></div>
+   <div class="pil k">${pg('screen','on-dark')}<h4>시스템 솔루션 사업 <span class="tg">2027 – 28 중점</span></h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR 자가복구 배전 · 디지털 변전소</li><li>SVG/STATCOM · AHF 전력품질 패키지</li></ul></div>
    <div class="pil">${pg('building')}<h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>원자력 · 발전 · 해외 EPC</li></ul></div></div></div>`;
 }
 function pgCompanyCerts(){
