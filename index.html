@@ -1513,7 +1513,7 @@ const BRANDS={
    intro:'Beijing SIFANG Automation — 동적 무효전력 보상(SVG/STATCOM), AHF · 콘덴서 · 리액터 조합의 전력품질 패키지, 보호 · 변전 자동화',
    made:[['SVG / STATCOM','CN'],['보호','CN']],site:'https://www.sf-auto.com'},
  sangdo:{name:'상도일렉트릭',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'상도일렉트릭 공급사',scope:'AFDD (아크 고장 차단기)',
-   intro:'저압 아크 고장 차단기(AFDD) 공급',made:[],site:'http://www.sangdo.com/'}
+   intro:'지능형 아크차단기(AFDD) 공급 — 하이브리드(듀얼스캔) · 온디바이스 AI 칩 기반',made:[],site:'http://www.sangdo.com/'}
 };
 const BKEYS=Object.keys(BRANDS);
 const brandLogo=(k,cls='')=>{const b=BRANDS[k];return b.logo?`<img class="${cls}" src="${A(b.logo)}" alt="${esc(b.name)}" loading="lazy">`:`<span class="txtlogo">SIFANG <small>北京四方</small></span>`};
@@ -1528,14 +1528,15 @@ const PRODUCTS=[
  P('abb-sync6','abb','transfer','동기투입장치','SYNCHROTACT 6','abb_sync6',['자동 동기 투입 · 동기 검출','발전기 · 계통 연계','원전 동기계전기 대체 동등성 검토']),
  P('abb-ssc600','abb','relay','스마트 변전소 보호 · 제어','SSC600','abb_ssc600',['집중형 보호 · 제어','AI 기반 예측 정비','디지털 변전소 (IEC 61850)']),
  P('abb-mvcb','abb','breaker','고압 차단기 · 개폐기','VCB · VCS · LBS','abb_mvcb',['IEC / ANSI 규격','CT · PT · 센서']),
- P('abb-islimiter','abb','breaker','고장전류 한류기','Is-Limiter',null,['고장전류를 수 ms 내 차단','기존 차단기 · 모선 정격 유지 가능','국내 대형 플랜트 적용 실적']),
+ P('abb-islimiter','abb','breaker','고장전류 한류기','Is-Limiter','abb_islimiter',['고장전류를 수 ms 내 차단','기존 차단기 · 모선 정격 유지 가능','국내 대형 플랜트 적용 실적']),
  P('abb-lvcb','abb','lv','저압 차단기','ACB · MCCB · MCB','abb_lvcb',['보조 계전기','배전반 · 플랜트 적용']),
- P('abb-afdd','abb','lv','아크 고장 차단기','AFDD','abb_afdd',['저압 아크 고장 검출 · 차단','전기 화재 예방']),
+ P('abb-afdd','abb','lv','아크 고장 차단기','AFDD · S-ARC1 · DS-ARC1','abb_afdd',['저압 아크 고장 검출 · 차단','전기 화재 예방']),
  P('abb-tx','abb','pa','전송기','압력 · 온도 · 유량','abb_tx',['공정자동화(PA) 계측']),
  P('abb-pos','abb','pa','밸브 포지셔너','Positioner','abb_pos',['플랜트 · 발전 적용']),
  P('abb-ana','abb','pa','분석기','Analyzer','abb_ana',['공정 분석']),
  P('se-easergy','schneider','relay','보호계전기','Easergy P3 · P5','se_easergy',['저 · 고압 보호, 아크 검출','IEC 61850 등 다양한 프로토콜','UL 인증 모델 (해외 프로젝트)']),
  P('se-powerlogic','schneider','meter','디지털 미터','PowerLogic PM8000 · ION','se_powerlogic',['정밀 계측','고조파 · 전력품질 분석','UL 인증 모델 PM8240 · ION7400']),
+ P('se-afdd','schneider','lv','아크 고장 차단기','AFDD · Acti9 Active',null,['저압 아크 고장 검출 · 차단','전기 화재 예방']),
  P('se-mtz','schneider','lv','저압 기중차단기','MasterPact MTZ','se_x139',['전력품질 계측 내장','디지털 모듈 업그레이드']),
  P('se-hvx','schneider','breaker','고압 진공차단기','EvoPact HVX','se_x141',['콤팩트 설계 · 저유지보수','IoT 센서 디지털 모니터링']),
  P('se-eocr','schneider','lv','전자식 모터보호계전기','EOCR iSEM1 · iSEM2','eocr',['과부하 · 결상 · 지락 보호','통신형 모델','신규 · MRO · Retrofit 공급']),
@@ -1551,7 +1552,7 @@ const PRODUCTS=[
  P('sf-svg','sifang','pq','SVG / STATCOM','동적 무효전력 보상',null,['고압 · 특고압 (변전소)','신재생 · 해상풍력 연계','실시간(ms) 응답']),
  P('sf-pq','sifang','pq','전력품질 패키지','AHF · 콘덴서 · 리액터',null,['부하 · 계통별 조합 제안','진단 → 선정 → 공급 → 사후관리']),
  P('sf-sa','sifang','relay','보호 · 변전 자동화','Protection & SA',null,['보호 및 변전 자동화 포트폴리오']),
- P('sd-afdd','sangdo','lv','아크 고장 차단기','AFDD',null,['저압 아크 고장 검출 · 차단','전기 화재 예방'])
+ P('sd-afdd','sangdo','lv','지능형 아크차단기','AFDD · 하이브리드 · AI',null,['하이브리드(듀얼스캔) 아크 검출','온디바이스 AI 칩 기반 판별','누전차단기 기능 일체형'])
 ];
 
 /* ---------- resources ---------- */
@@ -1777,7 +1778,7 @@ const chipBrand=k=>{const b=BRANDS[k];return `<span class="chip" style="--bc:${b
 const waveIcon=`<svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 Q12 2 22 20 T42 20 T62 20 T82 20 T102 20 T122 20" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/><path d="M2 20 Q12 6 22 20 T42 20 T62 20 T82 20 T102 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
 function pImg(p){
  if(p.img)return `<img src="${A(p.img)}" alt="${esc(p.name)} ${esc(p.model)}" loading="lazy">`;
- const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','abb-islimiter':'islimiter'}[p.id];if(mk)return ISO.miniProduct(mk);
+ const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel'}[p.id];if(mk)return ISO.miniProduct(mk);
  const b=BRANDS[p.brand];
  return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
 }
@@ -1958,7 +1959,7 @@ function pgCompanyHistory(){
   <div class="tl-next"><b>2027 →</b><span>제품 판매에서 시스템 솔루션으로 확장 · 2030년 제조 기반 종합 솔루션 공급</span></div></div>`;
 }
 function pgCompanyOrg(){
- const prod={abb:'보호계전기 · 차단기 · HSBT · 동기투입 · LV · PA',schneider:'보호계전기 · 차단기 · 디지털 미터 · EOCR · SCADA',hitachi:'변압기 (몰드 · 유입) · HV 제품',sifang:'SVG / STATCOM · 전력품질 솔루션',sangdo:'AFDD (아크 고장 차단기)'};
+ const prod={abb:'보호계전기 · 차단기 · HSBT · 동기투입 · LV · PA',schneider:'보호계전기 · 차단기 · 디지털 미터 · EOCR · AFDD · SCADA',hitachi:'변압기 (몰드 · 유입) · HV 제품',sifang:'SVG / STATCOM · 전력품질 솔루션',sangdo:'AFDD (아크 고장 차단기)'};
  return `<div class="block">${blockHead('제품 사업')}
   <div class="org-brands">${BKEYS.map(k=>`<a class="ob" href="#products-${k}" style="--bc:${BRANDS[k].color}"><div class="bl">${brandLogo(k)}</div><p>${prod[k]}</p></a>`).join('')}</div></div>
  <div class="block">${blockHead('엔지니어링 · 시스템 솔루션')}
@@ -2329,24 +2330,51 @@ function refreshProducts(){
 }
 /* Manufacturer documents per product: [title, language, url]. Official ABB Library links. */
 const DOCS={
- 'abb-relion':[['REX615 Product Guide','EN','https://library.e.abb.com/public/b184c4f15a6e4209a8b9f5f41b5ed6e2/REX615_pg_001867_Enb.pdf'],['REX640 Product Guide','EN','https://library.abb.com/d/1MRS759144']],
- 'abb-sue':[['SUE 4000 Technical Data Sheet','EN','https://library.e.abb.com/public/8eb1332ac72d4f73b5f95a113a834de7/SUE%204000_1VBX110001P0100_EN_techn_data_sheet.pdf']],
+ 'abb-relion':[['REX615 Product Guide','EN','https://library.abb.com/d/2NGA001867'],['REX640 Product Guide','EN','https://library.abb.com/d/1MRS759144']],
+ 'abb-sue':[['SUE 4000 Technical Data Sheet','EN','https://library.abb.com/d/1VBX110001P0100']],
  'abb-sync6':[['SYNCHROTACT 6 Brochure','EN','https://library.e.abb.com/public/dd24007303b1471a9ff6e014bc4b131e/SYNCHROTACT%206%20Brochure%20A4%20size.pdf']],
- 'abb-islimiter':[['Is-limiter Brochure','EN','https://library.e.abb.com/public/d06f1243f60c44318a1494a28b4cd637/Is-limiter_EN.pdf']]
+ 'abb-mvcb':[['VD4 Vacuum Circuit-Breaker Brochure','EN','https://library.e.abb.com/public/a02c9fa50e44217dc1257b4a004754a8/2485%20VD4_6Seiter_GB_2013.pdf']],
+ 'abb-islimiter':[['Is-리미터 카탈로그','KR','docs/abb/ABB_Is-Limiter_Catalog_KR.pdf'],['Is-limiter Brochure','EN','https://library.e.abb.com/public/d06f1243f60c44318a1494a28b4cd637/Is-limiter_EN.pdf']],
+ 'abb-lvcb':[['SACE Emax 2 Technical Catalogue','EN','https://library.abb.com/d/1SDC200023D0209']],
+ 'abb-afdd':[['AFDD S-ARC1 · DS-ARC1 Brochure','EN','https://library.e.abb.com/public/2c12db3bd6964dbb9fe5688d4c9c0e3c/AFDD%20S-ARC1%20and%20DS-ARC1%20Brochure.pdf']],
+ 'abb-tx':[['266HSH Pressure Transmitter Data Sheet','EN','https://library.e.abb.com/public/b29423206ccc40479151a099809582e5/DS_266HSH_LowP-EN_D.pdf']],
+ 'abb-pos':[['TZIDC Positioner Data Sheet','EN','https://library.e.abb.com/public/c56ef34aa466f4acc1257b0c00549c21/10_18-022-EN-C-03_2008.pdf']],
+ 'abb-ana':[['Continuous Gas Analyzers (CEMS) Product Guide','EN','https://library.e.abb.com/public/95243a91cdd344b086d0b6a8ed6b286c/PG_ANALYTICAL_002-EN_A.pdf']],
+ 'se-easergy':[['PowerLogic (Easergy) P3 Catalog','EN','https://www.se.com/in/en/download/document/NRJCAT17764EN']],
+ 'se-powerlogic':[['PowerLogic PM8000 Technical Datasheet','EN','https://www.se.com/ca/en/download/document/PLSED310058EN_Web/']],
+ 'se-mtz':[['MasterPact MTZ Catalog','EN','https://www.se.com/uk/en/download/document/LVPED216026EN_WEB']],
+ 'se-hvx':[['EvoPact HVX Catalog (up to 24 kV)','EN','https://www.se.com/ph/en/download/document/NRJED316716EN/']],
+ 'se-eocr':[['EOCR iSEM 소개','KR','https://www.se.com/kr/ko/download/document/EOCR_iSEM_kr'],['스마트 EOCR 브로셔','KR','https://www.se.com/kr/ko/download/document/smart_eocr_brochure']],
+ 'se-afdd':[['Acti9 Active AFDD Brochure','EN','https://www.se.com/uk/en/download/document/SE11822_Acti9Active_AFDD-pages']],
+ 'sd-afdd':[['지능형 아크차단기 소개서 (2026.04)','KR','docs/sangdo/Sangdo_Intelligent_AFDD_KR_2026-04.pdf']]
 };
 const PPAGE={
  'abb-relion':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/primary-protection-relays/rex615',
  'abb-sue':'https://new.abb.com/medium-voltage/packaging-and-solutions/digital-systems/solution-center-products/high-speed-transfer-system/high-speed-transfer-device-HSTD',
  'abb-sync6':'https://new.abb.com/power-electronics/excitation-and-synchronization/synchronizing-equipment/synchrotact-6',
  'abb-ssc600':'https://new.abb.com/medium-voltage/digital-substations/numerical-relays/multiapplication/ssc600',
- 'abb-islimiter':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/core-components/fault-current-limiters-is'
+ 'abb-islimiter':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/core-components/fault-current-limiters-is',
+ 'abb-afdd':'https://new.abb.com/low-voltage/products/system-pro-m/protection-against-arc-faults/arc-fault-detection-device-s-arc1',
+ 'abb-ana':'https://new.abb.com/products/measurement-products/analytical/continuous-gas-analyzers/advance-optima-and-easyline-series/el3000',
+ 'se-afdd':'https://www.se.com/nz/en/product-subcategory/86772-acti-9-arc-fault-detection-devices-afdd/',
+ 'se-edge':'https://www.se.com/kr/ko/work/campaign/local/eocr',
+ 'se-eocr':'https://www.se.com/kr/ko/work/campaign/local/eocr',
+ 'se-hvx':'https://www.se.com/vn/en/product-range/48378764-evopact-hvx/',
+ 'he-cb':'https://www.hitachienergy.com/offering/product-and-system/high-voltage-switchgear-and-breakers/air-insulated-switchgear',
+ 'he-ds':'https://www.hitachienergy.com/products-and-solutions/disconnectors',
+ 'he-it':'https://www.hitachienergy.com/products-and-solutions/instrument-transformers',
+ 'he-sa':'https://www.hitachienergy.com/offering/product-and-system/surge-arresters/high-voltage-surge-arresters',
+ 'he-gcb':'https://www.hitachienergy.com/products-and-solutions/generator-circuit-breakers',
+ 'he-tr':'https://www.hitachienergy.com/products-and-solutions/transformers',
+ 'he-bu':'https://www.hitachienergy.com/offering/product-and-system/transformer/bushings'
 };
 function prodDocs(p){
- const d=DOCS[p.id]||[],pg0=PPAGE[p.id];
- const rows=d.map(([t,l,u])=>`<a class="doc-dl" href="${u}" target="_blank" rel="noopener">${ic('doc','sm')}<span>${esc(t)}</span><em>${l}</em>${ic('ext','sm')}</a>`).join('')
-  +(pg0?`<a class="doc-dl pgl" href="${pg0}" target="_blank" rel="noopener">${ic('ext','sm')}<span>제조사 제품 페이지</span></a>`:'');
+ const d=DOCS[p.id]||[],pg0=PPAGE[p.id],site=!pg0&&BRANDS[p.brand].site;
+ const rows=d.map(([t,l,u])=>`<a class="doc-dl" href="${u}" target="_blank" rel="noopener noreferrer">${ic('doc','sm')}<span>${esc(t)}</span><em>${l}</em>${ic('ext','sm')}</a>`).join('')
+  +(pg0?`<a class="doc-dl pgl" href="${pg0}" target="_blank" rel="noopener noreferrer">${ic('ext','sm')}<span>제조사 제품 페이지</span></a>`:'')
+  +(site?`<a class="doc-dl pgl" href="${site}" target="_blank" rel="noopener noreferrer">${ic('ext','sm')}<span>제조사 사이트</span></a>`:'');
  return `<div class="pm-docs"><p class="eyebrow">자료 다운로드</p>${rows||'<p class="note" style="margin:0">이 제품 자료는 아래 자료 요청 버튼으로 보내 드립니다.</p>'}
-  ${rows?'<p class="note" style="margin:4px 0 0">제조사 공식 자료실로 연결되어 최신판을 받습니다. 국문 자료는 자료 요청 버튼으로 보내 드립니다.</p>':''}</div>`;
+  ${d.length?'<p class="note" style="margin:4px 0 0">EN 자료는 제조사 공식 자료실로 연결됩니다. 그 밖의 국문 자료는 자료 요청 버튼으로 보내 드립니다.</p>':(rows?'<p class="note" style="margin:4px 0 0">상세 자료는 아래 자료 요청 버튼으로 보내 드립니다.</p>':'')}</div>`;
 }
 function prodModal(id){
  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const b=BRANDS[p.brand];
