@@ -1325,7 +1325,7 @@ function sceneHSBT(){
  s+=byDepth(o);
  s+=k.spark(9.6,12.2,.3,'VOLTAGE DIP',-122,10);
  s+=k.chip('TR-A',4.2,11.8,7.6)+k.chip('TR-B',24.6,4,7.6)+k.chip('INC-A',13.1,11.8,8.2,{dot:true,n:'INC-A'})+k.chip('INC-B',28.6,11.8,8.2,{dot:true,n:'INC-B'});
- s+=`<g class="sue">${k.chip('SUE 3000',19.7,11.8,9.6,{bg:'#007A85',fg:'#FFFFFF',w:84})}</g><g class="t30" opacity="0">${k.chip('≈ 30 ms',19.7,11.8,12,{bg:'#13253A',fg:'#5CF0FA',w:72})}</g>`;
+ s+=`<g class="sue">${k.chip('SUE 4000',19.7,11.8,9.6,{bg:'#007A85',fg:'#FFFFFF',w:84})}</g><g class="t30" opacity="0">${k.chip('≈ 30 ms',19.7,11.8,12,{bg:'#13253A',fg:'#5CF0FA',w:72})}</g>`;
  s+=k.badge('factory',42,29,11.8,15);
  return wrap(s,'High-speed bus transfer (HSBT) isometric illustration');
 }
@@ -1530,7 +1530,7 @@ const CATS={relay:'Protection relays',transfer:'Transfer · synchronizing',break
 const P=(id,brand,cat,name,model,img,pts)=>({id,brand,cat,name,model,img,pts});
 const PRODUCTS=[
  P('abb-relion','abb','relay','Relion protection relays','REX615 · REX640 · arc protection','abb_relion',['Integrated protection · control · metering','IEC 61850 communication','Ring distribution automation (FLISR)']),
- P('abb-sue','abb','transfer','High-speed bus transfer (HSBT)','SUE 3000 · SUE 4000','abb_sue4000',['Fast transfer in approx. 30 ms','Minimal process interruption','Various busbar configurations']),
+ P('abb-sue','abb','transfer','High-speed bus transfer (HSBT)','SUE 4000','abb_sue4000',['Fast transfer in approx. 30 ms','Minimal process interruption','Various busbar configurations']),
  P('abb-sync6','abb','transfer','Synchronizers','SYNCHROTACT 6','abb_sync6',['Automatic synchronizing · synchro-check','Generator · grid connection','Equivalence review for replacing nuclear plant synchronizing relays']),
  P('abb-ssc600','abb','relay','Smart substation protection · control','SSC600','abb_ssc600',['Centralized protection · control','AI-based predictive maintenance','Digital substation (IEC 61850)']),
  P('abb-mvcb','abb','breaker','MV circuit breakers · switchgear','VCB · VCS · LBS','abb_mvcb',['IEC / ANSI standards','CT · PT · sensors']),
@@ -1565,7 +1565,7 @@ const RCAT={catalog:'Catalogs',tech:'Technical documents',cert:'Certificates'};
 const R=(id,cat,title,brand,meta,date,access,extra={})=>({id,cat,title,brand,meta,date,access,...extra});
 const RESOURCES=[
  R('r-c-relion','catalog','Relion 615 · 640 series product guide','abb','Manufacturer document','—','maker'),
- R('r-c-sue','catalog','SUE 3000 / SUE 4000 high-speed transfer brochure','abb','Manufacturer document','—','maker'),
+ R('r-c-sue','catalog','SUE 4000 high-speed transfer technical data sheet','abb','Manufacturer document','—','maker'),
  R('r-c-sync','catalog','SYNCHROTACT 6 synchronizer','abb','Manufacturer document','—','maker'),
  R('r-c-ssc','catalog','SSC600 smart substation','abb','Manufacturer document','—','maker'),
  R('r-c-isl','catalog','Is-limiter fault current limiter','abb','Manufacturer document','—','maker'),
@@ -1807,7 +1807,7 @@ const SLIDES_ALL=[
   cta:[['solutions-datacenter','View solution','pri'],['contact','Request consultation','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroFL">${ISO.sceneFLISR()}</div><p class="iso-cap"><b id="flHeroStep">01 / 04</b><span id="flHeroCap">${ISO.FL.cap[0]}</span></p>`},
  {id:'hsbt',on:true,since:'2026-11',eb:'HIGH-SPEED TRANSFER',h:'Non-stop processes<br>Fast transfer · synchronizing',
-  p:'SUE 3000/4000 high-speed transfer (approx. 30 ms) and the SYNCHROTACT 6 synchronizer. We support transfer logic design based on REX640 HSABTC and interlock testing.',
+  p:'SUE 4000 high-speed transfer (approx. 30 ms) and the SYNCHROTACT 6 synchronizer. We support transfer logic design based on REX640 HSABTC and interlock testing.',
   cta:[['solutions-hsbt','View solution','pri'],['products-abb','ABB products','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroHS">${ISO.sceneHSBT()}</div><p class="iso-cap"><b id="hsHeroStep">01 / 04</b><span id="hsHeroCap">${ISO.HS.cap[0]}</span></p>`},
  {id:'pq',on:true,since:'2026-11',eb:'POWER QUALITY · SIFANG',h:'Harmonics · power factor · reactive power<br>From diagnosis to after-sales',
@@ -2052,7 +2052,7 @@ function pgSolHsbt(){
   <div class="diagram isod"><div id="hsSol">${ISO.sceneHSBT()}</div><div class="dg-ctrl" role="group" aria-label="HSBT steps">${ISO.HS.steps.map((s,i)=>`<button data-act="hs" data-k="${i}" class="${i?'':'on'}">${i+1}. ${s}</button>`).join('')}</div><p class="dg-cap" id="hsCap">${ISO.HS.cap[0]}</p></div>
   <div class="diagram">${hsbtSVG()}<p class="note" style="margin-top:8px">Concept diagram. Actual transfer time depends on the transfer mode and settings.</p></div></div>
  <div class="block"><div class="grid-2">
-  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 3000/4000)</h4><p>High-speed transfer devices for various busbar configurations · transfer logic design based on REX640 HSABTC · interlock test plans and on-site recovery support</p></div></div>
+  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 4000)</h4><p>High-speed transfer devices for various busbar configurations · transfer logic design based on REX640 HSABTC · interlock test plans and on-site recovery support</p></div></div>
   <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sync6')}" alt="SYNCHROTACT 6" style="width:100%"></div><div><h4>SYNCHROTACT 6</h4><p>Automatic synchronizing / synchro-check for generators · grids · equivalence review for replacing aging nuclear synchronizing relays · for power generation and industry</p></div></div>
  </div></div>`;
 }
@@ -2336,13 +2336,13 @@ function refreshProducts(){
 /* Manufacturer documents per product: [title, language, url]. Official ABB Library links. */
 const DOCS={
  'abb-relion':[['REX615 Product Guide','EN','https://library.e.abb.com/public/b184c4f15a6e4209a8b9f5f41b5ed6e2/REX615_pg_001867_Enb.pdf'],['REX640 Product Guide','EN','https://library.abb.com/d/1MRS759144']],
- 'abb-sue':[['SUE 3000 Product Description','EN','https://library.e.abb.com/public/bf03330c24a89eaac1257b1300573c64/1hdk400075en%20f%20sue3000%20prod%20descr.pdf']],
+ 'abb-sue':[['SUE 4000 Technical Data Sheet','EN','https://library.e.abb.com/public/8eb1332ac72d4f73b5f95a113a834de7/SUE%204000_1VBX110001P0100_EN_techn_data_sheet.pdf']],
  'abb-sync6':[['SYNCHROTACT 6 Brochure','EN','https://library.e.abb.com/public/dd24007303b1471a9ff6e014bc4b131e/SYNCHROTACT%206%20Brochure%20A4%20size.pdf']],
  'abb-islimiter':[['Is-limiter Brochure','EN','https://library.e.abb.com/public/d06f1243f60c44318a1494a28b4cd637/Is-limiter_EN.pdf']]
 };
 const PPAGE={
  'abb-relion':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/primary-protection-relays/rex615',
- 'abb-sue':'https://new.abb.com/medium-voltage/packaging-and-solutions/digital-systems/bus-transfer-solutions/high-speed-transfer-system-HSTS',
+ 'abb-sue':'https://new.abb.com/medium-voltage/packaging-and-solutions/digital-systems/solution-center-products/high-speed-transfer-system/high-speed-transfer-device-HSTD',
  'abb-sync6':'https://new.abb.com/power-electronics/excitation-and-synchronization/synchronizing-equipment/synchrotact-6',
  'abb-ssc600':'https://new.abb.com/medium-voltage/digital-substations/numerical-relays/multiapplication/ssc600',
  'abb-islimiter':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/core-components/fault-current-limiters-is'

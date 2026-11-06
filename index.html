@@ -1319,7 +1319,7 @@ function sceneHSBT(){
  s+=byDepth(o);
  s+=k.spark(9.6,12.2,.3,'VOLTAGE DIP',-122,10);
  s+=k.chip('TR-A',4.2,11.8,7.6)+k.chip('TR-B',24.6,4,7.6)+k.chip('INC-A',13.1,11.8,8.2,{dot:true,n:'INC-A'})+k.chip('INC-B',28.6,11.8,8.2,{dot:true,n:'INC-B'});
- s+=`<g class="sue">${k.chip('SUE 3000',19.7,11.8,9.6,{bg:'#007A85',fg:'#FFFFFF',w:84})}</g><g class="t30" opacity="0">${k.chip('≈ 30 ms',19.7,11.8,12,{bg:'#13253A',fg:'#5CF0FA',w:72})}</g>`;
+ s+=`<g class="sue">${k.chip('SUE 4000',19.7,11.8,9.6,{bg:'#007A85',fg:'#FFFFFF',w:84})}</g><g class="t30" opacity="0">${k.chip('≈ 30 ms',19.7,11.8,12,{bg:'#13253A',fg:'#5CF0FA',w:72})}</g>`;
  s+=k.badge('factory',42,29,11.8,15);
  return wrap(s,'고속절체(HSBT) 아이소메트릭 일러스트');
 }
@@ -1524,7 +1524,7 @@ const CATS={relay:'보호계전기',transfer:'절체 · 동기',breaker:'차단�
 const P=(id,brand,cat,name,model,img,pts)=>({id,brand,cat,name,model,img,pts});
 const PRODUCTS=[
  P('abb-relion','abb','relay','Relion 보호계전기','REX615 · REX640 · 아크 보호','abb_relion',['보호 · 제어 · 계측 통합','IEC 61850 통신','링 배전 자동화(FLISR) 적용']),
- P('abb-sue','abb','transfer','고속절체장치 (HSBT)','SUE 3000 · SUE 4000','abb_sue4000',['약 30 ms 고속 절체','공정 중단 최소화','다양한 모선 구성 대응']),
+ P('abb-sue','abb','transfer','고속절체장치 (HSBT)','SUE 4000','abb_sue4000',['약 30 ms 고속 절체','공정 중단 최소화','다양한 모선 구성 대응']),
  P('abb-sync6','abb','transfer','동기투입장치','SYNCHROTACT 6','abb_sync6',['자동 동기 투입 · 동기 검출','발전기 · 계통 연계','원전 동기계전기 대체 동등성 검토']),
  P('abb-ssc600','abb','relay','스마트 변전소 보호 · 제어','SSC600','abb_ssc600',['집중형 보호 · 제어','AI 기반 예측 정비','디지털 변전소 (IEC 61850)']),
  P('abb-mvcb','abb','breaker','고압 차단기 · 개폐기','VCB · VCS · LBS','abb_mvcb',['IEC / ANSI 규격','CT · PT · 센서']),
@@ -1559,7 +1559,7 @@ const RCAT={catalog:'카탈로그',tech:'기술자료',cert:'인증서'};
 const R=(id,cat,title,brand,meta,date,access,extra={})=>({id,cat,title,brand,meta,date,access,...extra});
 const RESOURCES=[
  R('r-c-relion','catalog','Relion 615 · 640 시리즈 제품 안내','abb','제조사 자료','—','maker'),
- R('r-c-sue','catalog','SUE 3000 / SUE 4000 고속절체 브로셔','abb','제조사 자료','—','maker'),
+ R('r-c-sue','catalog','SUE 4000 고속절체 기술 데이터시트','abb','제조사 자료','—','maker'),
  R('r-c-sync','catalog','SYNCHROTACT 6 동기투입장치','abb','제조사 자료','—','maker'),
  R('r-c-ssc','catalog','SSC600 스마트 변전소','abb','제조사 자료','—','maker'),
  R('r-c-isl','catalog','Is-Limiter 고장전류 한류기','abb','제조사 자료','—','maker'),
@@ -1801,7 +1801,7 @@ const SLIDES_ALL=[
   cta:[['solutions-datacenter','솔루션 보기','pri'],['contact','상담 요청','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroFL">${ISO.sceneFLISR()}</div><p class="iso-cap"><b id="flHeroStep">01 / 04</b><span id="flHeroCap">${ISO.FL.cap[0]}</span></p>`},
  {id:'hsbt',on:true,since:'2026-11',eb:'HIGH-SPEED TRANSFER',h:'공정을 멈추지 않는<br>고속절체 · 동기투입',
-  p:'SUE 3000/4000 고속절체(약 30 ms)와 SYNCHROTACT 6 동기투입장치. REX640 HSABTC 기반 절체 로직 설계와 인터록 시험을 지원합니다.',
+  p:'SUE 4000 고속절체(약 30 ms)와 SYNCHROTACT 6 동기투입장치. REX640 HSABTC 기반 절체 로직 설계와 인터록 시험을 지원합니다.',
   cta:[['solutions-hsbt','솔루션 보기','pri'],['products-abb','ABB 제품','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroHS">${ISO.sceneHSBT()}</div><p class="iso-cap"><b id="hsHeroStep">01 / 04</b><span id="hsHeroCap">${ISO.HS.cap[0]}</span></p>`},
  {id:'pq',on:true,since:'2026-11',eb:'POWER QUALITY · SIFANG',h:'고조파 · 역률 · 무효전력<br>진단에서 사후관리까지',
@@ -2046,7 +2046,7 @@ function pgSolHsbt(){
   <div class="diagram isod"><div id="hsSol">${ISO.sceneHSBT()}</div><div class="dg-ctrl" role="group" aria-label="HSBT 단계">${ISO.HS.steps.map((s,i)=>`<button data-act="hs" data-k="${i}" class="${i?'':'on'}">${i+1}. ${s}</button>`).join('')}</div><p class="dg-cap" id="hsCap">${ISO.HS.cap[0]}</p></div>
   <div class="diagram">${hsbtSVG()}<p class="note" style="margin-top:8px">개념도입니다. 실제 절체 시간은 절체 방식과 설정에 따라 달라집니다.</p></div></div>
  <div class="block"><div class="grid-2">
-  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 3000/4000)</h4><p>다양한 모선 구성에 대응하는 고속절체장치 · REX640 HSABTC 기반 절체 로직 설계 · 인터록 시험 계획과 현장 복구 지원</p></div></div>
+  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 4000)</h4><p>다양한 모선 구성에 대응하는 고속절체장치 · REX640 HSABTC 기반 절체 로직 설계 · 인터록 시험 계획과 현장 복구 지원</p></div></div>
   <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sync6')}" alt="SYNCHROTACT 6" style="width:100%"></div><div><h4>SYNCHROTACT 6</h4><p>발전기 · 계통 자동 동기투입 / 동기 검출 · 원전 노후 동기계전기 대체 동등성 검토 · 발전 및 산업용</p></div></div>
  </div></div>`;
 }
@@ -2330,13 +2330,13 @@ function refreshProducts(){
 /* Manufacturer documents per product: [title, language, url]. Official ABB Library links. */
 const DOCS={
  'abb-relion':[['REX615 Product Guide','EN','https://library.e.abb.com/public/b184c4f15a6e4209a8b9f5f41b5ed6e2/REX615_pg_001867_Enb.pdf'],['REX640 Product Guide','EN','https://library.abb.com/d/1MRS759144']],
- 'abb-sue':[['SUE 3000 Product Description','EN','https://library.e.abb.com/public/bf03330c24a89eaac1257b1300573c64/1hdk400075en%20f%20sue3000%20prod%20descr.pdf']],
+ 'abb-sue':[['SUE 4000 Technical Data Sheet','EN','https://library.e.abb.com/public/8eb1332ac72d4f73b5f95a113a834de7/SUE%204000_1VBX110001P0100_EN_techn_data_sheet.pdf']],
  'abb-sync6':[['SYNCHROTACT 6 Brochure','EN','https://library.e.abb.com/public/dd24007303b1471a9ff6e014bc4b131e/SYNCHROTACT%206%20Brochure%20A4%20size.pdf']],
  'abb-islimiter':[['Is-limiter Brochure','EN','https://library.e.abb.com/public/d06f1243f60c44318a1494a28b4cd637/Is-limiter_EN.pdf']]
 };
 const PPAGE={
  'abb-relion':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/primary-protection-relays/rex615',
- 'abb-sue':'https://new.abb.com/medium-voltage/packaging-and-solutions/digital-systems/bus-transfer-solutions/high-speed-transfer-system-HSTS',
+ 'abb-sue':'https://new.abb.com/medium-voltage/packaging-and-solutions/digital-systems/solution-center-products/high-speed-transfer-system/high-speed-transfer-device-HSTD',
  'abb-sync6':'https://new.abb.com/power-electronics/excitation-and-synchronization/synchronizing-equipment/synchrotact-6',
  'abb-ssc600':'https://new.abb.com/medium-voltage/digital-substations/numerical-relays/multiapplication/ssc600',
  'abb-islimiter':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/core-components/fault-current-limiters-is'
