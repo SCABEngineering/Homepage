@@ -8,7 +8,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head><body>
-<title>SCAB 홈페이지 시안</title>
+<title>(주)에스캡엔지니어링</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2227,7 +2227,7 @@ function render(scroll=true){
  v.innerHTML=id==='home'?pageHome():subLayout(id,post?pgPost(+post[1]):PAGES[id]());
  $$('.gnb li').forEach(li=>li.classList.toggle('cur',li.dataset.menu===menuOf(id)));
  drawer();$('#drawer').hidden=true;const bg=$('[data-act="burger"]');bg.setAttribute('aria-expanded','false');bg.innerHTML=ic('menu');
- document.title=(id==='home'?'':(TITLE[id]||'게시판')+' | ')+'SCAB 홈페이지 (테스트)';
+ document.title=(id==='home'?'':(TITLE[id]||'게시판')+' | ')+'(주)에스캡엔지니어링';
  afterRender(id);
  if(scroll)window.scrollTo({top:0,behavior:'auto'});
  updateDockPage();
