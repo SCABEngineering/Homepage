@@ -478,6 +478,7 @@ td.hl{color:var(--ac);font-weight:600}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:18px}
 .pc{display:grid;grid-template-rows:auto 1fr auto;background:var(--card);border:1px solid var(--line);transition:border-color .15s;text-align:left}
 .pc:hover{border-color:var(--ink)}
+.pc[data-act]{cursor:pointer}
 .pc{min-width:0}
 .pc .pw{background:var(--well);aspect-ratio:4/3;max-width:100%;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
 .pc .pw img{position:absolute;inset:18px;width:calc(100% - 36px);height:calc(100% - 36px);object-fit:contain}
@@ -659,6 +660,12 @@ td.hl{color:var(--ac);font-weight:600}
 .pm-b ul li{position:relative;padding-left:14px;margin-bottom:6px;color:var(--muted);font-size:15px}
 .pm-b ul li::before{content:"";position:absolute;left:0;top:.7em;width:5px;height:5px;background:var(--ac)}
 .pm-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.pm-docs{display:grid;gap:6px;padding:14px 16px;background:var(--panel);border:1px solid var(--line)}
+.pm-docs .eyebrow{margin-bottom:2px}
+.doc-dl{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:9px 12px;background:var(--card);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:14.5px;transition:border-color .15s}
+.doc-dl:hover{border-color:var(--ac)}
+.doc-dl em{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--ac);border:1px solid var(--ac);border-radius:9px;padding:0 7px;line-height:1.6}
+.doc-dl.pgl{grid-template-columns:auto minmax(0,1fr);color:var(--ac);font-weight:500}
 .mpad{padding:36px 32px}
 .mpad h3{font-size:22px;margin-bottom:16px;color:var(--title)}
 .mpad .prose{font-size:14.5px}
@@ -1511,8 +1518,8 @@ const BRANDS={
  sifang:{name:'SIFANG',ko:'北京四方',color:'#1565C0',logo:null,role:'SIFANG exclusive distributor in Korea',scope:'SVG/STATCOM · power quality',
    intro:'Beijing SIFANG Automation — dynamic reactive power compensation (SVG/STATCOM), power quality packages combining AHF · capacitors · reactors, protection · substation automation',
    made:[['SVG / STATCOM','CN'],['Protection','CN']],site:'https://www.sf-auto.com'},
- sangdo:{name:'Sangdo Electric',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'Sangdo Electric supplier',scope:'LV products',
-   intro:'LV products made in Korea and Vietnam, supplied to domestic switchboard and plant projects',made:[['LV products','KR · VN']],site:'http://www.sangdo.com/'}
+ sangdo:{name:'Sangdo Electric',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'Sangdo Electric supplier',scope:'AFDD (arc fault detection devices)',
+   intro:'Supply of low-voltage arc fault detection devices (AFDD)',made:[],site:'http://www.sangdo.com/'}
 };
 const BKEYS=Object.keys(BRANDS);
 const brandLogo=(k,cls='')=>{const b=BRANDS[k];return b.logo?`<img class="${cls}" src="${A(b.logo)}" alt="${esc(b.name)}" loading="lazy">`:`<span class="txtlogo">SIFANG <small>北京四方</small></span>`};
@@ -1550,7 +1557,7 @@ const PRODUCTS=[
  P('sf-svg','sifang','pq','SVG / STATCOM','Dynamic reactive power compensation',null,['MV · HV (substations)','Renewables · offshore wind connection','Real-time (ms) response']),
  P('sf-pq','sifang','pq','Power quality package','AHF · capacitors · reactors',null,['Combinations by load and system','Diagnosis → selection → supply → after-sales']),
  P('sf-sa','sifang','relay','Protection · substation automation','Protection & SA',null,['Protection and substation automation portfolio']),
- P('sd-lv','sangdo','lv','LV products','Sangdo LV',null,['Made in Korea · Vietnam','Domestic switchboard · plant projects'])
+ P('sd-afdd','sangdo','lv','Arc fault detection device','AFDD',null,['LV arc fault detection · interruption','Electrical fire prevention'])
 ];
 
 /* ---------- resources ---------- */
@@ -1776,12 +1783,12 @@ const chipBrand=k=>{const b=BRANDS[k];return `<span class="chip" style="--bc:${b
 const waveIcon=`<svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 Q12 2 22 20 T42 20 T62 20 T82 20 T102 20 T122 20" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/><path d="M2 20 Q12 6 22 20 T42 20 T62 20 T82 20 T102 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
 function pImg(p){
  if(p.img)return `<img src="${A(p.img)}" alt="${esc(p.name)} ${esc(p.model)}" loading="lazy">`;
- const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','abb-islimiter':'islimiter','sd-lv':'lvbox'}[p.id];if(mk)return ISO.miniProduct(mk);
+ const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','abb-islimiter':'islimiter'}[p.id];if(mk)return ISO.miniProduct(mk);
  const b=BRANDS[p.brand];
  return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
 }
 function pCard(p){
- return `<article class="pc"><div class="pw">${pImg(p)}</div>
+ return `<article class="pc" data-act="prod" data-id="${p.id}"><div class="pw">${pImg(p)}</div>
   <div class="pb">${chipBrand(p.brand)}<span class="pn">${esc(p.name)}</span><span class="pm">${esc(p.model)}</span><ul>${p.pts.slice(0,2).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
   <div class="pf"><button class="link" data-act="prod" data-id="${p.id}">Learn more ${ic('arrow')}</button><button class="btn line sm" data-act="quote" data-id="${p.id}">Request a quote</button></div></article>`;
 }
@@ -1957,7 +1964,7 @@ function pgCompanyHistory(){
   <div class="tl-next"><b>2027 →</b><span>From product sales to system solutions · manufacturing-based total solutions by 2030</span></div></div>`;
 }
 function pgCompanyOrg(){
- const prod={abb:'Protection relays · breakers · HSBT · synchronizing · LV · PA',schneider:'Protection relays · breakers · digital meters · EOCR · SCADA',hitachi:'Transformers (dry-type · oil-immersed) · HV products',sifang:'SVG / STATCOM · power quality solutions',sangdo:'LV products'};
+ const prod={abb:'Protection relays · breakers · HSBT · synchronizing · LV · PA',schneider:'Protection relays · breakers · digital meters · EOCR · SCADA',hitachi:'Transformers (dry-type · oil-immersed) · HV products',sifang:'SVG / STATCOM · power quality solutions',sangdo:'AFDD (arc fault detection devices)'};
  return `<div class="block">${blockHead('Product business')}
   <div class="org-brands">${BKEYS.map(k=>`<a class="ob" href="#products-${k}" style="--bc:${BRANDS[k].color}"><div class="bl">${brandLogo(k)}</div><p>${prod[k]}</p></a>`).join('')}</div></div>
  <div class="block">${blockHead('Engineering · system solutions')}
@@ -1966,7 +1973,7 @@ function pgCompanyOrg(){
    <div class="pil">${pg('building')}<h4>Large design · consulting market</h4><ul><li>Data centers</li><li>Renewables · offshore wind</li><li>Nuclear · power generation · overseas EPC</li></ul></div></div></div>`;
 }
 function pgCompanyCerts(){
- const dist=[['schneider','Schneider Electric Korea distributor','DE · PP products / EOCR'],['hitachi','Hitachi Energy Korea distributor','Transformers · HV products'],['sifang','SIFANG exclusive distributor in Korea','SVG/STATCOM · power quality'],['sangdo','Sangdo Electric supplier','LV products']];
+ const dist=[['schneider','Schneider Electric Korea distributor','DE · PP products / EOCR'],['hitachi','Hitachi Energy Korea distributor','Transformers · HV products'],['sifang','SIFANG exclusive distributor in Korea','SVG/STATCOM · power quality'],['sangdo','Sangdo Electric supplier','AFDD (arc fault detection devices)']];
  return `<div class="block">${blockHead('Certifications · registrations')}
   <div class="cert-row">
    <button class="cert" data-act="img" data-img="cert_rnd" data-t="R&D department certificate"><div class="ci"><img src="${A('cert_rnd')}" alt="R&D department certificate" loading="lazy"></div><span>R&D department certificate</span></button>
@@ -2023,7 +2030,7 @@ function pgBrand(k){
  const b=BRANDS[k];
  return `<div class="block"><div class="bhead" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div>
   <div class="bi"><span class="chip red">${esc(b.role)}</span><h3>${esc(b.name)}${b.ko?` <span style="font-weight:500;color:var(--muted)">${b.ko}</span>`:''}${b.en?` <span style="font-weight:500;color:var(--muted);font-size:16px">${b.en}</span>`:''}</h3><p>${esc(b.intro)}</p>
-  <div class="made">${b.made.map(([t,c])=>`<span>${t}<b>${c}</b></span>`).join('')}<span style="color:var(--faint)">Country of origin may vary by product</span></div>
+  ${b.made.length?`<div class="made">${b.made.map(([t,c])=>`<span>${t}<b>${c}</b></span>`).join('')}<span style="color:var(--faint)">Country of origin may vary by product</span></div>`:''}
   ${b.site?`<div><a class="link" href="${b.site}" target="_blank" rel="noopener">Manufacturer site ${ic('ext')}</a></div>`:''}</div></div></div>
  <div class="block">${blockHead('Products')}${prodFilter(false)}<div id="pgrid">${prodGridHTML()}</div></div>`;
 }
@@ -2326,13 +2333,33 @@ function refreshProducts(){
  updCount();
  if(had){const n=$('#pq');n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}}
 }
+/* Manufacturer documents per product: [title, language, url]. Official ABB Library links. */
+const DOCS={
+ 'abb-relion':[['REX615 Product Guide','EN','https://library.e.abb.com/public/b184c4f15a6e4209a8b9f5f41b5ed6e2/REX615_pg_001867_Enb.pdf'],['REX640 Product Guide','EN','https://library.abb.com/d/1MRS759144']],
+ 'abb-sue':[['SUE 3000 Product Description','EN','https://library.e.abb.com/public/bf03330c24a89eaac1257b1300573c64/1hdk400075en%20f%20sue3000%20prod%20descr.pdf']],
+ 'abb-sync6':[['SYNCHROTACT 6 Brochure','EN','https://library.e.abb.com/public/dd24007303b1471a9ff6e014bc4b131e/SYNCHROTACT%206%20Brochure%20A4%20size.pdf']],
+ 'abb-islimiter':[['Is-limiter Brochure','EN','https://library.e.abb.com/public/d06f1243f60c44318a1494a28b4cd637/Is-limiter_EN.pdf']]
+};
+const PPAGE={
+ 'abb-relion':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/primary-protection-relays/rex615',
+ 'abb-sue':'https://new.abb.com/medium-voltage/packaging-and-solutions/digital-systems/bus-transfer-solutions/high-speed-transfer-system-HSTS',
+ 'abb-sync6':'https://new.abb.com/power-electronics/excitation-and-synchronization/synchronizing-equipment/synchrotact-6',
+ 'abb-ssc600':'https://new.abb.com/medium-voltage/digital-substations/numerical-relays/multiapplication/ssc600',
+ 'abb-islimiter':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/core-components/fault-current-limiters-is'
+};
+function prodDocs(p){
+ const d=DOCS[p.id]||[],pg0=PPAGE[p.id];
+ const rows=d.map(([t,l,u])=>`<a class="doc-dl" href="${u}" target="_blank" rel="noopener">${ic('doc','sm')}<span>${esc(t)}</span><em>${l}</em>${ic('ext','sm')}</a>`).join('')
+  +(pg0?`<a class="doc-dl pgl" href="${pg0}" target="_blank" rel="noopener">${ic('ext','sm')}<span>Manufacturer product page</span></a>`:'');
+ return `<div class="pm-docs"><p class="eyebrow">Downloads</p>${rows||'<p class="note" style="margin:0">Documents for this product are sent on request via the Request document button below.</p>'}
+  ${rows?'<p class="note" style="margin:4px 0 0">Links open the manufacturer’s official library, so you always get the latest edition. Korean documents are sent on request.</p>':''}</div>`;
+}
 function prodModal(id){
  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const b=BRANDS[p.brand];
- const res=RESOURCES.filter(r=>r.brand===p.brand&&r.cat==='catalog').slice(0,3);
  openModal(`<div class="pm-grid"><div class="pm-img">${pImg(p)}</div><div class="pm-b">${chipBrand(p.brand)}<h3>${esc(p.name)}</h3><span class="mono" style="color:var(--muted)">${esc(p.model)}</span>
   <ul>${p.pts.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
   <p class="note">Category: ${CATS[p.cat]} · ${esc(b.role)}</p>
-  ${res.length?`<div><p class="eyebrow" style="margin-bottom:6px">Related documents</p>${res.map(r=>`<div style="font-size:14px;padding:4px 0">${ic('doc','sm')} ${esc(r.title)}</div>`).join('')}</div>`:''}
+  ${prodDocs(p)}
   <div class="pm-act"><button class="btn pri" data-act="quote" data-id="${p.id}">Request a quote ${ic('arrow')}</button><button class="btn line" data-act="reqp" data-id="${p.id}">Document request</button><a class="btn line" href="#products-${p.brand}" data-act="closemodal">${esc(b.name)} products</a></div></div></div>`,p.name);
 }
 
