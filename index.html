@@ -15,9 +15,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <style>
 /* Layout: ABB식 기업 사이트 구조 — 유틸리티 바 + 메가메뉴 고정 헤더, 네이비 히어로(도면 격자 + SCAB 큐브 워터마크), 흰 본문과 쿨그레이 패널 교차,
-   서브페이지는 좌측 LNB + 본문. 반응형은 컨테이너 쿼리. 톤앤매너는 data-tone으로 전환 (기본: Grid Navy · Teal) */
+   서브페이지는 좌측 LNB + 본문. 반응형은 컨테이너 쿼리. 톤앤매너는 data-tone으로 전환 (기본: SCAB Red · Navy, v0.6부터) */
 :root{
-  --ac:#007A85; --ac-strong:#005E66; --ac-soft:#E2F2F3; --ac-hl:#3CC8D2; --ac-btn:#007A85; --ac-btn-h:#00636C; --ac-ink:#FFFFFF; --err:#C8102E;
+  --ac:#C0142A; --ac-strong:#9A1022; --ac-soft:#FBEBED; --ac-hl:#FF6B7A; --ac-btn:#CD162C; --ac-btn-h:#A8121F; --ac-ink:#FFFFFF; --err:#C8102E;
   --sw-on:#D7263D; --ink:#16202A; --title:#3B4754; --muted:#5F6B77; --faint:#94A0AB; --bg:#FFFFFF; --panel:#F2F5F7; --panel-2:#E4E9EE;
   --line:#DCE2E8; --card:#FFFFFF; --well:#FFFFFF; --tile:#FFFFFF; --th:#13253A; --th-fg:#FFFFFF; --hero:#0D1B2A; --hero-2:#13253A; --hero-fg:#F2F6FA;
   --hero-muted:#9FB0C2; --hero-line:#26394F; --hero-grid:rgba(160,200,230,.05); --ok:#1E9E57; --open:#16A34A; --warn:#D08A00;
@@ -28,7 +28,7 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ac:#2BB8C4; --ac-strong:#5FD3DC; --ac-soft:#0E2C31; --ac-hl:#3CC8D2; --ac-btn:#2BB8C4; --ac-btn-h:#4FCAD4; --ac-ink:#04181B; --err:#FF5A6A;
+    --ac:#FF5A6A; --ac-strong:#FF8A96; --ac-soft:#3A1B22; --ac-hl:#FF6B7A; --ac-btn:#D42A3E; --ac-btn-h:#E0384C; --ac-ink:#FFFFFF; --err:#FF5A6A;
     --sw-on:#FF4D61; --ink:#E8EDF2; --title:#C3CCD5; --muted:#9AA6B2; --faint:#6C7884; --bg:#0E1318; --panel:#151C23; --panel-2:#080B0E;
     --line:#26313C; --card:#141A20; --well:#EDEFF1; --tile:#EDEFF1; --th:#1C2A3A; --th-fg:#F2F6FA; --hero:#08121D; --hero-2:#0F1C2B;
     --hero-fg:#F2F6FA; --hero-muted:#9FB0C2; --hero-line:#1F3044; --hero-grid:rgba(160,200,230,.045); --ok:#3CC57A; --open:#34C46A; --warn:#F0A928;
@@ -36,12 +36,15 @@
   }
 }
 :root[data-theme="dark"]{
-  --ac:#2BB8C4; --ac-strong:#5FD3DC; --ac-soft:#0E2C31; --ac-hl:#3CC8D2; --ac-btn:#2BB8C4; --ac-btn-h:#4FCAD4; --ac-ink:#04181B; --err:#FF5A6A;
+  --ac:#FF5A6A; --ac-strong:#FF8A96; --ac-soft:#3A1B22; --ac-hl:#FF6B7A; --ac-btn:#D42A3E; --ac-btn-h:#E0384C; --ac-ink:#FFFFFF; --err:#FF5A6A;
   --sw-on:#FF4D61; --ink:#E8EDF2; --title:#C3CCD5; --muted:#9AA6B2; --faint:#6C7884; --bg:#0E1318; --panel:#151C23; --panel-2:#080B0E;
   --line:#26313C; --card:#141A20; --well:#EDEFF1; --tile:#EDEFF1; --th:#1C2A3A; --th-fg:#F2F6FA; --hero:#08121D; --hero-2:#0F1C2B; --hero-fg:#F2F6FA;
   --hero-muted:#9FB0C2; --hero-line:#1F3044; --hero-grid:rgba(160,200,230,.045); --ok:#3CC57A; --open:#34C46A; --warn:#F0A928;
   --scrim:rgba(0,0,0,.66); --shadow:0 14px 36px rgba(0,0,0,.55); --logo-l:none; --logo-d:block; color-scheme:dark;
 }
+:root[data-tone="teal"]{ --ac:#007A85; --ac-strong:#005E66; --ac-soft:#E2F2F3; --ac-hl:#3CC8D2; --ac-btn:#007A85; --ac-btn-h:#00636C; --ac-ink:#FFFFFF; }
+@media (prefers-color-scheme: dark){ :root[data-tone="teal"]:not([data-theme="light"]){ --ac:#2BB8C4; --ac-strong:#5FD3DC; --ac-soft:#0E2C31; --ac-hl:#3CC8D2; --ac-btn:#2BB8C4; --ac-btn-h:#4FCAD4; --ac-ink:#04181B; } }
+:root[data-tone="teal"][data-theme="dark"]{ --ac:#2BB8C4; --ac-strong:#5FD3DC; --ac-soft:#0E2C31; --ac-hl:#3CC8D2; --ac-btn:#2BB8C4; --ac-btn-h:#4FCAD4; --ac-ink:#04181B; }
 :root[data-tone="blue"]{
   --ac:#0057B8; --ac-strong:#00428C; --ac-soft:#E6EEF8; --ac-hl:#5AA9FF; --ac-btn:#0057B8; --ac-btn-h:#00489A; --ac-ink:#FFFFFF; --ink:#151E2C;
   --title:#3A4658; --panel:#F2F4F8; --panel-2:#E3E8F0; --line:#DBE1EA; --th:#122244; --bg:#FFFFFF; --card:#FFFFFF; --hero:#0B1830; --hero-2:#122244;
@@ -138,7 +141,7 @@ ul{margin:0;padding:0;list-style:none}
 /* utility bar */
 .util{background:var(--panel);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
 .util-in{display:flex;justify-content:space-between;align-items:center;min-height:36px;gap:16px}
-.util-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.util-tag{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
 .util-links{display:flex;align-items:center;gap:18px}
 .util-links a:hover{color:var(--ink)}
 .util-tel{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);color:var(--ink)}
@@ -201,6 +204,10 @@ ul{margin:0;padding:0;list-style:none}
 .slide{grid-area:1/1;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:48px;align-items:center;padding-block:76px 144px;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
 .slide.on{opacity:1;visibility:visible}
 .slide h1{font-size:46px;line-height:1.22;font-weight:700;margin-block:14px 18px}
+.scab-eb{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 0;font-size:14px;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.9)}
+.scab-eb b{font-size:24px;line-height:1;font-weight:700;color:var(--ac-hl);letter-spacing:0;margin-right:2px}
+.scab-eb .sep{color:var(--hero-muted);opacity:.6;margin-inline:12px}
+@media (max-width:520px){.scab-eb{font-size:11.5px;letter-spacing:.08em}.scab-eb b{font-size:19px}.scab-eb .sep{margin-inline:6px}}
 .slide-p{color:var(--hero-muted);font-size:17px;max-width:46ch}
 .slide-cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
 .bchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:26px}
@@ -718,7 +725,7 @@ td.hl{color:var(--ac);font-weight:600}
 .tsw i{position:absolute;right:4px;bottom:4px;width:10px;height:10px;border-radius:50%}
 .mbox.wide{max-width:1320px}
 .tc-note{font-size:13.5px;color:var(--muted);margin:-6px 0 18px}
-.tcmp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tcmp{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 .tc{border:1px solid var(--line);display:grid;grid-template-rows:auto auto 1fr;background:var(--card);min-width:0}
 .tc.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 .tc-hero{padding:18px 16px 20px;display:grid;gap:8px;justify-items:start;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px}
@@ -737,6 +744,7 @@ td.hl{color:var(--ac);font-weight:600}
 .tc-sw span{display:flex;align-items:center;gap:6px}
 .tc-sw i{width:14px;height:14px;border-radius:3px;outline:1px solid var(--line)}
 .tc-sw code{font-family:var(--mono);margin-left:auto;color:var(--ink)}
+@media (max-width:1280px){.tcmp{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1000px){.tcmp{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.tcmp{grid-template-columns:1fr}}
 
@@ -789,8 +797,8 @@ td.hl{color:var(--ac);font-weight:600}
 @media (prefers-reduced-motion: reduce){.iso .flow,.iso .goose-on,.iso .pulse,.iso .blink,.iso .rotor{animation:none}}
 
 /* SCAB meaning */
-.util-tag .ini{color:var(--ac);font-weight:600}
-.util-tag .ko{text-transform:none;letter-spacing:0;color:var(--muted);margin-left:4px;font-family:var(--font);font-size:12px}
+.util-tag .ini{color:var(--ac);font-weight:700}
+.util-tag .ko{text-transform:none;letter-spacing:0;color:var(--muted);margin-left:4px;font-family:var(--font);font-size:13px}
 .util-tag .sep{opacity:.4;margin-inline:7px}
 .scab-band{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--hero);color:var(--hero-fg);padding:28px 28px 26px;overflow:hidden}
 .scab-band::before{content:"";position:absolute;left:28px;right:28px;top:63px;height:2px;background:linear-gradient(90deg,var(--ac-hl),rgba(92,240,250,.12))}
@@ -1450,10 +1458,12 @@ const store={get(k,d){try{const v=localStorage.getItem('scab_site_'+k);return v=
              set(k,v){try{localStorage.setItem('scab_site_'+k,JSON.stringify(v))}catch(e){}}};
 const A=n=>`assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const VERSION='v0.5.1', VDATE='2026-11-05';
+const VERSION='v0.6', VDATE='2026-11-06';
 const TONES={
- teal:{ko:'네이비 · 틸',name:'Grid Navy · Teal',rec:true,hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
-  why:'전력 · 에너지 업계에서 많이 쓰는 딥 네이비를 바탕으로, Schneider 그린과 SIFANG 블루 사이의 틸을 포인트로 씁니다. 취급 브랜드 어느 쪽 색에도 치우치지 않습니다.'},
+ scab:{ko:'SCAB 레드 × 네이비',name:'SCAB Red · Navy',rec:true,hero:'#0D1B2A',btn:'#CD162C',ink:'#FFFFFF',ac:'#C0142A',hl:'#FF6B7A',panel:'#F2F5F7',title:'#3B4754',
+  why:'회사 로고의 레드를 포인트로 쓰고 배경은 딥 네이비를 유지합니다. 레드 · 검정 조합을 피해 ABB · Hitachi Energy 사이트와 인상이 겹치지 않게 했습니다. (v0.6 기본)'},
+ teal:{ko:'네이비 · 틸',name:'Grid Navy · Teal',hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
+  why:'v0.5까지의 기본 톤입니다. 딥 네이비 바탕에 Schneider 그린과 SIFANG 블루 사이의 틸을 포인트로 씁니다.'},
  blue:{ko:'파워 블루',name:'Power Blue',hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
   why:'국내외 전력기기 · 전력회사에서 가장 흔한 신뢰형 블루입니다. 안정적이지만 SIFANG · 상도일렉트릭의 블루와 가깝게 보일 수 있습니다.'},
  amber:{ko:'그래파이트 · 볼트',name:'Graphite · Volt',hero:'#1B2026',btn:'#F2A900',ink:'#1A1A1A',ac:'#8A5D00',hl:'#F5B700',panel:'#F3F4F5',title:'#3F454C',
@@ -1461,7 +1471,7 @@ const TONES={
  red:{ko:'SCAB 레드 (v0.1)',name:'SCAB Red',hero:'#1A1A1C',btn:'#CD162C',ink:'#FFFFFF',ac:'#CD162C',hl:'#FF5C6E',panel:'#F4F4F5',title:'#46464C',
   why:'회사 로고색을 그대로 쓴 v0.1 시안입니다. 차콜과 레드 조합이라 ABB · Hitachi Energy 사이트와 인상이 비슷합니다.'}
 };
-let tone=store.get('tone','teal');if(!TONES[tone])tone='teal';
+let tone=store.get('tone6','scab');if(!TONES[tone])tone='scab';
 document.documentElement.setAttribute('data-tone',tone);
 
 /* ---------- icons ---------- */
@@ -1819,7 +1829,7 @@ function pageHome(){
   <img class="hero-cube" src="${A('cube_white')}" alt="">
   <div class="wrap"><div class="slides" id="slides">
    ${SLIDES.map((s,i)=>`<article class="slide${i?'':' on'}" aria-roledescription="slide" aria-label="${i+1} / ${SLIDES.length}"${i?' aria-hidden="true"':''}>
-    <div class="slide-txt"><p class="eyebrow on-dark">${s.eb}</p><h1>${s.h}</h1><p class="slide-p">${s.p}</p>
+    <div class="slide-txt">${s.id==='main'?`<p class="eyebrow on-dark scab-eb" aria-label="Safe, Connected, Advanced, Beyond">${SCABV.map(v=>`<span class="w"><b>${v.l}</b>${v.w.slice(1)}</span>`).join('<span class="sep">·</span>')}</p>`:`<p class="eyebrow on-dark">${s.eb}</p>`}<h1>${s.h}</h1><p class="slide-p">${s.p}</p>
      <div class="slide-cta">${s.cta.map(([h,l,c])=>`<a class="btn ${c}" href="#${h}"${i?' tabindex="-1"':''}>${l}${c==='pri'?ic('arrow'):''}</a>`).join('')}</div>
      ${s.chips?`<div class="bchips">${chips}</div>`:''}</div>
     <div class="slide-vis">${s.vis()}</div></article>`).join('')}
@@ -2500,7 +2510,7 @@ function dockRender(){
 function updateDockPage(){const p=$('#dpPage');if(p)p.textContent=curId==='home'?'홈':(TITLE[curId]||curId)}
 
 function setTone(k){
- if(!TONES[k])return;tone=k;document.documentElement.setAttribute('data-tone',k);store.set('tone',k);dockRender();
+ if(!TONES[k])return;tone=k;document.documentElement.setAttribute('data-tone',k);store.set('tone6',k);dockRender();
  if(!$('#modal').hidden&&$('#tcmp'))toneModal(true);
  toast(`'${TONES[k].ko}' 톤을 적용했습니다.`);
 }
