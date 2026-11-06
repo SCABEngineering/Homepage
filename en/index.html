@@ -497,6 +497,13 @@ td.hl{color:var(--ac);font-weight:600}
 .pc ul li::before{content:"";position:absolute;left:0;top:.66em;width:4px;height:4px;background:var(--ac)}
 .pc .pf{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 16px;gap:8px}
 .pc .pf .link{font-size:14px}
+/* brand-colored links */
+.bx{--bt:var(--bt-l)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bx{--bt:var(--bt-d)}}
+:root[data-theme="dark"] .bx{--bt:var(--bt-d)}
+.pc.bx .pf .link,.bhead.bx .link,.bx .doc-dl.pgl{color:var(--bt)}
+.bx .doc-dl em{color:var(--bt);border-color:var(--bt)}
+.bx .doc-dl:hover,.pc.bx:hover{border-color:var(--bt)}
 .pc .bdg{position:absolute;left:10px;top:10px}
 .plate{width:100%;height:100%;display:grid;align-content:center;justify-items:center;gap:10px;background:linear-gradient(180deg,var(--bc) 0 6px,#F4F4F5 6px);color:#2A2A2E;text-align:center;padding:12px}
 .plate .pl-b{font-weight:700;font-size:15px;color:var(--bc);letter-spacing:.03em}
@@ -1516,22 +1523,23 @@ const CO={name:'SCAB Engineering Co., Ltd.',en:'SCAB Engineering Co., Ltd.',ceo:
   addrEn:'#1410, IS Biz Tower 2, 23 Seonyu-ro 49-gil, Yeongdeungpo-gu, Seoul, Korea'};
 
 const BRANDS={
- abb:{name:'ABB',color:'#FF000F',logo:'brand_abb',role:'ABB product supply',scope:'LV · MV · PA products',
+ abb:{name:'ABB',color:'#FF000F',tx:'#EB000E',txd:'#FF2431',logo:'brand_abb',role:'ABB product supply',scope:'LV · MV · PA products',
    intro:'Protection relays (Relion), high-speed bus transfer (SUE), synchronizers (SYNCHROTACT), smart substation (SSC600), MV/LV circuit breakers, process automation (PA) instruments',
    made:[['Protection relays','FI'],['Circuit breakers','IT · CN'],['HSBT','DE'],['Synchronizers','CH']],site:'https://new.abb.com/kr'},
- schneider:{name:'Schneider Electric',color:'#3DCD58',logo:'brand_se',role:'Schneider Electric Korea distributor',scope:'DE · PP products / EOCR',
+ schneider:{name:'Schneider Electric',color:'#3DCD58',tx:'#238635',txd:'#3DCD58',logo:'brand_se',role:'Schneider Electric Korea distributor',scope:'DE · PP products / EOCR',
    intro:'EcoStruxure-based protection relays (Easergy), digital meters (PowerLogic), LV/MV circuit breakers, EOCR motor protection and MCC monitoring',
    made:[['Relays · breakers','FR · CN'],['LV products','FR'],['Digital meters','FR · CN'],['EOCR','KR']],site:'https://www.se.com/kr/ko/'},
- hitachi:{name:'Hitachi Energy',color:'#E4002B',logo:'brand_hitachi',role:'Hitachi Energy Korea distributor',scope:'Transformers · high-voltage (HV) products',
+ hitachi:{name:'Hitachi Energy',color:'#E4002B',tx:'#E4002B',txd:'#FF1D48',logo:'brand_hitachi',role:'Hitachi Energy Korea distributor',scope:'Transformers · high-voltage (HV) products',
    intro:'HV circuit breakers, disconnectors, instrument transformers, surge arresters and generator circuit breakers for power plants and substations, plus transformers · reactors and service',
    made:[['Relays · breakers','SE'],['Transformers','KR · VN, etc.'],['HV products','SE, etc.']],site:'https://www.hitachienergy.com'},
- sifang:{name:'SIFANG',ko:'北京四方',color:'#1565C0',logo:null,role:'SIFANG exclusive distributor in Korea',scope:'SVG/STATCOM · power quality',
+ sifang:{name:'SIFANG',ko:'北京四方',color:'#1565C0',tx:'#1565C0',txd:'#2D84E8',logo:null,role:'SIFANG exclusive distributor in Korea',scope:'SVG/STATCOM · power quality',
    intro:'Beijing SIFANG Automation — dynamic reactive power compensation (SVG/STATCOM), power quality packages combining AHF · capacitors · reactors, protection · substation automation',
    made:[['SVG / STATCOM','CN'],['Protection','CN']],site:'https://www.sf-auto.com'},
- sangdo:{name:'Sangdo Electric',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'Sangdo Electric supplier',scope:'AFDD (arc fault detection devices)',
+ sangdo:{name:'Sangdo Electric',en:'Sangdo Electric',color:'#2F6FE4',tx:'#2F6FE4',txd:'#4880E7',logo:'brand_sangdo',role:'Sangdo Electric supplier',scope:'AFDD (arc fault detection devices)',
    intro:'Supply of intelligent AFDDs — hybrid (dual-scan) and on-device AI chip based',made:[],site:'http://www.sangdo.com/'}
 };
 const BKEYS=Object.keys(BRANDS);
+const bvar=k=>{const b=BRANDS[k];return `--bt-l:${b.tx};--bt-d:${b.txd};--bc:${b.color}`};
 const brandLogo=(k,cls='')=>{const b=BRANDS[k];return b.logo?`<img class="${cls}" src="${A(b.logo)}" alt="${esc(b.name)}" loading="lazy">`:`<span class="txtlogo">SIFANG <small>北京四方</small></span>`};
 
 const CATPG={all:'box',relay:'relay',transfer:'transfer',breaker:'breaker',meter:'meter',hv:'tower',pq:'wave',lv:'plug',pa:'gauge',service:'wrench'};
@@ -1799,7 +1807,7 @@ function pImg(p){
  return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
 }
 function pCard(p){
- return `<article class="pc" data-act="prod" data-id="${p.id}"><div class="pw">${pImg(p)}</div>
+ return `<article class="pc bx" style="${bvar(p.brand)}" data-act="prod" data-id="${p.id}"><div class="pw">${pImg(p)}</div>
   <div class="pb">${chipBrand(p.brand)}<span class="pn">${esc(p.name)}</span><span class="pm">${esc(p.model)}</span><ul>${p.pts.slice(0,2).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
   <div class="pf"><button class="link" data-act="prod" data-id="${p.id}">Learn more ${ic('arrow')}</button><button class="btn line sm" data-act="quote" data-id="${p.id}">Request a quote</button></div></article>`;
 }
@@ -2039,7 +2047,7 @@ function pgProducts(){
 }
 function pgBrand(k){
  const b=BRANDS[k];
- return `<div class="block"><div class="bhead" style="--bc:${b.color}"><div class="bl">${brandLogo(k)}</div>
+ return `<div class="block"><div class="bhead bx" style="${bvar(k)}"><div class="bl">${brandLogo(k)}</div>
   <div class="bi"><span class="chip red">${esc(b.role)}</span><h3>${esc(b.name)}${b.ko?` <span style="font-weight:500;color:var(--muted)">${b.ko}</span>`:''}${b.en?` <span style="font-weight:500;color:var(--muted);font-size:16px">${b.en}</span>`:''}</h3><p>${esc(b.intro)}</p>
   ${b.made.length?`<div class="made">${b.made.map(([t,c])=>`<span>${t}<b>${c}</b></span>`).join('')}<span style="color:var(--faint)">Country of origin may vary by product</span></div>`:''}
   ${b.site?`<div><a class="link" href="${b.site}" target="_blank" rel="noopener">Manufacturer site ${ic('ext')}</a></div>`:''}</div></div></div>
@@ -2394,7 +2402,7 @@ function prodDocs(p){
 }
 function prodModal(id){
  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const b=BRANDS[p.brand];
- openModal(`<div class="pm-grid"><div class="pm-img">${pImg(p)}</div><div class="pm-b">${chipBrand(p.brand)}<h3>${esc(p.name)}</h3><span class="mono" style="color:var(--muted)">${esc(p.model)}</span>
+ openModal(`<div class="pm-grid bx" style="${bvar(p.brand)}"><div class="pm-img">${pImg(p)}</div><div class="pm-b">${chipBrand(p.brand)}<h3>${esc(p.name)}</h3><span class="mono" style="color:var(--muted)">${esc(p.model)}</span>
   <ul>${p.pts.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
   <p class="note">Category: ${CATS[p.cat]} · ${esc(b.role)}</p>
   ${prodDocs(p)}
