@@ -2000,9 +2000,28 @@ const SLIDES_ALL=[
  {id:'pq',on:true,since:'2026-11',eb:'POWER QUALITY · SIFANG',h:'고조파 · 역률 · 무효전력<br>진단에서 사후관리까지',
   p:'SIFANG SVG/STATCOM, AHF, 콘덴서 · 리액터 가운데 부하와 계통에 맞는 설비를 선정합니다.',
   cta:[['solutions-pq','솔루션 보기','pri'],['products-sifang','SIFANG 제품','ghost']],
-  vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">보상 전</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`}
+  vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">보상 전</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`},
+ {id:'mcc',on:true,since:'2026-11',eb:'SMART MCC · EOCR',h:'모터 보호에서<br>MCC 모니터링까지',
+  p:'Schneider EOCR iSEM2와 EOCR Edge로 모터 보호, 상태 감시, 예지 정비를 하나의 MCC 시스템으로 구성합니다.',
+  cta:[['solutions-mcc','솔루션 보기','pri'],['products-schneider','Schneider 제품','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroMC">${ISO.sceneMCC()}</div><p class="iso-cap"><b>SMART MCC</b><span>EOCR 모터 보호 → EOCR Edge 데이터 수집 → 모니터링 · 예지 정비</span></p>`},
+ {id:'arc',on:true,since:'2026-11',eb:'ARC · FIRE SAFETY',h:'아크를 먼저 끊는<br>전기화재 예방',
+  p:'저압 분전반은 AFDD로, 고압 배전반은 아크 보호계전기로 아크 사고를 차단합니다. ABB · Schneider · 상도일렉트릭 AFDD를 현장에 맞춰 선정합니다.',
+  cta:[['solutions-arc','솔루션 보기','pri'],['contact','상담 요청','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroAR">${ISO.sceneARC()}</div><p class="iso-cap"><b id="arHeroStep">01 / 03</b><span id="arHeroCap">${HCAP.ar[0]}</span></p>`},
+ {id:'thermal',on:true,since:'2026-11',eb:'THERMAL MONITORING',h:'연기가 나기 전에<br>배전반 과열 감지',
+  p:'TH110 · CL110 · HeatTag 무선 센서와 PAS600, PME로 접속부 과열과 절연 열분해를 조기에 경보합니다.',
+  cta:[['solutions-thermal','솔루션 보기','pri'],['products-schneider','Schneider 제품','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroTH">${ISO.sceneTHERM()}</div><p class="iso-cap"><b id="thHeroStep">01 / 03</b><span id="thHeroCap">${HCAP.th[0]}</span></p>`},
+ {id:'retrofit',on:true,since:'2026-11',eb:'RETROFIT',h:'단종 · 노후 설비를<br>현행 제품으로',
+  p:'기능 · 정격 · 치수 · 통신을 비교하는 동등성 검토부터 결선 · 로직 · 정정값 이관, 교체 후 시험까지 수행합니다.',
+  cta:[['solutions-retrofit','솔루션 보기','pri'],['contact','상담 요청','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroRT">${ISO.sceneRETRO()}</div><p class="iso-cap"><b id="rtHeroStep">01 / 03</b><span id="rtHeroCap">${HCAP.rt[0]}</span></p>`}
 ];
-const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,5);
+const HCAP={ar:['정상 운전 — 아크 보호계전기 · AFDD 상시 감시','저압 아크 — AFDD가 해당 회로만 차단','고압 아크 — 광센서 + 과전류로 상위 차단기 트립'],
+ th:['정상 감시 — 무선 센서 → PAS600 → PME','접속부 과열 — 상별 온도 · 편차 경보','절연 열분해 — HeatTag 3단계 조기 경보'],
+ rt:['교체 전 — 단종 · 노후 제품 현황 조사','동등성 검토 — 기능 · 정격 · 치수 · 통신 비교','교체 후 — 이관 · 인터록 · 기능 시험']};
+const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,8);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
  const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
@@ -2582,12 +2601,14 @@ function initCarousel(){
  paused=paused||RM;
  showSlide(0);
  const t=setInterval(()=>{if(!paused&&!document.hidden&&!hoverHero)showSlide((slideI+1)%SLIDES.length)},dur);timers.push(t);
- const hk={fl:0,hs:0,pq:0};
+ const hk={fl:0,hs:0,pq:0,x:0};ISO.setMCC($('#isoHeroMC svg'));
  const heroSet=()=>{ISO.setFLISR($('#isoHeroFL svg'),hk.fl);ISO.setHSBT($('#isoHeroHS svg'),hk.hs);ISO.setPQ($('#isoHeroPQ svg'),hk.pq);
   const t=(id,v)=>{const e=$(id);if(e)e.textContent=v};
-  t('#flHeroStep',`0${hk.fl+1} / 04`);t('#flHeroCap',ISO.FL.cap[hk.fl]);t('#hsHeroStep',`0${hk.hs+1} / 04`);t('#hsHeroCap',ISO.HS.cap[hk.hs]);t('#pqHeroStep',hk.pq?'보상 후':'보상 전');t('#pqHeroCap',PQCAP[hk.pq])};
+  t('#flHeroStep',`0${hk.fl+1} / 04`);t('#flHeroCap',ISO.FL.cap[hk.fl]);t('#hsHeroStep',`0${hk.hs+1} / 04`);t('#hsHeroCap',ISO.HS.cap[hk.hs]);t('#pqHeroStep',hk.pq?'보상 후':'보상 전');t('#pqHeroCap',PQCAP[hk.pq]);
+  ISO.setARC($('#isoHeroAR svg'),hk.x);ISO.setTHERM($('#isoHeroTH svg'),hk.x);ISO.setRETRO($('#isoHeroRT svg'),hk.x);
+  ['ar','th','rt'].forEach(k=>{t('#'+k+'HeroStep',`0${hk.x+1} / 03`);t('#'+k+'HeroCap',HCAP[k][hk.x])})};
  heroSet();
- const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;heroSet()},2400);
+ const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;hk.x=(hk.x+1)%3;heroSet()},2400);
  if(!RM)timers.push(ft);else clearInterval(ft);
  $('#hcPause').innerHTML=paused?ic('play'):ic('pause');
  bars.classList.toggle('paused',paused);

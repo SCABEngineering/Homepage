@@ -2006,9 +2006,28 @@ const SLIDES_ALL=[
  {id:'pq',on:true,since:'2026-11',eb:'POWER QUALITY · SIFANG',h:'Harmonics · power factor · reactive power<br>From diagnosis to after-sales',
   p:'We select the right equipment for the load and system among SIFANG SVG/STATCOM, AHF and capacitors · reactors.',
   cta:[['solutions-pq','View solution','pri'],['products-sifang','SIFANG products','ghost']],
-  vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">Before compensation</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`}
+  vis:()=>`<div class="iso-vis" id="isoHeroPQ">${ISO.scenePQ()}</div><p class="iso-cap"><b id="pqHeroStep">Before compensation</b><span id="pqHeroCap">${PQCAP[0]}</span></p>`},
+ {id:'mcc',on:true,since:'2026-11',eb:'SMART MCC · EOCR',h:'From motor protection<br>to MCC monitoring',
+  p:'Schneider EOCR iSEM2 and EOCR Edge combine motor protection, condition monitoring and predictive maintenance in one MCC system.',
+  cta:[['solutions-mcc','View solution','pri'],['products-schneider','Schneider products','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroMC">${ISO.sceneMCC()}</div><p class="iso-cap"><b>SMART MCC</b><span>EOCR motor protection → EOCR Edge data collection → monitoring · predictive maintenance</span></p>`},
+ {id:'arc',on:true,since:'2026-11',eb:'ARC · FIRE SAFETY',h:'Stop the arc first:<br>electrical fire prevention',
+  p:'AFDDs protect LV distribution boards and arc protection relays protect MV switchgear. AFDDs from ABB, Schneider and Sangdo Electric are selected for each site.',
+  cta:[['solutions-arc','View solution','pri'],['contact','Request consultation','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroAR">${ISO.sceneARC()}</div><p class="iso-cap"><b id="arHeroStep">01 / 03</b><span id="arHeroCap">${HCAP.ar[0]}</span></p>`},
+ {id:'thermal',on:true,since:'2026-11',eb:'THERMAL MONITORING',h:'Detect switchgear overheating<br>before smoke appears',
+  p:'TH110, CL110 and HeatTag wireless sensors with PAS600 and PME give early alarms for connection overheating and insulation decomposition.',
+  cta:[['solutions-thermal','View solution','pri'],['products-schneider','Schneider products','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroTH">${ISO.sceneTHERM()}</div><p class="iso-cap"><b id="thHeroStep">01 / 03</b><span id="thHeroCap">${HCAP.th[0]}</span></p>`},
+ {id:'retrofit',on:true,since:'2026-11',eb:'RETROFIT',h:'From discontinued equipment<br>to current products',
+  p:'From an equivalence review of functions, ratings, dimensions and communication to transfer of wiring, logic and settings and post-replacement testing.',
+  cta:[['solutions-retrofit','View solution','pri'],['contact','Request consultation','ghost']],
+  vis:()=>`<div class="iso-vis" id="isoHeroRT">${ISO.sceneRETRO()}</div><p class="iso-cap"><b id="rtHeroStep">01 / 03</b><span id="rtHeroCap">${HCAP.rt[0]}</span></p>`}
 ];
-const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,5);
+const HCAP={ar:['Normal — arc protection relays and AFDDs on watch','LV arc — the AFDD trips only that circuit','MV arc — light + overcurrent trip the upstream breaker'],
+ th:['Normal — wireless sensors → PAS600 → PME','Connection overheating — per-phase temperature and deviation alarm','Insulation decomposition — HeatTag three-level early alarm'],
+ rt:['Before — survey of discontinued and aged products','Equivalence review — functions, ratings, dimensions and communication','After — transfer, interlock and function tests']};
+const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,8);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
  const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
@@ -2588,12 +2607,14 @@ function initCarousel(){
  paused=paused||RM;
  showSlide(0);
  const t=setInterval(()=>{if(!paused&&!document.hidden&&!hoverHero)showSlide((slideI+1)%SLIDES.length)},dur);timers.push(t);
- const hk={fl:0,hs:0,pq:0};
+ const hk={fl:0,hs:0,pq:0,x:0};ISO.setMCC($('#isoHeroMC svg'));
  const heroSet=()=>{ISO.setFLISR($('#isoHeroFL svg'),hk.fl);ISO.setHSBT($('#isoHeroHS svg'),hk.hs);ISO.setPQ($('#isoHeroPQ svg'),hk.pq);
   const t=(id,v)=>{const e=$(id);if(e)e.textContent=v};
-  t('#flHeroStep',`0${hk.fl+1} / 04`);t('#flHeroCap',ISO.FL.cap[hk.fl]);t('#hsHeroStep',`0${hk.hs+1} / 04`);t('#hsHeroCap',ISO.HS.cap[hk.hs]);t('#pqHeroStep',hk.pq?'After compensation':'Before compensation');t('#pqHeroCap',PQCAP[hk.pq])};
+  t('#flHeroStep',`0${hk.fl+1} / 04`);t('#flHeroCap',ISO.FL.cap[hk.fl]);t('#hsHeroStep',`0${hk.hs+1} / 04`);t('#hsHeroCap',ISO.HS.cap[hk.hs]);t('#pqHeroStep',hk.pq?'After compensation':'Before compensation');t('#pqHeroCap',PQCAP[hk.pq]);
+  ISO.setARC($('#isoHeroAR svg'),hk.x);ISO.setTHERM($('#isoHeroTH svg'),hk.x);ISO.setRETRO($('#isoHeroRT svg'),hk.x);
+  ['ar','th','rt'].forEach(k=>{t('#'+k+'HeroStep',`0${hk.x+1} / 03`);t('#'+k+'HeroCap',HCAP[k][hk.x])})};
  heroSet();
- const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;heroSet()},2400);
+ const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;hk.x=(hk.x+1)%3;heroSet()},2400);
  if(!RM)timers.push(ft);else clearInterval(ft);
  $('#hcPause').innerHTML=paused?ic('play'):ic('pause');
  bars.classList.toggle('paused',paused);
