@@ -247,8 +247,11 @@ ul{margin:0;padding:0;list-style:none}
 .sec.dark{background-color:var(--hero-2);color:var(--hero-fg)}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;margin-bottom:40px;flex-wrap:wrap}
 .sec-head .lead{margin-top:14px}
-.t2{position:relative;padding-top:20px;font-size:32px;line-height:1.3;font-weight:700;color:var(--title)}
-.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--ac)}
+.t2{position:relative;padding-top:20px;font-size:32px;line-height:1.3;font-weight:700;color:var(--ink)}
+:root{--logo-red:#CD162C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--logo-red:#FF5A6A}}
+:root[data-theme="dark"]{--logo-red:#FF5A6A}
+.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--logo-red)}
 .sec.dark .t2{color:#fff}
 .t3{font-size:21px;font-weight:700;color:var(--title);line-height:1.4}
 .lead{color:var(--muted);font-size:17px;max-width:64ch}
@@ -1941,7 +1944,7 @@ function pgCompanyVision(){
  <div class="block">${blockHead('미션 · 핵심가치')}<p class="lead">Growing with our customers — Long and Steady. 고객과 함께 오래, 꾸준히 성장합니다.</p>
   <div class="grid-4">${VALUES.map(([t,d],i)=>`<div class="card">${pg(['target','compass','link','growth','leaf','bulb','gear','people'][i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
-const HIST=[['2004–05',['에스캡 설립 (서울)']],['2007–08',['발전 · 공공 분야 ABB 제품 공급']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['SIFANG 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
+const HIST=[['2004–05',['에스캡 설립']],['2007–08',['발전 · 공공 분야 ABB 제품 공급']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['SIFANG 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
 function pgCompanyHistory(){
  return `<div class="block">${blockHead('연혁','<span class="note">2004 – 2026</span>')}
   <div class="tl">${HIST.map(([y,it],i)=>`<div class="tl-i${i===HIST.length-1?' hl':''}"><div class="yr">${y}</div><ul>${it.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>

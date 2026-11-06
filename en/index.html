@@ -247,8 +247,11 @@ ul{margin:0;padding:0;list-style:none}
 .sec.dark{background-color:var(--hero-2);color:var(--hero-fg)}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;margin-bottom:40px;flex-wrap:wrap}
 .sec-head .lead{margin-top:14px}
-.t2{position:relative;padding-top:20px;font-size:32px;line-height:1.3;font-weight:700;color:var(--title)}
-.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--ac)}
+.t2{position:relative;padding-top:20px;font-size:32px;line-height:1.3;font-weight:700;color:var(--ink)}
+:root{--logo-red:#CD162C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--logo-red:#FF5A6A}}
+:root[data-theme="dark"]{--logo-red:#FF5A6A}
+.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--logo-red)}
 .sec.dark .t2{color:#fff}
 .t3{font-size:21px;font-weight:700;color:var(--title);line-height:1.4}
 .lead{color:var(--muted);font-size:17px;max-width:64ch}
@@ -1947,7 +1950,7 @@ function pgCompanyVision(){
  <div class="block">${blockHead('Mission · Core values')}<p class="lead">Growing with our customers — Long and Steady.</p>
   <div class="grid-4">${VALUES.map(([t,d],i)=>`<div class="card">${pg(['target','compass','link','growth','leaf','bulb','gear','people'][i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
-const HIST=[['2004–05',['SCAB founded (Seoul)']],['2007–08',['ABB product supply for power generation · public sectors']],['2009–10',['Product supply for nuclear · energy sectors']],['2011–13',['Is-limiter (fault current limiter) supply']],['2015–16',['Strategic alliance with CVS','ABB product supply for nuclear MV · LV switchgear']],['2017–19',['First intelligent load shedding (PML) application in Korea']],['2020–21',['SCAB Engineering Co., Ltd. incorporated']],['2022–23',['SSC600 · REX640 digital substation application']],['2024–25',['Schneider Electric Korea distributor (DE/PP)','Hitachi Energy Korea distributor']],['2026',['SIFANG exclusive distributor · SVG/STATCOM','Schneider EOCR distributor (ETEVERS)','R&D department recognized (04.14)']]];
+const HIST=[['2004–05',['SCAB founded']],['2007–08',['ABB product supply for power generation · public sectors']],['2009–10',['Product supply for nuclear · energy sectors']],['2011–13',['Is-limiter (fault current limiter) supply']],['2015–16',['Strategic alliance with CVS','ABB product supply for nuclear MV · LV switchgear']],['2017–19',['First intelligent load shedding (PML) application in Korea']],['2020–21',['SCAB Engineering Co., Ltd. incorporated']],['2022–23',['SSC600 · REX640 digital substation application']],['2024–25',['Schneider Electric Korea distributor (DE/PP)','Hitachi Energy Korea distributor']],['2026',['SIFANG exclusive distributor · SVG/STATCOM','Schneider EOCR distributor (ETEVERS)','R&D department recognized (04.14)']]];
 function pgCompanyHistory(){
  return `<div class="block">${blockHead('History','<span class="note">2004 – 2026</span>')}
   <div class="tl">${HIST.map(([y,it],i)=>`<div class="tl-i${i===HIST.length-1?' hl':''}"><div class="yr">${y}</div><ul>${it.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
