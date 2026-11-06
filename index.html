@@ -287,6 +287,11 @@ ul{margin:0;padding:0;list-style:none}
 .sol .sb b{font-size:18px;line-height:1.4}
 .sol .sb p{font-size:14px;color:var(--muted)}
 .sol .sb .link{margin-top:6px}
+.sol-cta{background:var(--hero);border-color:var(--hero);color:var(--hero-fg);grid-template-rows:1fr}
+.sol-cta .sb{align-content:end;padding:26px 22px 24px}
+.sol-cta .sb p{color:var(--hero-muted)}
+.sol-cta .eyebrow,.sol-cta .link{color:var(--ac-hl)}
+.sol-cta:hover{border-color:var(--ac-hl)}
 
 /* engineering band */
 .eng{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:56px;align-items:start}
@@ -799,6 +804,27 @@ td.hl{color:var(--ac);font-weight:600}
 .mega-feat .fimg.pgf{background:var(--panel)}
 .mega-feat .fimg.pgf .pg svg{width:64px;height:64px}
 .sd-col{display:grid;gap:20px}
+.wmap{background:var(--card);border:1px solid var(--line);padding:14px 16px 16px}
+.wmap svg{display:block;width:100%;height:auto}
+.wm-land{fill:var(--line);stroke:var(--card);stroke-width:.5}
+.wm-c{stroke:var(--card);stroke-width:.6}
+.wm-l{stroke:var(--ink);stroke-width:.9;opacity:.5}
+.wm-d{fill:var(--ink);stroke:#FFFFFF;stroke-width:1.2}
+.wm-leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-top:10px}
+.wm-leg i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.wm-leg i.st{background:repeating-linear-gradient(45deg,#FF000F 0 2.4px,#3DCD58 2.4px 4.8px,#1565C0 4.8px 7.2px)}
+.wm-list{display:none;list-style:none;margin:12px 0 0;padding:0;border-top:1px solid var(--line)}
+.wm-list li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.wm-list span{color:var(--muted)}
+.det{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:var(--card)}
+.det>div{padding:16px 16px 18px;display:grid;gap:6px;align-content:start;border-right:1px solid var(--line);position:relative}
+.det>div:last-child{border-right:0}
+.det>div::before{content:"";height:6px;margin:-16px -16px 8px;background:var(--c)}
+.det b{font-size:15px}
+.det span{font-size:13px;color:var(--muted)}
+.det em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:2px 8px;justify-self:start}
+.det-note{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--muted);margin-top:6px}
+.rf-arrow{font-family:var(--mono);color:var(--ac);font-weight:600}
 .sd-col .numlist{grid-template-columns:repeat(4,minmax(0,1fr))}
 .diagram.isod{padding:12px 16px 18px;background:linear-gradient(180deg,var(--panel),var(--bg))}
 @media (prefers-reduced-motion: reduce){.iso .flow,.iso .goose-on,.iso .pulse,.iso .blink,.iso .rotor{animation:none}}
@@ -966,6 +992,8 @@ td.hl{color:var(--ac);font-weight:600}
 }
 @container site (max-width:480px){
   .sd-col .numlist{grid-template-columns:1fr}
+  .wm-list{display:block}
+  .det{grid-template-columns:1fr}.det>div{border-right:0;border-bottom:1px solid var(--line)}.det>div:last-child{border-bottom:0}
   .slide h1{font-size:30px}
   .slide-p{font-size:15.5px}
   .quick-grid{grid-template-columns:1fr}
@@ -1083,6 +1111,9 @@ const PG={
  compass:'<circle cx="24" cy="24" r="18"/><path class="a" d="M31 17l-4 10-10 4 4-10z"/>',
  screen:'<rect x="4" y="8" width="40" height="26" rx="2"/><path d="M18 42h12M24 34v8"/><path class="a" d="M10 26l7-8 6 5 8-9 7 6"/>',
  fax:'<rect x="8" y="16" width="32" height="22" rx="2"/><path d="M14 16V6h16l4 4v6M14 30h20"/><path class="a" d="M16 24h4M24 24h4"/>',
+ arc:'<rect x="10" y="6" width="28" height="36" rx="2"/><path d="M10 15h28"/><path class="a" d="M26 19l-7 10h6l-4 9 9-12h-6l4-7z"/>',
+ thermo:'<path d="M14 29V10a4 4 0 0 1 8 0v19a7 7 0 1 1-8 0z"/><path class="a" d="M18 16v16"/><circle class="fa" cx="18" cy="34" r="3"/><path class="a" d="M30 14a8 8 0 0 1 0 11M35 10a14 14 0 0 1 0 19"/>',
+ retrofit:'<rect x="5" y="13" width="14" height="22" rx="2"/><rect class="a" x="29" y="13" width="14" height="22" rx="2"/><path d="M20 20h8M25 17l3 3-3 3"/><path class="a" d="M28 28h-8M23 25l-3 3 3 3"/>',
  beyond:'<path d="M32 26v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V18a2 2 0 0 1 2-2h14"/><path class="a" d="M18 30L41 7M29 7h12v12"/>'
 };
 window.PG=PG;
@@ -1424,7 +1455,14 @@ function miniProduct(kind){
   for(let i=0;i<3;i++){const xa=3.3+i*1.35;s+=k.poly(k.qY(xa,xa+.9,1.4,5.6,yF),'#1C2C3B')+k.poly(k.qY(xa+.25,xa+.65,1.8,5.2,yF),'#E07800','opacity=".85"')}}
  else if(kind==='lvbox'){s+=k.box(2,1,0,6.4,2.6,.3,MAT.plinth)+k.box(2.2,1.2,.3,6,2.2,6,MAT.cab);const yF=3.4;
   for(let r=0;r<4;r++)for(let c=0;c<4;c++){const xa=2.7+c*1.4,za=1+r*1.2;s+=k.poly(k.qY(xa,xa+1,za,za+.9,yF),'#3B4855')+k.poly(k.qY(xa+.35,xa+.65,za+.25,za+.65,yF),r===1&&c===2?'#E5484D':'#C9D2DA')}}
- return `<svg viewBox="0 0 240 180" class="iso mini" role="img" aria-label="제품 일러스트">${s}</svg>`;
+ else if(kind==='thsensor'){const q=kit(14,120,62);[[-2.2,1.6],[4.8,1.6]].forEach(([x])=>s+=q.box(x,-.4,0,.8,4.4,.9,{t:'#D5DCE2',l:'#BFC8D0',r:'#A9B4BE'}));for(let i=0;i<3;i++){const y0=i*1.6;s+=q.box(-3,y0,.9,9,.6,1.1,{t:'#E7B489',l:'#C98B5B',r:'#AE7444'})}for(let i=0;i<3;i++){const y0=i*1.6;s+=q.box(.2+i*1.3,y0-.07,2,1.5,.74,.7,{t:'#4CD26A',l:'#2FAF4E',r:'#25913F'})}}
+ else if(kind==='heattag'){const q=kit(14,120,96);s+=q.box(-2.1,-1.2,0,4.6,2.4,.25,MAT.plinth)+q.box(-1.9,-1,.25,4.2,2,3.8,{t:'#F2F5F7',l:'#E3E8EC',r:'#C9D1D8'})+q.box(-1.9,-1,4.05,4.2,2,1,{t:'#3DCD58',l:'#2FAF4E',r:'#25913F'});
+  const yF=1;for(let i=0;i<6;i++){const xa=-1.55+i*.62;s+=q.poly(q.qY(xa,xa+.36,4.2,4.9,yF),'#1F7A36')}s+=q.poly(q.qY(1.2,1.8,3.2,3.5,yF),'#3DCD58')+q.poly(q.qY(-1.4,.4,1.2,2.6,yF),'#D9DFE4')}
+ else if(kind==='gateway'){const q=kit(14,120,100);s+=q.box(-3,-1.2,0,6.4,2.4,.25,MAT.plinth)+q.box(-2.6,-.9,.25,5.6,1.8,3.8,{t:'#E9EDF0',l:'#D5DCE2',r:'#BBC5CE'});const yF=.9;
+  s+=q.poly(q.qY(-2.1,2.5,2.3,3.5,yF),'#2B3A48');[[-1.7,'#3DCD58'],[-1.1,'#3DCD58'],[-.5,'#F0A928']].forEach(([xa,c])=>s+=q.poly(q.qY(xa,xa+.35,2.75,3.1,yF),c));
+  const a=q.ip(2.1,0,4.05),b=q.ip(2.1,0,6.1);s+=`<path d="M${f1(a[0])} ${f1(a[1])}V${f1(b[1])}" stroke="#5B6670" stroke-width="3" stroke-linecap="round"/>`}
+ else if(kind==='pmescreen'){const q=kit(17,120,96);s+=q.monitor(-2,-1.2)}
+ return `<svg viewBox="0 0 240 180" class="iso mini\" role="img" aria-label="제품 일러스트">${s}</svg>`;
 }
 
 /* ---------- scene: SCAB meaning (four cubes on one busbar) ---------- */
@@ -1451,7 +1489,133 @@ function sceneSCAB(words){
  return wrap(s,'Safe · Connected · Advanced · Beyond — SCAB');
 }
 
-window.ISO={fit:(svg,pad=10)=>{if(!svg)return;try{const b=svg.getBBox();if(b.width>0)svg.setAttribute('viewBox',`${(b.x-pad).toFixed(1)} ${(b.y-pad).toFixed(1)} ${(b.width+2*pad).toFixed(1)} ${(b.height+2*pad).toFixed(1)}`)}catch(e){}},sceneGrid,sceneFLISR,setFLISR,sceneHSBT,setHSBT,scenePQ,setPQ,sceneMCC,setMCC,miniProduct,sceneSCAB,FL,HS,thd,PQH,PQA};
+/* ---------- shared helpers for v0.7 solution scenes ---------- */
+const twW=t=>[...t].reduce((a,c)=>a+(c.charCodeAt(0)>0x1100?11.2:6.7),0)+20;
+function pill(k,text,x,y,z,col='#E07800'){const p=k.ip(x,y,z),w=twW(text)+14;
+ return `<g transform="translate(${f1(p[0]-w/2)},${f1(p[1]-11)})"><rect width="${f1(w)}" height="22" rx="11" fill="${col}" filter="url(#iso-drop)"/><circle cx="12" cy="11" r="4" fill="#fff" class="blink"/><text x="22" y="15" font-size="11" font-weight="600" fill="#fff">${text}</text></g>`}
+function ring(k,x,y,z,col='#FF9A1F'){const p=k.ip(x,y,z);return `<circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="12" fill="none" stroke="${col}" stroke-width="2" class="pulse"/>`}
+function lvb(k,x,y,n,o={}){const cw=o.cw||2.2,d=o.d||2,h=o.h||5.2;let t=k.shadow(x,y,n*cw,d,h)+k.box(x-.2,y-.2,0,n*cw+.4,d+.4,.3,MAT.plinth);
+ for(let i=0;i<n;i++){const x0=x+i*cw,yF=y+d;t+=k.box(x0,y,.3,cw,d,h,MAT.cab);
+  t+=`<path d="${k.D([k.ip(x0+.12,yF,.5),k.ip(x0+.12,yF,h+.1),k.ip(x0+cw-.13,yF,h+.1),k.ip(x0+cw-.13,yF,.5),k.ip(x0+.12,yF,.5)])}" fill="none" stroke="rgba(60,80,100,.3)" stroke-width=".7"/>`;
+  for(let r=0;r<4;r++){const za=1+r*1.05;t+=k.poly(k.qY(x0+.3,x0+cw-.3,za,za+.62,yF),'#3B4855');
+   for(let m=0;m<5;m++){const xa=x0+.38+m*.3,af=o.afdd&&r<2;t+=k.poly(k.qY(xa,xa+.22,za+.08,za+.54,yF),af?'#EEF1F3':'#C9D2DA');
+    if(af)t+=k.poly(k.qY(xa+.05,xa+.17,za+.36,za+.48,yF),'#2BD4A0');}}}
+ if(o.trough!==false)t+=k.box(x,y+.2,h+.3,n*cw,1.2,.4,MAT.trough);return t}
+function setSteps(root,kk){if(!root)return;root.querySelectorAll('[data-on]').forEach(g=>g.setAttribute('opacity',g.dataset.on.split(',').includes(String(kk))?1:0))}
+const flowOff=(k,pts)=>`<path d="${k.D(pts.map(q=>k.ip(q[0],q[1],.04)))}" fill="none" stroke="#9AA5AF" stroke-width="2.4" stroke-dasharray="5 5" opacity=".75"/>`;
+
+/* ---------- scene: arc & electrical fire prevention ---------- */
+const ARC={seg:{G:[[.6,5.8],[4,5.8]],M:[[17.8,5.8],[21,5.8]],T:[[26.6,5],[30,5]],F1:[[32.2,6.2],[32.2,14],[34,14],[34,19.8]],F2:[[35.5,6.2],[35.5,12],[40,12],[40,19.8]]},
+ cap:['정상 운전 — 고압 배전반은 아크 보호계전기가, 저압 분전반은 AFDD가 상시 감시','저압 아크 — 케이블 손상 · 접속 불량으로 생긴 아크를 AFDD가 전류 파형으로 판별해 해당 회로만 차단','고압 아크 플래시 — 아크 빛(광센서)과 과전류 조건이 함께 들어오면 아크 보호계전기가 상위 차단기를 고속 트립'],
+ steps:['정상 운전','저압 아크 → AFDD','고압 아크 → 아크 보호']};
+function sceneARC(){
+ const k=kit(10.4,404,98);let s=k.platform(52,40);
+ s+=k.patch(29,8,46,17.5,'#E3E9EE');
+ Object.values(ARC.seg).forEach(p=>s+=k.trench(p));
+ s+=`<g class="aflow"></g>`;
+ const o=[];
+ o.push({d:14,s:k.swgr(4,4,6,{cw:2.3,lamps:['ARC-INC','','','','','']})});
+ o.push({d:26,s:k.transformer(21,2.6)});
+ o.push({d:36,s:lvb(k,30,4,4,{afdd:true})});
+ o.push({d:60,s:k.factory(30,20,14,13,5,{})});
+ [[48,4,.9],[3,36,1],[48.5,37,.8],[9,37.5,.8],[2.5,22,.75],[22,35,.85]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ // arc light sensors on each MV column
+ for(let i=0;i<6;i++){const p=k.ip(4+i*2.3+1.75,7.6,4.55);s+=`<circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="2.6" fill="#FFFFFF" stroke="#13253A" stroke-width=".8"/>`}
+ s+=`<g data-on="1">${k.spark(32.2,10,.3,'ARC',18,-12).replace('class="fault" opacity="0"','class="fault"')}${pill(k,'AFDD 차단',34.4,5,8.8,'#1E9E57')}</g>`;
+ const sp=k.ip(11.5,7.6,2.6);let rays='';for(let i=1;i<5;i++){const q=k.ip(4+i*2.3+1.75,7.6,4.55);rays+=`<path d="M${f1(sp[0])} ${f1(sp[1])}L${f1(q[0])} ${f1(q[1])}" stroke="#FFC23D" stroke-width="1.6" stroke-dasharray="3 3" opacity=".9"/>`}
+ s+=`<g data-on="2">${rays}${k.spark(11.5,7.6,2.6,'ARC FLASH',22,-30).replace('class="fault" opacity="0"','class="fault"')}${pill(k,'광센서 + 과전류 → 트립',8.6,5.8,10.4,'#13253A')}</g>`;
+ s+=k.chip('MV · 아크 보호',10.9,5.8,7.6,{w:twW('MV · 아크 보호')})+k.chip('TR',23.8,4.7,7.4)+k.chip('LV · AFDD',34.4,5,6.4,{w:twW('LV · AFDD')});
+ s+=k.badge('arc',37,26.5,7.4,15);
+ return wrap(s,'아크 · 전기화재 예방 아이소메트릭 일러스트');
+}
+function setARC(root,kk){
+ if(!root)return;const k=kit(10.4,404,98),S=ARC.seg;let f=k.flow(S.G);
+ if(kk<2)f+=k.flow(S.M)+k.flow(S.T)+k.flow(S.F2)+(kk===0?k.flow(S.F1):flowOff(k,S.F1));
+ else f+=flowOff(k,S.M)+flowOff(k,S.T)+flowOff(k,S.F1)+flowOff(k,S.F2);
+ root.querySelector('.aflow').innerHTML=f;
+ lampsState(root,kk===2?['ARC-INC']:[]);setSteps(root,kk);
+}
+
+/* ---------- scene: switchgear thermal & humidity monitoring ---------- */
+const TH={tags:[0,1,2,3,4,5].map(i=>[4+i*2.3+1.15,7.6,1.5]),ht:[23.2,6.35,4.75],cl:[29.6,6,1.6],gw:[12.9,15.6,3.9],pc:[32,19.2,4.7],
+ cap:['정상 감시 — TH110(접속부 온도) · CL110(반 내부 온도 · 습도) · HeatTag 무선 센서 → PAS600 → PME','접속부 과열 — 체결 불량 등으로 접속부 온도가 오르면 PME가 상별 온도 · 편차와 함께 경보','절연 열분해 조기 경보 — HeatTag가 케이블 피복에서 나오는 가스 · 미세입자를 감지해 연기 발생 전 3단계로 경보'],
+ steps:['정상 감시','접속부 과열','절연 열분해 경보']};
+function sceneTHERM(){
+ const k=kit(10.4,404,98);let s=k.platform(44,29);
+ const SG=[[[.6,5.8],[4,5.8]],[[17.8,6.6],[19.6,6.6],[19.6,9.4],[36.4,9.4],[36.4,6.9]],[[34,4.6],[30.9,4.6]]];
+ SG.forEach(p=>s+=k.trench(p));s+=`<g>${SG.map(p=>k.flow(p)).join('')}</g>`;
+ const o=[];
+ o.push({d:14,s:k.swgr(4,4,6,{cw:2.3})});
+ o.push({d:28,s:lvb(k,22,4,4)});
+ o.push({d:38,s:k.transformer(34,2.4)});
+ o.push({d:31,s:k.box(12,15,0,1.9,1.3,.3,MAT.plinth)+k.box(12.15,15.15,.3,1.6,1,2.6,MAT.cab)});
+ o.push({d:52,s:k.monitor(30,18)});
+ [[42,13,.9],[3,26,1],[41,26,.85],[11,27,.8],[2.5,18,.75],[24,26.5,.9]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ // PAS600 device and antenna
+ s+=k.poly(k.qY(12.4,13.5,1.6,2.5,16.15),'#2B3A48')+k.poly(k.qY(12.55,12.8,2.1,2.3,16.15),'#3DCD58')+k.poly(k.qY(12.9,13.15,2.1,2.3,16.15),'#3DCD58');
+ const an=k.ip(13.4,15.6,2.9),at=k.ip(13.4,15.6,4.2);s+=`<path d="M${f1(an[0])} ${f1(an[1])}V${f1(at[1])}" stroke="#5B6670" stroke-width="2" stroke-linecap="round"/>`;
+ // wireless links (Zigbee) to the gateway
+ const g=k.ip(13.4,15.6,4.2);let zb='';
+ [...TH.tags,TH.ht,TH.cl].forEach(([x,y,z])=>{const p=k.ip(x,y,z);zb+=`<path d="M${f1(p[0])} ${f1(p[1])}Q${f1((p[0]+g[0])/2)} ${f1(Math.min(p[1],g[1])-26)} ${f1(g[0])} ${f1(g[1])}" fill="none" stroke="#2FBF56" stroke-width="1.2" stroke-dasharray="2 4" opacity=".75"/>`});
+ s+=`<g>${zb}</g>`;
+ const pc=k.ip(32,19.2,4.6);s+=`<path d="M${f1(g[0])} ${f1(g[1])}Q${f1((g[0]+pc[0])/2)} ${f1(Math.max(g[1],pc[1])+14)} ${f1(pc[0])} ${f1(pc[1])}" fill="none" stroke="#00A3AD" stroke-width="1.6" stroke-dasharray="3 5" class="goose-on"/>`;
+ // TH110 tags on MV columns
+ TH.tags.forEach(([x,y,z],i)=>{s+=`<g class="ttag" data-n="t${i}">${k.poly(k.qY(x-.26,x+.26,z-.26,z+.26,y),'#3DCD58','stroke="#1F7A36" stroke-width=".8"')}</g>`});
+ // CL110 on LV board, HeatTag at top of LV board
+ const [cx,cy,cz]=TH.cl;s+=k.poly(k.qY(cx-.3,cx+.3,cz-.3,cz+.3,cy),'#222B33','stroke="#3DCD58" stroke-width="1"');
+ const [hx,hy,hz]=TH.ht;s+=k.box(hx-.6,hy-.35,hz-.4,1.2,.4,.8,{t:'#3DCD58',l:'#F4F6F8',r:'#D5DCE2'})+`<g class="htl">${k.poly(k.qY(hx+.2,hx+.45,hz-.2,hz-.02,hy+.05),'#3DCD58')}</g>`;
+ s+=`<g data-on="1">${ring(k,...TH.tags[2])}${pill(k,'접속부 72 ℃ · 주의',9.4,7.6,10)}${pill(k,'온도 경보',32,19.2,7.2,'#E07800')}</g>`;
+ s+=`<g data-on="2">${ring(k,hx,hy,hz)}${pill(k,'HeatTag 경보 · MEDIUM',26.4,5,10.2)}${pill(k,'절연 열분해 경보',32,19.2,7.2,'#E07800')}</g>`;
+ s+=k.chip('MV 배전반 · TH110',10.9,5.8,7.4,{w:twW('MV 배전반 · TH110')})+k.chip('LV 배전반 · HeatTag · CL110',26.4,5,7.6,{w:twW('LV 배전반 · HeatTag · CL110')})+k.chip('TR',36.8,4.4,7.2);
+ s+=k.chip('PAS600',12.9,15.6,5.4,{bg:'#13253A',fg:'#5CF0FA',w:70})+k.chip('PME',32,19.2,9.4,{bg:'#007A85',fg:'#FFFFFF',w:52});
+ return wrap(s,'배전반 온도 · 습도 감시 아이소메트릭 일러스트');
+}
+function setTHERM(root,kk){
+ if(!root)return;
+ root.querySelectorAll('.ttag polygon').forEach((p,i)=>p.setAttribute('fill',kk===1&&i===2?'#F0A928':'#3DCD58'));
+ const hl=root.querySelector('.htl polygon');if(hl)hl.setAttribute('fill',kk===2?'#F0A928':'#3DCD58');
+ setSteps(root,kk);
+}
+
+/* ---------- scene: retrofit of discontinued / aged equipment ---------- */
+const RT={cap:['교체 전 — 단종 · 노후 제품은 부품 수급과 기술 지원이 끊기기 전에 대체 계획이 필요','동등성 검토 — 기능 · 정격 · 치수 · 통신 · 설정값을 기존 제품과 비교해 대체품 확정','교체 후 — 결선 · 로직 · 정정값을 이관하고 인터록 · 기능 시험으로 확인'],
+ steps:['교체 전','동등성 검토','교체 후']};
+function sceneRETRO(){
+ const k=kit(10.4,404,98);let s=k.platform(52,40);
+ const SG=[[[.6,5.8],[4,5.8]],[[17.8,6.6],[19.4,6.6],[19.4,12],[33,12],[33,19.8]],[[19.4,9.2],[31.2,9.2],[31.2,6.6]]];
+ SG.forEach(p=>s+=k.trench(p));s+=`<g>${SG.map(p=>k.flow(p)).join('')}</g>`;
+ const o=[];
+ o.push({d:14,s:k.swgr(4,4,6,{cw:2.3})});
+ const cab=(x,y,w,d,h)=>k.shadow(x,y,w,d,h+.3)+k.box(x-.15,y-.15,0,w+.3,d+.3,.3,MAT.plinth)+k.box(x,y,.3,w,d,h,MAT.cab)+k.poly(k.qY(x+.35,x+w-.35,h-1.2,h-.3,y+d),'#1C2C3B');
+ o.push({d:26,s:cab(21,3.4,2.6,2.4,6)});
+ o.push({d:30,s:cab(24.4,3.4,2.4,2.4,6)});
+ o.push({d:36,s:k.mcc(29,4,3)});
+ o.push({d:60,s:k.factory(30,20,14,13,5,{})});
+ [[48,4,.9],[3,36,1],[48.5,37,.8],[9,37.5,.8],[2.5,22,.75],[22,35,.85]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
+ s+=byDepth(o);
+ // old vs new device faces
+ let old='',nw='';
+ for(let i=0;i<6;i++){const x0=4+i*2.3,yF=7.6,h=5;old+=k.poly(k.qY(x0+.36,x0+1.3,h-1,h-.15,yF),'#8C929A')+k.poly(k.qY(x0+.5,x0+1.16,h-.85,h-.3,yF),'#E6DFC9')+k.poly(k.qY(x0+1.45,x0+1.7,h-.65,h-.45,yF),'#F0A928');
+  nw+=k.poly(k.qY(x0+.4,x0+1.25,h-.9,h-.25,yF),'#5CF0FA');}
+ [[21,5.8,2.6],[24.4,5.8,2.4]].forEach(([x,yF,w])=>{old+=k.poly(k.qY(x+.35,x+w-.35,4.8,5.7,yF),'#8C929A')+k.poly(k.qY(x+.55,x+w-.55,4.95,5.5,yF),'#E6DFC9');nw+=k.poly(k.qY(x+.4,x+w-.4,4.85,5.65,yF),'#5CF0FA')});
+ s+=`<g data-on="0,1">${old}</g><g data-on="2">${nw}</g>`;
+ // review frames
+ const fr=(x0,x1,y0,y1,z0,z1)=>{const P=[[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]].map(q=>k.ip(...q));return `<path d="${k.D(P)}Z" fill="rgba(240,169,40,.08)" stroke="#F0A928" stroke-width="1.6" stroke-dasharray="5 4"/>`};
+ s+=`<g data-on="1">${fr(3.8,18,4,7.7,.2,5.5)+fr(20.8,27,3.3,5.9,.2,6.5)+fr(28.8,35.8,4,6.3,.2,6.5)}</g>`;
+ // checklist card (step 1)
+ const cp=k.ip(46,8,6);const items=['기능 · 보호 요소','정격 · 입출력','치수 · 결선','통신 · 설정값 이관'];
+ s+=`<g data-on="1" transform="translate(${f1(cp[0]-20)},${f1(cp[1]-70)})"><rect width="196" height="${36+items.length*24}" rx="8" fill="#FFFFFF" stroke="rgba(19,37,58,.16)" filter="url(#iso-drop)"/><text x="16" y="24" font-size="12.5" font-weight="700" fill="#13253A">동등성 검토</text>${items.map((t,i)=>`<g transform="translate(16,${42+i*24})"><rect width="14" height="14" rx="3" fill="#1E9E57"/><path d="M3.5 7.2l2.6 2.6 4.6-5" stroke="#fff" stroke-width="1.8" fill="none"/><text x="22" y="11.5" font-size="12" fill="#1C2A38">${t}</text></g>`).join('')}</g>`;
+ // labels: before / after
+ const L=[['구형 보호계전기','REX615 · Easergy P3',10.9,5.8,7.6],['SUE 3000','SUE 4000',22.3,4.6,7.4],['동기계전기 (타사)','SYNCHROTACT 6',25.6,4.6,11],['구형 EOCR','EOCR iSEM2',32.3,5,8]];
+ s+=`<g data-on="0,1">${L.map(([a,,x,y,z])=>k.chip(a,x,y,z,{w:twW(a),bg:'#FFF4E0',fg:'#8A4B00'})).join('')}</g><g data-on="2">${L.map(([,b,x,y,z])=>k.chip(b,x,y,z,{w:twW(b),bg:'#007A85',fg:'#FFFFFF'})).join('')}</g>`;
+ s+=k.badge('retrofit',37,26.5,7.4,15);
+ return wrap(s,'노후 · 단종 설비 대체 아이소메트릭 일러스트');
+}
+function setRETRO(root,kk){setSteps(root,kk)}
+
+window.ISO={fit:(svg,pad=10)=>{if(!svg)return;try{const b=svg.getBBox();if(b.width>0)svg.setAttribute('viewBox',`${(b.x-pad).toFixed(1)} ${(b.y-pad).toFixed(1)} ${(b.width+2*pad).toFixed(1)} ${(b.height+2*pad).toFixed(1)}`)}catch(e){}},sceneGrid,sceneFLISR,setFLISR,sceneHSBT,setHSBT,scenePQ,setPQ,sceneMCC,setMCC,sceneARC,setARC,ARC,sceneTHERM,setTHERM,TH,sceneRETRO,setRETRO,RT,miniProduct,sceneSCAB,FL,HS,thd,PQH,PQA};
 })();
 
 </script>
@@ -1465,7 +1629,7 @@ const store={get(k,d){try{const v=localStorage.getItem('scab_site_'+k);return v=
              set(k,v){try{localStorage.setItem('scab_site_'+k,JSON.stringify(v))}catch(e){}}};
 const A=n=>`assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const VERSION='v0.6', VDATE='2026-11-06';
+const VERSION='v0.7', VDATE='2026-11-06';
 const TONES={
  scab:{ko:'SCAB 레드 × 네이비',name:'SCAB Red · Navy',rec:true,hero:'#0D1B2A',btn:'#CD162C',ink:'#FFFFFF',ac:'#C0142A',hl:'#FF6B7A',panel:'#F2F5F7',title:'#3B4754',
   why:'회사 로고의 레드를 포인트로 쓰고 배경은 딥 네이비를 유지합니다. 레드 · 검정 조합을 피해 ABB · Hitachi Energy 사이트와 인상이 겹치지 않게 했습니다. (v0.6 기본)'},
@@ -1543,7 +1707,7 @@ const P=(id,brand,cat,name,model,img,pts)=>({id,brand,cat,name,model,img,pts});
 const PRODUCTS=[
  P('abb-relion','abb','relay','Relion 보호계전기','REX615 · REX640 · 아크 보호','abb_relion',['보호 · 제어 · 계측 통합','IEC 61850 통신','링 배전 자동화(FLISR) 적용']),
  P('abb-sue','abb','transfer','고속절체장치 (HSBT)','SUE 4000','abb_sue4000',['약 30 ms 고속 절체','공정 중단 최소화','다양한 모선 구성 대응']),
- P('abb-sync6','abb','transfer','동기투입장치','SYNCHROTACT 6','abb_sync6',['자동 동기 투입 · 동기 검출','발전기 · 계통 연계','원전 동기계전기 대체 동등성 검토']),
+ P('abb-sync6','abb','transfer','동기투입장치','SYNCHROTACT 6','abb_sync6',['자동 동기 투입 · 동기 검출','발전기 · 계통 연계','노후 동기계전기 대체 동등성 검토']),
  P('abb-ssc600','abb','relay','스마트 변전소 보호 · 제어','SSC600','abb_ssc600',['집중형 보호 · 제어','AI 기반 예측 정비','디지털 변전소 (IEC 61850)']),
  P('abb-mvcb','abb','breaker','고압 차단기 · 개폐기','VCB · VCS · LBS','abb_mvcb',['IEC / ANSI 규격','CT · PT · 센서']),
  P('abb-islimiter','abb','breaker','고장전류 한류기','Is-Limiter','abb_islimiter',['고장전류를 수 ms 내 차단','기존 차단기 · 모선 정격 유지 가능','국내 대형 플랜트 적용 실적']),
@@ -1555,6 +1719,10 @@ const PRODUCTS=[
  P('se-easergy','schneider','relay','보호계전기','Easergy P3 · P5','se_easergy',['저 · 고압 보호, 아크 검출','IEC 61850 등 다양한 프로토콜','UL 인증 모델 (해외 프로젝트)']),
  P('se-powerlogic','schneider','meter','디지털 미터','PowerLogic PM8000 · ION','se_powerlogic',['정밀 계측','고조파 · 전력품질 분석','UL 인증 모델 PM8240 · ION7400']),
  P('se-afdd','schneider','lv','아크 고장 차단기','AFDD · Acti9 Active',null,['저압 아크 고장 검출 · 차단','전기 화재 예방']),
+ P('se-th110','schneider','meter','무선 온도 · 습도 센서','TH110 · CL110',null,['접속부 온도(TH110) · 반 내부 온도 · 습도(CL110)','무선(Zigbee) · TH110은 통전 전류로 자가 전원','부스바 · 케이블 · 인출형 차단기 접속부']),
+ P('se-heattag','schneider','meter','케이블 과열 조기 감지 센서','PowerLogic HeatTag',null,['케이블 피복의 가스 · 미세입자 분석','연기 · 절연 갈변 전 3단계 경보','저압 배전반 · 분전반 상단 설치']),
+ P('se-pas600','schneider','meter','무선 센서 게이트웨이','EcoStruxure Panel Server PAS600',null,['무선 센서 수집 · Modbus 게이트웨이','PME · 상위 시스템 연동']),
+ P('se-pme','schneider','meter','전력 · 설비 감시 소프트웨어','EcoStruxure Power Monitoring Expert',null,['단선도 · 온도 화면, 경보 · 트렌드','리포트 · 이력 관리']),
  P('se-mtz','schneider','lv','저압 기중차단기','MasterPact MTZ','se_x139',['전력품질 계측 내장','디지털 모듈 업그레이드']),
  P('se-hvx','schneider','breaker','고압 진공차단기','EvoPact HVX','se_x141',['콤팩트 설계 · 저유지보수','IoT 센서 디지털 모니터링']),
  P('se-eocr','schneider','lv','전자식 모터보호계전기','EOCR iSEM1 · iSEM2','eocr',['과부하 · 결상 · 지락 보호','통신형 모델','신규 · MRO · Retrofit 공급']),
@@ -1586,16 +1754,22 @@ const RESOURCES=[
  R('r-c-pm','catalog','PowerLogic PM8000 · ION 시리즈','schneider','제조사 자료','—','maker'),
  R('r-c-mtz','catalog','MasterPact MTZ · EvoPact HVX','schneider','제조사 자료','—','maker'),
  R('r-c-eocr','catalog','EOCR iSEM · EOCR Edge','schneider','제조사 자료','—','maker'),
+ R('r-c-th110','catalog','PowerLogic TH110 · CL110 무선 온도 · 습도 센서','schneider','제조사 자료','—','maker',{url:'https://www.se.com/kr/ko/product-range/64883-th110'}),
+ R('r-c-heattag','catalog','PowerLogic HeatTag 케이블 과열 조기 감지','schneider','제조사 자료','—','maker',{url:'https://www.se.com/kr/ko/product-range/38501657'}),
+ R('r-c-pme','catalog','EcoStruxure Power Monitoring Expert · Panel Server PAS600','schneider','제조사 자료','—','maker',{url:'https://www.se.com/kr/ko/product-range/65404'}),
  R('r-c-he','catalog','Hitachi Energy 초고압 제품군','hitachi','제조사 자료','—','maker'),
  R('r-c-svg','catalog','SIFANG SVG / STATCOM','sifang','제조사 자료','—','request'),
  R('r-t-coord','tech','보호협조 · 정정 계산서 작성 예시 (단락전류 계산 기반)',null,'기술 노트','—','request'),
  R('r-t-87b','tech','고임피던스 모선보호(87B) 안정화 저항 · VDR 선정',null,'기술 노트','—','request'),
  R('r-t-alt','tech','고지대(해발 4,000 m) 보호계전기 적용 — 절연 보정 · 컨포멀 코팅 (IEC 60255-27)',null,'기술 노트','—','request'),
  R('r-t-hsbt','tech','HSBT 절체 로직 설계 (REX640 HSABTC) · 인터록 시험 계획',null,'기술 노트','—','request'),
- R('r-t-sync','tech','원전 동기계전기 대체 동등성 검토 (SYNCHROTACT 6)',null,'기술 노트','—','request'),
+ R('r-t-sync','tech','노후 동기계전기 대체 동등성 검토 (SYNCHROTACT 6)',null,'기술 노트','—','request'),
  R('r-t-flisr','tech','데이터센터 FLISR 자가복구 배전 (REX615 링 · IEC 61850 GOOSE)',null,'기술 노트','—','request'),
  R('r-t-pq','tech','전력품질 설비 선정 가이드 (콘덴서 · 리액터 / AHF / SVG)',null,'기술 노트','—','request'),
  R('r-t-mcc','tech','Smart MCC — Load List 기반 EOCR 모델 · CT · 통신 선정',null,'기술 노트','—','request'),
+ R('r-t-arc','tech','아크 · 전기화재 예방 — 저압 AFDD(IEC 62606)와 고압 아크 보호 적용',null,'기술 노트','—','request'),
+ R('r-t-thermal','tech','배전반 온도 · 습도 감시 구성 — TH110 · CL110 · HeatTag · PAS600 · PME',null,'기술 노트','—','request'),
+ R('r-t-retro','tech','노후 · 단종 설비 대체 동등성 검토 체크리스트',null,'기술 노트','—','request'),
  R('r-cert-rnd','cert','연구개발전담부서 인정서',null,'이미지','2026-04-14','view',{img:'cert_rnd'}),
  R('r-cert-se','cert','Schneider Electric Korea 대리점 인증','schneider','등록 예정','—','soon'),
  R('r-cert-he','cert','Hitachi Energy Korea 대리점 인증','hitachi','등록 예정','—','soon'),
@@ -1650,7 +1824,7 @@ const MENU=[
   feat:{img:'cube_red',t:'SCAB 2030',d:'제품 판매 → 시스템 솔루션 → 제조 기반 종합 솔루션',href:'company-vision'}},
  {id:'products',label:'취급제품',en:'PRODUCTS',home:'products',desc:'취급 브랜드 제품, 현장별 솔루션과 엔지니어링',
   cols:[{t:'브랜드',items:[['products-abb','ABB'],['products-schneider','Schneider Electric'],['products-hitachi','Hitachi Energy'],['products-sifang','SIFANG 北京四方'],['products-sangdo','상도일렉트릭']]},
-        {t:'솔루션',items:[['solutions-datacenter','데이터센터 FLISR'],['solutions-hsbt','고속절체 · 동기 (HSBT)'],['solutions-pq','전력품질 (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)']]},
+        {t:'솔루션',items:[['solutions-datacenter','데이터센터 FLISR'],['solutions-hsbt','고속절체 · 동기 (HSBT)'],['solutions-pq','전력품질 (SVG · AHF)'],['solutions-mcc','Smart MCC (EOCR)'],['solutions-arc','아크 · 전기화재 예방'],['solutions-thermal','배전반 온도 · 습도 감시'],['solutions-retrofit','노후 · 단종 설비 대체']]},
         {t:'엔지니어링',items:[['engineering','엔지니어링 서비스'],['products','전체 제품 찾기']]}],
   feat:{img:'abb_relion',t:'Relion REX615 · REX640',d:'보호 · 제어 · 계측, IEC 61850',href:'products-abb'}},
  {id:'resources',label:'자료실',en:'RESOURCES',home:'resources',desc:'카탈로그, 기술자료, 인증서',
@@ -1796,7 +1970,7 @@ const chipBrand=k=>{const b=BRANDS[k];return `<span class="chip" style="--bc:${b
 const waveIcon=`<svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 Q12 2 22 20 T42 20 T62 20 T82 20 T102 20 T122 20" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/><path d="M2 20 Q12 6 22 20 T42 20 T62 20 T82 20 T102 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
 function pImg(p){
  if(p.img)return `<img src="${A(p.img)}" alt="${esc(p.name)} ${esc(p.model)}" loading="lazy">`;
- const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel'}[p.id];if(mk)return ISO.miniProduct(mk);
+ const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','se-th110':'thsensor','se-heattag':'heattag','se-pas600':'gateway','se-pme':'pmescreen'}[p.id];if(mk)return ISO.miniProduct(mk);
  const b=BRANDS[p.brand];
  return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
 }
@@ -1867,6 +2041,10 @@ function pageHome(){
    <a class="sol" href="#solutions-hsbt"><div class="sp">${pg('transfer','lg')}</div><div class="sb"><span class="eyebrow">HSBT · SYNC</span><b>고속절체 · 동기투입</b><p>약 30 ms 고속절체와 발전기 · 계통 동기투입</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
    <a class="sol" href="#solutions-pq"><div class="sp">${pg('wave','lg')}</div><div class="sb"><span class="eyebrow">POWER QUALITY</span><b>전력품질 (SVG · AHF)</b><p>고조파 · 역률 · 무효전력 진단과 설비 선정</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
    <a class="sol" href="#solutions-mcc"><div class="sp">${pg('motor','lg')}</div><div class="sb"><span class="eyebrow">SMART MCC</span><b>Smart MCC (EOCR)</b><p>모터 보호부터 MCC 모니터링 · 예지정비까지</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-arc"><div class="sp">${pg('arc','lg')}</div><div class="sb"><span class="eyebrow">ARC · FIRE SAFETY</span><b>아크 · 전기화재 예방</b><p>저압 AFDD와 고압 아크 보호계전기로 배전 계통 화재 예방</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-thermal"><div class="sp">${pg('thermo','lg')}</div><div class="sb"><span class="eyebrow">THERMAL MONITORING</span><b>배전반 온도 · 습도 감시</b><p>무선 센서 · PAS600 · PME로 접속부 과열과 절연 열화 조기 감지</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-retrofit"><div class="sp">${pg('retrofit','lg')}</div><div class="sb"><span class="eyebrow">RETROFIT</span><b>노후 · 단종 설비 대체</b><p>동등성 검토부터 교체 · 시험까지, 단종 제품을 현행 제품으로</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol sol-cta" href="#contact"><div class="sb"><span class="eyebrow">CUSTOM</span><b>현장 조건에 맞춘 구성</b><p>여러 솔루션을 조합하거나 기존 설비에 맞춰 구성합니다.</p><span class="link">솔루션 문의 ${ic('arrow')}</span></div></a>
   </div>
  </div></section>
 
@@ -1953,7 +2131,47 @@ function pgCompanyOverview(){
    <tr><th>전화 / 팩스</th><td class="mono tnum">${CO.tel} / ${CO.fax}</td></tr><tr><th>이메일</th><td class="email">${CO.mail}</td></tr>
    <tr><th>사업자등록번호</th><td class="mono tnum">${CO.bizno}</td></tr><tr><th>업태 / 종목</th><td>${CO.type}</td></tr>
    <tr><th>설립</th><td>창업 ${CO.founded} · 법인 설립 ${CO.inc}</td></tr>
-  </tbody></table></div></div>`;
+  </tbody></table></div></div>
+ <div class="block">${blockHead('취급 브랜드 · 생산 국가',`<a class="link" href="#products">취급제품 보기 ${ic('arrow')}</a>`)}${brandMap()}</div>`;
+}
+/* ---------- world map: brand production countries (Natural Earth based, public domain) ---------- */
+const WMAP={"w":1000,"y0":24,"h":472,"land":"M639 177l3 1 3 0 0-2 2-1 1-1 0-2 3-1 0-1 1 1 1 0 2 0 2 1 1 0 2-1 1 1 0-2 2 0 0-2 1-1 2 1 0 1 1 0 0 3 1 1 1-1 1 0 2-2 2 1 3 0 0 1-1 0-2 1-3 0-2 1-2 1 1 2 1 1-1 2 0 1-1 1-2 0 1 3-1 0-1 3 0 2-1 1-1-1-2 1 0 1-2 0-1 2 0 3-4 1-2 0 0 1-2-1-3 1-5-2 3-3-1-3-2 0-1-2-1-3 1-2-1 0 0-3zM515 320l1 2 1 2 1 2 1 1 2 0 1 0 1 0 1-1 1-2 1 0 1-1 1 0 0 2 3 0 0 2 1 1 0 2 0 2 1 2 0 4 0-1 2 0 1 0 2 0 0 1 0 2 0 2 0 1 0 1-6 0 0 11 1 3 2 2-5 1-7 0-2-2-12 0 0 1-2-2-2 0-2 0-1 1-1-2 1-3 1-3 0-2 1-3 1-1 1-2 1-2 1-3 0-1-1-2-1-2-1-2 0-1 1-1-1-3 0-3-2-2 1 0 1-1 1 0 1 0zM504 319l-1 1-1-3 2-2 2 1-2 1 0 1zM525 155l0 2 1 1 1 1 0 1-1 0 0 1-1 2-1 0 0-1-2-1 0-2 0-2 1-1-1-1 0-1 1-1 1 0 1 1zM617 216l0 1 3-1 2 0 2 1 2-3 1-2 2-2 1 1 0 3-1 0 0 2 0 1-1 0 0 2 0 1 0 1-1 1-9-2-1-3zM307 488l-3 1-1-2-2 0-3 0-3-7 2 2 2 2 4 2 4 1zM279 376l2 2 1-3 3 0 1 1 6 6 2 0 4 3 3 1 1 2-2 5 3 1 3 1 3-1 2-3 0-3 1 0 2 2 0 2-2 2-2 2-2 3-3 5-1 3 0 3 1 4-1 0 1 3 0 1 4 3 0 3 2 1 0 2-1 4-4 2-5 1-3-1 1 3 0 2 1 2-2 1-2 1-3-2-1 1 1 4 2 1 2-1 1 1-2 1-2 2 1 4 0 2-3 0-1 1 0 3 3 2 3 1 0 3-3 2 0 4-2 1 0 2 2 3 2 2-1 0-2-1-7 0-2-2-1-2-1 0-2-1-1-4 1-1 0-2-1-2 1-3-1-5-1-2 1 0-1-1-1-1 0-2-1-1-2-4 1 0-2-5 0-3 0-3 1-1-2-4-1-3 2-2-1-3 1-3-1-4-1 0-2-6 1-4-1-3 0-3 1-4 2-2-1-1 0-1-1-6 3-2 1-3-1-1 2-3zM588 158l4-1 1 1 1 1-1 1 2 1-1 1 2 1 1 1 0 2-1 0-1-2-1 0-1-1-1 0-1-1-2-1 0-2zM651 467l2 1 2 0 0 1-1 1-4 1 0-2 1-2zM866 440l2 1 2 0 2-1 2 1-2 4-1 1-2 2-1 0-3 2-2 0 0-3 1-3 0-3 1-1zM890 347l0 3 2-2 1 2 1 1 0 2 0 3 0 1 1 1 0 3-1 2 1 2 3 2 1 1 2 2-1 1 1 2 1 4 1-1 1 1 1 0-1 3 2 3 1 1 1 3 0 2-1 2 0 3 0 2-1 4-1 1-2 3-1 2-1 3-3 3-3 2-2 2-1 2-2 3-2 2-2 2-1 3-1 1-2 1-3 0-3 1-2 2-2 1-2-1-1-1 1-2-2 1-4 2-1-1-2 0-1 0-3-1 0-2 0-3 0-2-1-1-2-1 1-1 1-3-2 3-3 0 2-2 1-2 2-1 1-3-4 3-2 1-2 3-2-2 1-1-1-3-1-1 1-1-3-2-2 0-2-2-5 1-4 1-4 1-3 0-3 1-3 1-1 2-1 1-3 1-2 0-2-1-2 1-2 0-2 2-1-1-2 1-2 2-1-1-2 0-3-2-1 0 1-2 1-1 1-1 0-1 1-2 1-2-1-4 0-2 1-2-1-2 0-1-1-1 1-3-1-3 0-1 1 1-1-3 1 1 1 1 0-2 0-2 0-1-1-1 1-2 1-1 0-2 0-2 2-2 0 2 1-2 3-1 2-2 2-1 2 0 3-1 2-1 1-1 2 0 3-1 2-1 1-2 2-2 0-1 1-2 2-3 1 3 1-1-1-1 2-2 1 1 0-3 2-2 1-1 2 0 0-1 1 0 0-1 2 0 1-1 2 2 1 2 2 0 2 0 0-2 2-3 1 0 0-1 1-2 2-1 2 0 2-1 0-1-2-2 2 0 2 1 1 1 3 1 2 1 2-1 1 0 1-1 1 2-1 2-1 1-1 0 0 2-1 2-2 1 0 1 2 2 3 1 1 1 2 2 2 1 0 1 3 2 2-2 1-1 1-2 0-2 2-3-1-1 1-1 0-2 1-3 0-1 0-1 1-2 1-1 0-1 1-2 1 2 0 2 0 1 0 1 1 2 0 2zM515 134l0 2-2 0 1 0-1 2 0 1-3 0-1 1-2 0-4-1-1-1-2 0-1 1-1-1-2 0-1 0 1-1 0-1 2 1 0-1 2 0 2 0 2 0 1 0-1-2 1-1 1-1 2 1 1-2 1 0 2 1 2 0 1 1zM593 163l1 1 1 0 1 2-2 0-1-2-1-1zM598 158l2 0 0-1 1-1 2 1 2 3 1 0 1 1-2 0 0 3 0 1-1 1 0 2-1 0-2-2 1-2-1-1-1 0-3 3 0-2-1-1-2-1 1-1-2-1 1-1-1-1-1-1 1 0 2 1 1 0-1-2 1-1zM554 315l0-4-1-2 2 1 1-2 1 0 1 1 0 1 0 1 0 1-2 2-1 1zM479 123l2 1 3-1 1 1 2 1-1 2 0 1-1 1-2-1-1 0-2-1-1-2-1 0-1-1zM475 278l-2 1-1-3 0-8-1 0 0-2-1-1-1-1 1-2 1-1 0-1 2 0 1-1 1-1 1 0 2 2 0 1 0 2 0 1 0 1-1 2-1 1-1 2 0 3zM459 266l-2 0-2 0-1 1-1-1-1-1-1-1 0-2 1-1 0-2 2-2 1-3 0-1 2 1 1-1 0-1 3-1 0-1 3-2 2 0 2 0 0 2 1 2 1 2 0 1 4 1 0 3-1 1-2 0 0 1-1 1-3 0-1-1-1 1-1 0-6 0 0 2zM737 224l0 2-1 0 0 2-1-1 0-2-1-2-1-2-3 0 0 2 0 1-2 0-1 0-1 0-1-3-1-3 0-2-2-1 0-1 2-1-2-2 0-2 3 1 1 0 1 3 3 0 2 0 2 1-1 3-1 0-1 2 2 1 0-2 1 0zM531 147l0 2 2-1 2 1 4 0 1-1 3-1 2 2 2 0-2 1 0 3 1 2-3-1-3 1 1 2-3 1-2-2-2 1-2 0 0-2-2-1 1-1-1 0 1-1 1-1-2-2 0-1zM244 218l-1 0 0-2-1-1 1-2 1 3zM245 208l-4 1 0-2 2 0 2 0zM521 145l1 0-1 2 1 1 0 2-1 0-1 1 0 2-3-2-1-1-1-1-1-1-1-1-1-2 1-1 1 1 0-1 1 0 3 0 2 0zM531 115l2 0 3-1 0-2 2-1 0-2 2 0 2-1 3 0 0 1 2 0 2 1 0 1 0 1 2 2 1 1 2 1 0 1 0 1-2-1-1 1 1 1 1 2-3 0 0 1 0 2-1-1-3 0-1 0-1 0-2 0-3-1-3 0-2 0-1 1-1 0-1-2-1-1 2-1 0-1-1-2zM207 238l1 0 1-2 1 1-1 2 0 2-1 2 0 1-1 0-1 1-1 0 1-4zM286 188l-1 0 1 0-1 0 1 0zM285 375l-3 0-1 3-2-2-4-1-2 3-2 0-2-4-2-4 1-4-2-1-1-3-1-2 1-4-1-3 0-1 0-1 1-2-1-3 0-2 1-1-3-6 2 1 2-1 0-1 3-1 1-1 4-1 0 3 0 1 0 2 4 3 3 1 1 1 2 1 2 1 1 0 2 1 0 2 1 1 0 1-1 1 2 4 6 0-1 2 1 1 1 1 1 2 0 3-1 1 1 2-1 1 0-1-3-2-3 0-5 1-1 3 0 2 0 4zM305 404l3-5 2-3 2-2 2-2 0-2-2-2-1 0 0-2 0-2 0-2-1 0-1 0-1 0-1-1 0-3-1-1-2-1-1 0-3 0-1-5-1-2 1-1-1-2 1-1 0-3-1-2-1-1-1-1 1-2-6 0-2-4 1-1 0-1-1-1 0-2-2-1-1 0-2-1-2-1-1-1-3-1-4-3 0-2 0-1 0-3-4 1-1 1-3 1 0 1-2 1-2-1-2 1-1-1 0-5-3 2-2 0-1-2-2 0 0-1-2-2-1-4 1 0 0-2 1-1 0-1 1-2 0-1 3-3 3 0 0-1 3 0 1-9 0-2-1-1-1-2 0-2 2-1 0 1 0-2-1 0 0-2 5 0 1-1 1 1 1 2 0-1 2 2 2 0 1-1 2-1 1-1 1-1 2-1 0-1-3 0 0-2 0-2-1-1 0-1 2 1 3 1 1-1 2-1 3-1 1-1 0-1 1 0 1 0 0 2 1 0 0 2-1 1 0 3 1 2 0 1 2 2 1 0 1 0 0-1 2 0 1-1 1 0 1 0 2 0 0-1 0-1 1 0 1 0 2 1 1 0 1-1 1 1 0 1 2-1 1-1 1-3 2-3 1 0 0 2 2 6 2 1 0 2-3 3 1 1 6 0 0 4 2-2 4 1 5 2 1 2 0 2 3-1 6 2 4-1 5 3 4 4 2 1 2 0 2 1 1 5 0 2-1 6-1 2-4 5-2 3-2 3-1 1 0 2 0 6 0 6 0 2-1 1 0 5-3 5 0 3-2 2-1 2-3 0-4 1-2 2-3 1-4 2-2 4 0 2 1 2 0 4 0 1-2 2-2 6-2 3-2 2-1 3-1 2-1-2 1-2-2-2-3-2-3-2-1 0-4-3zM806 284l1-1 2-2 0 2 0 2-1 0-1 1zM730 204l2 1 0 2-2 0-3 0-2 1-2-2-1 0 2-3 1-1 2 1 2 0zM542 363l1 1 1 2 3 4 1 0 0 1 1 3 2 0 2 2-4 2-3 3-1 2-1 1-1 1-1 1 0 1-2 1-2 0-2-1-1 0-1 0-1 2-2 1-1 2-2 0-1-1 1-2-2-4-1 0 0-10 3 0 1-13 2 0 4-1 1 2 2-2 1 0 2-1 0 1zM512 274l3 0 0-1 1 0 1 1 3-1 1-2 2-1 0-1 1-1 2 1 3-2 2-4 2-1 2-1 0 2 2 2 0 1-1 2 0 1 2 1 2 1 1 2 0 1 2 2 2 1 0 2 3 2 0 1-1 0-2 0-2 0-1 0 0 1-1 0-2-1-3 2-1-1-1 1-1 2-2-1-2 0-2-1-2-2-2 1-1 2 0 3-2-1-2 0-2 2-1 3-1-1 0-2-1-1-1-2-1-1-1-2 0-1 0-1 0-3 1 0zM301 139l2 1 3 0-2 1-1 0-3-1-1-1 2-1zM309 131l-1 0-3-1-2-2 1 0 3 1 2 1zM146 133l-1 0-4-1 0-1-1-2 0-1-3 0 1-2 0-1 3 1 1 1 2 0 0 1 1 2 1 1zM325 126l-2 3 2-2 1 1-1 1 2 1 1-1 3 1-2 3 2-1 0 2 0 2-2 3-1 0-1 0 1-3-1-1-4 3-1 0 2-1-2-1-3 0-5 0 0-1 2-1-1-1 3-2 4-6 2-1 3-2 1 1-1 1zM135 115l2-1-3 4 0 3-1 0 0-2 0-1-1-1 1-2 1-1zM283 89l-2 1-1 0 0-1 1 0 1-1 1 0zM278 87l-4 2-2 0 0-1 3-2 3 1zM276 78l-1 1 2 0 1 1 1 1 3 1-1 1 2 0 1 1-3 1-3-1 0-1-4 1-4 2 0-2-3 1 3-2 2-2 2-3zM300 74l-3 0 0-2 2-1 3-1 1 1-1 1 0 1zM259 68l-3 1-2-1-2 0-2-1 3-1 2-1 2 1 1 0 0 1zM271 67l-2 3 4-2 2 1-2 3 0 2 4-3 4-2 2-3 3 0 3 0 2 2-1 1-2 2 0 1-1 2-6 2-3 0-2-1-2 2-4 3-1 1-4 2-4 0-2 1-2 2-3 1-4 2-5 4-3 2-2 4 3 0 0 3 0 3 3-1 4 2 2 1 1 1 3 1 2 1 4 1 2 0-1 3-1 3 0 4 2 3 3-1 3-4 1-5-1-1 4-2 4-2 3-2 1-3-1-2-2-3 5-3 0-3 2-5 2 0 4 0 2 1 3-1 1 1 2 2 1 1 4 0-2 3-1 4 2 0 1 2 5-2 4-3 2-2 0 3 2 4 1 4-2 2 3 2 2 2 3 1 2 1 0 2 1 1 1 1-1 4-2 1-2 1-5 1-4 3-5 1-5-1-4 0-3 0-3 3-4 1-5 4-4 4 2-1 6-4 6-3 5-1 1 2-3 2 0 4 0 2 3 2 4 0 4-4 0 2 1 2-4 2-7 2-3 1-3 3-2-1 0-3 6-2-4 0-4 0-1-2 2-4-1-1-2 0-1-1-2 3-2 3-2 1-1 1-1 0 0 1-5 0-4 0-2 0-3 3-1 0-1 1-3 0-2 0-2 1 1 1-1 1-4 2-3 0-4 2-1-1 1-2 2-1 1-2 1-3 1-4-3-1 1-1-1 0 0-1-1 0 0-1-1 0 0-1-1-1-2-1-2-1-2-1-3 0 0 1-3-1-3 0-2-1-2 0-2-1 0-2-1 0-1 1-5 0-9 0-9 0-8 0-7 0-8 0-8 0-3 0-8 0-7 0-3-3-1-2-4-1 0-3 2-2-2-1 1-3-1-2 1-2 3-1 1-2-3-3 1-3 0-2-1-2-1-1 0-2-3 1-4 2 0-2-1-1-1-1-3 0 17-18 11-11 4 1 2 1 2 1 3-2 4-1 3 1 4-1 5-1 0 1 2-1 2-1 2 0 1 3 5-2-2 2 3 0 2-1 2 0 3 1 4 1 2 1 3 0 2 1-5 1 4 1 6 0 3-1 1 2 3-1-1-2 2-1 3 0 2 0 1 1 1 1 3 0 3 1 4 0 3 0 1-2 3 0 3 1-2 2 3-2 2 0 3-3-1-2-2-1 2-3 5-2 2 0 2 2 0 3-3 1zM227 56l-2 2 6-1 1 1 4-1 1 1 0 3 2-2 1-2 2-1 2 1 1 1-1 3-1 2 3 1 3 1-2 2-3 0 0 1-2 1-3 0-4-1-2 0-5 1-6 0-5 1 0-2-2-1-2 1-1-3 2 0 4 0 3 0 3-1-4 0-5 0-3 0 0-1 6-1-3 0-3-1 4-2 2-1 8-2zM249 56l-4 2-1-2 1-1 3 0zM309 57l-2 0-3 0-2 1-1-1-1-1 1-1 1 0 5 0zM287 56l1 2 3-2 7-1 1 3-1 1 5 0 2-1 4 1 3 1-1 2 5-1 1 2 4 1 2 1 0 3-5 1 5 2 3 1 2 2 3 1-1 2-6 3-2-1-2-3-4 0-1 2 2 2 2 1 1 1 0 3-2 2-3-1-4-2 2 3 1 1 0 2-6-2-4-1-2-2 1-1-2-1-3-2-1 1-7 0-1-1 3-2 4 0 5 0 0-1 2-2 4-3 0-1 0-1-3-1-3-1 1-1-1-2-2 0-1-1-2 1-4 0-8-1-4 0-3-1-1-1 3-1-3 0 1-3 4-3 3-1 6 0zM259 54l2 1 4 0 0 1-3 1 2 1-2 3-5 1-2-1 0-1-4-2 1-1 4 1-1-2zM272 57l-4 3-2-1 0-2 1-1 3-2 2 0 5 0 3 0-5 3zM209 61l-7 2 0-1-4-2 2-1 4-2 4-2-1-2 8 0 3 0 5 1 1 0 1 2-3 0-7 2-5 2zM276 51l-2 1-3 0-2 0 2-2 4 0 1 1zM270 47l0 1-1 1-3 2-3 1-2-1 1-1-3 0 2-2 2 0 4-1 3 0zM248 48l0 1 3 0 2 0-1 1-3 1-7 1-7 1-3 0 0-1 6-1-10 0-2 0 5-3 3-1 5 1 2 2 4 0-1-3 3 0 2 0zM279 46l1 1 5 0 1 0-2 1 2 1 1 1 3 0 3 0 3-1 5 0 3 0 2 1-1 2-2 0-3 1-3 0-6 0-5 0-3 0-5-1 1-2 1-1-1-1-4-1-2 0 2-1zM236 44l-3 2-2 1-2 0-6 1-3 1-3-1 6-2 6-1 4 0zM282 45l-1 0-4 0 0-1 4 0 1 0zM248 44l-4 1-2-1 2-1 4 0 2 0zM252 42l-3 0-3 0 3-1 1 0zM279 43l-4 1-1-1 0-1 1-1 3 0 1 0 1 1zM271 43l0 1-3-1-3 0-4-1 2 0-1-1 1-1 3 0 5 1zM301 39l2 1-4 1-5 2-4 0-4 0-1-2 1 0 2-1-4 0-1-1 0-1 2-1 3-1 2 0 4-1 2 2 2 0 3 1zM346 31l5 1 4 0 3 0-1 1-6 1-5 0-2 1 4 0-6 1-4 1-5 2-4 0-2 1-6 0 2 0-2 1 1 1-3 1-3 1-2 1-4 0 0 1 4 0-1 1-7 1-5-1-6 1-3 0-4-1 1-1 5 0 0-2 2-1 4 2-1-2-3-1 2-1 5 0 1-1-2-1 1-1 5 0 1 0 4-1-4 0-7 0-3-1 0-1-2 0 1-1 3 0 3-1 4 0 4-1 2 0 2 1 3-1 2 0 4-1 6 0 1 0 6 0 4 0zM295 480l3 7 3 0 2 0-1 2-1 1-2 0-1-1-3-1-2 0-4-2-4-2-5-3 3 0 4 3 4 1 1-2 0-2 1-1zM269 374l2 4 2 0 1 1-1 3-3 2 1 6 0 1 1 1-2 2-1 4 0 3 1 3-1 4 2 6 1 0 1 4-1 3 1 3-2 2 1 3 2 4-1 1 0 3 0 3 2 5-1 0 2 4 1 1 0 2 1 1 1 1-1 0 1 2 1 5-1 3 1 2 0 2-1 1 1 4 2 1 1 0 1 2 2 2 7 0 2 1-2 0-1 1-2 1 1 3-1 0-3-1-4-2-4-2-2-2 0-2-2-2-3-6 0-3 2-3-4-1 1-3-1-5 3 1 0-7-3-1 1 4-2 0-1-5-1-7 1-2-2-3-1-4 1 0 0-6 1-5 0-6-2-5 0-3-1-4 1-4-1-7 0-7 0-8-1-5-1-5 1-1 1-2 1 2 1 3 2 1-1 4zM459 282l-2 1-2-1-2 0-3 0-2 1-3 2-1 0 0-3 1-1 0-1-2-1-1-1 0-1 0-1 0-2 0-1 1 0 0-1 0-1 1-1-1-3 0-1 0-1 1-1 1 1 2 0 0-1 1 0 1-1 0 2 1-1 1 0 1 1 1 1 1 1 1-1 2 0 2 0 0 5-1 3-1 4 2 3zM506 292l-1 0-1 0-2 0-2 0-4 0 0-3-1-2-1-1-1-1-1-1 0-1 1-2 1-4 1 0 2-2 1 0 2 2 2-1 0-2 1-1 0-2 2-1 0-3 1-1 0-1 1-2 3-3 0-1 0-1-1-1 0-1 1-1 1 3 0 2 0 2 2 3-2 0-1 1-1-1-1 2 2 2 1 0 1 2 1 2-1 1-1 4-1 0 0 3 0 1 0 1 1 2 1 1 1 2 1 1 0 2 1 1-1 2-2-1-2-1zM558 288l0 4 2 0-1 1-2 1-1 2 0 2 0 2-1 2 0 2-1 1 0 2-1 0 0 2 1 2 0 4 1 3-1 2 1 2 2 2 1 4-1 0-4 1-1 0-1 2 1 2-1 4 0 3 1 1 2 1 1-1 0 4-3 0-1-2-1-1-2-1-1-1-2 1-2-1-1-1-2-1-1 0 0-1-1 0-2 0-1 0-2 0 0 1 0-4-1-2 0-2 0-2-1-1 0-2-3 0 0-2-1 0-1 1-1 0-1 2-1 1-1 0-1 0-2 0-1-1-1-2-1-2-1-2-8 0-1 0-1 0-1 1-1-1 1-1 0-1 0-1 2-1 1-1 2 0 0 1 1 1 2-2 2-2 0-1 0-3 2-3 1-2 2-2 0-1 0-1 1-1 0-2 0-3 1-3 1-1 0-2 0-3 1-2 2-1 2 2 2 1 2 0 2 1 1-2 1-1 1 1 3-2 2 1 1 0 0-1 1 0 2 0 2 0 1 0 2 2 1 1 1-1 1 1 2-1 1 1zM506 316l-2-1-2 2-2-4 2-2-1-2 1-1 2 0 0-2 2 2 3 0 0-2 1-2-1-2-1-3 1-3 0-1-3 0 0-2 0-1 4 0 2 1 2 1 1-2 1-3 2-2 2 0 2 1 0 2-1 1-1 3 0 3 0 2-1 1 0 1 0 1-2 2-1 2-2 3 0 3 0 1-2 2-2 2-1-1 0-1-2 0-1 1zM243 300l-1-1-2-1 0 1-3-1-1-1-3-2-1-1 2 0-1-2 1-1 2-1 1-2 1-2-1 0 1-2-1-4 1 0-1-3-1-2 1-2 1 0 0-1 0-2 2 0 2-2 1-1 0-1 1-3 2-1 2-1 2 0 3-2 1 0 2-2 1 0 0 1 0 1-2 1-1 1-1 1-1 2-1 2-1 2 2 0 0 2 1 1 0 1-1 1 0 1 1 0 1 2 4-1 1 1 2 3 2-1 2 0 1 0 1 1 0 2-1 1 0 2 0 2 1 1 0 1-1 2 1 1 1 1 0 3 0 1-1-2-1-1-1 1-5 0 0 2 1 0 0 2 0-1-2 1 0 2 1 2 1 1 0 2-1 9-2-1-1-1 2-3-2-2-2 1-1-1-2 1-2 0-2-4-1-1-1-2-2-1zM221 271l-1 0-1-1 1-1-1-1-1-1-1 0 0-1-1-1 0 1-1 1 0-1-1-1 0-1 0-1-1-1 1 0 1-1 1 1 1 0 1 0 1 1 1-1 1 2 1 1 1 2-1 0 0 1 0 1 0 1 0 1zM230 220l2 0 2 0 3 1 1 2 3-1 0 1 3 2 1 2 1 0 2 0-1 1 3 0 2 2-1 1-2 0-2 0-2 0-4 0 2-2-1-1-2 0-1-1 0-2-2 0-2-1-1 0-4-1-1 0 2-1-3 0-3 1-1 0 0 1-2 1-1-1 2-1 1-1 1-1 2 0 2-1zM560 178l1 0 2 0 2-1-2 1 1 1-1 0-1 0 0-1-1 0 0 1zM564 179l-3 1-1 0-1-1 1-1 1 1 0-1 1 0 0 1 1 0zM515 133l-1-1-2 0-2-1-1 0-1 2-2-1-1-2-2-1 0-1-1-1 2-1 1-1 2 0 1-1 0 1 2-1 1 1 2 1 1 1 0-1 2 1 1 1 1 0 2 2-1 0-1 0 0 1-1 0 0 1-1 0-1 0zM594 256l1 1 0 1-2 1 1 1-1 2 0-1-1 1-2 0 0-1 0-1 1-2 1-1 1 0zM503 109l-1 3-3-2 0-1 4-1zM499 107l-1 1-2 2 0 2-1 0-2 0-1-2 0-3 0-1 1-1 2-1 1 0 2-1 0 1-1 1 1 1zM258 232l1-1 2 0 2 1 1 0 0 1 2 0-1 1 2 0 1 2-1 1-2-1-1 0-1 0-1 1-1 0 0-1-1 1-2 2 0-1 0-1-1-1 1-1 0-1zM502 219l-9 6-9 7-4 2-3 0 0-2-2-1-1-1-1-1-10-8-9-7-11-9 0-1 0-4 5-2 3-1 2-1 1-1 4-2 0-2 2-1 1-1 4-1 0-1 0-1-1-3 0-2-1-3 2-2 3 0 2-2 3-1 5 0 4 0 2 0 2-1 3 0 1 0 2 0 0 2 0 3-1 3-1 2 0 3 2 2 0 1 2 1 1 6 1 3 0 2 0 3 0 1 0 2 0 2-1 2 1 2 1 2 1 2 1-1 2 2zM229 311l1-2 0-2-2 2-1-2 0-1 0-3 1 0 0-2 1-3 0-1 2-1 2-1 3 2 1 1 3 1 0-1 2 1 1 1 1 3-1 2-3 4-4 1-2 3 0 2-2 2-1-2-1 0-2 0 0-1 1-1zM568 198l-1 1-1 3 0 2-1 0-1-1-1-1-3-5 2 4 1 3 3 6 1 1 1 2 3 4-1 1 1 2 3 3 1 1-12 0-11 0-12 0 0-13-1-12-1-3 1-2 0-2 1-1 3 0 3 1 3 1 1 0 2-1 2-1 2 0 2 0 1 2 0-1 3 1 2 0 1-1zM592 257l-1-2-1-2-2-1 0-1-3-1-2 0-1-1-2 1-1-2-1 3-4-1 0-1 1-5 0-3 1-1 2 0 2-2 2 4 1 3 1 2 4 3 2 2 2 2 1 1 1 1-1 1zM445 155l0-2-1-2 4-2 4 1 3 0 3 0 2 0 5 0 1 1 5 2 1-1 3 2 3-1 0 2-3 3-3 0-1 1-1 2-2 3 1 2-1 2-1 2-2 1-2 2-4 0-2 0-2 1-1 2-2-1 0-1-1-2-3 0 0-1 1-2 1-1-1-1 1-2-1-2 1 0 0-2 1 0 0-3 1-1-1-2-1 0-1 1-1 0-1-2-1 0zM532 102l0-1-1 0-1-1-1-2 3-1 3 0 3 0 3 0 0 1-2 2 1 3-1 1-2 0-2-2-1 0zM579 248l1 2 2-1 1 1 2 0 3 1 0 1 2 1 1 2 1 2-1 1-1 2 0 1 0 1 2 0 1-1 0 1 0 1 1 2 1 2 1 1 10 4 3 0-9 10-4 1-2 2-2 0-1 1-2 0-1-1-3 1-1 2-2 0 0-1-1 0-1 0-4-3-2 0-1-1 0-2-1 0-2-4-1-1-1-1-2-2-1 0 1-2 1 0 1-1 0-3 0-4 2-1 0-1 1-3 2-2 1-3 0-3 4 1zM990 359l0 1-1 2-1 1-2-1 0-1 1-2 2 1zM993 357l-2 1 0-1 1-1 1 0 2-1 0 2zM313 477l3-1 2 0 1-1 3 2 0 1-3 1-2-2-2 2zM500 313l-3-3-2-3-2-4 0-1 1-1 1-2 0-3 1 0 4 0 0-4 2 0 2 0 1 0 1 0 0 1 0 2 3 0 0 1-1 3 1 3 1 2-1 2 0 2-3 0-2-2 0 2-2 0-1 1 1 2zM457 113l-1 2-2-1-2 1 1-2-1-2 3 0zM465 100l-3 3 2 0 3 0-1 2-2 3 2 1 1 0 2 4 1 0 2 4 0 1 3 1 0 2-1 1 1 2-3 1-3 0-5 1-1 0-2 1-2 0-2 1-1-1 4-3 2-1-4 0-1-2 3-1-1-1 1-3 3 1 1-2-2-2-3-1 0-1 1-1-1-1-2 1 1-3-2-1 2-4 2-2 2 0zM582 156l1-1-1-2-2-2-1 0-2-1 1 0 2 0 4 1 4 1 1 1 1-1 3 1 1 2 2 0-1 1 1 2-1 0-2-1-1 0-4 1-3-2zM470 279l-4 2-2 1-3 1-2-1 0-1-2-3 1-4 1-3 0-5-1-2 0-2 6 0 1 0 1-1 1 1 0 1 1 2 0 2 0 3 1 1-1 3 1 2 1 2zM442 273l-1 0 0 2-1-1-1 0 0-2-1-2-1 1-1 0 0-1 0-1 0-1-1-2-1-1-2 0-1 1-1 0 0 1-1 1-1 1-1-2-1-1-1-1-1 0 0-2-1-1-1 0 2-2 1 0 0-1 1 0 1 0-1-1 1 0 0-2 1 0 2 1 1 0 2 0 0 1 1 0 1 0 1 1 1 0 1-1 1 0 1-1 1 1 0 1 1 1 0 1 0 1 1 1-1 1 1 1 0 1 0 1 1 3-1 1 0 1 0 1zM418 254l0-1 3 0 1-1 1 0 1 1 1 0 1-1 0 1-1 1-1 0-1-1-1 1-1 0-1 0zM422 262l-1-2-1 0-1-1-1-1 0-1 2-1 1 1 0-1 6 0 0 2-1 0 1 1-1 0-1 0 0 1-1 0zM495 296l1-4 4 0 0 4-4 0zM535 177l1 1 3-1 2 1 1 0 0 1-4 0-4-1zM542 156l-1 3-1 0-1 0-2-1-3 1 2 2-1 1-2 0-1-2-1 1 1 2 1 2-1 0 2 2 1 1 0 2-2-1 1 2-2 0 1 3-2 0-2-1-1-3-1-2-1-2-1-2 0-1 1-2 0-1 1 0 0-1 2 0 1-1 1 0 0-1 1 0 2 0 2-1 2 2 3-1-1-2zM387 32l7-1 7 0 3-1 7 0 15 0 11 2-4 1-7 0-11 0 1 1 7-1 5 1 4 0 2 0-3 2 5-1 10-1 6 0 1 1-9 2-1 1-7 0 5 0-3 2-2 1-1 3 2 2-3 0-4 1 4 1 0 3-2 0 2 2-5 0 2 2-1 1-3 0-3 0 2 2 0 1-4-1-1 1 2 0 3 2 0 2-4 1-1-1-3-2 1 2-3 2 5 0 3 0-6 3-7 2-7 1-2 0-3 1-4 3-6 2-1 0-4 1-3 1-3 2-1 2-1 2-5 2 0 3-2 2-2 3-4 0-2-2-5 0-2-2 0-3-3-4 0-2 0-2-2-3 2-2-1-1 4-4 4-1 1-1 2-2-4 1-1 0-2 0-2 0 0-2 2-2 2 0 4 1-3-2-1-1-3 0-1 0 4-3-1-1-1-2-1-3-2-1 1-1-5-2-5 0-5 0-6 0-1 0-3-2 6-1 5 0-9-1-4-1 1-1 9-1 8-1 2-1-5-1 3-1 8-1 3-1 0-1 5 0 7-1 6 0 1 1 6-1 4 1 3 0 4 0-4-1zM202 252l-1 0-2 0-1-1-2-1 0-1 1-1-1-1 2-3 4 0 0-1 0-1-1-1-1-1 1 0 0-2 3 0 3 0-1 3-1 4 1 0 1 1 1-1 0 1-1 1-2 1 0 1 0 1-1 0 0 1-1 0-1 1zM311 291l-1 1-2 1 0-1-1-1-1 1-1 0 1-2 0-1 1-2-1-2-1-2 2-3 1 0 2 1 3 3 1 1-2 3zM290 271l2 1 2 2 0 2 1 0 1 2 2 1-1 3-2 1 0 1 0 2 1 2 1 0 0 2 2 3-1 0-1 0-1 1-2 0 0 1-1 0-1 0-2-2 0-1-1-2 0-3 1-1 0-2-1 0 0-2-1 0-1 0-2-3 1-1 0-1 2-1 0-1-1-1 1-1zM210 255l0-1-1 0 0-2-1 0-1 0-1-1-1-1 0-1 0-1 2-1 1-1 1 0 0-1 1 0 1 0 1 0 2 0 1 0 1 0 1 0 1 0 1 0 1 0 1 1 0 1 1 0 1 1-1 0-2 1-1 0-1 0-1 1-1 1-1 1-1-1-1 1-1 0 0 2-1 0 0 1zM520 142l1 1 1 1-1 1-1-1-2 0-3 0-1 0 0 1-1-1-1 1 1 2 1 1 1 1 1 1 1 1 3 2-3-1-2-1-2-1-2-3-1-1 0-2-2 0-1 1-1-1 0-1 1 0 1 0 1 0 1 0 1 0 0-1 1 0 0-2 2 0 1 0 2 1 2 1zM254 231l2 0 2 1 0 2 0 1-1 1 1 1 0 1-2-1-2 0-1 0-2 1-1-1 0-2 3 1 2 0 1-1-1-1 0-1-2-1zM513 138l1-2-1 0 2 0 0-2 1 1 1 0 3 0 0-1 1 0 1 0 2-1 1-1 3 1 2 1 0 1-1 1-2 2-1 2-2 1-2 0-2 1-1 0-2-1-2-1-1 0 0-2zM824 335l-1 0-4-3 3 0 1 1 1 1zM835 334l-3 1 0-1 2-2 3-2 0 1 0 1zM816 327l1 1 2 0 1 2-4 0-2 1-2 0 2-2 1 0zM831 327l-1 2-4 1-4 0 0-1 2-1 2 1 2 0zM789 323l6 0 0-1 6 1 1 3 4 0 4 2-4 2-3-2-3 0-3 0-3 0-3-2-2 0-1 0-6-1 0-2-3 0 2-3 4 0 2 1 2 1zM866 321l-1 2 0-2 0-2 1-1 0 1zM845 312l-2 1-2-1 0-1 3-1zM854 310l1 3-2-2-3 0-1 0-2 0 0-2 4 0zM865 304l1 5 3 2 3-3 3-3 3 0 2 2 2 1 4 1-1 11-1 11-2-3-3-1-1 1-4 1 2-3 2-1-1-4-1-3-6-3-2 0-4-3-1 1-1 1-1-2 0-1-2-2 3-1 2 0 0-1-4 0-2-2-2 0-2-2 5-1 1-1 5 1zM839 295l-3 3-2 1-3-1-5 0-2 1-1 2 3 3 2-1 5-1 0 1-1 0-2 2-2 1 2 5 0 1 2 4 0 2-1 1-2-1 2-3-3 1-1-1 1-1-2-2 0-3-2 1 0 4 0 5-2 0-1-1 1-3 0-3-2 0-1-3 2-2 0-3 2-5 0-1 3-3 2 1 4 1 3-1 3-2zM849 296l0 3-2-1 0 2 1 2-1 1-1-2-1-5 1-3 1-1 0 2 2 0zM817 293l3 4-3 0-1 2 0 3-3 3 0 3-1 5-1-1-3 2-1-2-2-1-2-1-3 2-1-2-2 0-3 0 0-5-2-1-1-3-1-3 1-3 2-2 0 2 2 2 2-1 2 1 2-2 1-1 3 1 2 0 2-5 1-1 1-4 3 0 3 0-2 4 2 3zM781 320l-4 0-2-3-4-3-1-2-2-3-1-2-3-5-2-3-1-3-1-3-3-2-2-3-2-2-3-3 0-2 1 0 5 1 3 3 2 2 2 2 3 3 3 0 2 3 2 3 2 1-1 3 2 1 1 0 0 3 1 2 3 0 1 2-1 4zM686 177l4 4 0 3 1 2 1 2-2-1 1 4 3 2 5 3-2 1 0 3 3 2 3 1 4 2 4 1 2 2 2 0 3 1 3 0 0-2-1-2 0-1 2-1 0 3 1 0 2 2 2-1 3 0 2 0 0-2-2-1 3 0 2-3 3-2 2 1 2-2 2 2-1 2 3 0 1 2-1 0 0 2-2 0-3 2 0 2-1 3 1 2-1 3-3-1 1 3-1 1 1 2-1 1-3-6-1 0 0 2-2-1 1-2 1 0 1-3-2-1-2 0-3 0-1-3-1 0-3-1 0 2 2 2-2 1 0 1 2 1 0 2 1 3 1 3 0 1-2 0-4 1 1 2-2 2-3 3-3 4-2 2-3 2 0 2-1 1-3 1-1 0-1 3 1 4 1 3-1 3 0 6-1 0-2 3 1 1-2 1-1 2-1 1-3-3-2-5-1-3-1-2-2-3-1-4-1-3-3-4-2-7-1-4 0-5-1-3-4 2-2 0-5-4 2-2-1-1-4-3 1-2 7 0-1-3-2-2-1-3-2-1 3-4 3 0 3-3 1-4 2-3 0-3 2-2-3-1-1-3-2-3 1-1 5 1 3-1zM456 115l0 2-2 3-5 2-4 0 3-4-1-3 3-2 2-2 1 2-1 2 2-1zM618 171l3 0 1-2 2 0 1-1 2 1 4 1 2 1 4 3 2 0 0 3 0 4 0 3 1 0-1 2 1 3 1 2 2 0 1 3-3 3 2 2 1 2 3 1 1 3 1 1 1 1-4 2-1 4-5-1-4-1-3 0-2-4-1-1-2 1-3 1-4-1-3-2-3-1-2-4-2-4-2 0-2-1-1 1-1-1-1-2-1 0 1-3-2-2-4-2-2-3 0-3 2-1-1-2-2-1-2-5-2-2 1-1-2-4 2-1 1 1 1 2 2 0 1 0 3-3 1 0 1 1-1 2 2 2 1 0 1 2 3 1 2 1 4 1 4-1zM595 176l2 1 1 2-2 1 0 3 2 3 4 2 2 2-1 3 1 0 1 2 1 1-1 0-2 0-2 3-5 0-9-7-4-2-4-1-1-4 6-4 0-4 0-3 1-1 1-2 1 0 4 0 1 1 1-1zM440 76l-1 2 3 2-4 2-7 2-2 1-3-1-7-1 3-1-5-2 5 0 0-1-5-1 2-2 3 0 4 2 4-2 2 1 4-1zM569 187l0 1-1-1-1 3 1 0-1 1 0 1 2-1 0 1-1 6-3-6 1-1 1-2 0-3 1 0 1-1 0 1 0 1zM241 236l2 0 1 1 1 1-3 0 0 1-2-1-2-1 1-1 1 0zM569 188l0-1 3 1 6-3 1 4-6 2 3 3-1 1 0 1-2 1-1 1-1 1-3-1 1-6 0-1 0-1zM662 154l-1 1-4 2 0 2-1 0-1-1-4 0-1-3-1 0-1-4-4-2-4 0-3 1-3-3-3-2-4-2-1 0-6 2 2 12-2 0-2-2-2-1-3 0-1 2 0-1 0-2 0-1-4-1-1-3-2-1 0-1 2 0 0-2 2-1 3 1 0-4-1-2-3 1-2-1-3 1-3 1-1-1 0-1-2-3-2 1-3-3 2-2-1-1 1-4 3 2 0-2 5-4 4 0 6 2 3 2 3-2 4 0 3 2 1-1 4 0 0-1-5-3 2-1-1-1 3-1-3-2 1-1 9-1 1-1 6-1 2-2 5 1 2 3 2-1 4 2 0 1 3 0 5-3-1 1 4 3 9 8 1-2 4 2 3-1 2 1 2 2 2 0 2 2 3-1 2 2-1 3-2 0 1 3-1 2-6-1 0 6-1 1-5 1 4 6-2 1 1 2-2-1-1-1-5 0-4 0-1 0-4-2-1 1 0 2-5-1-2 0zM589 303l1 2-2 2 0 1-2 0 0 3-1 1-1 3-1 1-4-4 0-2-11-7 0-4 0-1 2-2 1-3-1-4-1-2-1-2 2-2 2-2 1 0 0 2 1 1 2 0 4 3 1 0 1 0 0 1 2 0 1-2 3-1 1 1 2 0-2 4zM662 154l0-2 2 0 5 1 0-2 1-1 4 2 1 0 4 0 5 0 1 1 2 1-4 2-1 2-3 0 0 2-3 0-2 0-2 2 0 1-1 1-5 0-3-1-3 0 0-2 3 1 1-1 2 0 3-2-4-2-2 1-2-1 2-3zM773 263l-2-2-1-3-1-4 1-3 4-1 3 1 2 1 1-2 3 1 1 2 0 4-5 3 2 2-3 0-3 2zM526 155l-1 0 0-1-1-1 0-1 1 0 0-1 1 0 1 0 0 1 1 0 0 1 1 0-1 0 0 1-1 0zM605 196l0 2 0 1 1 2-2 0-1-1-2-1 2-3zM777 251l0-2 0-3-2-3-1-3-3-3-2 0 0 1-2 0-1-1-3 2 0-3 0-3-2 0-1-3-1-1 0-1 3-2 0 1 2 0-2-4 2-1 2 3 2 3 3 0 2 3-2 1 0 1 3 2 3 4 3 4 2 2 1 2 0 4-3-1-1 2zM569 185l-1 1-1 0 1-3 1-3 2 0 0 2-1 1zM444 285l-1 0-3-2-2-3-3-1-2-3 1-1 0-1 1-2 2-1 1-1 1 2 0 2 1 0 1 1 0-2 1 0 0 1 0 2 0 1 0 1 1 1 2 1 0 1-1 1zM511 221l-2 1-2-2-5-1-1-2-2-2-1 1-1-2-1-2-1-2 1-2 0-2 0-2 0-1 0-3 0-2-1-3 2-1 0-1 0-2 1-1 1-1 2-1 0-3 3 2 1-1 3 1 3 1 2 3 2 1 4 2 3 1 2-1 1-1-1-3 1-2 2-1 2-1 4 1 1 2 1 0 1 0 3 1 1 1-1 1 0 2-1 2 1 3 1 12 0 13 0 7-3 0 0 1-12-6-11-7zM709 274l0 3-1 1-3 1-1-3-1-5 1-5 2 2 2 2zM551 399l1 1-1 2-1 1-1 1-1 1-1 0-2-2 2-3 1-1 2-1zM529 114l0-1 0-1-1-1-3 0-1-3 3-1 4 0 3 0 0 1 2 0 2 1 0 2-2 1 0 2-3 1-2 0-1-1zM486 127l1 1 0 2-1 0-1-1 1-1zM524 108l0-2 1-2 3-1 2 2 2 0 0-3 2 0 1 0 2 2 2 0 2 0 0 2 1 2-2 1-2 0-2-1-2 0 0-1-3 0-4 0zM454 176l2 2 3 0 2 0 2 0 1 3 0 2 1 3 0 1 0 1-4 1-1 1-2 1 0 2-4 2-1 1-2 1-3 1-5 2 0 4 0 2-2 0-1 1-1 0-1 0-3 0-1 3-1 0-1 4-4 4-2 5-1 1 0 2-7 0 0-2 2-1 1-1-1-2 2-2 1-2 1-1 1-2 0-2 1-2 2-1 2-4 2-1 3 0 2-3 2-1 2-3 0-4 1-3 0-2 2-2 3-2 2-1 2-4 1-2zM540 134l1-1 2 0 2 1 1 0 1 1 0 1 1 1 0 1 1 1 0 1 1 0-1 0-1 0-1 0-1 1 0 2-1 0 0-2 0-1 0-1-2-2-1-2-1-1zM613 342l1 2 1 2 0 4 1 2-1 2 0 1-1-2-1 1 1 2-1 2-1 0 0 3-1 4-2 5-2 7-2 5-1 4-3 0-2 2-2-1-2-1-1-2 0-3-1-3 0-2 1-3 1-1 0-1 2-2 0-3 0-1-1-2 0-3 1-2 1-3 1 0 2 0 1-1 1 0 2-2 3-2 0-2 0-1 1 0 2-2 0-2 1-2zM189 211l-2 3-1 2-1 5-1 1 0 2 1 2 0 3 1 2 1 2 0 2 3 1 1 1 3-1 2 0 3-1 2 0 2-2 1-2 0-3 1-1 2-1 3 0 3 0 2-1 0 1 0 2-2 2-1 2 0 1 0 1-1 3-1-1-1 0-1 2-1 0-3 0-3 0 0 2-1 0 1 1 1 1 0 1 0 1-4 0-2 3 1 1-1 1 0 1-3-4-1-1-2-1-2 0-3 1-1 1-2-1-2-1-3-1-2-1-3-1-2-2-1-1-1 0-3-1-1-2-3-2-1-2 0-2 1 0 0-1 1-1 0-1-1-2 0-1 0-2-2-3-3-3 0-2-3-1 0-1 1-2-1-1-1-2 0-2-2-1-1-1-1-2 0-1 0-3-1-2 1-2-2-1-1 0-1-1-1 1 0 2-1 3 1 1 1 2 1 1 0 1 0 1 1 0-1 2 1 1 0 1 2 2 0 3 0 2 1 1-1 2 2 0 1 2 0 1 0 1-2 1 0-2-2-2-1-2-2-1 1-2 0-2-1-1-2-2 0 1-1-1-1-1-1-2 1 0 2-1 0-2-1-2-2-1 0-2 0-3-1-2 0-4 4 0 3 0 0 1 3 1 6 3 6 0 2 0 0-2 5 0 1 1 1 1 1 2 1 2 0 2 1 1 2 1 3-3 2 0 2 1 0 3 1 2 1 2 0 2 1 2 2 1 1 1zM525 155l1 0 1-1 1 0 1 0 1 0 2 1 0 2-1 0 0 1-1 0-1 1-2 0-1-1-1-1zM431 249l1 0 1-2 1 0 2 1 2-1 1 0 0-1 12 0 1-2-1-1-1-14-1-15 5 0 9 7 10 8 1 1 1 1 2 1 0 2 3 0 0 8-2 2 0 2-3 1-4 0-1 1-2 0-2 0-2 0-3 2 0 1-3 1 0 1-1 1-2-1 0 1-1 3-2 2 0 2-1 1 0 2-1 0-1 1 0-2-1 1-1 0 0 1-2 0-1-1-1 1-1-1 1-1-1-1 0-1 0-1-1-1 0-1-1-1-1 1-1 0-1 1-1 0-1-1-1 0-1 0 0-1 0-1 0-2-1-1 0-1zM509 176zM509 175l-1 0 1 0zM757 230l-1 2-2 0-1 4-1 0 2 3 2 3 1 2 0 3-1 1 1 1 2 3 0 2 0 2 2 3-1 3-2 3 0-2 1-3-2-2 0-3-1-2-1-4-1-5-2-3-2 2-3 3-1-1-2-1 0-4-1-3-3-4 1-1-2-1-3-3 0-2 1 0 0-2 1-1-1-2 1-1-1-3 3 1 1-3-1-2 1-3 0-2 3-2 2 0 0-2 1 0-1-2 2 0 1 2 2 1 0 3 1 2-3 3 1 4 3 0 1 3 2 1 0 2 2 2 1 0 2-1 1 2-3 2 0 1zM523 153l-1 1 0 1-1-1-1-1 0-2 1-1 1 0 1 1 1 0 1 1-1 0 0 1zM700 130l2 0 4-3 4-2 2 1 3 0 2 2 3 0 4 1 2-3-2-1 1-4 3 1 3 1 3 1 2 2 4 2 2-1 4 0 2 0 4 2 2 1 2 0 4 1 2-1 3-1 3-2 2 0 1 2 3-1 0 3 0 3 1 1 2 0 3 1 1-2 3 1 3 3 0 1-2 0-4 0-1 1-1 2-3 2-2 1-3 0-2-1-1 3 2 1 1 1-2 1-1 2-3 1-4 0-4 1-2 2-2-1-3 0-5-2-3 0-3 0-6-1-3 0-2-2-2-3-2 0-4-2-4-1-3 0-2-2 0-4-3-2-4-2-3-1zM569 339l2 0 4 1 1-1 2 0 1-1 2 0 3-1 2-2 1 2-1 3 1 3 0 5 0 2-1 3-1 2-2 2-3 1-3 2-4 4-1 0-2 3-1 1 0 2 1 3 0 2 0 1 1 0 0 3-1 2 1 0-1 2-1 1-3 1-3 2-1 1 0 2 0 2-2 0 0-2-1-1 0-2 1-3-1-3-1-5 3-4 1-2 1-1 0-2 0-1 0-2 0-3 1-4-2-1-1 0-1-1-1-1-3 0 0-1 0-3 9-2 2 1 2 1 0 1-1 2 0 2 2 2 1-2 1-1 0-4-1-3-1-1-1 0-1-4zM431 249l-1-2-2-3-2 0-1-1-2 0-1 0-2 0-1 1 0-2 1-1 0-4 0-3 0-2 0-2-1-1-1-2 1-1 11 0 0-5 0-2 3 0 0-9 10 0 0-5 11 9-5 0 1 15 1 14 1 1-1 2-12 0 0 1-1 0-2 1-2-1-1 0-1 2zM569 339l-1 3 1 4 1 0 1 1 1 3 0 4-1 1-1 2-2-2 0-2 1-2 0-1-2-1-2-1-2-1 1-3 1-2 0-2 1-3 0-1-1-3-1-2 3 1 0 1 1 2zM767 278l0 2 2 0 1-2 0 1 2 2 2 2 0 2 0 2 0 1 0 2 1 1 1 3 0 1-2 0-3-2-3-3 0-2-2-2-1-3-1-2 0-2 0-2zM819 284l-2 1-3 0-3 0-1 4-1 1-2 5-2 0-3-1-1 1-2 2-2-1-2 1-2-2 0-2 2 1 2-1 1-3 1 0 3-1 2-3 2-2 1 2 1-1 1 0 0-2 0-2 3-2 1-3 1 0 2 2 0 1 2 1 2 1 0 1-2 1zM515 398l-2-3-1-2-1-3-1-3-1-5 0-4 0-2-1-2-2-3-1-4-1-2-2-3 0-3 1-1 2 0 2 0 2 2 0-1 12 0 2 2 7 0 5-1 3-1 2 0 1 1-2 1-1 0-2 2-1-2-4 1-2 0-1 13-3 0 0 10 0 13-3 1-1 1-2-1-1 0-1-2-1-1zM950 372l1 2 1 2-1 1-1-1-2-2-1-2-2-2 0-1 2 0 1 1 1 1zM474 259l0-3-4-1 0-1-1-2-1-2 0-2 2 0 1-1 4 0 3-1 0-2 2-2 0-8 4-2 9-7 9-6 5 1 2 2 2-1 0 5 2 1 0 1 1 1-1 2-1 7 0 4-4 4-1 4 1 2 0 2 2 0 0 1-1 1 0 1-1 0-2-4-3 2-2-1-1 0-1 0-2 0-2 1-1 1-4-2-1 1-2 0-1-2-3-1-3 0-1 1 0 2-1 1 0 4-2-2-1 0zM492 283l-3 1-1 0-1 1-3 0-1-2-1-3-2-2-2 0-3 0 0-5 0-3 1-2 1-1 1-2 0-1 0-1 0-2 0-1 0-4 1-1 0-2 1-1 3 0 3 1 1 2 2 0 1-1 4 2 1-1 2-1 2 0 1 0 1 0 2 1 3-2 2 4 1 0 1 1 0 1 0 1-3 3-1 2 0 1-1 1 0 3-2 1 0 2-1 1 0 2-2 1-2-2-1 0-2 2-1 0-1 4zM214 262l-1-2-1-1-1-1-1-1-1-2 1 0 1 0 0-1 1 0 0-2 1 0 1-1 1 1 1-1 1-1 1-1 1 0 1 0 2-1 1 0-1 1 1 1-1 2-1 1 0 2 0 2-1 2 0 1 0 1 0 1-1 1-1-1-1 0-1 0-1-1zM487 116l2 0 0 2 0 3-1 1-2 0 1 3-2-1-1-1-3 1-2-1 2 0 2-5zM537 62l7 2-3 1 3 2-4 1-1 0 0-2-3-1-3 1-1 2-2 1-2 0-3 0-3-2-1 1-2 0 0 2-4 0-1 1-2 0-1 2-3 4-3 4 1 1-1 1-2 0-2 3 0 4 2 1-1 4-2 2-1 2-1-2-5 4-4 1-3-2-1-3 0-8 2-2 6-2 5-3 4-4 6-6 3-2 6-4 5-1 4 0 3-3 4 1zM527 44l-4 1-4-1 1 0-1-1 4-1 1 1zM513 39l7 2-5 1-1 2-2 0 0 2-3 1-5-2 2-1-3-1-4-2-1-2 5-1 1 1 3 0 1-1 3 0zM528 37l4 1-3 2-6 0-6-1-3 0-3-1 6-1 3 1 2-1zM720 204l0 1 1 2 0 2-3 0-3-1-2 0-2-2-4-1-4-2-3-1-3-2 0-3 2-1 1-1 2 1 3 2 2 1 1 1 3 1 2 1 4 1zM941 441l0 1 3-1 0 1-1 2-2 1-3 3-3 1 0 2-2 0-3 1-2 2-4 4-3 1-2 1-2 0-1-1-3 0 0-2 3-2 6-3 2-1 3-1 3-2 3-2 3-2 1-1 2-2 3-2zM955 424l0 4 1-2 1 1-1 2 2 1 1 1 3-2 1 1-3 3-2 2-2 0-1 1-1 1 0 1-2 2-3 2-3 1 0-1-1 0 3-3 0-2-2-1 1-1 3-2 2-2 1-2 0-3 0-2-1-3 0-2 1-1 1 2 1 1zM639 227l-1 2-2 0 0 1 0 2 0 2-1 0-2 2 0 1-1 1-2 0-1 1 0 1-1 1-2 0-2 1-1 0-1-2-3-6 9-3 1-7-1-3 0-1 0-1 0-2 1 0 0-1 0-2 1 0 2 2 2 1 2 1 2 0 1 2 1 2 1 0 0 1-1 2 0 1zM677 172l3 1 1 3 5 1-2 3-3 1-5-1-1 1 2 3 1 3 3 1-2 2 0 3-2 3-1 4-3 3-3 0-3 4 2 1 1 3 2 2 1 3-7 0-1 2-2-1-2-2-2-3-5 1-5 0-4 0 1-4 4-2-1-1-1-1-1-3-3-1-1-2-2-2 5 2 3-1 2 1 0-1 2 0 4-1 0-3 1-2 2 0 0-1 2-1 1 1 1-1 0-2 1-3 1 0-1-3 2 0 1-1 0-1 1-2-1-1-1-2 2-1 2-1 3 0 2-1zM236 275l-1-1 0-2 1-1-1 0-1-1-1-1-1 0-1 1-1 1-1 0 0 1 1 2-1 0 0 1-2 0 0-2-1 0-1-1-1 0-1-1-1 0 0 1-1-1 1 0 0-1 0-1 0-1 0-1 1 0 1 1 0 1 1 0 1 0 2 0 1-1 2 0 1-1 1 0 2 0 1 1 1 1 1 1 0 2 0 1-1 0zM264 360l-1 2-1 1-3-2-1-2-6-3-6-4-2-2-2-3 1-1-3-4-4-7-3-7-1-1-1-3-3-2-2-1 1-2-1-3 0-3 3-2 0 2-1 1 0 1 2 0 1 0 1 2 2-2 0-2 2-3 4-1 3-4 1-2-1-3 1 0 2 1 1 2 1 1 2 4 2 0 2-1 1 1 2-1 2 2-2 3 1 1 2 1-3 0 0 1-3 0-3 3 0 1-1 2 0 1-1 1 0 2-1 0 1 4 2 2 0 1 2 0 1 2 2 0 3-2 0 5 1 1 2-1 3 6-1 1 0 2 1 3-1 2 0 1 0 1 1 3zM841 271l1 2 0 2-1 3-1-3-2 1 2 3-1 1-4-2-1-2 1-2-2-1-1 1-1 0-2 2-1-1 1-3 2-1 1-1 2 1 2-1 0-1 2 0 0-3 2 2 1 1zM833 264l-1 1 0 3-1 1-2-3 0-1 1-1 0-2 2 0 0 2 1-3zM818 268l-4 3 1-3 2-2 2-2 1-3 1 2-2 2zM827 259l2 1 1 0 1 1-2 2-1 1-1-2 0-2zM837 258l2 4-3-1 0 1 1 2-1 1 0-3-1 0-1-2 2 0 0-1-3-3 3 1zM825 255l0 3-2-2-2-3 3 0zM822 236l2 1 1-1 0 1 0 1 1 3 0 3-2 1 0 3 1 2 2 1 1-1 4 2 0 2 1 1 0 2-3-2-1-2 0 1-3-2-2 1-2-1 0-1 1-1-1-1 0 1-2-2-1-1 0-4 1 1 0-5 0-3zM929 323l-1 0-1-1-1-2-1-3 1 0 0 1 1 1 1 2 1 1zM918 318l-2 1 0 1-2 1-2 0-1 0-3-1-1-1 0-1 3 1 1 0 1-2 0 2 2-1 1-1 2-1 0-2 1 0 1 0 0 2zM903 325l2 2 2 4 2 0-1 1 3 1-1 1 3 1-1 1-2 0 0-1-3 0-3-1-2-2-1-2-2-3-3-1-3 1-2 1 0 2-2 2-2-1-3 0 1-11 1-11 5 2 5 2 2 2 2 1 0 2 5 3 0 1-2 1zM921 315l-1 1 0-2-1-1-1-1-2-2-2-1 1-1 2 1 1 1 1 1 1 1 1 1zM510 124l-1-2 0-1-1-2-1-1 1-1-1-1 2-1 4-2 3-1 2 0 1 1 2 0 3 1 5 0 1 0 1 1 0 1 1 2 0 1-2 1 1 1 1 2 1 3-1 1-3 3 1 1-3-1-2 0-1 0-2 0-1-1-1 1-2-2-1 0-1-1-2-1 0 1-1-1-2-1zM274 236l1 0 1 1-1 1-2 0-2 0 0-2zM824 154l-1 0-1 1 0 1 1 3-1 0 0 1-1 1-1 1-1 1 0 1 2 1 2 2-1 1-2 0-1 1-1 0-2 0 0 1-1-1-1 0-1-1 1-1 0-1 0-2-1-1-2 0-1-1 1-2 2-2 1-2 2 1 2 0-1-2 4-2 0-1zM445 155l1-1 1 0 1 2 1 0 1-1 1 0 1 2-1 1 0 3-1 0 0 2-1 0 1 2-1 2 1 1-1 1-1 2 0 1-1 1-1-1-2 1 1-3 0-2-2-1 0-1 0-2 1-1 1-2 0-2 0-1 0-2zM286 376l0-4 0-2 1-3 5-1 3 0 3 2 0 1 1 2 1 5 3 0 1 0 2 1 1 1 0 3 1 1 1 0 1 0 1 0 0 2 0 2 0 2 0 3-2 3-3 1-3-1-3-1 2-5-1-2-3-1-4-3-2 0zM614 214l0-2 1-2 1 1 0 2 0 2-1 0zM530 135l1-1 2 1 2 0 1 0 1 0 2 0 0-1 1 0 1 0 1 1 1 2 2 2 0 1 0 1 0 2 2 1 1-1 1 1 0 1-1 0-1 0 0 4-2 0-2-2-3 1-1 1-4 0-2-1-2 1 0-2-1 0 1-1-1 0-1 0-1-1-1-1-1-1-1-1-1-1 2-1 1-2 2-2zM843 125l6 6-4-1 1 5 4 3 2 3-4-2 0 2-2-2-1-4-3-3-1-3-2-4-4-4-3-4 2-2-2-1 3 2 3 3 2 3zM529 114l-5 0-3-1 1-1 3-1 3 0 1 1 0 1zM80 77l-1 0 1 0zM914 77l-1 2-3 0 3 3-2 0-3-1-5-1-2-1-2 0-3 0-2-1-1-1-2 1 3 1 0 1-14-12 9 3 9 3 2 1 2 1-3-2 7 0 8 3zM874 63l-3 0-1-1 1-1zM876 63l-2 0-3-2 2 0 5 1zM786 56l-3 0-5 0 1-1 2-1 4 2zM796 51l-1 1-4 0-5-1-1-1 5 0zM782 50l1 2-8 0-3 0-6-1-1-2 2-1 6 0zM602 63l-1 1-7-1-1-1-5-1 0-1 2-1-1-2 4-2-3 0 5-3-1-1 4-1 6-2 7-1 3-1 4 0 2 1-1 1-7 1-6 2-5 2-3 3-2 3 1 2zM699 46l1 1 2 0 6 0 6 1 2 1 1 1-2 1-4 2-1 1 3 0 4 1 1-1 3 2 0-1 3 0 8 0 1 2 10 0-2-2 5 0 3 0 5 2 3 2 0 1 4 2 5 1-1-3 5 1 3 0 5 1 1-1 4 0-4-3 1-1 22 2 4 2 8 2 8-1 5 1 3 1 2 2 4 1 2-1 4 0 5 1 4 0 7 2 1-1-4-2 0-1 8 1 5 0 8 1 4 1 14 12-2 2-3-1 4 2 4 2 2 1 2 2-5 0-5 2-1 0-2 3-2 1 1 2-6-2-4 2-2-1-1 1-4 0 1 2 0 3 1 1 4 1 3 5-2 0 1 3 2 1-3 2 2 3-3 1 2 3-2 4-2-3-5-5-7-7-2-4 1-2-2-2 4 0 1-4 1-4 2-2-2-4-3 0 1 2-3 4-5-4-6 1-1 5 4 2-5 1-4 0-1-2-5 0-1 1-8 0-8 1-3 6-4 7 4 1 2 2 3 1 1-2 3 0 6 4 2 2 0 4 2 4 2 5-1 5 0 2-1 4-2 4-1 2-2 2-2 0-2-1-3 2 0 1-1-2 1 0-1-4-3-3 2-1 4 0 0-3-1-4 0-1 0-3-4 1-2 1-4 0-2-3-5-2-5-1-3-4-2-2-1-1-4-3-3-2-4-1-3 1-3 0-2 2 2 1 1 1-1 1 0 4 1 1-3 3-4-2-3 1-1-2-2 0-3 2-3 1-2 1-4-1-2 0-2-1-4-2-2 0-4 0-2 1-4-2-2-2-3-1-3-1-3-1-1 4 2 1-2 3-4-1-3 0-2-2-3 0-2-1-4 2-4 3-2 0-1 0-2-2-3 1-2-2-2 0-2-2-2-1-3 1-4-2-1 2-9-8-4-3 1-1-5 3-3 0 0-1-4-2-2 1-2-3-5-1-2 2-6 1-1 1-9 1-1 1 3 2-3 1 1 1-2 1 5 3 0 1-4 0-1 1-3-2-4 0-3 2-3-2-6-2-4 0-5 4 0 2-3-2-1 4 1 1-2 2 3 3 2-1 2 3 0 1 1 1 0 2-3 1-2 3 3 3 0 3 3 4-1 1 0 1-2 0-2-3-2 0-1-2-3-1-1 1-1-1-4-1-4-1-2 0-1 0-3-3-4-1-2-2 2-1 2-3-2-1 4-1 0-1-3 1 0-2 1-1 3 0 0-1-1-2 1-2 0-1-4-1-1 0-2-1-2 0-4-1 0-1-1-1-2 0 0-1 0-1-1-2-3 0-1 0 0 1-1 0-1-2-1-1 1-1 2 1 0-1 0-1-2-1-1-1-2-2 0-1 0-1-2-1-2 0 0-1-3 0-1-2 0-2-2 0 1-1-1-3 2-2 0-1 2-2-3-1 5-4 2-2 1-1-4-2 1-2-3-3 2-2-4-4 2-2-3-2 0-2 1 0 4-1 2-1 4 1 6 1 10 3 2 2 0 2-2 1-4 1-10-2-2 0 4 2 1 2 0 3 3 1 2 1 0-2-1-1 1-1 6 2 2-1-2-2 5-3 2 0 2 1 1-2-2-2 1-2-3-1 7 0 2 2-3 0 0 2 2 1 4 0 0-2 4-2 7-2 2 0-2 2 3 0 2-1 4 0 3-1 3 1 2-2-3-1 1-1 7 1 3 1 10 3 1-2-3-1-1-1-2 0 0-1-2-3-1-1 3-2 0-3 2 0 6 0 1 2-1 2 2 1 2 2 1 4 3 2 0 2-3 4 3 1 1-1 2-1 0-2 1-1-2-2 0-2-2 0-2-2 1-2-4-3 3-2-2-2 1 0 2 2 1 3 2 0-2-2 3-1 5 0 5 1-3-2-2-3 3-1 5 1 5-1-3-1 2-2 2 0 3-1 6-1 0-1 5 0 2 1 4-2 4 0 0-1 1-1 4-1 4 1-2 1zM692 43l-11 1 1-4 1 0 2 0 6 2zM579 37l-3 0-2 1-2 0-2 0 1-1-5 0 4 0 3 0 1 0 2-1 3 1zM680 41l-4 0-7 0-4-1-3-2-3 0 4-2 3-1 5 2 7 2zM557 304l1 1 0 2-1 1-1 0-1 2-2-1 0-2 1 0 0-2 1-1 1 1zM443 206l0-2 0 1 0 5-10 0 0 9-3 0 0 2 0 5-11 0-1 1 0-1 7 0 0-2 1-1 2-5 4-4 1-4 1 0 1-3 3 0 1 0 1 0 1-1zM593 243l-1-1-1-1 0-1-1-2-2-3-1-2-2-3-2 0-2-4 0-2 0-2-2-4-1-1-2-1-1-2 0-1-1-2-1 0-1-3-2-3-2-2-1 0 0-2 0-1 1-2 3 1 1-1 1-1 2-1 0-1 1-1-3-3 6-2 4 1 4 2 9 7 5 0 2 1 1 1 2 0 2 3 1 1 1 1 2 2 0 1 0 1 0 1 1 1 1 2 1 1 1 0 1 1 0 1 1 3 9 2 1-1 1 3-1 7-9 3-8 2-3 1-2 4-1 0-1-1-1 0-3 0-4 0-2-1 0 2 0 1zM568 267l-1 0 0-2 0-1-2-1 0-3 0-2-1 0-2 0 0 1 1 3-2 1-1 3-2 0-2-2-1 1-1 1-1 1-3 0-1 0-2 0-1 0-1 0-1-2-1-1-2 0-1 2 0 3-1 1-1 0-2-1 0-1 1-2 0-1-2-2 0-2 0-1-1-1 0-2-1-1-1 0 0-1 1-1 0-2 0-1 0-1 1-2 1-2 2 0 0-14 0-1 3 0 0-7 12 0 11 0 12 0 1 3-1 1 1 3 1 5 1 0 2 2-2 2-2 0-1 1 0 3-1 5 0 1 0 3-1 3-2 2-1 3 0 1-2 1 0 4zM568 267l0 3-1 1-1 0-1 2 1 0 2 2 1 1 1 1 2 4-2 2-2 2-2 2-2 0-2 0-2 0-2 1-2-3-1-1-2 1-1-1-1 1-1-1-2-2 0-1-3-2 0-2-2-1-2-2 0-1-1-2-2-1 1 0 1-1 0-3 1-2 2 0 1 1 1 2 1 0 1 0 2 0 1 0 3 0 1-1 1-1 1-1 2 2 2 0 1-3 2-1-1-3 0-1 2 0 1 0 0 2 0 3 2 1 0 1 0 2zM418 253l-1-3-2-1 2-1 1-2 1-2 1-1 2 0 1 0 2 0 1 1 2 0 2 3 1 2 1 3 0 1 1 1 0 2 0 1-2 0-1 0-2-1-1 0-6 0 0 1-1-1-2 1 0-3 2 0 1 0 1 0 1-1 1 1 1 0 1-1 0-1-1 1-1 0-1-1-1 0-1 1zM946 336l1 1-2 0-1-2 1 1zM943 334l-2 0-1-1-1 0 0-2 2 1 1 1zM945 333l-2-3-1-2 1 0 1 3zM940 328l0 1-2-1-1-2-1-1 1 1 3 1zM433 276l-1 0-2-1-1-2-1-1 0-3 1-1 1-1 0-1 1 0 1-1 2 0 1 1 1 2 0 1 0 1 0 1 1 0-2 1-1 2 0 1zM209 254l-1 0-1 0-1 0-2-1-1 0-1-1 1-1 1 0 0-1 1 0 1 1 1 1 1 0 1 0zM612 267l-1 2-2 3-3 0-10-4-1-1-1-2-1-2 0-1 1-2 1 1 1 1 1 2 2 0 3-1 3-1 2-1 2 0 1 0 2-1 0 2 0 3zM614 260l1-1 2-1 1 0 0 1 0 2 0 2-1 1 0 4-2 4-1 4-3 5-2 4-4 5-3 3-4 3-3 3-3 4-1 2-1 0-1-2 0-13 2-4 1-1 2 0 2-2 4-1 9-10 2-3 1-2 0-2 0-3 0-2 1 0zM526 143l1 1 1 1 1 1 1 0 1 0-1 1 1 0-1 1 0 1 2 2-1 1-1 1 1 0-1 1-1 0-1 0 0-1 1 0-1 0 0-1-1 0 0-1-1 0-1 0 0 1-1 0 1 0-1-1-1 0-1-1 0-2-1-1 1-2-1 0 1-1-1-1-1-1 2-1 2 0 1 1zM298 279l3 1 0-1 3 0 3 1-2 3 1 2 1 2-1 2 0 1-1 2-2-1-1 0-1 0 0 1 0 1-2 0-2-3 0-2-1 0-1-2 0-2 0-1 2-1zM520 130l1-1 1 1 2 0 1 0 2 0 3 1-1 1-1 1-3-1-1 1-2 1-1 0-1 0 0 1-3 0-1 0-1-1 0-1 0-1 1 0 1 0 0-1 1 0 0-1 1 0zM507 140l2 0 1-1 3 0 0-1 1 0 0 2-2 0 0 2-1 0 0 1-1 0-1 0-1 0-1 0-1-2zM560 392l-1 1-1 1-2-2 0-1 1-2 0-1 1 0 1 1 1 1zM578 185l-6 3-3-1 0-1 0-1 1-2 1-1 0-2-2 0 0-2 1-2 0-1 1 0 0-2 1 0 3-1 1 1 3 0 3-1 1 0 3-1-1 2-1 1 0 3 0 4zM510 255l0-1-2 0 0-2-1-2 1-4 4-4 0-4 1-7 1-2-1-1 0-1-2-1 0-5 3-2 11 7 12 6 0 14-2 0-1 2-1 2 0 1 0 1 0 2-1 1 0 1 1 0 1 1 0 2 1 1 0 1-2 1-2 1-2 4-3 2-2-1-1 1 0 1-2 1-1 2-3 1-1-1-1 0 0 1-3 0 1-1-1-2-1-2-1 0-2-2 1-2 1 1 1-1 2 0-2-3 0-2 0-2zM473 279l-3 0 0-1-1-2-1-2 1-3-1-1 0-3 0-2-1-2 0-1 3 0-1 2 1 1 1 1 0 2 1 0 0 8zM770 258l-3-2-3 0 1-2-3 0 0 3-1 5-1 3 1 3 1 0 2 3 1 3 1 2 2 0 2 2-1 2-2 0 0-2-3-1-2-1 0-2-2-2-1-1-1 2 0-2 0-2 0-4 2-3 1-3-2-3 0-2 0-2-2-3-1-1 1-1 0-3-1-2-2-3-2-3 1 0 1-4 2 0 1-2 2-1 1 1 1 3 2 0 0 3 0 3 3-2 1 1 2 0 0-1 2 0 3 3 1 3 2 3 0 3 0 2-3-1-4 1-1 3zM664 161l-1 1-3-1 0 2 3 0 3 1 5 0 2 3 1 0 2 0 0 2 1 2-3 0-2-1-2 2-1 0-1 1-1-1 0-3-1 0 0-1-2-1-1 1 0 2-2 0 0 2-1-1-2 1-1 0 1-4-1-2-2-1 0-2 2 0 1-2 1-2 3-1 0 2 0 1zM639 177l0-3-2 0-4-3-2-1-4-1-2-1-1 1-2 0-1 2-3 0 0-2-1-4-2-1 0-2-1 0 0-3 2 1 3-2-3-2-1-2-2 1 0 3-1-2 1-2 3 0 2 1 2 2 2 0 3 0-1-2 2-1 2-2 4 2 1 3 1 1 3-1 1 1 2 4 4 2 2 2 3 1 4 2 0 2-1 0-1-1 0 1-3 1 0 2-1 1-2 1 0 2-3 0zM837 330l0-1 3 0 2-1 1 0 1 0-1 1-3 2-3 1 0-1zM285 263l2-1 0 3-2 0-1 0 1-1zM495 195l-1-6-2-1 0-1-2-2 0-3 1-2 1-3 0-3 0-2 3-1 2 0 0 2 3-1-2 2 0 2 1 1 0 3-2 1 1 2 1 0 1 2 1 0 0 3-2 1-1 1-1 1 0 2 0 1zM570 157l4 1 3 0 2 0 3-2 3 0 3 2 1 1 0 2 2 1 1 1-2 1 2 4-1 1 2 2-1 1-1-1-4 0-1 0-3 1-1 0-3 1-3 0-1-1-3 1-1 0 0 2-1 0 0 1-2-1 1-2-1 1-3-1-1 2-5 0-2-2-3 0-1 2-2 0-2-2-3 0-2-3-2-2 1-3-2-1 3-4 4 0 1-2 5 0 3-2 3-1 5 0zM544 159l-3 2-1-1 0-1 1 0 1-3-2-1 3-1 3 1 0 1 2 1 0 1-3 0zM819 216l0 5-1 3-2-3-1-2 1-4 2-2 1 1zM568 303l11 7 0 2 4 4-1 4 0 2 2 1 0 1-1 2 0 1 0 2 1 2 1 3 1 1-2 2-3 1-2 0-1 1-2 0-1 1-4-1-2 0-1-4-1-2 0-1-3-1-2-1-2 0-1-1-1-1-1-4-2-2-1-2 1-2-1-3 1 0 1-1 2-2 0-1 0-1 0-1-1-1 1-1 0-2-1-1 1-1 4 0zM562 303l-4 0-1 1-1 1-1-1 0-2 1-2 0-2 0-2 1-2 2-1 1-1-2 0 0-4 2-1 2 0 2 0 2 0 2-2 1 2 1 2 1 4-1 3-2 2 0 1 0 4zM553 121l1 0 0-1 1 0 3 0 1 2 0 1 0 1 2 0 1 1 0 1 4 1 2 0 2 1 1 0 4 1 0 1-1 2 1 2 0 1-3 0-1 1 0 2-2 0-1 1-3 0-2 1 0 2 2 1 2 0 0 1-3 1-3 2-2-1 1-1-3-1 0-1 2-1 0-1-5-1 0-1-2 0-1 2-2 3-1-1-1 1-2-1 1 0 0-2 1-1 1 0 1 0 1 0-1 0 0-1-1-1 0-1-1-1 0-1-1-1-1 0-2-1-2 0-1 1-1 0 0 1-2 0-1 0-1 0-2 0-2-1-1 1 0-1-2-1 1-1 1-1-1-1 3-3 1-1-1-3 1 0 1-1 2 0 3 0 3 1 2 0 1 0 1 0 3 0 1 1 0-2 0-1zM305 404l1-1 4 3 1 0 3 2 3 2 2 2-1 2 1 2-1 2-3 2-2-1-1 1-3-2-2 0-2-1-1-3 1 0-1-4 0-3zM653 171l0-2-4-2-3-1-2-2-4-2-2-4-1-1-3 1-1-1-1-3-4-2-2 2-2 1 1 2-3 0-2-12 6-2 1 0 4 2 3 2 3 3 3-1 4 0 4 2 1 4 1 0 1 3 4 0 1 1 1 0 0-2 4-2 1-1 1 0-2 3 2 1 2-1 4 2-3 2-2 0-2 0 0-1 0-2-3 1-1 2-1 2-2 0 0 2 2 1 1 2-1 4-2-1zM257 259l0 1-2 0 1 2 0 2-2 2 1 2 1 0 1-2-1-1 0-3 4-1 0-2 1-1 1 2 2 0 2 2 0 1 2 0 4 0 1 2 2 0 2-1 0-1 4 0 3 0-2 1 1 1 2 1 2 1 1 3 1 0 1 1-2 2-1 1 1 1 0 1-2 1 0 1-1 1 2 3 0 1-1 1-3 1-2 1-1 1-3-1-2-1 0 1 1 1 0 2 0 2 3 0 0 1-2 1-1 1-1 1-2 1-1 1-2 0-2-2 0-3-1-1-1-1 1-2 0-1-1-1 0-2 0-2 1-1 0-2-1-1-1 0-2 0-2 1-2-3-1-1-4 1-1-2-1 0 0-1 1-1 0-1-1-1 0-2-2 0 1-2 1-2 1-2 1-1 1-1zM958 351l0 3 0-1-1 1 0-1 0-3zM569 188l0 2 0 1-2 1 0-1 1-1-1 0 1-3zM623 242l-2 1-1 2 0 1-2 1-5 2-3 2-1 1-1-1-1 2-2 1-3 0-1 1-1 0 0 1-2 0-1 0-2 0 0-2 0-2-1-1-1-2-1-2 1 0 0-1 0-1 0-2 1-1 0-1 0-2 2 1 4 0 3 0 1 0 1 1 1 0 2-4 3-1 8-2 3 6zM558 400l-1 1-1 2-1 1-2 3-3 4-2 2-2 1-3 2-2 0 0 1-2-1-1 1-3-1-2 1-1-1-3 2-2 0-2 2-1 0-2-2-1 0-1-1 0-1 0-2-1-2 1-1 0-2-2-3-1-3-2-5 1-2 1 1 1 2 1 0 2 1 1-1 3-1 0-13 1 0 2 4-1 2 1 1 2 0 1-2 2-1 1-2 1 0 1 0 2 1 2 0 2-1 0-1 1-1 1-1 1-1 1-2 3-3 4-2 1 0 2 0 1 0 1 0 1 5 1 3-1 3 0 2-1-1-1 0 0 1-1 2 0 1 2 2 1-1 1-1 2 0-1 2 0 3-1 2zM551 399l-1-1-2 1-1 1-2 3 2 2 1 0 1-1 1-1 1-1 1-2zM564 331l1 2 1 3 0 1-1 3 0 2-1 2-1 3 2 1-9 2 0 3-2 0-2 2 0 1-1 0-3 3-1 2-1 0-1 0-4 0 0-1-1-1-2 0-3 1-2-2-1-3 0-11 6 0 0-1 0-1 0-2 0-2 0-1 1 0 0 1 1 0 2 1 1 1 2 1 2-1 1 1 2 1 1 1 1 2 3 0 0-4-1 1-2-1-1-1 0-3 1-4-1-2 1-2 1 0 4-1 1 0 1 1 1 1 2 0zM558 376l-1 0-1 0-2 0-1 0-2-2-2 0-1-3 0-1-1 0-3-4-1-2-1-1-1-2 4 0 1 0 1 0 1-2 3-3 1 0 0-1 2-2 2 0 0 1 3 0 1 1 1 1 1 0 2 1-1 4 0 3 0 2 0 1 0 2-1 1-1 2z","c":{"CHE":"M496 136l0 1-1 1 1 0 2 0 0 2-2 0-2 0 0 1-1 0-1 0-1 1-2 0-1-1-1-1-1 0 0-1 2-2 0-1 1 0 1 0 2 0 1-1z","CHN":"M790 235l-3 2-2-1-1-3 2-2 3-1 1 1 1 1-1 1zM803 129l5 1 5 2 2 3 4 0 2-1 4-1 0 3 0 1 1 4 0 3-4 0-2 1 3 3 1 4-1 0 1 2-3-2 0 1-4 2 1 2-2 0-2-1-1 2-2 2-1 2-4 1-1 2-3 1 1-2-1-1 1-3-2-2-2 2-2 2-1 2-2 0-1 2 2 2 3 1 0 2 3 1 2-3 3 1 2 0 1 2-4 1 0 2-3 2 0 2 3 2 3 4 2 3 3 2 1 3-2 1 1 2 2 1 1 3 0 2-2 1-1 3-1 5-2 4-3 3-4 3-3 1-1 1-1-1-2 2-4 1-3 1 0 4-1 0-2-3 1-1-4-1-2 0-3 0-1-2 0-2-3 0-2-2-2 2-2 0-3 0-1 1-2 1 2 4-2 0 0-1-1-2-2 1-1 0-2-2 0-2-2-1-1-3-3 0-1-4 3-3-1-2 0-3-2-1-1-2-2 0-3 0 1-2-2-2-2 2-2-1-3 2-2 3-3 0-1-1-2 0-2-1-1 1-2 3 0-3-2 1-3-1-4-1-2-1-3-1-1-1-2-1-3-2-2-1-1 1-5-3-3-2-1-4 2 1-1-2-1-2 0-3-4-4-5-1-1-3-3-1 0-1-1-2 0-2-2 0-1 0-2-3 1-1 0-1 2-2 2 0 3 0 0-2 3 0 1-2 4-2-1-2 2-1-4-6 5-1 1-1 0-6 6 1 1-2-1-3 2 0 1-3 1 0 1 3 3 1 4 2 3 2 0 4 2 2 3 0 4 1 4 2 2 0 2 3 2 2 3 0 6 1 3 0 3 0 5 2 3 0 2 1 2-2 4-1 4 0 3-1 1-2 2-1-1-1-2-1 1-3 2 1 3 0 2-1 3-2 1-2 1-1 4 0 2 0 0-1-3-3-3-1-1 2-3-1-2 0-1-1 0-3 0-3 4 2 3-3-1-1 0-4 1-1-1-1-2-1 2-2 3 0 3-1 4 1 3 2 4 3 1 1 2 2z","DEU":"M496 112l1 1 2 1 0 1 3-1 1-1 3 1 1 2 1 1-1 1 1 1 1 2 0 1 1 2-2 1 0-1-1 1-2 0-1 1-2 1 1 1 0 1 2 1 1 2-1 1-1 1 1 2-1 0-2 0-2 0-2 0 0 1-2-1-3-1-1 1-2 0 0-3 2-2-4 0-1-1 0-2-1-1 1-2-1-3 2 0 1-1 0-3 0-2 2 0 1 0 2-1-1-2 0-1 2 0z","FIN":"M539 68l0 2 3 2-2 2 4 4-2 2 3 3-1 2 4 2-1 1-2 2-5 4-4 0-4 1-4 1-2-2-2-1 0-3-1-3 1-1 2-2 5-4 2 0-1-1-3-2-1-1-1-5-3-2-3-1 1-1 3 2 3 0 2 0 2-1 1-2 3-1 3 1z","FRA":"M495 154l0 3-2-1 0-2 0-1 2-2zM480 127l2 1 1 0 2 1 1 1 1 0 1 1 4 0-2 2 0 3-1 0-1 0 0 1-2 2 0 1 1 0 1 1 0 1 1 2-1 1 1 2 1 1 0 1-3 2-5-1-4 1 0 2-3 1-3-2-1 1-5-2-1-1 1-2 1-7-3-3-2-2-3-1-1-3 4 0 4 0 0-3 2 1 6-3 1-2 2-1 1 1 1 0z","ITA":"M512 168l-1 3 0 1 0 1-2-1-2 0-4-2 1-2 3 0 3 0zM495 158l1 2 0 5-1-1-2 1-1 0 0-5 0-2 1 1zM503 139l4 1-1 1 1 2-2-1-2 1 0 2 0 1 1 2 2 1 2 3 3 3 2 0 0 1 2 2 2 1 3 2-1 1-1-1-3-1-1 2 2 2 0 2-1 0-1 3-2 0 0-1 1-2 0-1-1-2-1-1-1-1 0-1-2-1-1-1-2-1-3-1-2-2-2-2-1-4-1 0-2-1-2 0-1 2-1 0 0-1-1-1-1-2 1-1-1-2 0-1 1 1 2 0 1-1 1 0 1 0 0-1 2 0 2 0 0-2 1 1 1-1 2 0z","JPN":"M846 182l1 1-1 2-2-1-1 1 0 2-2-1 0-2 0-2 2 1 1-2zM860 172l0 2 1 2 0 2-3 2-5 0-3 4-2-1-1-3-5 1-3 2-3 0 4 2 0 6-1 2-2-2-1-3-2-1-2-2 3-1 0-2 3-2 1-3 5-1 3 1 1-6 2 2 3-4 1-1 0-4-2-4 0-2 2-1 4 5 1 3-1 3zM856 147l3 1 1-1 2 4-3 1-1 3-5-2 0 3-3 0-2-3 0-3 3 0-2-5 0-2 5 3z","KOR":"M823 167l4 4 1 2 2 4-1 2-2 0-2 2-2 0-1-2 0-2-3-4 2-1-3-3 1 0 1-1 2 0 1-1z","SWE":"M525 78l-2 2 0 2-3 2-5 3-1 4 2 3 2 1-2 4-3 1 0 5-2 3-3 0-1 2-3 0-1-3-2-3-2-5 1-2 2-2 1-4-2-1 0-4 2-3 2 0 1-1-1-1 3-4 3-4 1-2 2 0 1-1 4 0 0-2 2 0 3 1 3 2 1 5 1 1zM520 102l-2 1 1 1-1 0 0 1-1 0 0-1 0-1 1-1 1 0 1 0z","USA":"M13 234l0 1-1-1 1-1 0-1 0-1 0-1 1 0 1 1 1 0 0 2-1 0zM223 130l0 2 2 1 2 0 2 1 3 0 3 1 0-1 3 0 2 1 2 1 2 1 1 1 0 1 1 0 0 1 1 0 0 1 1 0-1 1 3 1-1 4-1 3-1 2-2 1-1 2 1 1 4-2 3 0 4-2 1-1-1-1 2-1 2 0 3 0 1-1 1 0 3-3 2 0 4 0 5 0 0-1 1 0 1-1 2-1 2-3 2-3 1 1 2 0 1 1-2 4 1 2 1 1-4 2-3 1-3 1-2 2-1 1 0 2 0 2 1 0 0-2 1 1-1 1-2 1-1 0-2 0-1 0-2 1-3 1 5-1 0 1-4 1-2 0 0-1-1 1 1 0-1 3-3 2 0-1-1-1 0 2 0 1 0 1-1 2-2 2-1 0 2-2-1-1 0-3-1 1 0 2-1 0 1 1-1 3 1 0 0 2 0 3-3 3-3 1-2 2-2 0-2 1 0 1-4 3-2 1-2 2-1 3 0 2 0 3 1 3 0 1 0 4 0 2-1 2-1 2-1 0-1 0 0-2-1 0-1-3-1-3 0-1 1-3 0-2-2-3-1 0-3 1-1-1-2-1-3 0-3 0-2 0-1 1 0 1 0 1 0 1-1 0-1 0-1 0-2 0-1-2-3 1-2-1-2 0-2 1-4 3-3 1-2 2-1 1 0 3-1 1 1 2-2 0-1-1-2-1-1-2 0-2-1-2-1-2 0-3-2-1-2 0-3 3-2-1-1-1 0-2-1-2-1-2-1-1-1-1-5 0 0 2-2 0-6 0-6-3-3-1 0-1-3 0-4 0 0-1-1-2-1-1 0-1-1 0-1-1-2 0-1-1 0-2-1-3 0-5 0-1 0-1-1-3 1-2-1-2 2-3 1-3 1-3 3-3 2-3 2-3 2-5 0-3 1-1 0-1 3 1 0 4 1-1 1-3 1-3 7 0 8 0 3 0 8 0 8 0 7 0 8 0 9 0 9 0 5 0 1-1zM92 105l-4 1 0-1 1-1 3-2 2 0 1 0 0 1zM69 96l-2 0-1 0 0-1 3-1 1 1zM71 85l2 0 0 1-3 0 1-1zM924 86l-1 0-2-1-2 0-2-1 2 0 2 0 1 1 2 1zM132 62l0 1 1 0 4 0-1 1 3 0 2 0 4 1 4 0 1 0 4 0 2 1 2 0-11 11-17 18 3 0 1 1 1 1 0 2 4-2 3-1 0 2 1 1 1 2 0 2-1 3 3 3-1 2-3 1 0-1-2-1 2-3-2-3 1-3-2 0-4 0-2-1-2-3-2-1-3-1-4 1-3-2-2-1-3 0-2 3-1 0-4 0-3 2-3 0 1-2 4-3 4-1-5 1-3 2-6 3 0 1-4 2-4 2-3 1-2 1-6 2-2 1-4 2-2-1-3 1-3 1-3 1-6 1 5-2 3-1 4-1 4-1 2-1 5-2 2-1 2-1 3-2 3-2-4 1 0-1-2 1 0-1-2 1 1-2-4 2-2 0 2-2 2-1-1-1-4 0 0-1-1-1 2-2-1-1 3-2 4-2 3-1 2 0 1 0 3-1 2 0 3-1 1-1-1-1 3-1-1 0-4 0-1 1-1-1-4 1-3-1 1-1-1-2 5-1 7-2 1 0-2 2 5 0 1-2-2-1 0-2 0-1-2-1 3-1 4 0 4-2 3-1 4-2 2 0 6-1 2 0 5-2z","VNM":"M781 225l-3 3-2 4 0 2 3 4 3 4 3 2 2 3 2 6 0 7-2 2-3 2-2 3-4 3-1-2 1-2-3-2 3-2 3 0-2-2 5-3 0-4-1-2 0-4-1-2-2-2-3-4-3-4-3-2 0-1 2-1-2-3-3 0-2-3-2-3 1-1 3 0 2 0 2-2 2 2 3 0 0 2 1 2z"},"pt":{"FIN":[534.6,82.4],"SWE":[511.2,88],"DEU":[497.4,124.3],"CHE":[491.7,138.6],"ITA":[503,150],"FRA":[476.4,139.4],"CHN":[756,172.9],"KOR":[824.2,174.1],"VNM":[779,242.7],"USA":[198.7,162.2],"JPN":[849.5,175.5]}};
+const WM_ISO={FI:'FIN',SE:'SWE',DE:'DEU',CH:'CHE',IT:'ITA',FR:'FRA',CN:'CHN',KR:'KOR',VN:'VNM',US:'USA',JP:'JPN'};
+const WM_NAME={FIN:'핀란드',SWE:'스웨덴',DEU:'독일',CHE:'스위스',ITA:'이탈리아',FRA:'프랑스',CHN:'중국',KOR:'한국',VNM:'베트남',USA:'미국',JPN:'일본'};
+const WM_COL={abb:'#FF000F',schneider:'#3DCD58',hitachi:'#F2B33D',sifang:'#1565C0',sangdo:'#4287F6'};
+const WM_HQ={sangdo:[['KR','AFDD']]};
+const WM_ONLY={abb:['FI','DE','CN']};
+const WM_LOGO={abb:['brand_abb',2.48,16],schneider:['brand_se',3.13,16],hitachi:['brand_hitachi',6.46,14],sangdo:['brand_sangdo',6.66,13],sifang:[null,0,13]};
+const WM_CARDS=[{b:['hitachi'],c:['SWE'],x:376,y:44},{b:['schneider'],c:['FRA'],x:380,y:120},{b:['abb'],c:['FIN','DEU'],x:575,y:92},
+ {b:['abb','schneider','sifang'],c:['CHN'],x:690,y:58},{b:['schneider','hitachi','sangdo'],c:['KOR'],x:872,y:92},{b:['hitachi'],c:['VNM'],x:820,y:258}];
+function wmData(){const m={};
+ BKEYS.forEach(k=>{const list=(BRANDS[k].made||[]).concat(WM_HQ[k]||[]).map(x=>WM_HQ[k]&&WM_HQ[k].includes(x)?[x[1],x[0]]:x);
+  list.forEach(([prod,codes])=>{(codes.match(/[A-Z]{2}/g)||[]).filter(cc=>!WM_ONLY[k]||WM_ONLY[k].includes(cc)).forEach(cc=>{const iso=WM_ISO[cc];if(!iso||!WMAP.c[iso])return;((m[iso]=m[iso]||{})[k]=m[iso][k]||[]).push(prod)})})});
+ return m}
+function brandMap(){
+ const M=wmData(),RG=6,PD=8,LH=k=>WM_LOGO[k][2];
+ const pats=[],fills={};
+ Object.entries(M).forEach(([iso,bs])=>{const ks=Object.keys(bs);if(ks.length===1){fills[iso]=WM_COL[ks[0]];return}
+  const id='wm-'+iso.toLowerCase();pats.push(`<pattern id="${id}" width="${ks.length*1.9}" height="${ks.length*1.9}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">${ks.map((k,i)=>`<rect x="${(i*1.9).toFixed(1)}" width="1.9" height="${ks.length*1.9}" fill="${WM_COL[k]}"/>`).join('')}</pattern>`);fills[iso]=`url(#${id})`});
+ const tip=iso=>`${WM_NAME[iso]} — `+Object.entries(M[iso]||{}).map(([k,ps])=>`${BRANDS[k].name}: ${ps.join(', ')}`).join(' / ');
+ const ctry=Object.keys(fills).map(iso=>`<path d="${WMAP.c[iso]}" fill="${fills[iso]}" class="wm-c"><title>${esc(tip(iso))}</title></path>`).join('');
+ const logo=(k,x,y)=>{if(k==='sifang')return `<text x="${x}" y="${y+11.5}" font-size="13" font-weight="800" fill="#1565C0" letter-spacing=".04em" font-family="IBM Plex Sans KR,Arial,sans-serif">SIFANG<tspan font-size="9.5" font-weight="600" dx="4">北京四方</tspan></text>`;
+  const [a,r,hh]=WM_LOGO[k];return `<image href="${A(a)}" x="${x}" y="${y}" width="${(hh*r).toFixed(1)}" height="${hh}"/>`};
+ const lw=k=>k==='sifang'?98:LH(k)*WM_LOGO[k][1];
+ let lines='',cards='';
+ WM_CARDS.forEach(cd=>{const w=Math.max(...cd.b.map(lw))+PD*2,h=cd.b.reduce((a,k)=>a+LH(k),0)+(cd.b.length-1)*RG+PD*2;
+  cd.c.forEach(iso=>{const [tx,ty]=WMAP.pt[iso];let sx,sy;
+   if(tx>cd.x+w){sx=cd.x+w;sy=cd.y+h/2}else if(tx<cd.x){sx=cd.x;sy=cd.y+h/2}else{sx=Math.max(cd.x+8,Math.min(cd.x+w-8,tx));sy=ty>cd.y+h?cd.y+h:cd.y}
+   lines+=`<path d="M${sx.toFixed(1)} ${sy.toFixed(1)}L${tx} ${ty}" class="wm-l"/><circle cx="${tx}" cy="${ty}" r="3.2" class="wm-d"/>`});
+  const t=cd.c.map(tip).join('\n');
+  cards+=`<g class="wm-card"><title>${esc(t)}</title><rect x="${cd.x}" y="${cd.y}" width="${w.toFixed(1)}" height="${h}" rx="6" fill="#FFFFFF" stroke="rgba(19,37,58,.18)" filter="url(#wm-sh)"/>${(()=>{let yy=cd.y+PD;return cd.b.map(k=>{const o=logo(k,cd.x+PD,yy);yy+=LH(k)+RG;return o}).join('')})()}</g>`});
+ const used=[...new Set(Object.values(M).flatMap(o=>Object.keys(o)))];
+ const list=Object.keys(M).map(iso=>`<li><b>${WM_NAME[iso]}</b><span>${Object.entries(M[iso]).map(([k,ps])=>`${esc(BRANDS[k].name)} · ${ps.join(', ')}`).join('<br>')}</span></li>`).join('');
+ return `<div class="wmap"><svg viewBox="0 ${WMAP.y0} ${WMAP.w} ${WMAP.h}" role="img" aria-label="취급 브랜드 생산 국가 지도"><defs><filter id="wm-sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#13253A" flood-opacity=".18"/></filter>${pats.join('')}</defs>
+  <path d="${WMAP.land}" class="wm-land"/>${ctry}${lines}${cards}</svg>
+  <div class="wm-leg">${used.map(k=>`<span><i style="background:${WM_COL[k]}"></i>${esc(BRANDS[k].name)}</span>`).join('')}<span><i class="st"></i>여러 브랜드</span></div>
+  <ul class="wm-list">${list}</ul>
+  <p class="note" style="margin:8px 0 0">생산국은 제품과 모델에 따라 다를 수 있습니다. 지도에 마우스를 올리면 국가별 제품이 보입니다.</p></div>`;
 }
 const VALUES=[['고객 성공','고객 관점의 제품 선정과 기술 검토'],['새로운 기회와 시장','데이터센터 · 신재생 · 해외'],['신뢰 기반 시너지','제조사 · EPC · 배전반 제작사와 협업'],['지속 성장','충성 고객 기반의 안정적 성장'],['사회 공헌','안전한 전력 시스템으로 산업 지원'],['신기술 리더십','디지털 변전소 · IEC 61850 · AI 유지보수'],['기술 · 영업 역량','보호계전 전문성 · 멀티 브랜드 역량'],['사람 중심 문화','교육 · 복지 · 성과 공유']];
 const AREAS=[['relay','보호계전기','보호 · 제어 · 아크 보호'],['breaker','차단기 · 개폐기','저압 · 고압 · 초고압'],['transfer','절체 · 동기','HSBT · 동기투입장치'],['meter','계측 · 모니터링','디지털 미터 · EOCR'],['tower','초고압 · 변압기','변압기 · HV 제품'],
@@ -1970,7 +2188,7 @@ function pgCompanyVision(){
  <div class="block">${blockHead('미션 · 핵심가치')}<p class="lead">Growing with our customers — Long and Steady. 고객과 함께 오래, 꾸준히 성장합니다.</p>
   <div class="grid-4">${VALUES.map(([t,d],i)=>`<div class="card">${pg(['target','compass','link','growth','leaf','bulb','gear','people'][i])}<h4>${t}</h4><p>${d}</p></div>`).join('')}</div></div>`;
 }
-const HIST=[['2004–05',['에스캡 설립']],['2007–08',['발전 · 공공 분야 ABB 제품 공급']],['2009–10',['원자력 · 에너지 분야 제품 공급']],['2011–13',['Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','원자력 고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['SIFANG 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
+const HIST=[['2004–05',['에스캡 설립']],['2007–08',['발전 · 공공 분야 ABB 제품 공급']],['2009–10',['에너지 분야 제품 공급']],['2011–13',['Is-Limiter (고장전류 한류기) 공급']],['2015–16',['CVS 전략적 제휴','고 · 저압반용 ABB 제품 공급']],['2017–19',['국내 최초 지능형 부하차단(PML) 적용']],['2020–21',['(주)에스캡엔지니어링 법인 설립']],['2022–23',['SSC600 · REX640 디지털 변전소 적용']],['2024–25',['Schneider Electric Korea 대리점 (DE/PP)','Hitachi Energy Korea 대리점']],['2026',['SIFANG 독점 대리점 · SVG/STATCOM','Schneider EOCR 대리점 (에티버스)','연구개발전담부서 인정 (04.14)']]];
 function pgCompanyHistory(){
  return `<div class="block">${blockHead('연혁','<span class="note">2004 – 2026</span>')}
   <div class="tl">${HIST.map(([y,it],i)=>`<div class="tl-i${i===HIST.length-1?' hl':''}"><div class="yr">${y}</div><ul>${it.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
@@ -1983,7 +2201,7 @@ function pgCompanyOrg(){
  <div class="block">${blockHead('엔지니어링 · 시스템 솔루션')}
   <div class="pillars"><div class="pil">${pg('gear')}<h4>엔지니어링 사업</h4><ul><li>정정 계산 · 보호협조</li><li>HSBT · 동기 · 로직 설계, 시운전 지원</li><li>EOCR · 디지털 미터 적용 설계</li></ul></div>
    <div class="pil k">${pg('screen','on-dark')}<h4>시스템 솔루션 사업 <span class="tg">2027 – 28 중점</span></h4><ul><li>Power SCADA · PMS · DCIM</li><li>FLISR 자가복구 배전 · 디지털 변전소</li><li>SVG/STATCOM · AHF 전력품질 패키지</li></ul></div>
-   <div class="pil">${pg('building')}<h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>원자력 · 발전 · 해외 EPC</li></ul></div></div></div>`;
+   <div class="pil">${pg('building')}<h4>대형 설계 · 컨설팅 시장</h4><ul><li>데이터센터</li><li>신재생 · 해상풍력</li><li>발전 · 해외 EPC</li></ul></div></div></div>`;
 }
 function pgCompanyCerts(){
  const dist=[['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','SIFANG 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도일렉트릭 공급사','AFDD (아크 고장 차단기)']];
@@ -2066,7 +2284,7 @@ function pgSolHsbt(){
   <div class="diagram">${hsbtSVG()}<p class="note" style="margin-top:8px">개념도입니다. 실제 절체 시간은 절체 방식과 설정에 따라 달라집니다.</p></div></div>
  <div class="block"><div class="grid-2">
   <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sue4000')}" alt="SUE 4000" style="width:100%"></div><div><h4>HSBT (SUE 4000)</h4><p>다양한 모선 구성에 대응하는 고속절체장치 · REX640 HSABTC 기반 절체 로직 설계 · 인터록 시험 계획과 현장 복구 지원</p></div></div>
-  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sync6')}" alt="SYNCHROTACT 6" style="width:100%"></div><div><h4>SYNCHROTACT 6</h4><p>발전기 · 계통 자동 동기투입 / 동기 검출 · 원전 노후 동기계전기 대체 동등성 검토 · 발전 및 산업용</p></div></div>
+  <div class="card" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:center"><div style="background:var(--well);padding:10px"><img src="${A('abb_sync6')}" alt="SYNCHROTACT 6" style="width:100%"></div><div><h4>SYNCHROTACT 6</h4><p>발전기 · 계통 자동 동기투입 / 동기 검출 · 노후 동기계전기 대체 동등성 검토 · 발전 및 산업용</p></div></div>
  </div></div>`;
 }
 let pqMode='before';
@@ -2095,6 +2313,61 @@ function pgSolMcc(){
    <li><div><b>공급 채널</b><span>Schneider EOCR 대리점 — 신규 · MRO · Retrofit</span></div></li></ol></div></div>
  <div class="block">${blockHead('관련 제품')}<div class="pgrid">${['se-eocr','se-edge'].map(id=>pCard(PRODUCTS.find(p=>p.id===id))).join('')}</div></div>`;
 }
+function solSteps(key,steps,cap){return `<div class="dg-ctrl" role="group" aria-label="단계">${steps.map((t,i)=>`<button data-act="sst" data-s="${key}" data-k="${i}" class="${i?'':'on'}">${i+1}. ${t}</button>`).join('')}</div><p class="dg-cap" id="${key}Cap">${cap[0]}</p>`}
+const relCards=ids=>`<div class="pgrid">${ids.map(id=>pCard(PRODUCTS.find(p=>p.id===id))).join('')}</div>`;
+function pgSolArc(){
+ return `<div class="block">${blockHead('아크 · 전기화재 예방')}<p class="lead">저압 AFDD와 고압 아크 보호로 배전 계통의 전기 화재를 예방합니다</p>
+  <div class="sd-col"><div class="diagram isod"><div id="arcSol">${ISO.sceneARC()}</div>${solSteps('arc',ISO.ARC.steps,ISO.ARC.cap)}</div>
+  <ol class="numlist"><li><div><b>저압 AFDD</b><span>전류 파형으로 직렬 · 병렬 아크를 판별해 분기 회로 차단 (IEC 62606)</span></div></li>
+   <li><div><b>고압 아크 보호</b><span>아크 빛(광센서)과 과전류 조건으로 상위 차단기 고속 트립</span></div></li>
+   <li><div><b>조기 감지 연계</b><span>접속부 과열 · 절연 열분해를 미리 감지 — <a class="link" href="#solutions-thermal" style="font-size:13.5px">온도 · 습도 감시</a></span></div></li>
+   <li><div><b>브랜드 선택</b><span>ABB · Schneider · 상도일렉트릭 AFDD 중 현장 조건에 맞춰 선정</span></div></li></ol></div></div>
+ <div class="block">${blockHead('저압 AFDD와 고압 아크 보호')}
+  <div class="tbl-wrap"><table><thead><tr><th>구분</th><th>저압 AFDD (아크 고장 차단기)</th><th>고압 아크 보호계전</th></tr></thead><tbody>
+   <tr><th style="font-weight:600">대상</th><td>분전반 분기 회로 (콘센트 · 조명 · 소형 부하)</td><td>배전반 내부 (모선실 · 차단기실 · 케이블실)</td></tr>
+   <tr><th style="font-weight:600">검출 방식</th><td>전류 파형 분석으로 직렬 · 병렬 아크 판별</td><td>아크 빛(광센서)과 과전류를 함께 확인</td></tr>
+   <tr><th style="font-weight:600">동작</th><td>해당 분기 회로만 차단</td><td>상위 차단기 고속 트립으로 아크 에너지 제한</td></tr>
+   <tr><th style="font-weight:600">관련 제품</th><td>ABB S-ARC1 · DS-ARC1 / Schneider Acti9 Active / 상도일렉트릭 지능형 아크차단기</td><td>ABB REX615 / Schneider Easergy P3</td></tr>
+  </tbody></table></div><p class="note">현장 배전 구성과 부하 특성에 따라 적용 범위와 제품을 함께 검토합니다.</p></div>
+ <div class="block">${blockHead('관련 제품')}${relCards(['abb-afdd','se-afdd','sd-afdd','abb-relion','se-easergy'])}</div>`;
+}
+function pgSolThermal(){
+ const D=[['정상 · 과부하','접속부 · 반 내부 온도 상승','TH110 · CL110','#2BD4A0'],['절연 열분해','케이블 피복에서 가스 · 미세입자 발생','HeatTag','#F0C43C'],['연기','연기 발생','연기 감지기','#F08A28'],['발화','화염 · 화재','화재 감지기','#E5484D']];
+ return `<div class="block">${blockHead('배전반 온도 · 습도 감시')}<p class="lead">무선 센서와 EcoStruxure Power Monitoring Expert(PME)로 접속부 과열과 절연 열화를 조기에 감지합니다</p>
+  <div class="sd-col"><div class="diagram isod"><div id="thSol">${ISO.sceneTHERM()}</div>${solSteps('th',ISO.TH.steps,ISO.TH.cap)}</div>
+  <ol class="numlist"><li><div><b>TH110 · 접속부 온도</b><span>부스바 · 케이블 · 인출형 차단기 접속부, 통전 전류로 자가 전원</span></div></li>
+   <li><div><b>CL110 · 반 내부 온도 · 습도</b><span>결로 · 환경 이상 감시, 배터리 교체 주기 약 15년</span></div></li>
+   <li><div><b>HeatTag · 케이블 과열</b><span>가스 · 미세입자 분석, 연기 발생 전 3단계 경보</span></div></li>
+   <li><div><b>PAS600 → PME</b><span>무선 수집 · Modbus 게이트웨이, 온도 화면 · 경보 · 트렌드 · 리포트</span></div></li></ol></div></div>
+ <div class="block">${blockHead('감지 시점')}
+  <div class="det">${D.map(([t,d,sn,c])=>`<div style="--c:${c}"><b>${t}</b><span>${d}</span><em>${sn}</em></div>`).join('')}</div>
+  <div class="det-note"><span>← 조기 감지 구간 (TH110 · CL110 · HeatTag)</span><span>기존 연기 · 화재 감지기 →</span></div>
+  <p class="note">케이블 상시 허용 온도는 PVC 70 ℃, XLPE 90 ℃ 입니다 (IEC 60364-5-52). 온도 센서는 이 범위를 넘기 전에 추세로 경보하고, HeatTag는 열분해 단계에서 경보합니다.</p></div>
+ <div class="block">${blockHead('센서 사양')}
+  <div class="tbl-wrap"><table><thead><tr><th>항목</th><th>TH110</th><th>CL110</th><th>HeatTag</th></tr></thead><tbody>
+   <tr><th style="font-weight:600">측정</th><td>접속부 온도</td><td>반 내부 온도 · 습도</td><td>케이블 피복 가스 · 미세입자, 온도 · 습도</td></tr>
+   <tr><th style="font-weight:600">설치 위치</th><td>부스바 · 케이블 · 인출형 차단기 접속부</td><td>반 내부 표면</td><td>저압 배전반 · 분전반 상단</td></tr>
+   <tr><th style="font-weight:600">측정 범위</th><td>−25 ~ 125 ℃</td><td>−25 ~ 85 ℃ · 10 ~ 98 %RH</td><td>15 ~ 70 ℃ · 15 ~ 90 %RH</td></tr>
+   <tr><th style="font-weight:600">정확도</th><td>±1 ℃</td><td>±1 ℃ · ±2 %RH</td><td>±1.1 ℃</td></tr>
+   <tr><th style="font-weight:600">전원</th><td>무전원 (5 A 이상 통전 시 동작)</td><td>배터리 (교체 주기 약 15년)</td><td>—</td></tr>
+   <tr><th style="font-weight:600">전송 주기</th><td>60초</td><td>120초</td><td>60초</td></tr>
+   <tr><th style="font-weight:600">경보</th><td colspan="2">PME에서 온도 · 상간 편차 · 습도 기준값 설정</td><td>센서 자체 3단계 (LOW · MEDIUM · HIGH)</td></tr>
+  </tbody></table></div>
+  <p class="note">센서 전송 주기가 60 ~ 120초라 PME 화면 값은 1 ~ 2분 간격으로 갱신됩니다. 순간값 계측보다 추세 감시와 경보에 맞는 구성입니다. 사양은 Schneider Electric 자료 기준이며, 적용 시 제조사 최신 자료로 확인합니다.</p></div>
+ <div class="block">${blockHead('관련 제품')}${relCards(['se-th110','se-heattag','se-pas600','se-pme'])}</div>`;
+}
+function pgSolRetrofit(){
+ const ST=[['clipboard','현황 조사 — 모델 · 결선 · 설정값 · 도면 확인'],['scales','동등성 검토 — 기능 · 정격 · 치수 · 통신 비교'],['logic','설계 — 결선도 · 로직 · 정정값 이관'],['wrench','교체 · 시험 — 인터록 · 기능 시험, 시운전']];
+ const RF=[['고속절체','SUE 3000 (단종 예정)','SUE 4000','절체 로직 · 인터록 · 통신'],['동기투입','타사 동기계전기','SYNCHROTACT 6','동기 조건 · 출력 접점 · 치수'],['보호계전기','전자기계식 · 구형 디지털 계전기','Relion REX615 · Easergy P3','보호 요소 · CT/PT 입력 · 정정값 이관'],['계측','단종 디지털 미터','PowerLogic PM8000','계측 항목 · 통신 맵 · 패널 컷아웃'],['모터 보호','구형 EOCR · 열동형 계전기','EOCR iSEM2','정격 · CT · 상위 통신 연동']];
+ return `<div class="block">${blockHead('노후 · 단종 설비 대체')}<p class="lead">단종 · 노후 제품을 동등성 검토를 거쳐 현행 제품으로 교체합니다</p>
+  <div class="steps light" style="margin-top:0;grid-template-columns:repeat(4,minmax(0,1fr))">${ST.map(([p,t])=>`<div class="step">${pg(p,'sm')}<b>${t}</b></div>`).join('')}</div>
+  <div class="diagram isod"><div id="rtSol">${ISO.sceneRETRO()}</div>${solSteps('rt',ISO.RT.steps,ISO.RT.cap)}</div></div>
+ <div class="block">${blockHead('대체 예')}
+  <div class="tbl-wrap"><table><thead><tr><th>분야</th><th>기존 (단종 · 노후)</th><th></th><th>대체 제품</th><th>검토 포인트</th></tr></thead><tbody>
+   ${RF.map(([a,b,c,d])=>`<tr><th style="font-weight:600">${a}</th><td>${b}</td><td class="rf-arrow">→</td><td>${c}</td><td>${d}</td></tr>`).join('')}
+  </tbody></table></div><p class="note">기존 제품과 대체 제품의 기능 · 정격 · 치수 · 통신 비교표(동등성 검토 자료)를 함께 제출합니다.</p></div>
+ <div class="block">${blockHead('관련 제품')}${relCards(['abb-sue','abb-sync6','abb-relion','se-easergy','se-powerlogic','se-eocr'])}</div>`;
+}
 function pgEngineering(){
  const V=['ABB','Schneider','Siemens','SEL','GE'];
  return `<div class="block">${blockHead('엔지니어링 서비스')}<p class="lead">보호계전 · 전력계통 담당자가 기술 검토를 수행합니다.</p>
@@ -2116,7 +2389,7 @@ let rq='';
 function resRow(r){
  const act=r.access==='file'?`<button class="btn line sm" data-act="dl" data-id="${r.id}">${ic('down','sm')} 다운로드</button>`
   :r.access==='view'?`<button class="btn line sm" data-act="img" data-img="${r.img}" data-t="${esc(r.title)}">보기</button>`
-  :r.access==='maker'?`<a class="btn line sm" href="${BRANDS[r.brand].site}" target="_blank" rel="noopener">제조사 ${ic('ext','sm')}</a><button class="btn line sm" data-act="req" data-id="${r.id}">요청</button>`
+  :r.access==='maker'?`<a class="btn line sm" href="${r.url||BRANDS[r.brand].site}" target="_blank" rel="noopener">제조사 ${ic('ext','sm')}</a><button class="btn line sm" data-act="req" data-id="${r.id}">요청</button>`
   :r.access==='request'?`<button class="btn line sm" data-act="req" data-id="${r.id}">${ic('lock','sm')} 자료 요청</button>`
   :`<span class="badge">준비 중</span>`;
  return `<div class="ri"><span class="rc"><span class="chip${r.cat==='tech'?' red':''}">${RCAT[r.cat]}</span></span>
@@ -2241,7 +2514,7 @@ const PAGES={
  'company-overview':pgCompanyOverview,'company-name':pgCompanyName,'company-vision':pgCompanyVision,'company-history':pgCompanyHistory,'company-organization':pgCompanyOrg,
  'company-certs':pgCompanyCerts,'company-location':pgLocation,
  'products':pgProducts,'products-abb':()=>pgBrand('abb'),'products-schneider':()=>pgBrand('schneider'),'products-hitachi':()=>pgBrand('hitachi'),'products-sifang':()=>pgBrand('sifang'),'products-sangdo':()=>pgBrand('sangdo'),
- 'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'engineering':pgEngineering,
+ 'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'solutions-arc':pgSolArc,'solutions-thermal':pgSolThermal,'solutions-retrofit':pgSolRetrofit,'engineering':pgEngineering,
  'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),
  'contact':pgContact,'contact-people':pgPeople,
  'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna'),'board-write':pgWrite
@@ -2287,6 +2560,9 @@ function afterRender(id){
  if(id==='solutions-hsbt'){ISO.setHSBT($('#hsSol svg'),0)}
  if(id==='solutions-pq'){ISO.setPQ($('#pqSol svg'),0)}
  if(id==='solutions-mcc'){ISO.setMCC($('#mccSol svg'))}
+ if(id==='solutions-arc'){ISO.setARC($('#arcSol svg'),0)}
+ if(id==='solutions-thermal'){ISO.setTHERM($('#thSol svg'),0)}
+ if(id==='solutions-retrofit'){ISO.setRETRO($('#rtSol svg'),0)}
  if(id==='products'||id.startsWith('products-'))updCount();
  if(id==='contact'&&$('#cform'))initForm();
  if(id==='board-write')initWrite();
@@ -2372,6 +2648,10 @@ const PPAGE={
  'abb-sync6':'https://new.abb.com/power-electronics/excitation-and-synchronization/synchronizing-equipment/synchrotact-6',
  'abb-ssc600':'https://new.abb.com/medium-voltage/digital-substations/numerical-relays/multiapplication/ssc600',
  'abb-islimiter':'https://www.abb.com/global/en/areas/electrification/medium-voltage/grid-components/core-components/fault-current-limiters-is',
+ 'se-th110':'https://www.se.com/kr/ko/product-range/64883-th110',
+ 'se-heattag':'https://www.se.com/kr/ko/product-range/38501657',
+ 'se-pas600':'https://www.se.com/kr/ko/product/PAS600/',
+ 'se-pme':'https://www.se.com/kr/ko/product-range/65404',
  'abb-afdd':'https://new.abb.com/low-voltage/products/system-pro-m/protection-against-arc-faults/arc-fault-detection-device-s-arc1',
  'abb-ana':'https://new.abb.com/products/measurement-products/analytical/continuous-gas-analyzers/advance-optima-and-easyline-series/el3000',
  'se-afdd':'https://www.se.com/nz/en/product-subcategory/86772-acti-9-arc-fault-detection-devices-afdd/',
@@ -2570,6 +2850,7 @@ document.addEventListener('click',e=>{
   case 'pfc':pf.cat=k;refreshProducts();break;
   case 'fl':{flStop();const s=$('#flSol svg');ISO.setFLISR(s,+k);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#flCap').textContent=ISO.FL.cap[+k];break}
   case 'hs':{const s=$('#hsSol svg');ISO.setHSBT(s,+k);$$('.dg-ctrl [data-act="hs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#hsCap').textContent=ISO.HS.cap[+k];break}
+  case 'sst':{const key=a.dataset.s,M={arc:[ISO.setARC,ISO.ARC],th:[ISO.setTHERM,ISO.TH],rt:[ISO.setRETRO,ISO.RT]}[key];if(!M)break;M[0]($('#'+key+'Sol svg'),+k);$$(`.dg-ctrl [data-act="sst"][data-s="${key}"]`).forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#'+key+'Cap').textContent=M[1].cap[+k];break}
   case 'pqs':{const s=$('#pqSol svg');ISO.setPQ(s,+k);$$('.dg-ctrl [data-act="pqs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#pqCap').textContent=PQCAP[+k];break}
   case 'flplay':{if(flTimer){flStop();break}let i=0;const step=()=>{const s=$('#flSol svg');if(!s){flStop();return}ISO.setFLISR(s,i);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===i));$('#flCap').textContent=ISO.FL.cap[i];i=(i+1)%4};step();flTimer=setInterval(step,2000);timers.push(flTimer);a.innerHTML=`${ic('pause','sm')} 정지`;break}
   case 'pq':pqMode=k;$('#pqWave').innerHTML=pqSVG(k);$$('.dg-ctrl [data-act="pq"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));break;
