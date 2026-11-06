@@ -1507,9 +1507,9 @@ const BRANDS={
    made:[['Relays · breakers','SE'],['Transformers','KR · VN, etc.'],['HV products','SE, etc.']],site:'https://www.hitachienergy.com'},
  sifang:{name:'SIFANG',ko:'北京四方',color:'#1565C0',logo:null,role:'SIFANG exclusive distributor in Korea',scope:'SVG/STATCOM · power quality',
    intro:'Beijing SIFANG Automation — dynamic reactive power compensation (SVG/STATCOM), power quality packages combining AHF · capacitors · reactors, protection · substation automation',
-   made:[['SVG / STATCOM','CN'],['Protection','CN']],site:null},
+   made:[['SVG / STATCOM','CN'],['Protection','CN']],site:'https://www.sf-auto.com'},
  sangdo:{name:'Sangdo Electric',en:'Sangdo Electric',color:'#2F6FE4',logo:'brand_sangdo',role:'Sangdo Electric supplier',scope:'LV products',
-   intro:'LV products made in Korea and Vietnam, supplied to domestic switchboard and plant projects',made:[['LV products','KR · VN']],site:null}
+   intro:'LV products made in Korea and Vietnam, supplied to domestic switchboard and plant projects',made:[['LV products','KR · VN']],site:'http://www.sangdo.com/'}
 };
 const BKEYS=Object.keys(BRANDS);
 const brandLogo=(k,cls='')=>{const b=BRANDS[k];return b.logo?`<img class="${cls}" src="${A(b.logo)}" alt="${esc(b.name)}" loading="lazy">`:`<span class="txtlogo">SIFANG <small>北京四方</small></span>`};
@@ -1749,7 +1749,7 @@ function shell(){
    <nav class="ftr-map" aria-label="Sitemap">${MENU.map(m=>`<div><h4>${m.label}</h4>${m.cols.flatMap(c=>c.items).slice(0,6).map(([id,l])=>`<a href="#${id}">${l}</a>`).join('')}</div>`).join('')}</nav></div>
   <div class="ftr-bot"><nav><button class="b" data-act="privacy">Privacy policy</button><button data-act="noemail">No unauthorized e-mail collection</button><button data-act="sitemap">Sitemap</button></nav>
    <label class="sr" for="fam">Family sites</label>
-   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option><option value="https://www.sf-auto.com">SIFANG</option><option value="http://www.sang-do.com/">Sangdo Electric</option></select>
+   <select class="fam" id="fam"><option value="">Family Site</option><option value="https://new.abb.com/kr">ABB Korea</option><option value="https://www.se.com/kr/ko/">Schneider Electric Korea</option><option value="https://www.hitachienergy.com">Hitachi Energy</option><option value="https://www.sf-auto.com">SIFANG</option><option value="http://www.sangdo.com/">Sangdo Electric</option></select>
    <span class="mono">© SCAB Engineering Co., Ltd.</span></div></div>`;
  drawer();themeLabel();
 }
