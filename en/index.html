@@ -1716,7 +1716,7 @@ const PRODUCTS=[
  P('abb-sync6','abb','transfer','Synchronizers','SYNCHROTACT 6','abb_sync6',['Automatic synchronizing · synchro-check','Generator · grid connection','Equivalence review for replacing aging synchronizing relays']),
  P('abb-ssc600','abb','relay','Smart substation protection · control','SSC600','abb_ssc600',['Centralized protection · control','AI-based predictive maintenance','Digital substation (IEC 61850)']),
  P('abb-mvcb','abb','breaker','MV circuit breakers · switchgear','VCB · VCS · LBS','abb_mvcb',['IEC / ANSI standards','CT · PT · sensors']),
- P('abb-islimiter','abb','breaker','Fault current limiter','Is-Limiter','abb_islimiter',['Interrupts fault current within a few ms','Keeps existing breaker · busbar ratings','Installed in large plants in Korea']),
+ P('abb-islimiter','abb','breaker','Fault current limiter','Is-Limiter','abb_islimiter_v2',['Interrupts fault current within a few ms','Keeps existing breaker · busbar ratings','Installed in large plants in Korea']),
  P('abb-lvcb','abb','lv','LV circuit breakers','ACB · MCCB · MCB','abb_lvcb',['Auxiliary relays','For switchboards · plants']),
  P('abb-afdd','abb','lv','Arc fault detection device','AFDD · S-ARC1 · DS-ARC1','abb_afdd',['LV arc fault detection · interruption','Electrical fire prevention']),
  P('abb-tx','abb','pa','Transmitters','Pressure · temperature · flow','abb_tx',['Process automation (PA) instrumentation']),
@@ -1725,10 +1725,10 @@ const PRODUCTS=[
  P('se-easergy','schneider','relay','Protection relays','Easergy P3 · P5','se_easergy_p3p5',['LV · MV protection, arc detection','IEC 61850 and other protocols','UL-listed models (overseas projects)']),
  P('se-powerlogic','schneider','meter','Digital meters','PowerLogic PM8000 · ION','se_powerlogic_pm8000',['Precision metering','Harmonics · power quality analysis','UL-listed models PM8240 · ION7400']),
  P('se-afdd','schneider','lv','Arc fault detection device','AFDD · Acti9 Active',null,['LV arc fault detection · interruption','Electrical fire prevention']),
- P('se-th110','schneider','meter','Wireless temperature & humidity sensors','TH110 · CL110',null,['Connection temperature (TH110) · panel temperature & humidity (CL110)','Wireless (Zigbee) · TH110 self-powered by load current','Busbar, cable and withdrawable breaker connections']),
- P('se-heattag','schneider','meter','Early cable overheating sensor','PowerLogic HeatTag',null,['Analyses gas and micro-particles from cable insulation','Three-level alarm before smoke or insulation browning','Installed at the top of LV switchboards and panels']),
+ P('se-th110','schneider','meter','Wireless temperature & humidity sensors','TH110 · CL110','se_th110_cl110',['Connection temperature (TH110) · panel temperature & humidity (CL110)','Wireless (Zigbee) · TH110 self-powered by load current','Busbar, cable and withdrawable breaker connections']),
+ P('se-heattag','schneider','meter','Early cable overheating sensor','PowerLogic HeatTag','se_heattag_v1',['Analyses gas and micro-particles from cable insulation','Three-level alarm before smoke or insulation browning','Installed at the top of LV switchboards and panels']),
  P('se-pas600','schneider','meter','Wireless sensor gateway','EcoStruxure Panel Server PAS600',null,['Wireless sensor concentrator · Modbus gateway','Connects to PME and upper systems']),
- P('se-pme','schneider','meter','Power & asset monitoring software','EcoStruxure Power Monitoring Expert',null,['Single-line and thermal views, alarms and trends','Reports and history']),
+ P('se-pme','schneider','meter','Power & asset monitoring software','EcoStruxure Power Monitoring Expert','se_pme_v1',['Single-line and thermal views, alarms and trends','Reports and history']),
  P('se-mtz','schneider','lv','LV air circuit breakers','MasterPact MTZ','se_x139',['Built-in power quality metering','Digital module upgrades']),
  P('se-hvx','schneider','breaker','MV vacuum circuit breakers','EvoPact HVX','se_x141',['Compact design · low maintenance','Digital monitoring with IoT sensors']),
  P('se-eocr','schneider','lv','Electronic motor protection relays','EOCR iSEM1 · iSEM2','eocr',['Overload · phase loss · ground fault protection','Communication models','New · MRO · retrofit supply']),
@@ -1744,7 +1744,7 @@ const PRODUCTS=[
  P('sf-svg','sifang','pq','SVG / STATCOM','Dynamic reactive power compensation',null,['MV · HV (substations)','Renewables · offshore wind connection','Real-time (ms) response']),
  P('sf-pq','sifang','pq','Power quality package','AHF · capacitors · reactors',null,['Combinations by load and system','Diagnosis → selection → supply → after-sales']),
  P('sf-sa','sifang','relay','Protection · substation automation','Protection & SA',null,['Protection and substation automation portfolio']),
- P('sd-afdd','sangdo','lv','Intelligent arc fault detection device','AFDD · hybrid · AI',null,['Hybrid (dual-scan) arc detection','On-device AI chip arc discrimination','Integrated residual current protection'])
+ P('sd-afdd','sangdo','lv','Intelligent arc fault detection device','AFDD · hybrid · AI','sd_afdd_v1',['Hybrid (dual-scan) arc detection','On-device AI chip arc discrimination','Integrated residual current protection'])
 ];
 
 /* ---------- resources ---------- */
