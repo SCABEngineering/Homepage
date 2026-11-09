@@ -9,6 +9,19 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head><body>
 <title>SCAB Engineering Co., Ltd.</title>
+<meta name="description" content="Power equipment from ABB, Schneider Electric, Hitachi Energy, SIFANG and Sangdo Electric, with protection, power quality and substation automation engineering. SCAB Engineering Co., Ltd.">
+<link rel="canonical" href="https://www.scab.co.kr/en/">
+<link rel="alternate" hreflang="ko" href="https://www.scab.co.kr/">
+<link rel="alternate" hreflang="en" href="https://www.scab.co.kr/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SCAB Engineering">
+<meta property="og:title" content="SCAB Engineering Co., Ltd.">
+<meta property="og:description" content="From safe power to system solutions: power equipment supply with protection, power quality and substation automation engineering">
+<meta property="og:url" content="https://www.scab.co.kr/en/">
+<meta property="og:image" content="https://www.scab.co.kr/og-image-en.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1776,10 +1789,7 @@ const RESOURCES=[
  R('r-t-arc','tech','Arc and electrical fire prevention — applying LV AFDDs (IEC 62606) and MV arc protection',null,'Technical note','—','request'),
  R('r-t-thermal','tech','Switchgear temperature and humidity monitoring — TH110 · CL110 · HeatTag · PAS600 · PME',null,'Technical note','—','request'),
  R('r-t-retro','tech','Equivalence review checklist for retrofit of discontinued equipment',null,'Technical note','—','request'),
- R('r-cert-rnd','cert','R&D department certificate',null,'Image','2026-04-14','view',{img:'cert_rnd'}),
- R('r-cert-se','cert','Schneider Electric Korea distributor certificate','schneider','Coming soon','—','soon'),
- R('r-cert-he','cert','Hitachi Energy Korea distributor certificate','hitachi','Coming soon','—','soon'),
- R('r-cert-sf','cert','SIFANG exclusive distributor certificate (Korea)','sifang','Coming soon','—','soon')
+ R('r-cert-rnd','cert','R&D department certificate',null,'Image','2026-04-14','view',{img:'cert_rnd'})
 ];
 
 /* ---------- references ---------- */
@@ -1788,38 +1798,21 @@ const CUST=[];
 
 /* ---------- board ---------- */
 const SAMPLE_POSTS=[
- {id:1,cat:'notice',pin:true,title:'Homepage draft v0.1 released',date:'2026-11-03',sort:20261103,author:'Admin',views:24,sample:true,
-  body:'SCAB Engineering Co., Ltd. homepage draft.\nMenus, text and images will be revised step by step after review.\n\n· About Us / Products / Resources / Contact / Board\n· Domain: www.scab.co.kr'},
- {id:2,cat:'notice',pin:true,title:'Privacy policy · Refusal of unauthorized e-mail collection (draft)',date:'2026-11-03',sort:20261102,author:'Admin',views:9,sample:true,
-  body:'The privacy policy will be finalized and posted before the website opens.\nThe draft is available via the "Privacy policy" link at the bottom of the page.'},
- {id:3,cat:'news',title:'R&D department recognized',date:'2026-04-14',sort:20260414,author:'Admin',views:57,sample:true,
+ {id:1,cat:'notice',pin:true,title:'Our website is now open',date:'2026-12-01',sort:20261201,author:'Admin',
+  body:'SCAB Engineering has opened its website.\nYou can find the products of the brands we supply, solutions by application and technical documents in one place.\n\nFor quotations or technical questions, use the form under Contact or call +82-2-322-8100.'},
+ {id:3,cat:'news',title:'R&D department recognized',date:'2026-04-14',sort:20260414,author:'Admin',
   body:'The R&D department of SCAB Engineering Co., Ltd. has been officially recognized (registered 2026.04.14).\nThe certificate is available under Resources > Certificates.'},
- {id:4,cat:'news',title:'SIFANG (北京四方) exclusive distributor in Korea — SVG/STATCOM',date:'2026',sort:20260300,author:'Admin',views:41,sample:true,
+ {id:4,cat:'news',title:'SIFANG (北京四方) exclusive distributor in Korea — SVG/STATCOM',date:'2026',sort:20260300,author:'Admin',
   body:'As the exclusive distributor of Beijing SIFANG Automation in Korea, we supply SVG/STATCOM and power quality solutions.\nCombined proposals including AHF · capacitors · reactors are available.'},
- {id:5,cat:'news',title:'Schneider Electric EOCR distributor (ETEVERS)',date:'2026',sort:20260200,author:'Admin',views:33,sample:true,
+ {id:5,cat:'news',title:'Schneider Electric EOCR distributor (ETEVERS)',date:'2026',sort:20260200,author:'Admin',
   body:'As a Schneider Electric EOCR distributor, we supply iSEM1 / iSEM2 and EOCR Edge for new, MRO and retrofit projects.'},
- {id:6,cat:'news',title:'Hitachi Energy Korea distributor',date:'2024–25',sort:20250100,author:'Admin',views:62,sample:true,
+ {id:6,cat:'news',title:'Hitachi Energy Korea distributor',date:'2024–25',sort:20250100,author:'Admin',
   body:'As a Hitachi Energy Korea distributor, we supply transformers and high-voltage (HV) products.'},
- {id:7,cat:'news',title:'Schneider Electric Korea distributor (DE/PP)',date:'2024–25',sort:20240100,author:'Admin',views:58,sample:true,
-  body:'As a DE · PP distributor of Schneider Electric Korea, we supply protection relays, digital meters and circuit breakers.'},
- {id:9,cat:'qna',title:'Can protection relays be used at a 4,000 m altitude site?',date:'2026-11-03',sort:20261101,author:'Sample customer',views:15,sample:true,
-  body:'We plan to apply MV switchgear protection relays at a high-altitude plant. What should we check for the altitude conditions?',
-  answer:'We review catalog altitude ratings, conformal coating options and IEC 60255-27 insulation correction by manufacturer.\nABB · Schneider · Siemens · SEL · GE products are compared on the same criteria, and compliance with the customer specification and alternatives are submitted in a report.'},
- {id:10,cat:'qna',title:'How is an EOCR model selected?',date:'2026-11-03',sort:20261100,author:'Sample customer',views:11,sample:true,
-  body:'We would like an EOCR quotation for a new MCC. What information should we provide?',
-  answer:'Send us the motor load list (rated output · voltage · current), and we will select the model · CT · communication method for each motor and quote.\nIf monitoring is needed, we also propose an EOCR Edge configuration.'},
- {id:11,cat:'qna',title:'What coordination time interval (CTI) should be used?',date:'2026-11-04',sort:20261099,author:'Sample customer',views:8,sample:true,
-  body:'How is the coordination time interval between upstream and downstream overcurrent relays determined?',
-  answer:'Typically 0.2–0.4 s (see IEEE Std 242).\nIt is set per system by adding breaker interrupting time, relay operating error and margin; between digital relays it is sometimes reduced to 0.2–0.3 s.\nThe relay setting report includes operating times at each fault location and coordination curves (TCC).'},
- {id:12,cat:'qna',title:'Can GOOSE messaging replace hard-wired interlocks?',date:'2026-11-04',sort:20261098,author:'Sample customer',views:6,sample:true,
-  body:'We plan to replace hard-wired interlocks between relays with IEC 61850 GOOSE during a substation retrofit. What should we check?',
-  answer:'Yes. IEC 61850-5 specifies transfer times of a few ms for trip-class messages (Type 1A), so GOOSE can be used for interlocking and tripping.\nHowever, network redundancy (PRP / HSR, IEC 62439-3), VLAN · priority settings, behavior on communication loss and a GOOSE test plan must be reviewed together.'},
- {id:13,cat:'qna',title:'What CT requirements apply to high-impedance busbar protection (87B)?',date:'2026-11-04',sort:20261097,author:'Sample customer',views:5,sample:true,
-  body:'We are reviewing the 87B high-impedance scheme. How should the CTs be specified?',
-  answer:'All CTs must have the same ratio, and low-leakage-reactance CTs (IEC 61869-2 Class PX) are used.\nThe stabilizing voltage is set as Vs ≥ If × (Rct + 2RL), and the CT knee-point voltage is usually at least twice Vs.\nA VDR (metal-oxide non-linear resistor) that limits overvoltage during internal faults is selected as well.'},
+ {id:7,cat:'news',title:'Schneider Electric Korea distributor (DE/PP)',date:'2024–25',sort:20240100,author:'Admin',
+  body:'As a DE · PP distributor of Schneider Electric Korea, we supply protection relays, digital meters and circuit breakers.'}
 ];
-const BCAT={notice:'Notices',news:'Company news',qna:'Technical Q&A'};
-let userPosts=store.get('posts',[]);
+const BCAT={notice:'Notices',news:'Company news'};
+let userPosts=[];
 const allPosts=()=>[...userPosts,...SAMPLE_POSTS];
 
 /* ---------- menu ---------- */
@@ -1839,13 +1832,13 @@ const MENU=[
  {id:'contact',label:'Contact',en:'GET IN TOUCH',home:'contact',desc:'Quotation · technical · after-sales inquiries and contacts by division',
   cols:[{t:'Contact',items:[['contact','Quotation · technical inquiry'],['contact-people','Contacts by division'],['company-location','Location']]}],
   feat:{pg:'headset',t:'Tel. +82-2-322-8100',d:'FAX +82-2-322-8200 · axax1002@scab.co.kr',href:'contact'}},
- {id:'board',label:'Board',en:'NEWS & BOARD',home:'board-notice',desc:'Notices, company news, technical Q&A',
-  cols:[{t:'Board',items:[['board-notice','Notices'],['board-news','Company news'],['board-qna','Technical Q&A']]}],
-  feat:{pg:'chat',t:'Technical Q&A',d:'Ask about product selection and application',href:'board-qna'}}
+ {id:'board',label:'Board',en:'NEWS',home:'board-notice',desc:'Notices and company news',
+  cols:[{t:'Board',items:[['board-notice','Notices'],['board-news','Company news']]}],
+  feat:{pg:'chat',t:'Technical inquiry',d:'Send product selection and application questions through Contact',href:'contact'}}
 ];
 const TITLE={home:'Home'};
 MENU.forEach(m=>m.cols.forEach(c=>c.items.forEach(([id,l])=>{if(!TITLE[id])TITLE[id]=l})));
-TITLE['company-overview']='Company overview';TITLE['board-write']='Write';TITLE['resources']='Resources';
+TITLE['company-overview']='Company overview';TITLE['resources']='Resources';
 const menuOf=id=>id.startsWith('company')?'company':(id.startsWith('product')||id.startsWith('solution')||id==='engineering')?'products':id.startsWith('resource')?'resources':id.startsWith('contact')?'contact':id.startsWith('board')?'board':null;
 
 /* ---------- svg diagrams ---------- */
@@ -2030,7 +2023,7 @@ const HCAP={ar:['Normal — arc protection relays and AFDDs on watch','LV arc �
 const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,8);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
- const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
+ const latest=allPosts().sort((a,b)=>b.sort-a.sort).slice(0,5);
  return `
  <section class="hero" aria-roledescription="carousel" aria-label="Highlights">
   <img class="hero-cube" src="${A('cube_white')}" alt="">
@@ -2142,7 +2135,7 @@ function pgCompanyName(){
   <div class="scab-quote"><b>SCAB Engineering — Safe, Connected, Advanced, Beyond.</b><span>Protecting power, connecting systems, applying advanced technology — and going further.</span></div></div>`;
 }
 function pgCompanyOverview(){
- return `<div class="block">${blockHead('Greeting',`<span class="draft">Draft text</span>`)}
+ return `<div class="block">${blockHead('Greeting')}
   <div class="prose greet"><p>Since 2004, SCAB Engineering has supplied protection relays, circuit breakers and process automation equipment.</p>
   <p>Today it handles ABB, Schneider Electric, Hitachi Energy, SIFANG and Sangdo Electric products,<br class="br-pc"> and provides engineering such as protection coordination calculations, transfer logic design and commissioning support.</p>
   <p>The basic principle is to select products from the customer’s point of view and to provide technical review.<br class="br-pc"> Growing with our customers — long and steady.</p>
@@ -2234,7 +2227,7 @@ function pgCompanyCerts(){
   <div class="cert-row">
    <button class="cert" data-act="img" data-img="cert_rnd" data-t="R&D department certificate"><div class="ci"><img src="${A('cert_rnd')}" alt="R&D department certificate" loading="lazy"></div><span>R&D department certificate</span></button>
    <div class="dist">${dist.map(([k,t,d])=>`<div class="dc"><div class="bl${k==='khnp'?' k':''}">${k==='khnp'?'KHNP':brandLogo(k)}</div><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
-  </div><p class="note">Original distributor certificate images will be posted under Resources &gt; Certificates.</p></div>`;
+  </div></div>`;
 }
 function refTable(k){
  const g=REFS[k],ov=k==='overseas';
@@ -2253,7 +2246,7 @@ function pgLocation(){
  const q=encodeURIComponent('IS Biz Tower 2');
  return `<div class="block">${blockHead('Location')}
   <div class="sd-grid"><div class="map-ph">${ic('pin','lg')}<b style="font-size:17px">#1410, 14F, IS Biz Tower 2 (Seonyudo Station)</b>
-   <p class="note">The draft does not display a map. A map API will be connected on the live site.</p>
+   <p class="note">Open a map app to see the location and directions.</p>
    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="btn line sm" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">Naver Map ${ic('ext','sm')}</a><a class="btn line sm" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">Kakao Map ${ic('ext','sm')}</a></div></div>
   <div class="tbl-wrap"><table class="info"><tbody>
    <tr><th>Address</th><td>${CO.addr}<br>${CO.addr2}</td></tr>
@@ -2437,6 +2430,7 @@ const PEOPLE={
  abb:{t:'ABB Division',bc:'#FF000F',list:[DESK]},
  se:{t:'Schneider · Hitachi · SIFANG Division',bc:'#3DCD58',list:[DESK]}
 };
+const W3F_KEY='';
 const ITYPE=['Quotation','Technical inquiry','After-sales · failure','Document request','Overseas project','Other'];
 let prefill=null, receipt=null;
 function route2(f){
@@ -2448,7 +2442,6 @@ function route2(f){
 function pgContact(){
  if(receipt)return receiptHTML(receipt);
  const pf2=prefill||{};prefill=null;
- const inq=store.get('inq',[]);
  return `<div class="ct-grid"><form class="form" id="cform" novalidate>
    <div>${blockHead('Quotation · technical inquiry')}<p class="note" style="margin-top:10px"><i style="color:var(--err);font-style:normal">*</i> indicates a required field.</p></div>
    <div class="fld"><span class="lb">Inquiry type<i>*</i></span><div class="radios" role="radiogroup" aria-label="Inquiry type">${ITYPE.map((t,i)=>`<label><input type="radio" name="type" value="${t}" ${(pf2.type?pf2.type===t:i===0)?'checked':''}><span>${t}</span></label>`).join('')}</div></div>
@@ -2461,16 +2454,16 @@ function pgContact(){
    <div class="fld"><label for="f-mail">E-mail<i>*</i></label><input id="f-mail" name="mail" type="email" autocomplete="email" required><span class="em"></span></div>
    <div class="fld"><label for="f-sub">Subject<i>*</i></label><input id="f-sub" name="sub" value="${esc(pf2.sub||'')}" required><span class="em"></span></div>
    <div class="fld"><label for="f-msg">Message<i>*</i></label><textarea id="f-msg" name="msg" maxlength="2000" required placeholder="Including quantity, specifications, delivery date and site conditions speeds up the review.">${esc(pf2.msg||'')}</textarea><span class="hint"><span id="msgCount">0</span> / 2000</span><span class="em"></span></div>
-   <div class="fld"><span class="lb">Attachment</span><div class="file"><label class="btn line sm" for="f-file">${ic('doc','sm')} Choose file<input id="f-file" type="file" name="file"></label><span class="fname" id="fname">Specification · single-line diagram · load list (max. 10 MB)</span></div></div>
-   <div class="consent"><p class="ctext"><b>Collection and use of personal information</b><br>Items collected: company, name, phone, e-mail · Purpose: responding to inquiries and providing quotations · Retention: 1 year after the inquiry is closed <span class="draft" style="height:18px">Draft</span></p>
+   <p class="note">Please send files such as specifications, single-line diagrams or load lists as attachments when you reply to our response email.</p>
+   <input type="checkbox" name="botcheck" id="f-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+   <div class="consent"><p class="ctext"><b>Collection and use of personal information</b><br>Items collected: company, name, phone, email · Purpose: answering inquiries and providing quotations · Retention: one year after the inquiry is closed · Your inquiry is delivered to our company email through a mail delivery service (Web3Forms). <button type="button" class="link" data-act="privacy" style="font:inherit;background:none;border:0;padding:0;cursor:pointer">Privacy policy</button></p>
     <label><input type="checkbox" id="f-agree" name="agree"> I agree to the collection and use of personal information (required)</label><span class="em" id="agreeErr" style="color:var(--err);font-size:12.5px"></span></div>
-   <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" type="submit">Submit ${ic('arrow')}</button><button class="btn line" type="button" data-act="sample">Fill in sample</button><span class="note">No e-mail is sent in this draft.</span></div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" type="submit" id="f-send">Submit ${ic('arrow')}</button><span class="note" id="f-state" role="status"></span></div>
   </form>
   <aside class="fact-side">
    <div class="side-card k">${pg('headset','md on-dark')}<h4>Main contact</h4>
     <div class="kv"><span>TEL</span><b>${CO.tel}</b>${copyBtn(CO.tel)}</div><div class="kv"><span>FAX</span><b>${CO.fax}</b>${copyBtn(CO.fax)}</div><div class="kv"><span>E-mail</span><b class="email" style="font-size:13.5px">${CO.mail}</b>${copyBtn(CO.mail)}</div></div>
    <div class="side-card">${pg('people','md')}<h4>Contacts by division</h4><p class="note">ABB products are handled by the ABB Division; Schneider · Hitachi · SIFANG products by the respective division.</p><a class="link" href="#contact-people">View contacts ${ic('arrow')}</a></div>
-   ${admin?`<div class="side-card"><h4>Submissions (admin · this browser)</h4>${inq.length?inq.slice(0,6).map(x=>`<div style="font-size:13.5px;border-top:1px solid var(--line);padding-top:8px"><b class="mono" style="color:var(--ac)">${esc(x.no)}</b><br>${esc(x.type)} · ${esc(x.co)} · ${esc(x.sub)}</div>`).join(''):'<p class="note">No inquiries yet.</p>'}</div>`:''}
   </aside></div>`;
 }
 function receiptHTML(r){
@@ -2479,11 +2472,8 @@ function receiptHTML(r){
   <div class="rc-b"><div class="tbl-wrap"><table class="info"><tbody>
    <tr><th>Inquiry type</th><td>${esc(r.type)}</td></tr><tr><th>Brand · product</th><td>${r.brand?esc(BRANDS[r.brand].name):'—'} ${esc(r.prod||'')}</td></tr>
    <tr><th>Company · contact</th><td>${esc(r.co)} · ${esc(r.name)} ${esc(r.dept||'')}</td></tr><tr><th>Subject</th><td>${esc(r.sub)}</td></tr>
-   ${r.file?`<tr><th>Attachment</th><td>${esc(r.file)}</td></tr>`:''}</tbody></table></div>
-  <div><p class="eyebrow" style="margin-bottom:8px">Simulation · e-mail to be forwarded to the contact</p>
-   <div class="mailprev"><div class="mh"><span>To</span><b>${esc(rt.to[0])} ${esc(rt.to[1].split(' · ')[0])} &lt;<span class="email">${esc(rt.to[2])}</span>&gt;</b>${rt.cc?`<span>Cc</span><span>${esc(rt.cc[0])} &lt;<span class="email">${esc(rt.cc[2])}</span>&gt;</span>`:''}<span>Assigned</span><span>${esc(rt.bu)}</span><span>Subject</span><b>[Website inquiry] ${esc(r.type)} – ${esc(r.co)}</b></div>
-   <pre>${esc(`Ref. no.: ${r.no}\nCompany: ${r.co}\nName: ${r.name} ${r.dept||''}\nPhone: ${r.tel}\nE-mail: ${r.mail}\nBrand/product: ${r.brand?BRANDS[r.brand].name:'-'} ${r.prod||''}\n\n${r.msg}`)}</pre></div>
-   <p class="note" style="margin-top:8px">Routing rules (draft): ABB → ABB Division · Schneider/Hitachi/SIFANG → respective division · overseas projects → overseas contact · others → main e-mail</p></div>
+   <tr><th>Handled by</th><td>${esc(rt.bu)}</td></tr></tbody></table></div>
+  <p class="note">To send files, attach them to your reply to our email. For urgent matters, call ${CO.tel}.</p>
   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" data-act="newinq">New inquiry</button><a class="btn line" href="#home">Home</a></div></div></div>`;
 }
 function pgPeople(){
@@ -2498,39 +2488,26 @@ function pgBoard(cat){
  const list=allPosts().filter(p=>p.cat===cat&&(!bq||p.title.includes(bq))).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||b.sort-a.sort);
  const per=10,pages=Math.max(1,Math.ceil(list.length/per));bpage=Math.min(bpage,pages);
  const rows=list.slice((bpage-1)*per,bpage*per);
- const canWrite=cat==='qna'||admin;
  let n=list.length-(bpage-1)*per;
- return `<div class="block">${blockHead(BCAT[cat],canWrite?`<a class="btn pri sm" href="#board-write" data-act="wcat" data-k="${cat}">${ic('edit','sm')} Write</a>`:'')}
+ return `<div class="block">${blockHead(BCAT[cat])}
   <div class="fbar"><div class="tabs" style="border-bottom:0">${Object.entries(BCAT).map(([k,l])=>`<a href="#board-${k}" class="${k===cat?'on':''}">${l}</a>`).join('')}</div>
    <label class="search">${ic('search','sm')}<span class="sr">Search posts</span><input id="bq" type="search" placeholder="Search by subject" value="${esc(bq)}"></label></div>
-  <div class="tbl-wrap"><table class="btbl"><thead><tr><th class="c hide-m" style="width:72px">No.</th><th>Subject</th><th class="c hide-m" style="width:110px">Author</th><th class="c" style="width:112px">Date</th><th class="c hide-m" style="width:70px">Views</th></tr></thead>
+  <div class="tbl-wrap"><table class="btbl"><thead><tr><th class="c hide-m" style="width:72px">No.</th><th>Subject</th><th class="c hide-m" style="width:110px">Author</th><th class="c" style="width:112px">Date</th></tr></thead>
   <tbody>${rows.length?rows.map(p=>`<tr class="${p.pin?'pin':''}"><td class="c hide-m mono">${p.pin?'<span class="nb">Notice</span>':n--}</td>
-   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> ${p.cat==='qna'?(p.answer?'<span class="ans">Answered</span>':'<span class="ans wait">Pending</span>'):''} ${p.sample?'<span class="chip sample">Sample</span>':''}${p.mine?'<span class="chip sample">Draft post</span>':''}</td>
-   <td class="c hide-m">${esc(p.author)}</td><td class="c mono tnum" style="font-size:13px">${esc(p.date)}</td><td class="c hide-m mono" style="font-size:13px">${p.views||0}</td></tr>`).join(''):`<tr><td colspan="5" class="c" style="padding:40px;color:var(--muted)">No posts.</td></tr>`}</tbody></table></div>
+   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> </td>
+   <td class="c hide-m">${esc(p.author)}</td><td class="c mono tnum" style="font-size:13px">${esc(p.date)}</td></tr>`).join(''):`<tr><td colspan="4" class="c" style="padding:40px;color:var(--muted)">No posts.</td></tr>`}</tbody></table></div>
   ${pages>1?`<div class="pager">${Array.from({length:pages},(_,i)=>`<button class="${i+1===bpage?'on':''}" data-act="bpage" data-k="${i+1}">${i+1}</button>`).join('')}</div>`:''}
-  ${cat!=='qna'&&!admin?`<p class="note">Notices and company news are posted by administrators only. Turn on 'Admin mode' in the review tools to see the editor.</p>`:''}</div>`;
+  <p class="note">For product or technical questions, use <a class="link" href="#contact">Contact</a>and our team will answer.</p></div>`;
 }
 function pgPost(id){
  const all=allPosts(),p=all.find(x=>x.id===id);
  if(!p)return `<div class="empty">Post not found. <a class="link" href="#board-notice">Back to list</a></div>`;
  const same=all.filter(x=>x.cat===p.cat).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||b.sort-a.sort),i=same.indexOf(p),prev=same[i+1],next=same[i-1];
- return `<div class="block"><div class="post"><div class="post-h"><span>${p.pin?'<span class="chip red">Notice</span>':`<span class="chip">${BCAT[p.cat]}</span>`} ${p.sample?'<span class="chip sample">Sample</span>':''}</span><h2>${esc(p.title)}</h2>
-  <div class="post-meta"><span>Author ${esc(p.author)}</span><span class="mono">${esc(p.date)}</span><span>Views ${p.views||0}</span></div></div>
+ return `<div class="block"><div class="post"><div class="post-h"><span>${p.pin?'<span class="chip red">Notice</span>':`<span class="chip">${BCAT[p.cat]}</span>`}</span><h2>${esc(p.title)}</h2>
+  <div class="post-meta"><span>Author ${esc(p.author)}</span><span class="mono">${esc(p.date)}</span></div></div>
   <div class="post-b">${esc(p.body)}${p.answer?`<div class="post-a"><b>Answer · SCAB Engineering</b>${esc(p.answer)}</div>`:''}</div>
   <div class="post-nav">${next?`<a href="#board-post-${next.id}"><span>Next</span><b>${esc(next.title)}</b></a>`:''}${prev?`<a href="#board-post-${prev.id}"><span>Previous</span><b>${esc(prev.title)}</b></a>`:''}</div></div>
   <div class="post-act"><a class="btn line sm" href="#board-${p.cat}">${ic('list','sm')} List</a>${p.mine?`<button class="btn line sm" data-act="delpost" data-id="${p.id}">${ic('trash','sm')} Delete</button>`:''}</div></div>`;
-}
-let wcat='qna';
-function pgWrite(){
- const cats=admin?Object.entries(BCAT):[['qna',BCAT.qna]];
- if(!admin)wcat='qna';
- return `<div class="block">${blockHead('Write')}<form class="form" id="wform" novalidate>
-  <div class="frow"><div class="fld"><label for="w-cat">Category</label><select id="w-cat" name="cat">${cats.map(([k,l])=>`<option value="${k}" ${k===wcat?'selected':''}>${l}</option>`).join('')}</select></div>
-   <div class="fld"><label for="w-au">Author (company · name)<i>*</i></label><input id="w-au" name="author" value="${admin?'Admin':''}" required><span class="em"></span></div></div>
-  <div class="fld"><label for="w-t">Subject<i>*</i></label><input id="w-t" name="title" required><span class="em"></span></div>
-  <div class="fld"><label for="w-b">Message<i>*</i></label><textarea id="w-b" name="body" required></textarea><span class="em"></span></div>
-  ${admin?'<label class="sw" style="justify-content:flex-start;gap:8px"><input type="checkbox" name="pin"> Pin to top (notice)</label>':'<label class="sw" style="justify-content:flex-start;gap:8px"><input type="checkbox" name="secret"> Private (visible only to author and admin)</label>'}
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn pri" type="submit">Post</button><a class="btn line" href="#board-${wcat}">Cancel</a><span class="note">Draft posts are saved in this browser only.</span></div></form></div>`;
 }
 
 /* ---------- router ---------- */
@@ -2542,7 +2519,7 @@ const PAGES={
  'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'solutions-arc':pgSolArc,'solutions-thermal':pgSolThermal,'solutions-retrofit':pgSolRetrofit,'engineering':pgEngineering,
  'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),
  'contact':pgContact,'contact-people':pgPeople,
- 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna'),'board-write':pgWrite
+ 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news')
 };
 const PDESC={'company':'SCAB Engineering Co., Ltd. — products and engineering for power systems','products':'ABB · Schneider Electric · Hitachi Energy · SIFANG · Sangdo Electric','resources':'Catalogs · technical documents · certificates','contact':'Quotation · technical · after-sales inquiries','board':'Notices · company news · technical Q&A'};
 let curId='home';
@@ -2590,7 +2567,6 @@ function afterRender(id){
  if(id==='solutions-retrofit'){ISO.setRETRO($('#rtSol svg'),0)}
  if(id==='products'||id.startsWith('products-'))updCount();
  if(id==='contact'&&$('#cform'))initForm();
- if(id==='board-write')initWrite();
  if(id.startsWith('board-post-')){const p=SAMPLE_POSTS.find(x=>'board-post-'+x.id===id)||userPosts.find(x=>'board-post-'+x.id===id);if(p){p.views=(p.views||0)+1;if(p.mine)store.set('posts',userPosts)}}
 }
 
@@ -2731,7 +2707,6 @@ function setErr(f,name,msg){const el=f.elements[name];const fld=el&&el.closest('
 function initForm(){
  const f=$('#cform'),msg=$('#f-msg');
  const cnt=()=>$('#msgCount').textContent=msg.value.length;cnt();msg.addEventListener('input',cnt);
- $('#f-file').addEventListener('change',e=>{const fl=e.target.files[0];$('#fname').textContent=fl?`${fl.name} (${(fl.size/1048576).toFixed(1)} MB)${fl.size>10485760?' — exceeds 10 MB':''}`:'Specification · single-line diagram · load list (max. 10 MB)'});
  f.addEventListener('submit',e=>{
   e.preventDefault();const d=Object.fromEntries(new FormData(f).entries());let bad=null;
   const req={co:'Please enter your company name.',name:'Please enter your name.',tel:'Please enter your phone number.',mail:'Please enter your e-mail.',sub:'Please enter a subject.',msg:'Please enter your message.'};
@@ -2741,22 +2716,20 @@ function initForm(){
    setErr(f,k,er);if(er&&!bad)bad=k});
   const ag=$('#f-agree').checked;$('#agreeErr').textContent=ag?'':'Consent to the collection and use of personal information is required.';if(!ag&&!bad)bad='agree';
   if(bad){const el=f.elements[bad];el&&el.focus();toast('Please check the required fields.');return}
-  const fl=$('#f-file').files[0];const now=new Date();const ymd=`${String(now.getFullYear()).slice(2)}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`;
-  const inq=store.get('inq',[]);const no=`SCAB-${ymd}-${String(inq.length+1).padStart(3,'0')}`;
-  receipt={...d,no,file:fl?fl.name:''};inq.unshift({no,type:d.type,co:d.co,sub:d.sub});store.set('inq',inq);
-  render();
- });
-}
-function initWrite(){
- const f=$('#wform');
- f.elements.cat.addEventListener('change',e=>{wcat=e.target.value});
- f.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f).entries());let bad=null;
-  [['author','Please enter the author.'],['title','Please enter a subject.'],['body','Please enter the content.']].forEach(([k,m])=>{const er=(d[k]||'').trim()?'':m;setErr(f,k,er);if(er&&!bad)bad=k});
-  if(bad){f.elements[bad].focus();return}
-  const now=new Date(),date=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-  const id=Math.max(100,...allPosts().map(p=>p.id))+1;
-  userPosts.unshift({id,cat:d.cat,title:d.title.trim(),body:d.body.trim(),author:d.author.trim(),date,sort:+date.replace(/-/g,'')*100+99,views:0,mine:true,pin:!!d.pin,secret:!!d.secret});
-  store.set('posts',userPosts);toast('Posted.');location.hash='#board-post-'+id;
+  if(d.botcheck)return;
+  const now=new Date(),pad=v=>String(v).padStart(2,'0');
+  const no=`SCAB-${String(now.getFullYear()).slice(2)}${pad(now.getMonth()+1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+  const rt=route2(d),btn=$('#f-send'),st=$('#f-state');
+  if(!W3F_KEY){st.textContent=`Online submission is being set up. Please call ${CO.tel} or ${CO.mail} instead.`;toast('Online submission is being set up.');return}
+  const payload={access_key:W3F_KEY,subject:`[Website inquiry] ${d.type} – ${d.co} (${no})`,from_name:'SCAB website (EN)',replyto:d.mail,
+   'Reference no.':no,'Handled by':rt.bu,'Inquiry type':d.type,'Brand':d.brand?BRANDS[d.brand].name:'-','Product · model':d.prod||'-',
+   'Company':d.co,'Department · title':d.dept||'-','Name':d.name,'Phone':d.tel,'E-mail':d.mail,'Subject':d.sub,'Message':d.msg,
+   'Page':location.href.split('#')[0]+(document.documentElement.lang==='en'?' (EN)':' (KO)')};
+  btn.disabled=true;st.textContent='Sending…';
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+   .then(r=>r.json().catch(()=>({})).then(j=>{if(!r.ok||j.success===false)throw new Error(j.message||r.status)}))
+   .then(()=>{receipt={...d,no};render();window.scrollTo({top:0})})
+   .catch(()=>{btn.disabled=false;st.textContent=`Your inquiry could not be sent. Please try again later, or call ${CO.tel}, ${CO.mail}.`;toast('Your inquiry could not be sent.')});
  });
 }
 
@@ -2791,7 +2764,8 @@ function setTheme(t){if(t==='system')document.documentElement.removeAttribute('d
 function themeLabel(){const b=$('#themeBtn');if(b)b.innerHTML=curTheme()==='dark'?`${ic('sun','sm')} Light background`:`${ic('moon','sm')} Dark background`}
 
 /* ---------- sim dock ---------- */
-let dockOpen=false,width=store.get('width','pc'),notes=store.get('notes',[]),toolsOk=store.get('tools_ok','')===TOOLS_H;
+let dockOpen=false,width=(/[?&]tools\b/.test(location.search)||store.get('tools_ok','')===TOOLS_H)?store.get('width','pc'):'pc',notes=store.get('notes',[]),toolsOk=store.get('tools_ok','')===TOOLS_H;
+const SHOW_TOOLS=/[?&]tools\b/.test(location.search)||toolsOk;
 async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 function openLock(){openModal(`<div class="mpad lockbox"><h3>Review tools</h3><p class="note" style="margin-bottom:14px">Enter the administrator password.</p>
   <form id="lockForm" class="fld" novalidate><label class="sr" for="lockIn">Password</label><input id="lockIn" type="password" autocomplete="current-password"><span class="em" id="lockErr"></span>
@@ -2803,6 +2777,7 @@ function openLock(){openModal(`<div class="mpad lockbox"><h3>Review tools</h3><p
 const WID={pc:null,tab:'834px',mob:'390px'};
 function applyWidth(){const st=$('#stage');st.classList.toggle('preview',!!WID[width]);if(WID[width])st.style.setProperty('--pw',WID[width]);else st.style.removeProperty('--pw')}
 function dockRender(){
+ if(!SHOW_TOOLS){$('#dock').innerHTML='';return}
  const th=store.get('theme','system');
  $('#dock').innerHTML=`${dockOpen?`<div class="dock-panel" role="dialog" aria-label="Review tools">
    <div class="dp-h"><b>Review tools</b><span>${VERSION} · ${VDATE}</span><button class="btn line sm" data-act="locktools">${ic('lock','sm')} Lock</button></div>
@@ -2868,7 +2843,7 @@ document.addEventListener('click',e=>{
   case 'prod':prodModal(a.dataset.id);break;
   case 'quote':case 'reqp':{const p=PRODUCTS.find(x=>x.id===a.dataset.id);prefill={type:act==='quote'?'Quotation':'Document request',brand:p.brand,prod:p.model,sub:`${p.name} (${p.model}) ${act==='quote'?'Quotation':'Document request'}`};receipt=null;closeModal();if(curId==='contact')render();else location.hash='#contact';break}
   case 'req':{const r=RESOURCES.find(x=>x.id===a.dataset.id);prefill={type:'Document request',brand:r.brand||'',sub:`Document request: ${r.title}`,msg:`The following document is requested.\n- ${r.title}\n\nPurpose of use: `};receipt=null;if(curId==='contact')render();else location.hash='#contact';break}
-  case 'dl':toast('Downloads do not work in this draft. PDF files will be linked on the live site.');break;
+  case 'dl':{const r=RESOURCES.find(x=>x.id===a.dataset.id);if(r&&r.url)window.open(r.url,'_blank','noopener');break}
   case 'img':openModal(`<div class="mpad"><h3>${esc(a.dataset.t)}</h3><div style="background:var(--well);padding:16px;display:grid;place-items:center"><img src="${A(a.dataset.img)}" alt="${esc(a.dataset.t)}" style="max-height:70vh;width:auto;max-width:100%"></div></div>`,a.dataset.t);break;
   case 'closemodal':closeModal();break;
   case 'copy':copy(a.dataset.v);break;
@@ -2881,12 +2856,24 @@ document.addEventListener('click',e=>{
   case 'pqs':{const s=$('#pqSol svg');ISO.setPQ(s,+k);$$('.dg-ctrl [data-act="pqs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#pqCap').textContent=PQCAP[+k];break}
   case 'flplay':{if(flTimer){flStop();break}let i=0;const step=()=>{const s=$('#flSol svg');if(!s){flStop();return}ISO.setFLISR(s,i);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===i));$('#flCap').textContent=ISO.FL.cap[i];i=(i+1)%4};step();flTimer=setInterval(step,2000);timers.push(flTimer);a.innerHTML=`${ic('pause','sm')} Pause`;break}
   case 'pq':pqMode=k;$('#pqWave').innerHTML=pqSVG(k);$$('.dg-ctrl [data-act="pq"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));break;
-  case 'sample':{const f=$('#cform');const v={co:'(Sample) Hanbit Plant',dept:'Manager, Electrical Team',name:'Gildong Hong',tel:'010-1234-5678',mail:'sample@example.com',sub:f.elements.sub.value||'EOCR quotation for new MCC',msg:f.elements.msg.value||'We request an EOCR quotation for a new MCC.\n- 42 motors (load list to follow)\n- Communication: Modbus\n- Delivery: March 2027'};Object.entries(v).forEach(([n,x])=>{f.elements[n].value=x;setErr(f,n,'')});$('#f-agree').checked=true;$('#agreeErr').textContent='';$('#msgCount').textContent=f.elements.msg.value.length;toast('Sample filled in. Click Submit to try it.');break}
   case 'newinq':receipt=null;render();break;
-  case 'wcat':wcat=k;break;
   case 'bpage':bpage=+k;render(false);break;
-  case 'delpost':{userPosts=userPosts.filter(p=>p.id!==+a.dataset.id);store.set('posts',userPosts);toast('Deleted.');location.hash='#board-qna';break}
-  case 'privacy':openModal(`<div class="mpad"><h3>Privacy policy <span class="draft">Draft</span></h3><div class="prose"><p>SCAB Engineering Co., Ltd. collects the minimum personal information needed to respond to customer inquiries.</p><p><b>Items collected</b> company, name, phone, e-mail<br><b>Purpose</b> responding to inquiries, providing quotations and technical documents<br><b>Retention</b> 1 year after the inquiry is closed, or longer if required by law</p><p><b>Privacy officer</b> to be designated</p><p class="note">To be replaced with the final version before the official launch.</p></div></div>`,'Privacy policy');break;
+  case 'delpost':{userPosts=userPosts.filter(p=>p.id!==+a.dataset.id);store.set('posts',userPosts);toast('Deleted.');location.hash='#board-notice';break}
+  case 'privacy':openModal(`<div class="mpad"><h3>Privacy policy</h3><div class="prose">
+<p>SCAB Engineering Co., Ltd. (the 'Company') sets out this privacy policy under the Personal Information Protection Act of Korea to protect the personal information of data subjects and to handle related concerns promptly.</p>
+<p><b>1. Purpose of processing</b><br>We process personal information to answer quotation, technical, service and document requests received through the contact form, and to provide quotations and technical documents. We do not use it for any other purpose.</p>
+<p><b>2. Items processed</b><br>Required: company, name, phone, email, inquiry<br>Optional: department and title, related brand, product or model</p>
+<p><b>3. Retention period</b><br>We keep the information for one year after the inquiry is closed and then destroy it. Where a law sets a retention period, for example when a quotation leads to a contract, we keep it for that period.</p>
+<p><b>4. Destruction</b><br>When the retention period ends, we destroy the information without delay. Electronic files are deleted so they cannot be recovered, and printouts are shredded or incinerated.</p>
+<p><b>5. Provision to third parties</b><br>We do not provide personal information to third parties unless the data subject consents or a law requires it.</p>
+<p><b>6. Outsourcing and transfer abroad</b><br>We use a mail delivery service to deliver contact form submissions to our company email.<br>· Processor: Web3Forms (mail delivery service)<br>· Country: United States (server location)<br>· Items: everything entered in the contact form<br>· When and how: sent over an encrypted connection (HTTPS) when you submit the form<br>· Retention: the processor only forwards the submission without storing it, and deletes access logs after about two months.<br>If you do not want your information transferred abroad, you can contact us by phone or email instead of the form.</p>
+<p><b>7. Your rights</b><br>You may ask at any time to access, correct or delete your personal information, or to stop its processing. Contact the privacy officer below by phone or email and we will act without delay.</p>
+<p><b>8. Security measures</b><br>We restrict access to the email accounts and work computers that handle personal information and manage their passwords. The website is served only over an encrypted connection (HTTPS).</p>
+<p><b>9. Automatic collection</b><br>We do not use cookies. Only display settings such as light or dark mode are stored in your browser, and they are not sent to us. Our hosting provider (GitHub) may keep access logs to operate and secure the service.</p>
+<p><b>10. Privacy officer</b><br>Position: CEO<br>Contact: ${CO.tel} · <span class="email">${CO.mail}</span></p>
+<p><b>11. Remedies</b><br>You can report or seek advice on privacy infringements from the following Korean agencies.<br>· Personal Information Infringement Report Center (privacy.kisa.or.kr) 118<br>· Personal Information Dispute Mediation Committee (www.kopico.go.kr) 1833-6972<br>· Supreme Prosecutors’ Office Cyber Investigation (www.spo.go.kr) 1301<br>· Korean National Police Agency Cyber Bureau (ecrm.police.go.kr) 182</p>
+<p><b>12. Effective date</b><br>This privacy policy applies from 1 December 2026. If it changes, we will post a notice on the website seven days before the change takes effect.</p>
+</div></div>`,'Privacy policy');break;
   case 'noemail':openModal(`<div class="mpad"><h3>No unauthorized e-mail collection</h3><div class="prose"><p>We refuse the unauthorized collection of e-mail addresses posted on this website by e-mail harvesting programs or other technical means.</p><p>Violations may be punished under the Act on Promotion of Information and Communications Network Utilization and Information Protection.</p></div></div>`,'No unauthorized e-mail collection');break;
   case 'sitemap':sitemapModal();break;
   case 'settone2':setTone(k);break;
