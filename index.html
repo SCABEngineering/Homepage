@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
@@ -1755,7 +1755,7 @@ const PRODUCTS=[
 ];
 
 /* ---------- resources ---------- */
-const RCAT={catalog:'카탈로그',tech:'기술자료',cert:'인증서'};
+const RCAT={catalog:'카탈로그',tech:'기술자료'};
 const R=(id,cat,title,brand,meta,date,access,extra={})=>({id,cat,title,brand,meta,date,access,...extra});
 const RESOURCES=[
  R('r-c-relion','catalog','Relion 615 · 640 시리즈 제품 안내','abb','제조사 자료','—','maker'),
@@ -1782,8 +1782,7 @@ const RESOURCES=[
  R('r-t-mcc','tech','Smart MCC — Load List 기반 EOCR 모델 · CT · 통신 선정',null,'기술 노트','—','request'),
  R('r-t-arc','tech','아크 · 전기화재 예방 — 저압 AFDD(IEC 62606)와 고압 아크 보호 적용',null,'기술 노트','—','request'),
  R('r-t-thermal','tech','배전반 온도 · 습도 감시 구성 — TH110 · CL110 · HeatTag · PAS600 · PME',null,'기술 노트','—','request'),
- R('r-t-retro','tech','노후 · 단종 설비 대체 동등성 검토 체크리스트',null,'기술 노트','—','request'),
- R('r-cert-rnd','cert','연구개발전담부서 인정서',null,'이미지','2026-04-14','view',{img:'cert_rnd'})
+ R('r-t-retro','tech','노후 · 단종 설비 대체 동등성 검토 체크리스트',null,'기술 노트','—','request')
 ];
 
 /* ---------- references ---------- */
@@ -1792,10 +1791,12 @@ const CUST=[];
 
 /* ---------- board ---------- */
 const SAMPLE_POSTS=[
- {id:1,cat:'notice',pin:true,title:'(주)에스캡엔지니어링 홈페이지를 열었습니다',date:'2026-12-01',sort:20261201,author:'관리자',
-  body:'(주)에스캡엔지니어링 홈페이지를 열었습니다.\n취급 브랜드의 제품, 현장별 솔루션, 기술자료를 한곳에서 확인할 수 있습니다.\n\n견적 · 기술 문의는 고객문의 메뉴의 문의 양식이나 대표전화 02-322-8100으로 연락해 주세요.'},
+ {id:1,cat:'notice',pin:true,title:'(주)에스캡엔지니어링 홈페이지를 열었습니다',date:'2026-11-09',sort:20261109,author:'관리자',
+  body:'(주)에스캡엔지니어링 홈페이지를 열었습니다.\n취급 브랜드의 제품, 현장별 솔루션, 기술자료를 한곳에서 확인할 수 있습니다.\n\n· 회사소개 / 취급제품 / 자료실 / 고객문의 / 게시판\n· 견적 · 기술 문의: 고객문의 메뉴의 문의 양식 또는 대표전화 02-322-8100'},
+ {id:2,cat:'notice',pin:true,title:'개인정보처리방침 · 이메일무단수집거부',date:'2026-11-09',sort:20261108,author:'관리자',
+  body:'개인정보처리방침과 이메일무단수집거부 내용을 게시합니다.\n화면 하단의 "개인정보처리방침" · "이메일무단수집거부" 링크에서 확인할 수 있습니다.'},
  {id:3,cat:'news',title:'연구개발전담부서 인정',date:'2026-04-14',sort:20260414,author:'관리자',
-  body:'(주)에스캡엔지니어링 연구개발전담부서가 인정되었습니다. (신고일 2026.04.14)\n인정서는 자료실 > 인증서에서 확인할 수 있습니다.'},
+  body:'(주)에스캡엔지니어링 연구개발전담부서가 인정되었습니다. (신고일 2026.04.14)'},
  {id:4,cat:'news',title:'SIFANG(北京四方) 국내 독점 대리점 — SVG/STATCOM',date:'2026',sort:20260300,author:'관리자',
   body:'Beijing SIFANG Automation의 국내 독점 대리점으로 SVG/STATCOM과 전력품질 솔루션을 공급합니다.\nAHF · 콘덴서 · 리액터를 포함한 조합 제안이 가능합니다.'},
  {id:5,cat:'news',title:'Schneider Electric EOCR 대리점 (에티버스)',date:'2026',sort:20260200,author:'관리자',
@@ -1803,9 +1804,24 @@ const SAMPLE_POSTS=[
  {id:6,cat:'news',title:'Hitachi Energy Korea 대리점',date:'2024–25',sort:20250100,author:'관리자',
   body:'Hitachi Energy Korea 대리점으로 변압기와 초고압(HV) 제품을 공급합니다.'},
  {id:7,cat:'news',title:'Schneider Electric Korea 대리점 (DE/PP)',date:'2024–25',sort:20240100,author:'관리자',
-  body:'Schneider Electric Korea의 DE · PP 제품 대리점으로 보호계전기, 디지털 미터, 차단기를 공급합니다.'}
+  body:'Schneider Electric Korea의 DE · PP 제품 대리점으로 보호계전기, 디지털 미터, 차단기를 공급합니다.'},
+ {id:9,cat:'qna',title:'해발 4,000 m 현장에 보호계전기를 적용할 수 있나요?',date:'2026-11-03',sort:20261101,author:'관리자',
+  body:'고지대 플랜트에 고압반 보호계전기를 적용하려고 합니다. 고도 조건에서 확인해야 할 사항이 궁금합니다.',
+  answer:'카탈로그 고도 정격, 컨포멀 코팅 옵션, IEC 60255-27 절연 보정 항목을 제조사별로 검토합니다.\nABB · Schneider · Siemens · SEL · GE 제품을 같은 기준으로 비교하고, 고객 사양 적합성과 대안을 보고서로 제출합니다.'},
+ {id:10,cat:'qna',title:'EOCR 모델은 어떻게 선정하나요?',date:'2026-11-03',sort:20261100,author:'관리자',
+  body:'MCC 신설 건으로 EOCR 견적을 받고 싶습니다. 어떤 자료를 드리면 되나요?',
+  answer:'모터 Load List(정격 출력 · 전압 · 전류)를 보내 주시면 모터별 모델 · CT · 통신 방식을 선정해 견적합니다.\n모니터링이 필요하면 EOCR Edge 구성도 함께 제안합니다.'},
+ {id:11,cat:'qna',title:'보호협조 시간 간격(CTI)은 얼마로 잡나요?',date:'2026-11-04',sort:20261099,author:'관리자',
+  body:'상 · 하위 과전류 계전기 사이의 협조 시간 간격을 어떻게 정하는지 궁금합니다.',
+  answer:'일반적으로 0.2–0.4 s 범위에서 정합니다 (IEEE Std 242 참고).\n차단기 차단 시간, 계전기 동작 오차, 여유 시간을 합산해 계통별로 결정하고, 디지털 계전기끼리는 0.2–0.3 s 수준으로 줄이기도 합니다.\n정정 계산서에는 고장 지점별 동작 시간과 협조 곡선(TCC)을 함께 제출합니다.'},
+ {id:12,cat:'qna',title:'GOOSE 통신으로 배선 인터록을 대체할 수 있나요?',date:'2026-11-04',sort:20261098,author:'관리자',
+  body:'변전소 개보수 때 계전기 간 인터록 배선을 IEC 61850 GOOSE로 바꾸려고 합니다. 확인할 사항이 있을까요?',
+  answer:'가능합니다. IEC 61850-5는 트립급 신호(Type 1A)의 전송 시간을 수 ms 수준으로 규정하고 있어 인터록 · 차단 신호에도 적용됩니다.\n다만 통신망 이중화(PRP / HSR, IEC 62439-3), VLAN · 우선순위 설정, 통신 단절 시 동작 방식, GOOSE 시험 계획을 함께 검토해야 합니다.'},
+ {id:13,cat:'qna',title:'고임피던스 모선보호(87B)용 CT는 어떤 조건이 필요한가요?',date:'2026-11-04',sort:20261097,author:'관리자',
+  body:'87B 고임피던스 방식을 검토 중입니다. CT 사양은 어떻게 맞춰야 하나요?',
+  answer:'모든 CT의 변류비가 같아야 하고, 저누설 리액턴스 CT(IEC 61869-2 Class PX)를 사용합니다.\n안정화 전압 Vs ≥ If × (Rct + 2RL)로 정하고, CT 무릎점 전압은 보통 Vs의 2배 이상을 확보합니다.\n내부 고장 시 과전압을 제한하는 VDR(금속산화물 비선형 저항) 선정도 함께 검토합니다.'}
 ];
-const BCAT={notice:'공지사항',news:'회사 소식'};
+const BCAT={notice:'공지사항',news:'회사 소식',qna:'기술 Q&A'};
 let userPosts=[];
 const allPosts=()=>[...userPosts,...SAMPLE_POSTS];
 
@@ -1821,14 +1837,14 @@ const MENU=[
         {t:'엔지니어링',items:[['engineering','엔지니어링 서비스'],['products','전체 제품 찾기']]}],
   feat:{img:'abb_relion',t:'Relion REX615 · REX640',d:'보호 · 제어 · 계측, IEC 61850',href:'products-abb'}},
  {id:'resources',label:'자료실',en:'RESOURCES',home:'resources',desc:'카탈로그, 기술자료, 인증서',
-  cols:[{t:'자료실',items:[['resources','전체 자료'],['resources-catalog','카탈로그'],['resources-tech','기술자료'],['resources-cert','인증서']]}],
-  feat:{img:'cert_rnd',t:'연구개발전담부서 인정서',d:'신고일 2026.04.14',href:'resources-cert'}},
+  cols:[{t:'자료실',items:[['resources','전체 자료'],['resources-catalog','카탈로그'],['resources-tech','기술자료']]}],
+  feat:{pg:'book',t:'카탈로그 · 기술자료',d:'제조사 카탈로그와 기술 노트',href:'resources'}},
  {id:'contact',label:'고객문의',en:'CONTACT',home:'contact',desc:'견적 · 기술 · A/S 문의와 사업부별 담당자 안내',
   cols:[{t:'고객문의',items:[['contact','견적 · 기술 문의'],['contact-people','사업부별 문의 창구'],['company-location','오시는 길']]}],
   feat:{pg:'headset',t:'대표전화 02-322-8100',d:'FAX 02-322-8200 · axax1002@scab.co.kr',href:'contact'}},
- {id:'board',label:'게시판',en:'NEWS',home:'board-notice',desc:'공지사항, 회사 소식',
-  cols:[{t:'게시판',items:[['board-notice','공지사항'],['board-news','회사 소식']]}],
-  feat:{pg:'chat',t:'기술 문의',d:'제품 선정 · 적용 질문은 고객문의로 보내 주세요',href:'contact'}}
+ {id:'board',label:'게시판',en:'NEWS & BOARD',home:'board-notice',desc:'공지사항, 회사 소식, 기술 Q&A',
+  cols:[{t:'게시판',items:[['board-notice','공지사항'],['board-news','회사 소식'],['board-qna','기술 Q&A']]}],
+  feat:{pg:'chat',t:'기술 Q&A',d:'제품 선정 · 적용에 자주 묻는 질문',href:'board-qna'}}
 ];
 const TITLE={home:'홈'};
 MENU.forEach(m=>m.cols.forEach(c=>c.items.forEach(([id,l])=>{if(!TITLE[id])TITLE[id]=l})));
@@ -2017,7 +2033,7 @@ const HCAP={ar:['정상 운전 — 아크 보호계전기 · AFDD 상시 감시'
 const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,8);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
- const latest=allPosts().sort((a,b)=>b.sort-a.sort).slice(0,5);
+ const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
  return `
  <section class="hero" aria-roledescription="carousel" aria-label="주요 안내">
   <img class="hero-cube" src="${A('cube_white')}" alt="">
@@ -2166,7 +2182,7 @@ function brandMap(){
  Object.entries(M).forEach(([iso,bs])=>{const ks=Object.keys(bs);if(ks.length===1){fills[iso]=WM_COL[ks[0]];return}
   const id='wm-'+iso.toLowerCase();pats.push(`<pattern id="${id}" width="${ks.length*1.9}" height="${ks.length*1.9}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">${ks.map((k,i)=>`<rect x="${(i*1.9).toFixed(1)}" width="1.9" height="${ks.length*1.9}" fill="${WM_COL[k]}"/>`).join('')}</pattern>`);fills[iso]=`url(#${id})`});
  const tip=iso=>`${WM_NAME[iso]} — `+Object.entries(M[iso]||{}).map(([k,ps])=>`${BRANDS[k].name}: ${ps.join(', ')}`).join(' / ');
- const ctry=Object.keys(fills).map(iso=>`<path d="${WMAP.c[iso]}" fill="${fills[iso]}" class="wm-c"><title>${esc(tip(iso))}</title></path>`).join('');
+ const ctry=Object.keys(WMAP.c).filter(iso=>!fills[iso]).map(iso=>`<path d="${WMAP.c[iso]}" class="wm-land"/>`).join('')+Object.keys(fills).map(iso=>`<path d="${WMAP.c[iso]}" fill="${fills[iso]}" class="wm-c"><title>${esc(tip(iso))}</title></path>`).join('');
  const logo=(k,x,y)=>{if(k==='sifang')return `<text x="${x}" y="${y+11.5}" font-size="13" font-weight="800" fill="#1565C0" letter-spacing=".04em" font-family="IBM Plex Sans KR,Arial,sans-serif">SIFANG<tspan font-size="9.5" font-weight="600" dx="4">北京四方</tspan></text>`;
   const [a,r,hh]=WM_LOGO[k];return `<image href="${A(a)}" x="${x}" y="${y}" width="${(hh*r).toFixed(1)}" height="${hh}"/>`};
  const lw=k=>k==='sifang'?98:LH(k)*WM_LOGO[k][1];
@@ -2218,9 +2234,8 @@ function pgCompanyOrg(){
 function pgCompanyCerts(){
  const dist=[['schneider','Schneider Electric Korea 대리점','DE · PP 제품 / EOCR'],['hitachi','Hitachi Energy Korea 대리점','변압기 · HV 제품'],['sifang','SIFANG 국내 독점 대리점','SVG/STATCOM · 전력품질'],['sangdo','상도일렉트릭 공급사','AFDD (아크 고장 차단기)']];
  return `<div class="block">${blockHead('인증 · 등록')}
-  <div class="cert-row">
-   <button class="cert" data-act="img" data-img="cert_rnd" data-t="연구개발전담부서 인정서"><div class="ci"><img src="${A('cert_rnd')}" alt="연구개발전담부서 인정서" loading="lazy"></div><span>연구개발전담부서 인정서</span></button>
-   <div class="dist">${dist.map(([k,t,d])=>`<div class="dc"><div class="bl${k==='khnp'?' k':''}">${k==='khnp'?'KHNP':brandLogo(k)}</div><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
+  <div>
+   <div class="dist"><div class="dc" style="grid-column:1/-1"><div class="bl k">R&amp;D</div><div><b>연구개발전담부서 인정</b><span>신고일 2026.04.14</span></div></div>${dist.map(([k,t,d])=>`<div class="dc"><div class="bl${k==='khnp'?' k':''}">${k==='khnp'?'KHNP':brandLogo(k)}</div><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
   </div></div>`;
 }
 function refTable(k){
@@ -2488,7 +2503,7 @@ function pgBoard(cat){
    <label class="search">${ic('search','sm')}<span class="sr">게시물 검색</span><input id="bq" type="search" placeholder="제목 검색" value="${esc(bq)}"></label></div>
   <div class="tbl-wrap"><table class="btbl"><thead><tr><th class="c hide-m" style="width:72px">번호</th><th>제목</th><th class="c hide-m" style="width:110px">작성자</th><th class="c" style="width:112px">등록일</th></tr></thead>
   <tbody>${rows.length?rows.map(p=>`<tr class="${p.pin?'pin':''}"><td class="c hide-m mono">${p.pin?'<span class="nb">공지</span>':n--}</td>
-   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> </td>
+   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> ${p.cat==='qna'&&p.answer?'<span class="ans">답변완료</span>':''}</td>
    <td class="c hide-m">${esc(p.author)}</td><td class="c mono tnum" style="font-size:13px">${esc(p.date)}</td></tr>`).join(''):`<tr><td colspan="4" class="c" style="padding:40px;color:var(--muted)">게시물이 없습니다.</td></tr>`}</tbody></table></div>
   ${pages>1?`<div class="pager">${Array.from({length:pages},(_,i)=>`<button class="${i+1===bpage?'on':''}" data-act="bpage" data-k="${i+1}">${i+1}</button>`).join('')}</div>`:''}
   <p class="note">제품 · 기술 질문은 <a class="link" href="#contact">고객문의</a>로 보내 주시면 담당자가 답변드립니다.</p></div>`;
@@ -2511,9 +2526,9 @@ const PAGES={
  'company-certs':pgCompanyCerts,'company-location':pgLocation,
  'products':pgProducts,'products-abb':()=>pgBrand('abb'),'products-schneider':()=>pgBrand('schneider'),'products-hitachi':()=>pgBrand('hitachi'),'products-sifang':()=>pgBrand('sifang'),'products-sangdo':()=>pgBrand('sangdo'),
  'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'solutions-arc':pgSolArc,'solutions-thermal':pgSolThermal,'solutions-retrofit':pgSolRetrofit,'engineering':pgEngineering,
- 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),
+ 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),
  'contact':pgContact,'contact-people':pgPeople,
- 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news')
+ 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna')
 };
 const PDESC={'company':'전력 설비 제품과 엔지니어링을 공급하는 (주)에스캡엔지니어링','products':'ABB · Schneider Electric · Hitachi Energy · SIFANG · 상도일렉트릭','resources':'카탈로그 · 기술자료 · 인증서','contact':'견적 · 기술 · A/S 문의','board':'공지사항 · 회사 소식 · 기술 Q&A'};
 let curId='home';
@@ -2771,7 +2786,7 @@ function openLock(){openModal(`<div class="mpad lockbox"><h3>시안 도구</h3><
 const WID={pc:null,tab:'834px',mob:'390px'};
 function applyWidth(){const st=$('#stage');st.classList.toggle('preview',!!WID[width]);if(WID[width])st.style.setProperty('--pw',WID[width]);else st.style.removeProperty('--pw')}
 function dockRender(){
- if(!SHOW_TOOLS){$('#dock').innerHTML='';return}
+ if(!SHOW_TOOLS){$('#dock').innerHTML=`<button class="top-btn" data-act="top" aria-label="맨 위로">TOP</button>`;return}
  const th=store.get('theme','system');
  $('#dock').innerHTML=`${dockOpen?`<div class="dock-panel" role="dialog" aria-label="시안 도구">
    <div class="dp-h"><b>시안 도구</b><span>${VERSION} · ${VDATE}</span><button class="btn line sm" data-act="locktools">${ic('lock','sm')} 잠금</button></div>
@@ -2866,7 +2881,7 @@ document.addEventListener('click',e=>{
 <p><b>9. 자동 수집 장치</b><br>회사는 쿠키를 사용하지 않습니다. 화면 밝기 같은 표시 설정만 방문자의 브라우저에 저장되며, 회사로 전송되지 않습니다. 홈페이지 호스팅 업체(GitHub)가 서비스 운영과 보안을 위해 접속 기록을 남길 수 있습니다.</p>
 <p><b>10. 개인정보 보호책임자</b><br>직책: 대표이사<br>연락처: ${CO.tel} · <span class="email">${CO.mail}</span></p>
 <p><b>11. 권익침해 구제 방법</b><br>개인정보 침해에 대한 신고나 상담은 아래 기관에 문의할 수 있습니다.<br>· 개인정보침해신고센터 (privacy.kisa.or.kr) 국번 없이 118<br>· 개인정보분쟁조정위원회 (www.kopico.go.kr) 1833-6972<br>· 대검찰청 사이버수사과 (www.spo.go.kr) 국번 없이 1301<br>· 경찰청 사이버수사국 (ecrm.police.go.kr) 국번 없이 182</p>
-<p><b>12. 시행일</b><br>이 개인정보처리방침은 2026년 12월 1일부터 적용합니다. 내용이 바뀌면 시행 7일 전에 홈페이지 공지사항으로 알립니다.</p>
+<p><b>12. 시행일</b><br>이 개인정보처리방침은 2026년 11월 9일부터 적용합니다. 내용이 바뀌면 시행 7일 전에 홈페이지 공지사항으로 알립니다.</p>
 </div></div>`,'개인정보처리방침');break;
   case 'noemail':openModal(`<div class="mpad"><h3>이메일무단수집거부</h3><div class="prose"><p>본 웹사이트에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부합니다.</p><p>이를 위반하면 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 처벌받을 수 있습니다.</p></div></div>`,'이메일무단수집거부');break;
   case 'sitemap':sitemapModal();break;

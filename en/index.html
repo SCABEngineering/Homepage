@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">
@@ -1761,7 +1761,7 @@ const PRODUCTS=[
 ];
 
 /* ---------- resources ---------- */
-const RCAT={catalog:'Catalogs',tech:'Technical documents',cert:'Certificates'};
+const RCAT={catalog:'Catalogs',tech:'Technical documents'};
 const R=(id,cat,title,brand,meta,date,access,extra={})=>({id,cat,title,brand,meta,date,access,...extra});
 const RESOURCES=[
  R('r-c-relion','catalog','Relion 615 · 640 series product guide','abb','Manufacturer document','—','maker'),
@@ -1788,8 +1788,7 @@ const RESOURCES=[
  R('r-t-mcc','tech','Smart MCC — EOCR model · CT · communication selection based on the load list',null,'Technical note','—','request'),
  R('r-t-arc','tech','Arc and electrical fire prevention — applying LV AFDDs (IEC 62606) and MV arc protection',null,'Technical note','—','request'),
  R('r-t-thermal','tech','Switchgear temperature and humidity monitoring — TH110 · CL110 · HeatTag · PAS600 · PME',null,'Technical note','—','request'),
- R('r-t-retro','tech','Equivalence review checklist for retrofit of discontinued equipment',null,'Technical note','—','request'),
- R('r-cert-rnd','cert','R&D department certificate',null,'Image','2026-04-14','view',{img:'cert_rnd'})
+ R('r-t-retro','tech','Equivalence review checklist for retrofit of discontinued equipment',null,'Technical note','—','request')
 ];
 
 /* ---------- references ---------- */
@@ -1798,10 +1797,12 @@ const CUST=[];
 
 /* ---------- board ---------- */
 const SAMPLE_POSTS=[
- {id:1,cat:'notice',pin:true,title:'Our website is now open',date:'2026-12-01',sort:20261201,author:'Admin',
-  body:'SCAB Engineering has opened its website.\nYou can find the products of the brands we supply, solutions by application and technical documents in one place.\n\nFor quotations or technical questions, use the form under Contact or call +82-2-322-8100.'},
+ {id:1,cat:'notice',pin:true,title:'Our website is now open',date:'2026-11-09',sort:20261109,author:'Admin',
+  body:'SCAB Engineering has opened its website.\nYou can find the products of the brands we supply, solutions by application and technical documents in one place.\n\n· Company / Products / Resources / Contact / News\n· Quotations and technical questions: the form under Contact, or call +82-2-322-8100'},
+ {id:2,cat:'notice',pin:true,title:'Privacy policy and email address collection refusal',date:'2026-11-09',sort:20261108,author:'Admin',
+  body:'We have posted our privacy policy and email address collection refusal notice.\nSee the "Privacy policy" · "No unauthorized e-mail collection" links at the bottom of the page.'},
  {id:3,cat:'news',title:'R&D department recognized',date:'2026-04-14',sort:20260414,author:'Admin',
-  body:'The R&D department of SCAB Engineering Co., Ltd. has been officially recognized (registered 2026.04.14).\nThe certificate is available under Resources > Certificates.'},
+  body:'SCAB Engineering’s dedicated R&D department has been officially recognized. (Registered 14 April 2026)'},
  {id:4,cat:'news',title:'SIFANG (北京四方) exclusive distributor in Korea — SVG/STATCOM',date:'2026',sort:20260300,author:'Admin',
   body:'As the exclusive distributor of Beijing SIFANG Automation in Korea, we supply SVG/STATCOM and power quality solutions.\nCombined proposals including AHF · capacitors · reactors are available.'},
  {id:5,cat:'news',title:'Schneider Electric EOCR distributor (ETEVERS)',date:'2026',sort:20260200,author:'Admin',
@@ -1809,9 +1810,24 @@ const SAMPLE_POSTS=[
  {id:6,cat:'news',title:'Hitachi Energy Korea distributor',date:'2024–25',sort:20250100,author:'Admin',
   body:'As a Hitachi Energy Korea distributor, we supply transformers and high-voltage (HV) products.'},
  {id:7,cat:'news',title:'Schneider Electric Korea distributor (DE/PP)',date:'2024–25',sort:20240100,author:'Admin',
-  body:'As a DE · PP distributor of Schneider Electric Korea, we supply protection relays, digital meters and circuit breakers.'}
+  body:'As a DE · PP distributor of Schneider Electric Korea, we supply protection relays, digital meters and circuit breakers.'},
+ {id:9,cat:'qna',title:'Can protection relays be used at a 4,000 m altitude site?',date:'2026-11-03',sort:20261101,author:'Admin',
+  body:'We plan to apply MV switchgear protection relays at a high-altitude plant. What should we check for the altitude conditions?',
+  answer:'We review catalog altitude ratings, conformal coating options and IEC 60255-27 insulation correction by manufacturer.\nABB · Schneider · Siemens · SEL · GE products are compared on the same criteria, and compliance with the customer specification and alternatives are submitted in a report.'},
+ {id:10,cat:'qna',title:'How is an EOCR model selected?',date:'2026-11-03',sort:20261100,author:'Admin',
+  body:'We would like an EOCR quotation for a new MCC. What information should we provide?',
+  answer:'Send us the motor load list (rated output · voltage · current), and we will select the model · CT · communication method for each motor and quote.\nIf monitoring is needed, we also propose an EOCR Edge configuration.'},
+ {id:11,cat:'qna',title:'What coordination time interval (CTI) should be used?',date:'2026-11-04',sort:20261099,author:'Admin',
+  body:'How is the coordination time interval between upstream and downstream overcurrent relays determined?',
+  answer:'Typically 0.2–0.4 s (see IEEE Std 242).\nIt is set per system by adding breaker interrupting time, relay operating error and margin; between digital relays it is sometimes reduced to 0.2–0.3 s.\nThe relay setting report includes operating times at each fault location and coordination curves (TCC).'},
+ {id:12,cat:'qna',title:'Can GOOSE messaging replace hard-wired interlocks?',date:'2026-11-04',sort:20261098,author:'Admin',
+  body:'We plan to replace hard-wired interlocks between relays with IEC 61850 GOOSE during a substation retrofit. What should we check?',
+  answer:'Yes. IEC 61850-5 specifies transfer times of a few ms for trip-class messages (Type 1A), so GOOSE can be used for interlocking and tripping.\nHowever, network redundancy (PRP / HSR, IEC 62439-3), VLAN · priority settings, behavior on communication loss and a GOOSE test plan must be reviewed together.'},
+ {id:13,cat:'qna',title:'What CT requirements apply to high-impedance busbar protection (87B)?',date:'2026-11-04',sort:20261097,author:'Admin',
+  body:'We are reviewing the 87B high-impedance scheme. How should the CTs be specified?',
+  answer:'All CTs must have the same ratio, and low-leakage-reactance CTs (IEC 61869-2 Class PX) are used.\nThe stabilizing voltage is set as Vs ≥ If × (Rct + 2RL), and the CT knee-point voltage is usually at least twice Vs.\nA VDR (metal-oxide non-linear resistor) that limits overvoltage during internal faults is selected as well.'}
 ];
-const BCAT={notice:'Notices',news:'Company news'};
+const BCAT={notice:'Notices',news:'Company news',qna:'Technical Q&A'};
 let userPosts=[];
 const allPosts=()=>[...userPosts,...SAMPLE_POSTS];
 
@@ -1827,14 +1843,14 @@ const MENU=[
         {t:'Engineering',items:[['engineering','Engineering services'],['products','Find all products']]}],
   feat:{img:'abb_relion',t:'Relion REX615 · REX640',d:'Protection · control · metering, IEC 61850',href:'products-abb'}},
  {id:'resources',label:'Resources',en:'DOWNLOADS',home:'resources',desc:'Catalogs, technical documents, certificates',
-  cols:[{t:'Resources',items:[['resources','All resources'],['resources-catalog','Catalogs'],['resources-tech','Technical documents'],['resources-cert','Certificates']]}],
-  feat:{img:'cert_rnd',t:'R&D department certificate',d:'Registered 2026.04.14',href:'resources-cert'}},
+  cols:[{t:'Resources',items:[['resources','All resources'],['resources-catalog','Catalogs'],['resources-tech','Technical documents']]}],
+  feat:{pg:'book',t:'Catalogs and technical documents',d:'Manufacturer catalogs and technical notes',href:'resources'}},
  {id:'contact',label:'Contact',en:'GET IN TOUCH',home:'contact',desc:'Quotation · technical · after-sales inquiries and contacts by division',
   cols:[{t:'Contact',items:[['contact','Quotation · technical inquiry'],['contact-people','Contacts by division'],['company-location','Location']]}],
   feat:{pg:'headset',t:'Tel. +82-2-322-8100',d:'FAX +82-2-322-8200 · axax1002@scab.co.kr',href:'contact'}},
- {id:'board',label:'Board',en:'NEWS',home:'board-notice',desc:'Notices and company news',
-  cols:[{t:'Board',items:[['board-notice','Notices'],['board-news','Company news']]}],
-  feat:{pg:'chat',t:'Technical inquiry',d:'Send product selection and application questions through Contact',href:'contact'}}
+ {id:'board',label:'Board',en:'NEWS & BOARD',home:'board-notice',desc:'Notices, company news, technical Q&A',
+  cols:[{t:'Board',items:[['board-notice','Notices'],['board-news','Company news'],['board-qna','Technical Q&A']]}],
+  feat:{pg:'chat',t:'Technical Q&A',d:'Frequently asked questions on product selection and application',href:'board-qna'}}
 ];
 const TITLE={home:'Home'};
 MENU.forEach(m=>m.cols.forEach(c=>c.items.forEach(([id,l])=>{if(!TITLE[id])TITLE[id]=l})));
@@ -2023,7 +2039,7 @@ const HCAP={ar:['Normal — arc protection relays and AFDDs on watch','LV arc �
 const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,8);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
- const latest=allPosts().sort((a,b)=>b.sort-a.sort).slice(0,5);
+ const latest=allPosts().filter(p=>p.cat!=='qna').sort((a,b)=>b.sort-a.sort).slice(0,5);
  return `
  <section class="hero" aria-roledescription="carousel" aria-label="Highlights">
   <img class="hero-cube" src="${A('cube_white')}" alt="">
@@ -2172,7 +2188,7 @@ function brandMap(){
  Object.entries(M).forEach(([iso,bs])=>{const ks=Object.keys(bs);if(ks.length===1){fills[iso]=WM_COL[ks[0]];return}
   const id='wm-'+iso.toLowerCase();pats.push(`<pattern id="${id}" width="${ks.length*1.9}" height="${ks.length*1.9}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">${ks.map((k,i)=>`<rect x="${(i*1.9).toFixed(1)}" width="1.9" height="${ks.length*1.9}" fill="${WM_COL[k]}"/>`).join('')}</pattern>`);fills[iso]=`url(#${id})`});
  const tip=iso=>`${WM_NAME[iso]} — `+Object.entries(M[iso]||{}).map(([k,ps])=>`${BRANDS[k].name}: ${ps.join(', ')}`).join(' / ');
- const ctry=Object.keys(fills).map(iso=>`<path d="${WMAP.c[iso]}" fill="${fills[iso]}" class="wm-c"><title>${esc(tip(iso))}</title></path>`).join('');
+ const ctry=Object.keys(WMAP.c).filter(iso=>!fills[iso]).map(iso=>`<path d="${WMAP.c[iso]}" class="wm-land"/>`).join('')+Object.keys(fills).map(iso=>`<path d="${WMAP.c[iso]}" fill="${fills[iso]}" class="wm-c"><title>${esc(tip(iso))}</title></path>`).join('');
  const logo=(k,x,y)=>{if(k==='sifang')return `<text x="${x}" y="${y+11.5}" font-size="13" font-weight="800" fill="#1565C0" letter-spacing=".04em" font-family="IBM Plex Sans KR,Arial,sans-serif">SIFANG<tspan font-size="9.5" font-weight="600" dx="4">北京四方</tspan></text>`;
   const [a,r,hh]=WM_LOGO[k];return `<image href="${A(a)}" x="${x}" y="${y}" width="${(hh*r).toFixed(1)}" height="${hh}"/>`};
  const lw=k=>k==='sifang'?98:LH(k)*WM_LOGO[k][1];
@@ -2224,9 +2240,8 @@ function pgCompanyOrg(){
 function pgCompanyCerts(){
  const dist=[['schneider','Schneider Electric Korea distributor','DE · PP products / EOCR'],['hitachi','Hitachi Energy Korea distributor','Transformers · HV products'],['sifang','SIFANG exclusive distributor in Korea','SVG/STATCOM · power quality'],['sangdo','Sangdo Electric supplier','AFDD (arc fault detection devices)']];
  return `<div class="block">${blockHead('Certifications · registrations')}
-  <div class="cert-row">
-   <button class="cert" data-act="img" data-img="cert_rnd" data-t="R&D department certificate"><div class="ci"><img src="${A('cert_rnd')}" alt="R&D department certificate" loading="lazy"></div><span>R&D department certificate</span></button>
-   <div class="dist">${dist.map(([k,t,d])=>`<div class="dc"><div class="bl${k==='khnp'?' k':''}">${k==='khnp'?'KHNP':brandLogo(k)}</div><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
+  <div>
+   <div class="dist"><div class="dc" style="grid-column:1/-1"><div class="bl k">R&amp;D</div><div><b>R&D department recognized</b><span>Registered 2026.04.14</span></div></div>${dist.map(([k,t,d])=>`<div class="dc"><div class="bl${k==='khnp'?' k':''}">${k==='khnp'?'KHNP':brandLogo(k)}</div><div><b>${t}</b><span>${d}</span></div></div>`).join('')}</div>
   </div></div>`;
 }
 function refTable(k){
@@ -2494,7 +2509,7 @@ function pgBoard(cat){
    <label class="search">${ic('search','sm')}<span class="sr">Search posts</span><input id="bq" type="search" placeholder="Search by subject" value="${esc(bq)}"></label></div>
   <div class="tbl-wrap"><table class="btbl"><thead><tr><th class="c hide-m" style="width:72px">No.</th><th>Subject</th><th class="c hide-m" style="width:110px">Author</th><th class="c" style="width:112px">Date</th></tr></thead>
   <tbody>${rows.length?rows.map(p=>`<tr class="${p.pin?'pin':''}"><td class="c hide-m mono">${p.pin?'<span class="nb">Notice</span>':n--}</td>
-   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> </td>
+   <td class="t"><a href="#board-post-${p.id}">${esc(p.title)}${p.secret?ic('lock','sm'):''}</a> ${p.cat==='qna'&&p.answer?'<span class="ans">Answered</span>':''}</td>
    <td class="c hide-m">${esc(p.author)}</td><td class="c mono tnum" style="font-size:13px">${esc(p.date)}</td></tr>`).join(''):`<tr><td colspan="4" class="c" style="padding:40px;color:var(--muted)">No posts.</td></tr>`}</tbody></table></div>
   ${pages>1?`<div class="pager">${Array.from({length:pages},(_,i)=>`<button class="${i+1===bpage?'on':''}" data-act="bpage" data-k="${i+1}">${i+1}</button>`).join('')}</div>`:''}
   <p class="note">For product or technical questions, use <a class="link" href="#contact">Contact</a>and our team will answer.</p></div>`;
@@ -2517,9 +2532,9 @@ const PAGES={
  'company-certs':pgCompanyCerts,'company-location':pgLocation,
  'products':pgProducts,'products-abb':()=>pgBrand('abb'),'products-schneider':()=>pgBrand('schneider'),'products-hitachi':()=>pgBrand('hitachi'),'products-sifang':()=>pgBrand('sifang'),'products-sangdo':()=>pgBrand('sangdo'),
  'solutions-datacenter':pgSolDatacenter,'solutions-hsbt':pgSolHsbt,'solutions-pq':pgSolPq,'solutions-mcc':pgSolMcc,'solutions-arc':pgSolArc,'solutions-thermal':pgSolThermal,'solutions-retrofit':pgSolRetrofit,'engineering':pgEngineering,
- 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),'resources-cert':()=>pgResources('cert'),
+ 'resources':()=>pgResources('all'),'resources-catalog':()=>pgResources('catalog'),'resources-tech':()=>pgResources('tech'),
  'contact':pgContact,'contact-people':pgPeople,
- 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news')
+ 'board-notice':()=>pgBoard('notice'),'board-news':()=>pgBoard('news'),'board-qna':()=>pgBoard('qna')
 };
 const PDESC={'company':'SCAB Engineering Co., Ltd. — products and engineering for power systems','products':'ABB · Schneider Electric · Hitachi Energy · SIFANG · Sangdo Electric','resources':'Catalogs · technical documents · certificates','contact':'Quotation · technical · after-sales inquiries','board':'Notices · company news · technical Q&A'};
 let curId='home';
@@ -2777,7 +2792,7 @@ function openLock(){openModal(`<div class="mpad lockbox"><h3>Review tools</h3><p
 const WID={pc:null,tab:'834px',mob:'390px'};
 function applyWidth(){const st=$('#stage');st.classList.toggle('preview',!!WID[width]);if(WID[width])st.style.setProperty('--pw',WID[width]);else st.style.removeProperty('--pw')}
 function dockRender(){
- if(!SHOW_TOOLS){$('#dock').innerHTML='';return}
+ if(!SHOW_TOOLS){$('#dock').innerHTML=`<button class="top-btn" data-act="top" aria-label="Back to top">TOP</button>`;return}
  const th=store.get('theme','system');
  $('#dock').innerHTML=`${dockOpen?`<div class="dock-panel" role="dialog" aria-label="Review tools">
    <div class="dp-h"><b>Review tools</b><span>${VERSION} · ${VDATE}</span><button class="btn line sm" data-act="locktools">${ic('lock','sm')} Lock</button></div>
@@ -2872,7 +2887,7 @@ document.addEventListener('click',e=>{
 <p><b>9. Automatic collection</b><br>We do not use cookies. Only display settings such as light or dark mode are stored in your browser, and they are not sent to us. Our hosting provider (GitHub) may keep access logs to operate and secure the service.</p>
 <p><b>10. Privacy officer</b><br>Position: CEO<br>Contact: ${CO.tel} · <span class="email">${CO.mail}</span></p>
 <p><b>11. Remedies</b><br>You can report or seek advice on privacy infringements from the following Korean agencies.<br>· Personal Information Infringement Report Center (privacy.kisa.or.kr) 118<br>· Personal Information Dispute Mediation Committee (www.kopico.go.kr) 1833-6972<br>· Supreme Prosecutors’ Office Cyber Investigation (www.spo.go.kr) 1301<br>· Korean National Police Agency Cyber Bureau (ecrm.police.go.kr) 182</p>
-<p><b>12. Effective date</b><br>This privacy policy applies from 1 December 2026. If it changes, we will post a notice on the website seven days before the change takes effect.</p>
+<p><b>12. Effective date</b><br>This privacy policy applies from 9 November 2026. If it changes, we will post a notice on the website seven days before the change takes effect.</p>
 </div></div>`,'Privacy policy');break;
   case 'noemail':openModal(`<div class="mpad"><h3>No unauthorized e-mail collection</h3><div class="prose"><p>We refuse the unauthorized collection of e-mail addresses posted on this website by e-mail harvesting programs or other technical means.</p><p>Violations may be punished under the Act on Promotion of Information and Communications Network Utilization and Information Protection.</p></div></div>`,'No unauthorized e-mail collection');break;
   case 'sitemap':sitemapModal();break;
