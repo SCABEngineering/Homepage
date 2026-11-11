@@ -393,7 +393,7 @@ ul{margin:0;padding:0;list-style:none}
 .sign{font-weight:600;color:var(--title)}
 
 /* tables */
-.tbl-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--card)}
+.tbl-wrap{overflow-x:auto;overflow-y:hidden;border:1px solid var(--line);background:var(--card)}
 table{width:100%;border-collapse:collapse;font-size:14.5px}
 th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
 thead th{background:var(--th);color:var(--th-fg);font-weight:600;font-size:13.5px;white-space:nowrap}
@@ -403,6 +403,7 @@ tbody tr:hover td{background:var(--panel)}
 .info td{color:var(--ink)}
 .tnum{font-variant-numeric:tabular-nums}
 td.hl{color:var(--ac);font-weight:600}
+table.wth thead th{white-space:normal}
 
 /* cards general */
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -474,11 +475,14 @@ td.hl{color:var(--ac);font-weight:600}
 .dc span{font-size:13px;color:var(--muted)}
 
 /* tabs, filters */
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
-.tabs button,.tabs a{padding:12px 18px;font-weight:600;font-size:15px;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs{display:flex;gap:2px;box-shadow:inset 0 -1px 0 var(--line);overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.tabs::-webkit-scrollbar,.lnb::-webkit-scrollbar{display:none}
+.tabs.btabs{box-shadow:none;overflow:visible;flex-wrap:wrap;gap:6px}
+.tabs.btabs a{padding:12px 22px}
+.tabs button,.tabs a{padding:12px 18px;font-weight:600;font-size:15px;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
 .tabs .on{color:var(--ac);border-bottom-color:var(--ac)}
 .tabs button:hover,.tabs a:hover{color:var(--ink)}
-.fbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.fbar{display:flex;gap:12px 24px;align-items:center;flex-wrap:wrap;justify-content:space-between}
 .pills{display:flex;gap:6px;flex-wrap:wrap}
 .pill{height:36px;padding-inline:14px;border:1px solid var(--line);border-radius:18px;font-size:14px;color:var(--muted);display:inline-flex;align-items:center;gap:6px;background:var(--card)}
 .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--bc)}
@@ -947,7 +951,7 @@ td.hl{color:var(--ac);font-weight:600}
   .eng{grid-template-columns:1fr;gap:32px}
   .steps{grid-template-columns:repeat(3,minmax(0,1fr))}
   .sub{grid-template-columns:1fr;gap:28px;padding-block:28px 80px}
-  .lnb{position:static;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+  .lnb{position:static;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding-bottom:4px}
   .lnb-t,.lnb h5{display:none}
   .lnb a{flex:none;border:1px solid var(--line);border-radius:18px;padding:7px 14px;font-size:14px;background:var(--card)}
   .lnb a.cur{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -2486,7 +2490,7 @@ function pgSolBusbar(){
    <li><div><b>Selective zone trip and stability</b><span>Disconnector positions decide which zone trips; check zone, CT saturation handling and open CT detection keep it stable for external faults</span></div></li>
    <li><div><b>High impedance · REX615</b><span>For busbars with few bays, a simple scheme with REX615 and a stabilizing resistor and VDR (RK795101)</span></div></li></ol></div></div>
  <div class="block">${blockHead('Scheme comparison')}
-  <div class="tbl-wrap"><table><thead><tr><th>Item</th><th>Distributed · Hitachi Energy REB500</th><th>Centralized · Hitachi Energy REB670</th><th>High impedance · ABB REX615</th></tr></thead><tbody>
+  <div class="tbl-wrap"><table class="wth"><thead><tr><th>Item</th><th>Distributed · Hitachi Energy REB500</th><th>Centralized · Hitachi Energy REB670</th><th>High impedance · ABB REX615</th></tr></thead><tbody>
    ${CMP.map(([a,b,c,d])=>`<tr><th style="font-weight:600;white-space:nowrap">${a}</th><td>${b}</td><td>${c}</td><td>${d}</td></tr>`).join('')}
   </tbody></table></div>
   <p class="note">REB500 and REB670 data are from the Hitachi Energy product guides (REB500 v8.3, REB670 v2.2); trip times apply to the conditions shown. The scheme and number of devices depend on the busbar layout, CT data, number of bays and room layout, so we review your single-line diagram and CT data before proposing.</p></div>
@@ -2596,7 +2600,7 @@ function pgBoard(cat){
  const rows=list.slice((bpage-1)*per,bpage*per);
  let n=list.length-(bpage-1)*per;
  return `<div class="block">${blockHead(BCAT[cat])}
-  <div class="fbar"><div class="tabs" style="border-bottom:0">${Object.entries(BCAT).map(([k,l])=>`<a href="#board-${k}" class="${k===cat?'on':''}">${l}</a>`).join('')}</div>
+  <div class="fbar"><div class="tabs btabs">${Object.entries(BCAT).map(([k,l])=>`<a href="#board-${k}" class="${k===cat?'on':''}">${l}</a>`).join('')}</div>
    <label class="search">${ic('search','sm')}<span class="sr">Search posts</span><input id="bq" type="search" placeholder="Search by subject" value="${esc(bq)}"></label></div>
   <div class="tbl-wrap"><table class="btbl"><thead><tr><th class="c hide-m" style="width:72px">No.</th><th>Subject</th><th class="c hide-m" style="width:110px">Author</th><th class="c" style="width:112px">Date</th></tr></thead>
   <tbody>${rows.length?rows.map(p=>`<tr class="${p.pin?'pin':''}"><td class="c hide-m mono">${p.pin?'<span class="nb">Notice</span>':n--}</td>
