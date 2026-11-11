@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en" data-tone="blue"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <style>
 /* Layout: ABB-style corporate site — utility bar + mega-menu sticky header, navy hero (drawing grid + SCAB cube watermark), alternating white body and cool-gray panels,
-   Sub pages: left LNB + body. Responsive via container queries. Tone switched with data-tone (default: SCAB Red · Navy since v0.6) */
+   Sub pages: left LNB + body. Responsive via container queries. Tone switched with data-tone (default: Power Blue since 2026-11-11) */
 :root{
   --ac:#C0142A; --ac-strong:#9A1022; --ac-soft:#FBEBED; --ac-hl:#FF6B7A; --ac-btn:#CD162C; --ac-btn-h:#A8121F; --ac-ink:#FFFFFF; --err:#C8102E;
   --sw-on:#D7263D; --ink:#16202A; --title:#3B4754; --muted:#5F6B77; --faint:#94A0AB; --bg:#FFFFFF; --panel:#F2F5F7; --panel-2:#E4E9EE;
@@ -271,7 +271,7 @@ ul{margin:0;padding:0;list-style:none}
 :root{--logo-red:#CD162C}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--logo-red:#FF5A6A}}
 :root[data-theme="dark"]{--logo-red:#FF5A6A}
-.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--logo-red)}
+.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--ac)}
 .sec.dark .t2{color:#fff}
 .t3{font-size:21px;font-weight:700;color:var(--title);line-height:1.4}
 .lead{color:var(--muted);font-size:17px;max-width:64ch}
@@ -538,7 +538,7 @@ td.hl{color:var(--ac);font-weight:600}
 .dg-ctrl button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .bbv-tg{position:absolute;top:6px;right:6px;z-index:2;display:flex;border:1px solid rgba(255,255,255,.28);background:rgba(9,20,32,.55)}
 .bbv-tg button{height:30px;padding-inline:12px;border:0;background:transparent;color:#C9D3DE;font:600 12.5px/1 var(--f-mono,ui-monospace,monospace);letter-spacing:.04em;cursor:pointer}
-.bbv-tg button.on{background:var(--ac-btn,#CD162C);color:#fff}
+.bbv-tg button.on{background:var(--ac-btn,#0057B8);color:var(--ac-ink,#fff)}
 .bbv-tg button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
 .bb-sel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.bb-sel .lb{font-size:13px;color:var(--muted);font-weight:600}.bb-sel .dg-ctrl{margin-top:0}
 .dg-cap{margin-top:12px;font-size:14.5px;color:var(--ink);min-height:2.8em}
@@ -1707,18 +1707,18 @@ const A=n=>`../assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const VERSION='v0.7', VDATE='2026-11-06';
 const TONES={
- scab:{ko:'SCAB Red × Navy',name:'SCAB Red · Navy',rec:true,hero:'#0D1B2A',btn:'#CD162C',ink:'#FFFFFF',ac:'#C0142A',hl:'#FF6B7A',panel:'#F2F5F7',title:'#3B4754',
+ scab:{ko:'SCAB Red × Navy',name:'SCAB Red · Navy',hero:'#0D1B2A',btn:'#CD162C',ink:'#FFFFFF',ac:'#C0142A',hl:'#FF6B7A',panel:'#F2F5F7',title:'#3B4754',
   why:'Uses the logo red as the accent on a deep navy background. Avoids the red-and-black pairing so the site does not resemble ABB or Hitachi Energy. (v0.6 default)'},
  teal:{ko:'Navy · Teal',name:'Grid Navy · Teal',hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
   why:'Default tone up to v0.5. Deep navy with a teal accent between Schneider green and SIFANG blue.'},
- blue:{ko:'Power Blue',name:'Power Blue',hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
+ blue:{ko:'Power Blue',name:'Power Blue',rec:true,hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
   why:'The trusted blue most common among power equipment makers and utilities. Stable, but it may look close to the blues of SIFANG and Sangdo Electric.'},
  amber:{ko:'Graphite · Volt',name:'Graphite · Volt',hero:'#1B2026',btn:'#F2A900',ink:'#1A1A1A',ac:'#8A5D00',hl:'#F5B700',panel:'#F3F4F5',title:'#3F454C',
   why:'A graphite base with an amber accent taken from electrical hazard signs. Strong industrial and engineering character, with no overlap with brand colors.'},
  red:{ko:'SCAB Red (v0.1)',name:'SCAB Red',hero:'#1A1A1C',btn:'#CD162C',ink:'#FFFFFF',ac:'#CD162C',hl:'#FF5C6E',panel:'#F4F4F5',title:'#46464C',
   why:'The v0.1 draft using the company logo color. The charcoal and red combination resembles the ABB and Hitachi Energy websites.'}
 };
-let tone=store.get('tone6','scab');if(!TONES[tone])tone='scab';
+let tone=/[?&]tools\b/.test(location.search)?store.get('tone6','blue'):'blue';if(!TONES[tone])tone='blue';
 document.documentElement.setAttribute('data-tone',tone);
 
 /* ---------- icons ---------- */

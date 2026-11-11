@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ko" data-tone="blue"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <style>
 /* Layout: ABB식 기업 사이트 구조 — 유틸리티 바 + 메가메뉴 고정 헤더, 네이비 히어로(도면 격자 + SCAB 큐브 워터마크), 흰 본문과 쿨그레이 패널 교차,
-   서브페이지는 좌측 LNB + 본문. 반응형은 컨테이너 쿼리. 톤앤매너는 data-tone으로 전환 (기본: SCAB Red · Navy, v0.6부터) */
+   서브페이지는 좌측 LNB + 본문. 반응형은 컨테이너 쿼리. 톤앤매너는 data-tone으로 전환 (기본: Power Blue, 2026-11-11부터) */
 :root{
   --ac:#C0142A; --ac-strong:#9A1022; --ac-soft:#FBEBED; --ac-hl:#FF6B7A; --ac-btn:#CD162C; --ac-btn-h:#A8121F; --ac-ink:#FFFFFF; --err:#C8102E;
   --sw-on:#D7263D; --ink:#16202A; --title:#3B4754; --muted:#5F6B77; --faint:#94A0AB; --bg:#FFFFFF; --panel:#F2F5F7; --panel-2:#E4E9EE;
@@ -271,7 +271,7 @@ ul{margin:0;padding:0;list-style:none}
 :root{--logo-red:#CD162C}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--logo-red:#FF5A6A}}
 :root[data-theme="dark"]{--logo-red:#FF5A6A}
-.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--logo-red)}
+.t2::before{content:"";position:absolute;left:0;top:0;width:36px;height:4px;background:var(--ac)}
 .sec.dark .t2{color:#fff}
 .t3{font-size:21px;font-weight:700;color:var(--title);line-height:1.4}
 .lead{color:var(--muted);font-size:17px;max-width:64ch}
@@ -538,7 +538,7 @@ td.hl{color:var(--ac);font-weight:600}
 .dg-ctrl button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .bbv-tg{position:absolute;top:6px;right:6px;z-index:2;display:flex;border:1px solid rgba(255,255,255,.28);background:rgba(9,20,32,.55)}
 .bbv-tg button{height:30px;padding-inline:12px;border:0;background:transparent;color:#C9D3DE;font:600 12.5px/1 var(--f-mono,ui-monospace,monospace);letter-spacing:.04em;cursor:pointer}
-.bbv-tg button.on{background:var(--ac-btn,#CD162C);color:#fff}
+.bbv-tg button.on{background:var(--ac-btn,#0057B8);color:var(--ac-ink,#fff)}
 .bbv-tg button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
 .bb-sel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.bb-sel .lb{font-size:13px;color:var(--muted);font-weight:600}.bb-sel .dg-ctrl{margin-top:0}
 .dg-cap{margin-top:12px;font-size:14.5px;color:var(--ink);min-height:2.8em}
@@ -1701,18 +1701,18 @@ const A=n=>`assets/${n}.webp`;
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const VERSION='v0.7', VDATE='2026-11-06';
 const TONES={
- scab:{ko:'SCAB 레드 × 네이비',name:'SCAB Red · Navy',rec:true,hero:'#0D1B2A',btn:'#CD162C',ink:'#FFFFFF',ac:'#C0142A',hl:'#FF6B7A',panel:'#F2F5F7',title:'#3B4754',
+ scab:{ko:'SCAB 레드 × 네이비',name:'SCAB Red · Navy',hero:'#0D1B2A',btn:'#CD162C',ink:'#FFFFFF',ac:'#C0142A',hl:'#FF6B7A',panel:'#F2F5F7',title:'#3B4754',
   why:'회사 로고의 레드를 포인트로 쓰고 배경은 딥 네이비를 유지합니다. 레드 · 검정 조합을 피해 ABB · Hitachi Energy 사이트와 인상이 겹치지 않게 했습니다. (v0.6 기본)'},
  teal:{ko:'네이비 · 틸',name:'Grid Navy · Teal',hero:'#0D1B2A',btn:'#007A85',ink:'#FFFFFF',ac:'#007A85',hl:'#3CC8D2',panel:'#F2F5F7',title:'#3B4754',
   why:'v0.5까지의 기본 톤입니다. 딥 네이비 바탕에 Schneider 그린과 SIFANG 블루 사이의 틸을 포인트로 씁니다.'},
- blue:{ko:'파워 블루',name:'Power Blue',hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
+ blue:{ko:'파워 블루',name:'Power Blue',rec:true,hero:'#0B1830',btn:'#0057B8',ink:'#FFFFFF',ac:'#0057B8',hl:'#5AA9FF',panel:'#F2F4F8',title:'#3A4658',
   why:'국내외 전력기기 · 전력회사에서 가장 흔한 신뢰형 블루입니다. 안정적이지만 SIFANG · 상도일렉트릭의 블루와 가깝게 보일 수 있습니다.'},
  amber:{ko:'그래파이트 · 볼트',name:'Graphite · Volt',hero:'#1B2026',btn:'#F2A900',ink:'#1A1A1A',ac:'#8A5D00',hl:'#F5B700',panel:'#F3F4F5',title:'#3F454C',
   why:'그래파이트 바탕에 전기 위험 경고 표지의 노랑에서 온 앰버를 포인트로 씁니다. 산업 현장 · 엔지니어링 성격이 강하고 취급 브랜드 색과 겹치지 않습니다.'},
  red:{ko:'SCAB 레드 (v0.1)',name:'SCAB Red',hero:'#1A1A1C',btn:'#CD162C',ink:'#FFFFFF',ac:'#CD162C',hl:'#FF5C6E',panel:'#F4F4F5',title:'#46464C',
   why:'회사 로고색을 그대로 쓴 v0.1 시안입니다. 차콜과 레드 조합이라 ABB · Hitachi Energy 사이트와 인상이 비슷합니다.'}
 };
-let tone=store.get('tone6','scab');if(!TONES[tone])tone='scab';
+let tone=/[?&]tools\b/.test(location.search)?store.get('tone6','blue'):'blue';if(!TONES[tone])tone='blue';
 document.documentElement.setAttribute('data-tone',tone);
 
 /* ---------- icons ---------- */
