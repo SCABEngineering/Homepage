@@ -536,6 +536,11 @@ td.hl{color:var(--ac);font-weight:600}
 .dg-ctrl{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .dg-ctrl button{height:34px;padding-inline:12px;border:1px solid var(--line);background:var(--card);font-size:13.5px;border-radius:2px}
 .dg-ctrl button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bbv-tg{position:absolute;top:6px;right:6px;z-index:2;display:flex;border:1px solid rgba(255,255,255,.28);background:rgba(9,20,32,.55)}
+.bbv-tg button{height:30px;padding-inline:12px;border:0;background:transparent;color:#C9D3DE;font:600 12.5px/1 var(--f-mono,ui-monospace,monospace);letter-spacing:.04em;cursor:pointer}
+.bbv-tg button.on{background:var(--ac-btn,#CD162C);color:#fff}
+.bbv-tg button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.bb-sel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.bb-sel .lb{font-size:13px;color:var(--muted);font-weight:600}.bb-sel .dg-ctrl{margin-top:0}
 .dg-cap{margin-top:12px;font-size:14.5px;color:var(--ink);min-height:2.8em}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);margin-top:10px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
@@ -1465,7 +1470,6 @@ function miniProduct(kind){
  if(kind==='container')s+=k.container(0,0,11,4.6,4.4,'SVG');
  else if(kind==='pqcab'){s+=k.swgr(1.5,1,3,{cw:2.4,d:2.4,h:6,trough:false})}
  else if(kind==='relaypanel'){s+=k.swgr(2,1,2,{cw:2.8,d:2.4,h:7,hl:[0,1],trough:false})}
- else if(kind==='reb500'){s+=k.swgr(1.2,1,3,{cw:2.6,d:2.4,h:7,hl:[0],trough:false})}
  else if(kind==='islimiter'){s+=k.box(2.5,1,0,5,3,.3,MAT.plinth)+k.box(2.7,1.2,.3,4.6,2.6,6.4,MAT.cab);const yF=3.8;
   for(let i=0;i<3;i++){const xa=3.3+i*1.35;s+=k.poly(k.qY(xa,xa+.9,1.4,5.6,yF),'#1C2C3B')+k.poly(k.qY(xa+.25,xa+.65,1.8,5.2,yF),'#E07800','opacity=".85"')}}
  else if(kind==='lvbox'){s+=k.box(2,1,0,6.4,2.6,.3,MAT.plinth)+k.box(2.2,1.2,.3,6,2.2,6,MAT.cab);const yF=3.4;
@@ -1631,43 +1635,54 @@ function sceneRETRO(){
 function setRETRO(root,kk){setSteps(root,kk)}
 
 
-/* ---------- scene: busbar protection 87B (REB500 low impedance) ---------- */
+/* ---------- scene: busbar protection 87B — REB500 (distributed) / REB670 (centralized) ---------- */
 const BB={seg:{G1:[[.6,5.8],[3,5.8]],G2:[[23.9,4],[23.9,.6]],F1:[[8.5,7.8],[8.5,13],[30,13],[30,18.8]],F2:[[19.5,7.8],[19.5,11],[35,11],[35,18.8]],PB:[[25.3,5.8],[29.8,5.8]]},
- cap:['정상 운전 — Bay마다 BU가 전류와 단로기 · 차단기 상태를 광통신으로 CU에 보내고, CU가 구역별 차동 전류를 상시 연산','모선 내부 고장 — 고장이 난 구역(Zone 1)의 차단기만 선택 트립하고, 건전 구역(Zone 2)은 운전을 유지','외부 고장 — 피더 고장의 관통 전류는 비율 차동으로 안정, 87B는 동작하지 않고 피더 보호가 해당 차단기만 개방'],
- steps:['정상 운전','모선 고장 → 구역 트립','외부 고장 → 87B 안정']};
+ caps:{'500':['REB500 분산형 — Bay마다 BU가 전류와 단로기 · 차단기 상태를 광통신으로 CU에 보내고, CU가 구역별 차동 전류를 상시 연산','모선 내부 고장 — 고장이 난 구역(Zone 1)의 차단기만 선택 트립하고, 건전 구역(Zone 2)은 운전을 유지','외부 고장 — 피더 고장의 관통 전류는 비율 차동으로 안정, 87B는 동작하지 않고 피더 보호가 해당 차단기만 개방'],
+  '670':['REB670 집중형 — 모든 Bay의 CT 2차를 보호반의 IED 한 대에 결선하고, IED가 구역별 차동 전류를 상시 연산','모선 내부 고장 — 동적 구역 선택으로 고장 구역(Zone 1)의 차단기만 트립하고, 건전 구역(Zone 2)은 운전을 유지','외부 고장 — 관통 전류는 비율 차동으로 안정, CT 포화에도 오동작하지 않고 피더 보호가 해당 차단기만 개방']},
+ steps:['정상 운전','모선 고장 → 구역 트립','외부 고장 → 87B 안정'],v:'500'};
+BB.cap=BB.caps['500'];
 function sceneBUSBAR(){
  const k=kit(10.4,404,98);let s=k.platform(44,34);
  Object.values(BB.seg).forEach(p=>s+=k.trench(p));
  s+=`<g class="bflow"></g>`;
  const o=[];
  o.push({d:14,s:k.swgr(3,4,10,{cw:2.2,lamps:['B0','B1','B2','B3','B4','B5','B6','B7','B8','B9']})});
- const cab=(x,y,w,d,h)=>k.shadow(x,y,w,d,h+.3)+k.box(x-.15,y-.15,0,w+.3,d+.3,.3,MAT.plinth)+k.box(x,y,.3,w,d,h,MAT.cab)
-  +k.poly(k.qY(x+.35,x+w-.35,h-1.5,h-.35,y+d),'#1C2C3B')+k.poly(k.qY(x+.5,x+w-.5,h-1.35,h-.5,y+d),'#2DD4DF','opacity=".85"')
+ const cab=(x,y,w,d,h,led)=>k.shadow(x,y,w,d,h+.3)+k.box(x-.15,y-.15,0,w+.3,d+.3,.3,MAT.plinth)+k.box(x,y,.3,w,d,h,MAT.cab)
+  +k.poly(k.qY(x+.35,x+w-.35,h-1.5,h-.35,y+d),'#1C2C3B')+k.poly(k.qY(x+.5,x+w-.5,h-1.35,h-.5,y+d),led,'opacity=".85"')
   +[0,1,2,3].map(i=>k.poly(k.qY(x+.45+i*.45,x+.75+i*.45,h-2.2,h-1.95,y+d),i===0?'#2BD4A0':'#9AA5AF')).join('');
- o.push({d:30,s:cab(30,3.4,2.6,2.4,6)});
+ o.push({d:30,s:cab(30,3.4,2.6,2.4,6,'#2DD4DF')});
  o.push({d:55,s:k.factory(27,19,12,10,4.6,{})});
  [[41,4,.9],[3,30,1],[41.5,31,.8],[9,31.5,.8],[2.5,20,.75],[20,30,.85]].forEach(([x,y,sc])=>o.push({d:x+y,s:k.tree(x,y,sc)}));
  s+=byDepth(o);
+ // REB500: a bay unit (BU) on every bay
+ let bu='';for(let i=0;i<10;i++){const x0=3+i*2.2;bu+=k.poly(k.qY(x0+1.35,x0+1.95,2.6,3.5,7.62),'#13253A')+k.poly(k.qY(x0+1.45,x0+1.85,2.95,3.35,7.63),'#5CF0FA')}
+ s+=`<g data-v="500">${bu}</g>`;
+ // REB670: CT secondary wiring gathered to one panel
+ let ct='';for(let i=0;i<10;i++){const x0=3+i*2.2+1.1;ct+=`<path d="${k.D([k.ip(x0,7.6,.35),k.ip(x0,8.3,.05),k.ip(25.3,8.3,.05),k.ip(25.3,5.8,.05)])}" fill="none" stroke="#C77700" stroke-width="1.3" opacity=".75"/>`}
+ s+=`<g data-v="670">${ct}</g>`;
  // bus zones on the front of the busbar trough
  const bar=(xa,xb,col)=>k.poly(k.qY(xa,xb,5.38,5.72,5.74),col);
  s+=`<g data-on="0,2">${bar(3.1,11.7,'#00B7C3')+bar(14.1,24.9,'#2BD4A0')}</g><g data-on="1">${bar(3.1,11.7,'#E5484D')+bar(14.1,24.9,'#2BD4A0')}</g>`;
  s+=bar(11.85,13.95,'#9AA5AF');
  s+=k.chip('Zone 1',7.4,5.7,8.1)+k.chip('Zone 2',19.5,5.7,8.1)+k.chip('BC',12.9,5.7,7.2);
- s+=k.chip('REB500 CU',31.3,4.6,7.6,{w:twW('REB500 CU')})+k.chip('BU · Bay별',24,8.6,2.2,{w:twW('BU · Bay별'),bg:'#E8F7F8',fg:'#006A73'});
- s+=k.chip('광 Process bus',27.6,7.2,.9,{w:twW('광 Process bus'),bg:'#E8F7F8',fg:'#006A73'});
- s+=`<g data-on="0">${pill(k,'ΣI ≈ 0 · 구역별 상시 연산',9,5.7,11.3,'#007A85')}</g>`;
- s+=`<g data-on="1">${k.spark(7.4,5.74,5.55,'BUS FAULT',20,-16).replace('class="fault" opacity="0"','class="fault"')}${pill(k,'Zone 1 선택 트립 · 약 15 ms',9,5.7,11.3,'#13253A')}</g>`;
+ s+=`<g data-v="500">${k.chip('REB500 CU',31.3,4.6,7.6,{w:twW('REB500 CU')})+k.chip('BU · Bay별',24,8.6,2.2,{w:twW('BU · Bay별'),bg:'#E8F7F8',fg:'#006A73'})+k.chip('광 Process bus',27.6,7.2,.9,{w:twW('광 Process bus'),bg:'#E8F7F8',fg:'#006A73'})}</g>`;
+ s+=`<g data-v="670">${k.chip('REB670 보호반',31.3,4.6,7.6,{w:twW('REB670 보호반')})+k.chip('CT 2차 · 구리 결선',27.6,7.2,.9,{w:twW('CT 2차 · 구리 결선'),bg:'#FFF4E0',fg:'#8A4B00'})}</g>`;
+ s+=`<g data-on="0" data-v="500">${pill(k,'ΣI ≈ 0 · CU에서 구역별 연산',9,5.7,11.3,'#007A85')}</g>`;
+ s+=`<g data-on="0" data-v="670">${pill(k,'ΣI ≈ 0 · IED 한 대에서 구역별 연산',9,5.7,11.3,'#007A85')}</g>`;
+ s+=`<g data-on="1">${k.spark(7.4,5.74,5.55,'BUS FAULT',20,-16).replace('class="fault" opacity="0"','class="fault"')}${pill(k,'Zone 1만 선택 트립',9,5.7,11.3,'#13253A')}</g>`;
  s+=`<g data-on="2">${k.spark(35,15,.3,'FEEDER FAULT',20,-14).replace('class="fault" opacity="0"','class="fault"')}${pill(k,'87B 안정 · 피더 보호 차단',9,5.7,11.3,'#1E9E57')}</g>`;
  s+=k.badge('busbar',33,24,6.6,15);
  return wrap(s,'모선보호 87B 아이소메트릭 일러스트');
 }
-function setBUSBAR(root,kk){
- if(!root)return;const k=kit(10.4,404,98),S=BB.seg;
- let f=k.flow(S.G2)+k.flow(S.PB,1,'#5CF0FA');
+function setBUSBAR(root,kk,v){
+ if(!root)return;v=v||root.dataset.v||BB.v;root.dataset.v=v;root.dataset.k=kk;BB.v=v;BB.cap=BB.caps[v];
+ const k=kit(10.4,404,98),S=BB.seg;
+ let f=k.flow(S.G2)+(v==='500'?k.flow(S.PB,1,'#5CF0FA'):k.flow(S.PB,1,'#F0A928'));
  f+=kk===1?flowOff(k,S.G1)+flowOff(k,S.F1):k.flow(S.G1)+k.flow(S.F1);
  f+=kk===2?flowOff(k,S.F2):k.flow(S.F2);
  root.querySelector('.bflow').innerHTML=f;
- lampsState(root,kk===1?['B0','B1','B2','B3','B4']:kk===2?['B7']:[]);setSteps(root,kk);
+ lampsState(root,kk===1?['B0','B1','B2','B3','B4']:kk===2?['B7']:[]);
+ root.querySelectorAll('[data-on],[data-v]').forEach(g=>{const on=!g.dataset.on||g.dataset.on.split(',').includes(String(kk)),vv=!g.dataset.v||g.dataset.v===v;g.setAttribute('opacity',on&&vv?1:0)});
 }
 
 window.ISO={fit:(svg,pad=10)=>{if(!svg)return;try{const b=svg.getBBox();if(b.width>0)svg.setAttribute('viewBox',`${(b.x-pad).toFixed(1)} ${(b.y-pad).toFixed(1)} ${(b.width+2*pad).toFixed(1)} ${(b.height+2*pad).toFixed(1)}`)}catch(e){}},sceneGrid,sceneFLISR,setFLISR,sceneHSBT,setHSBT,scenePQ,setPQ,sceneMCC,setMCC,sceneARC,setARC,ARC,sceneTHERM,setTHERM,TH,sceneRETRO,setRETRO,RT,sceneBUSBAR,setBUSBAR,BB,miniProduct,sceneSCAB,FL,HS,thd,PQH,PQA};
@@ -1787,7 +1802,8 @@ const PRODUCTS=[
  P('he-it','hitachi','hv','계기용 변성기','CT 36–800 kV · VT 72–800 kV','he_it_v2',['복합형 ≤ 145 kV','광 센서']),
  P('he-sa','hitachi','hv','피뢰기','PEXLIM · TEXLIM · EXLIM','he_sa_v2',['EXCOUNT 서지 카운터']),
  P('he-gcb','hitachi','hv','발전기 차단기 (GCB)','HVR/S · HECPS · HECS · HEC','he_gcb_v2',['최대 300 kA / 2000 MW']),
- P('he-reb500','hitachi','relay','모선보호 시스템 (87B)','REB500',null,['저임피던스 모선보호 · Check zone (87CZ)','CU 1대 + Bay당 BU, 광 Process bus','CU 1대당 최대 60 Bay · 32 보호 구역']),
+ P('he-reb500','hitachi','relay','분산형 모선보호 (87B)','REB500','he_reb500',['CU 1대 + Bay당 BU, 광 Process bus','CU 1대당 최대 60 Bay · 32 구역','Check zone · 차단기 실패 · End fault']),
+ P('he-reb670','hitachi','relay','집중형 모선보호 (87B)','REB670','he_reb670',['IED 1대에 CT 직접 결선, 최대 6 구역','CT비 10:1까지 · 1 A · 5 A 혼용','Check zone · 차단기 실패 · CT 개방 감지']),
  P('he-tr','hitachi','hv','변압기 · 리액터','GSU · 변전 · 전기로 · 특수','he_152',['몰드 변압기 (HEK)']),
  P('he-bu','hitachi','hv','부싱 · 탭 절환기','OLTC · DETC','he_153',['계측 · 보호 장치']),
  P('he-sv','hitachi','service','서비스','설치 · 시운전 · 교육','he_154',['예비품 · 유지보수 · Retrofit']),
@@ -2022,7 +2038,7 @@ const chipBrand=k=>{const b=BRANDS[k];return `<span class="chip" style="--bc:${b
 const waveIcon=`<svg viewBox="0 0 120 40" aria-hidden="true"><path d="M2 20 Q12 2 22 20 T42 20 T62 20 T82 20 T102 20 T122 20" fill="none" stroke="currentColor" stroke-width="3" opacity=".35"/><path d="M2 20 Q12 6 22 20 T42 20 T62 20 T82 20 T102 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
 function pImg(p){
  if(p.img)return `<img src="${A(p.img)}" alt="${esc(p.name)} ${esc(p.model)}" loading="lazy">`;
- const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','se-th110':'thsensor','se-heattag':'heattag','se-pas600':'gateway','se-pme':'pmescreen','he-reb500':'reb500'}[p.id];if(mk)return ISO.miniProduct(mk);
+ const mk={'sf-svg':'container','sf-pq':'pqcab','sf-sa':'relaypanel','se-th110':'thsensor','se-heattag':'heattag','se-pas600':'gateway','se-pme':'pmescreen'}[p.id];if(mk)return ISO.miniProduct(mk);
  const b=BRANDS[p.brand];
  return `<div class="plate" style="--bc:${b.color};color:${b.color}"><span class="pl-b">${esc(b.name)}</span>${p.cat==='pq'?waveIcon:''}<span class="pl-m">${esc(p.model)}</span></div>`;
 }
@@ -2070,14 +2086,15 @@ const SLIDES_ALL=[
   cta:[['solutions-retrofit','솔루션 보기','pri'],['contact','상담 요청','ghost']],
   vis:()=>`<div class="iso-vis" id="isoHeroRT">${ISO.sceneRETRO()}</div><p class="iso-cap"><b id="rtHeroStep">01 / 03</b><span id="rtHeroCap">${HCAP.rt[0]}</span></p>`},
  {id:'busbar',on:true,since:'2026-11',eb:'BUSBAR PROTECTION · 87B',h:'모선 고장을<br>구역별로 빠르게 분리',
-  p:'Hitachi Energy REB500 저임피던스 모선보호와 ABB REX615 고임피던스 방식 가운데 Bay 수 · 모선 구성 · CT 조건에 맞는 방식을 선정합니다.',
+  p:'Hitachi Energy REB500(분산형) · REB670(집중형) 저임피던스 모선보호와 ABB REX615 고임피던스 방식 가운데 Bay 수 · 모선 구성 · 설치 조건에 맞는 방식을 선정합니다.',
   cta:[['solutions-busbar','솔루션 보기','pri'],['contact','상담 요청','ghost']],
-  vis:()=>`<div class="iso-vis" id="isoHeroBB">${ISO.sceneBUSBAR()}</div><p class="iso-cap"><b id="bbHeroStep">01 / 03</b><span id="bbHeroCap">${HCAP.bb[0]}</span></p>`}
+  vis:()=>`<div class="iso-vis" id="isoHeroBB"><div class="bbv-tg" role="group" aria-label="구성 선택"><button type="button" data-act="bbvh" data-k="500" class="on">REB500</button><button type="button" data-act="bbvh" data-k="670">REB670</button></div>${ISO.sceneBUSBAR()}</div><p class="iso-cap"><b id="bbHeroStep">REB500 · 01 / 03</b><span id="bbHeroCap">${HCAPBB['500'][0]}</span></p>`}
 ];
 const HCAP={ar:['정상 운전 — 아크 보호계전기 · AFDD 상시 감시','저압 아크 — AFDD가 해당 회로만 차단','고압 아크 — 광센서 + 과전류로 상위 차단기 트립'],
  th:['정상 감시 — 무선 센서 → PAS600 → PME','접속부 과열 — 상별 온도 · 편차 경보','절연 열분해 — HeatTag 3단계 조기 경보'],
- rt:['교체 전 — 단종 · 노후 제품 현황 조사','동등성 검토 — 기능 · 정격 · 치수 · 통신 비교','교체 후 — 이관 · 인터록 · 기능 시험'],
- bb:['정상 운전 — BU → CU 구역별 차동 연산','모선 고장 — 고장 구역만 선택 트립','외부 고장 — 관통 전류에 안정, 피더 보호가 차단']};
+ rt:['교체 전 — 단종 · 노후 제품 현황 조사','동등성 검토 — 기능 · 정격 · 치수 · 통신 비교','교체 후 — 이관 · 인터록 · 기능 시험']};
+const HCAPBB={'500':['분산형 — Bay별 BU → 광통신 → CU 구역별 연산','모선 고장 — 고장 구역만 선택 트립','외부 고장 — 관통 전류에 안정, 피더 보호가 차단'],
+ '670':['집중형 — 모든 CT를 IED 한 대에 결선해 구역별 연산','모선 고장 — 동적 구역 선택으로 고장 구역만 트립','외부 고장 — CT 포화에도 안정, 피더 보호가 차단']};HCAP.bb=HCAPBB['500'];
 const SLIDES=SLIDES_ALL.filter(s=>s.pin||s.on!==false).slice(0,9);
 function pageHome(){
  const chips=BKEYS.map(k=>`<span style="--bc:${k==='hitachi'?'#55555B':k==='sangdo'?'#55555B':BRANDS[k].color}">${BRANDS[k].name}</span>`).join('');
@@ -2120,7 +2137,7 @@ function pageHome(){
    <a class="sol" href="#solutions-arc"><div class="sp">${pg('arc','lg')}</div><div class="sb"><span class="eyebrow">ARC · FIRE SAFETY</span><b>아크 · 전기화재 예방</b><p>저압 AFDD와 고압 아크 보호계전기로 배전 계통 화재 예방</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
    <a class="sol" href="#solutions-thermal"><div class="sp">${pg('thermo','lg')}</div><div class="sb"><span class="eyebrow">THERMAL MONITORING</span><b>배전반 온도 · 습도 감시</b><p>무선 센서 · PAS600 · PME로 접속부 과열과 절연 열화 조기 감지</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
    <a class="sol" href="#solutions-retrofit"><div class="sp">${pg('retrofit','lg')}</div><div class="sb"><span class="eyebrow">RETROFIT</span><b>노후 · 단종 설비 대체</b><p>동등성 검토부터 교체 · 시험까지, 단종 제품을 현행 제품으로</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
-   <a class="sol" href="#solutions-busbar"><div class="sp">${pg('busbar','lg')}</div><div class="sb"><span class="eyebrow">BUSBAR · 87B</span><b>모선보호 (87B)</b><p>REB500 저임피던스 · REX615 고임피던스 방식으로 모선 고장을 구역별 분리</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
+   <a class="sol" href="#solutions-busbar"><div class="sp">${pg('busbar','lg')}</div><div class="sb"><span class="eyebrow">BUSBAR · 87B</span><b>모선보호 (87B)</b><p>REB500 분산형 · REB670 집중형 · REX615 고임피던스 가운데 계통에 맞는 방식으로</p><span class="link">자세히 ${ic('arrow')}</span></div></a>
   </div>
  </div></section>
 
@@ -2444,25 +2461,29 @@ function pgSolRetrofit(){
  <div class="block">${blockHead('관련 제품')}${relCards(['abb-sue','abb-sync6','abb-relion','se-easergy','se-powerlogic','se-eocr'])}</div>`;
 }
 function pgSolBusbar(){
- const CMP=[['측정 원리','Bay별 전류를 디지털로 모아 비율 차동 · 위상 비교로 판정','구역의 CT 2차를 병렬 결선하고 안정화 저항 양단 전압으로 판정'],
-  ['장치 구성','CU 1대 + Bay당 BU 1대, 광 Process bus (CU–BU 최대 2 km)','보호 구역당 REX615 1대 + 안정화 저항 · VDR (RK795101)'],
-  ['규모','CU 1대당 최대 60 Bay · 32 보호 구역','구역별로 독립, 구역당 병렬 CT 수에 따라 감도 검토'],
-  ['CT 조건','Bay마다 CT비가 달라도 적용 (CT비 설정)','같은 CT비, 저누설 리액턴스 CT (IEC 61869-2 Class PX), 무릎점 전압 확인'],
-  ['모선 절체','단로기 · 차단기 상태로 Busbar replica를 구성해 구역을 자동 전환','고정 구역 위주, 절체가 많으면 CT 회로 절체 검토'],
-  ['부가 기능','Check zone (87CZ) · 차단기 실패 (50BF) · End fault · 고장 기록','REX615의 피더 보호 · 계측 기능과 함께 구성'],
-  ['적합한 계통','Bay가 많고 이중 모선 · 단로기 절체가 있는 변전소 · 대형 수전','Bay 수가 적은 단순 모선, 독립 모선이 많은 계통']];
- return `<div class="block">${blockHead('모선보호 (87B)')}<p class="lead">모선 고장을 빠르게 검출해 고장 구역의 차단기만 분리하는 모선보호를 계통 규모에 맞춰 구성합니다</p>
-  <div class="sd-col"><div class="diagram isod"><div id="bbSol">${ISO.sceneBUSBAR()}</div>${solSteps('bb',ISO.BB.steps,ISO.BB.cap)}</div>
-  <ol class="numlist"><li><div><b>저임피던스 · REB500</b><span>Bay마다 BU가 전류와 단로기 · 차단기 상태를 측정하고, CU가 보호 구역별로 판정하는 분산형 구성</span></div></li>
-   <li><div><b>구역 선택 트립</b><span>단로기 상태를 반영한 Busbar replica로 고장 구역의 차단기만 트립, 트립 약 15 ms</span></div></li>
-   <li><div><b>오동작 방지</b><span>비율 차동과 위상 비교 두 기준, Check zone (87CZ)으로 외부 고장 · CT 포화에 안정</span></div></li>
+ const CMP=[['구성 방식','Bay마다 BU, CU가 판정 (광 Process bus)','CT를 보호반의 IED 한 대에 직접 결선','구역의 CT 2차를 병렬 결선'],
+  ['판정 원리','비율 차동 + 위상 비교','비율 차동 (RADSS 원리), CT 포화 안정화','안정화 저항 양단 전압'],
+  ['장치 구성','CU 1대 + Bay당 BU 1대 (CU–BU 광케이블 최대 2 km)','3상형 IED 1대 또는 단상형 IED 3대 (상별 1대)','구역당 REX615 1대 + 안정화 저항 · VDR (RK795101)'],
+  ['규모','CU 1대당 최대 60 Bay · 32 구역','단상형 CT 입력 최대 24 · 6 구역, 3상형 최대 12 · 4 구역','구역별 독립, 병렬 CT 수에 따라 감도 검토'],
+  ['CT 조건','1 A · 5 A 입력, CT비 차이는 소프트웨어로 보정','CT비 10:1까지 · 1 A · 5 A 혼용, 보조 CT 불필요','같은 CT비, Class PX (IEC 61869-2), 무릎점 전압 확인'],
+  ['트립 시간','typ. 15 ms (차동 전류 ≥ 5 × 정정값)','5–15 ms (차동 전류 10 × 정정값)','제조사 자료로 확인'],
+  ['모선 절체','단로기 상태로 Busbar replica 자동 전환','소프트웨어 동적 구역 선택','고정 구역 위주'],
+  ['부가 기능','Check zone · 차단기 실패 · End fault · 고장 기록','Check zone · 차단기 실패 · End fault · CT 개방 감지 · IEC 61850-9-2 (선택)','REX615 피더 보호 · 계측과 함께 구성'],
+  ['적합한 계통','Bay가 많거나 여러 전기실에 분산된 대형 변전소, 증설 계획이 있는 계통','중소 규모 변전소, 보호반을 한곳에 두는 이중 모선 · 1½ CB 계통','Bay 수가 적은 단순 모선, 독립 모선이 많은 계통']];
+ return `<div class="block">${blockHead('모선보호 (87B)')}<p class="lead">모선 고장을 빠르게 검출해 고장 구역의 차단기만 분리합니다. 계통 규모와 설치 조건에 맞춰 분산형 · 집중형 · 고임피던스 방식 가운데 선택합니다</p>
+  <div class="sd-col"><div class="diagram isod"><div id="bbSol">${ISO.sceneBUSBAR()}</div>
+   <div class="bb-sel"><span class="lb">구성 선택</span><div class="dg-ctrl" role="group" aria-label="구성 선택"><button type="button" data-act="bbv" data-k="500" class="on">REB500 · 분산형</button><button type="button" data-act="bbv" data-k="670">REB670 · 집중형</button></div></div>
+   ${solSteps('bb',ISO.BB.steps,ISO.BB.caps['500'])}</div>
+  <ol class="numlist"><li><div><b>분산형 · REB500</b><span>Bay마다 BU가 전류와 단로기 · 차단기 상태를 측정해 광통신으로 보내고, CU가 구역별로 판정. Bay가 많고 증설이 잦은 계통에 유리</span></div></li>
+   <li><div><b>집중형 · REB670</b><span>모든 CT를 보호반의 IED 한 대에 결선. 장치 수가 적고 구성이 단순해 중소 규모 변전소에 유리</span></div></li>
+   <li><div><b>구역 선택 트립 · 오동작 방지</b><span>단로기 상태로 고장 구역만 트립, Check zone과 CT 포화 · CT 개방 감지로 외부 고장에 안정</span></div></li>
    <li><div><b>고임피던스 · REX615</b><span>Bay 수가 적은 모선은 REX615와 안정화 저항 · VDR (RK795101)로 간단하게 구성</span></div></li></ol></div></div>
- <div class="block">${blockHead('저임피던스와 고임피던스')}
-  <div class="tbl-wrap"><table><thead><tr><th>항목</th><th>저임피던스 · Hitachi Energy REB500</th><th>고임피던스 · ABB REX615</th></tr></thead><tbody>
-   ${CMP.map(([a,b,c])=>`<tr><th style="font-weight:600">${a}</th><td>${b}</td><td>${c}</td></tr>`).join('')}
+ <div class="block">${blockHead('방식 비교')}
+  <div class="tbl-wrap"><table><thead><tr><th>항목</th><th>분산형 · Hitachi Energy REB500</th><th>집중형 · Hitachi Energy REB670</th><th>고임피던스 · ABB REX615</th></tr></thead><tbody>
+   ${CMP.map(([a,b,c,d])=>`<tr><th style="font-weight:600;white-space:nowrap">${a}</th><td>${b}</td><td>${c}</td><td>${d}</td></tr>`).join('')}
   </tbody></table></div>
-  <p class="note">REB500 사양은 Hitachi Energy REB500 Product guide 기준입니다. 트립 시간은 차동 전류가 정정값의 5배 이상일 때의 대표값입니다. 보호 방식과 장치 수는 모선 구성 · CT 사양 · Bay 수에 따라 달라지므로, 단선도와 CT 사양을 받아 검토 후 제안합니다.</p></div>
- <div class="block">${blockHead('관련 제품')}${relCards(['he-reb500','abb-relion','he-it'])}</div>`;
+  <p class="note">REB500 · REB670 사양은 Hitachi Energy Product guide (REB500 v8.3, REB670 v2.2) 기준이며, 트립 시간은 표에 적은 조건에서의 값입니다. 보호 방식과 장치 수는 모선 구성 · CT 사양 · Bay 수 · 전기실 배치에 따라 달라지므로, 단선도와 CT 사양을 받아 검토 후 제안합니다.</p></div>
+ <div class="block">${blockHead('관련 제품')}${relCards(['he-reb500','he-reb670','abb-relion','he-it'])}</div>`;
 }
 function pgEngineering(){
  const V=['ABB','Schneider','Siemens','SEL','GE'];
@@ -2643,7 +2664,7 @@ function afterRender(id){
  if(id==='solutions-arc'){ISO.setARC($('#arcSol svg'),0)}
  if(id==='solutions-thermal'){ISO.setTHERM($('#thSol svg'),0)}
  if(id==='solutions-retrofit'){ISO.setRETRO($('#rtSol svg'),0)}
- if(id==='solutions-busbar'){ISO.setBUSBAR($('#bbSol svg'),0)}
+ if(id==='solutions-busbar'){ISO.setBUSBAR($('#bbSol svg'),0,'500')}
  if(id==='products'||id.startsWith('products-'))updCount();
  if(id==='contact'&&$('#cform'))initForm();
  if(id.startsWith('board-post-')){const p=SAMPLE_POSTS.find(x=>'board-post-'+x.id===id)||userPosts.find(x=>'board-post-'+x.id===id);if(p){p.views=(p.views||0)+1;if(p.mine)store.set('posts',userPosts)}}
@@ -2662,14 +2683,16 @@ function initCarousel(){
  paused=paused||RM;
  showSlide(0);
  const t=setInterval(()=>{if(!paused&&!document.hidden&&!hoverHero)showSlide((slideI+1)%SLIDES.length)},dur);timers.push(t);
- const hk={fl:0,hs:0,pq:0,x:0};ISO.setMCC($('#isoHeroMC svg'));
+ const hk={fl:0,hs:0,pq:0,x:0,bv:'500'};ISO.setMCC($('#isoHeroMC svg'));
  const heroSet=()=>{ISO.setFLISR($('#isoHeroFL svg'),hk.fl);ISO.setHSBT($('#isoHeroHS svg'),hk.hs);ISO.setPQ($('#isoHeroPQ svg'),hk.pq);
   const t=(id,v)=>{const e=$(id);if(e)e.textContent=v};
   t('#flHeroStep',`0${hk.fl+1} / 04`);t('#flHeroCap',ISO.FL.cap[hk.fl]);t('#hsHeroStep',`0${hk.hs+1} / 04`);t('#hsHeroCap',ISO.HS.cap[hk.hs]);t('#pqHeroStep',hk.pq?'보상 후':'보상 전');t('#pqHeroCap',PQCAP[hk.pq]);
-  ISO.setARC($('#isoHeroAR svg'),hk.x);ISO.setTHERM($('#isoHeroTH svg'),hk.x);ISO.setRETRO($('#isoHeroRT svg'),hk.x);ISO.setBUSBAR($('#isoHeroBB svg'),hk.x);
-  ['ar','th','rt','bb'].forEach(k=>{t('#'+k+'HeroStep',`0${hk.x+1} / 03`);t('#'+k+'HeroCap',HCAP[k][hk.x])})};
+  ISO.setARC($('#isoHeroAR svg'),hk.x);ISO.setTHERM($('#isoHeroTH svg'),hk.x);ISO.setRETRO($('#isoHeroRT svg'),hk.x);
+  const bv=window.bbLock||hk.bv;HCAP.bb=HCAPBB[bv];ISO.setBUSBAR($('#isoHeroBB svg'),hk.x,bv);
+  ['ar','th','rt','bb'].forEach(k=>{t('#'+k+'HeroStep',`0${hk.x+1} / 03`);t('#'+k+'HeroCap',HCAP[k][hk.x])});
+  t('#bbHeroStep',`REB${bv} · 0${hk.x+1} / 03`);$$('[data-act="bbvh"]').forEach(b=>b.classList.toggle('on',b.dataset.k===bv))};
  heroSet();
- const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;hk.x=(hk.x+1)%3;heroSet()},2400);
+ const ft=setInterval(()=>{if(document.hidden)return;hk.fl=(hk.fl+1)%4;hk.hs=(hk.hs+1)%4;hk.pq=(hk.pq+1)%2;hk.x=(hk.x+1)%3;if(hk.x===0)hk.bv=hk.bv==='500'?'670':'500';heroSet()},2400);
  if(!RM)timers.push(ft);else clearInterval(ft);
  $('#hcPause').innerHTML=paused?ic('play'):ic('pause');
  bars.classList.toggle('paused',paused);
@@ -2678,7 +2701,7 @@ function initCarousel(){
 let hoverHero=false;
 function showSlide(i){
  slideI=i;
- $$('.slide').forEach((s,k)=>{const on=k===i;s.classList.toggle('on',on);s.setAttribute('aria-hidden',on?'false':'true');$$('a',s).forEach(a=>on?a.removeAttribute('tabindex'):a.setAttribute('tabindex','-1'))});
+ $$('.slide').forEach((s,k)=>{const on=k===i;s.classList.toggle('on',on);s.setAttribute('aria-hidden',on?'false':'true');$$('a,button',s).forEach(a=>on?a.removeAttribute('tabindex'):a.setAttribute('tabindex','-1'))});
  const bs=$$('#hcBars button');bs.forEach(b=>b.classList.remove('on'));void $('#hcBars').offsetWidth;bs[i]&&bs[i].classList.add('on');
  const n=$('#hcNow');if(n)n.textContent=String(i+1).padStart(2,'0');
 }
@@ -2746,6 +2769,7 @@ const PPAGE={
  'he-sa':'https://www.hitachienergy.com/offering/product-and-system/surge-arresters/high-voltage-surge-arresters',
  'he-gcb':'https://www.hitachienergy.com/products-and-solutions/generator-circuit-breakers',
  'he-reb500':'https://www.hitachienergy.com/products-and-solutions/substation-automation-protection-and-control/products/protection-and-control/reb500',
+ 'he-reb670':'https://www.hitachienergy.com/products-and-solutions/substation-automation-protection-and-control/products/protection-and-control/busbar-protection/reb670',
  'he-tr':'https://www.hitachienergy.com/products-and-solutions/transformers',
  'he-bu':'https://www.hitachienergy.com/offering/product-and-system/transformer/bushings'
 };
@@ -2933,6 +2957,8 @@ document.addEventListener('click',e=>{
   case 'fl':{flStop();const s=$('#flSol svg');ISO.setFLISR(s,+k);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#flCap').textContent=ISO.FL.cap[+k];break}
   case 'hs':{const s=$('#hsSol svg');ISO.setHSBT(s,+k);$$('.dg-ctrl [data-act="hs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#hsCap').textContent=ISO.HS.cap[+k];break}
   case 'sst':{const key=a.dataset.s,M={arc:[ISO.setARC,ISO.ARC],th:[ISO.setTHERM,ISO.TH],rt:[ISO.setRETRO,ISO.RT],bb:[ISO.setBUSBAR,ISO.BB]}[key];if(!M)break;M[0]($('#'+key+'Sol svg'),+k);$$(`.dg-ctrl [data-act="sst"][data-s="${key}"]`).forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#'+key+'Cap').textContent=M[1].cap[+k];break}
+  case 'bbv':{const r=$('#bbSol svg');ISO.setBUSBAR(r,+(r&&r.dataset.k||0),k);$$('[data-act="bbv"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));const c=$('#bbCap');if(c)c.textContent=ISO.BB.cap[+(r&&r.dataset.k||0)];break}
+  case 'bbvh':{window.bbLock=k;const r=$('#isoHeroBB svg'),kk=+(r&&r.dataset.k||0);ISO.setBUSBAR(r,kk,k);$$('[data-act="bbvh"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));const c=$('#bbHeroCap');if(c)c.textContent=HCAPBB[k][kk];const st=$('#bbHeroStep');if(st)st.textContent=`REB${k} · 0${kk+1} / 03`;break}
   case 'pqs':{const s=$('#pqSol svg');ISO.setPQ(s,+k);$$('.dg-ctrl [data-act="pqs"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));$('#pqCap').textContent=PQCAP[+k];break}
   case 'flplay':{if(flTimer){flStop();break}let i=0;const step=()=>{const s=$('#flSol svg');if(!s){flStop();return}ISO.setFLISR(s,i);$$('.dg-ctrl [data-act="fl"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===i));$('#flCap').textContent=ISO.FL.cap[i];i=(i+1)%4};step();flTimer=setInterval(step,2000);timers.push(flTimer);a.innerHTML=`${ic('pause','sm')} 정지`;break}
   case 'pq':pqMode=k;$('#pqWave').innerHTML=pqSVG(k);$$('.dg-ctrl [data-act="pq"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));break;
